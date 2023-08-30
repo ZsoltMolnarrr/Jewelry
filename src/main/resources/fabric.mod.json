@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "jewelry",
+  "version": "${version}",
+  "name": "Jewelry",
+  "description": "",
+  "authors": [],
+  "contact": {
+    "repo": "https://github.com/zsoltmolnar/Jewelry"
+  },
+  "license": "All-Rights-Reserved",
+  "icon": "assets/jewelry/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "net.jewelry.jewelry.client.JewelryClient"
+    ],
+    "main": [
+      "net.jewelry.jewelry.Jewelry"
+    ]
+  },
+  "mixins": [
+    "jewelry.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
