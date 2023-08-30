@@ -8,15 +8,15 @@
   "contact": {
     "repo": "https://github.com/zsoltmolnar/Jewelry"
   },
-  "license": "All-Rights-Reserved",
+  "license": "All Rights Reserved",
   "icon": "assets/jewelry/icon.png",
   "environment": "*",
   "entrypoints": {
     "client": [
-      "net.jewelry.jewelry.client.JewelryClient"
+      "net.jewelry.client.JewelryModClient"
     ],
     "main": [
-      "net.jewelry.jewelry.Jewelry"
+      "net.jewelry.JewelryMod"
     ]
   },
   "mixins": [
