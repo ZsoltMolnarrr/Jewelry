@@ -16,6 +16,10 @@ repositories {
             includeGroup 'maven.modrinth'
         }
     }
+    maven {
+        name = "Ladysnake Libs"
+        url = 'https://maven.ladysnake.org/releases'
+    }
 }
 
 dependencies {
@@ -29,6 +33,7 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
     modImplementation "maven.modrinth:spell-power:${project.spell_power_version}-fabric"
     modImplementation "maven.modrinth:projectile-damage-attribute:${project.projectile_damage_version}-fabric"
+    modImplementation "dev.emi:trinkets:${project.trinkets_version}"
 }
 
 processResources {

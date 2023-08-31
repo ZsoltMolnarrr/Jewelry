@@ -27,18 +27,111 @@
               "name": "jewelry:gem_vein"
             },
             {
-              "type": "minecraft:item",
-              "functions": [
+              "type": "minecraft:group",
+              "children": [
                 {
-                  "enchantment": "minecraft:fortune",
-                  "formula": "minecraft:ore_drops",
-                  "function": "minecraft:apply_bonus"
+                  "type": "minecraft:item",
+                  "functions": [
+                    {
+                      "enchantment": "minecraft:fortune",
+                      "formula": "minecraft:uniform_bonus_count",
+                      "function": "minecraft:apply_bonus",
+                      "parameters": {
+                        "bonusMultiplier": 1
+                      }
+                    },
+                    {
+                      "function": "minecraft:explosion_decay"
+                    }
+                  ],
+                  "name": "jewelry:crimson_spinel"
                 },
                 {
-                  "function": "minecraft:explosion_decay"
+                  "type": "minecraft:item",
+                  "functions": [
+                    {
+                      "enchantment": "minecraft:fortune",
+                      "formula": "minecraft:uniform_bonus_count",
+                      "function": "minecraft:apply_bonus",
+                      "parameters": {
+                        "bonusMultiplier": 1
+                      }
+                    },
+                    {
+                      "function": "minecraft:explosion_decay"
+                    }
+                  ],
+                  "name": "jewelry:fire_opal"
+                },
+                {
+                  "type": "minecraft:item",
+                  "functions": [
+                    {
+                      "enchantment": "minecraft:fortune",
+                      "formula": "minecraft:uniform_bonus_count",
+                      "function": "minecraft:apply_bonus",
+                      "parameters": {
+                        "bonusMultiplier": 1
+                      }
+                    },
+                    {
+                      "function": "minecraft:explosion_decay"
+                    }
+                  ],
+                  "name": "jewelry:lionseye"
+                },
+                {
+                  "type": "minecraft:item",
+                  "functions": [
+                    {
+                      "enchantment": "minecraft:fortune",
+                      "formula": "minecraft:uniform_bonus_count",
+                      "function": "minecraft:apply_bonus",
+                      "parameters": {
+                        "bonusMultiplier": 1
+                      }
+                    },
+                    {
+                      "function": "minecraft:explosion_decay"
+                    }
+                  ],
+                  "name": "jewelry:jade"
+                },
+                {
+                  "type": "minecraft:item",
+                  "functions": [
+                    {
+                      "enchantment": "minecraft:fortune",
+                      "formula": "minecraft:uniform_bonus_count",
+                      "function": "minecraft:apply_bonus",
+                      "parameters": {
+                        "bonusMultiplier": 1
+                      }
+                    },
+                    {
+                      "function": "minecraft:explosion_decay"
+                    }
+                  ],
+                  "name": "jewelry:sapphire"
+                },
+                {
+                  "type": "minecraft:item",
+                  "functions": [
+                    {
+                      "enchantment": "minecraft:fortune",
+                      "formula": "minecraft:uniform_bonus_count",
+                      "function": "minecraft:apply_bonus",
+                      "parameters": {
+                        "bonusMultiplier": 1
+                      }
+                    },
+                    {
+                      "function": "minecraft:explosion_decay"
+                    }
+                  ],
+                  "name": "jewelry:tanzanite"
                 }
-              ],
-              "name": "jewelry:crimson_spinel"
+              ]
             }
           ]
         }
