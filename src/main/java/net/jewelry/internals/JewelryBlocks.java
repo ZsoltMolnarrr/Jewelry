@@ -41,6 +41,15 @@ public class JewelryBlocks {
             UniformIntProvider.create(3, 7)
     ));
 
+    public static final Entry DEEPSLATE_GEM_VEIN = entry("deepslate_gem_vein", new ExperienceDroppingBlock(
+            FabricBlockSettings.create()
+                    .mapColor(MapColor.STONE_GRAY)
+                    .instrument(Instrument.BASEDRUM)
+                    .requiresTool()
+                    .strength(3.0F, 3.0F),
+            UniformIntProvider.create(3, 7)
+    ));
+
     public static void register() {
         for (var entry : all) {
             Registry.register(Registries.BLOCK, new Identifier(JewelryMod.ID, entry.name), entry.block);
