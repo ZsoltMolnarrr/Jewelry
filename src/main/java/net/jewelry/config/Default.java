@@ -1,9 +1,9 @@
 package net.jewelry.config;
 
 public class Default {
-    public static final ItemsConfig items;
+    public static final ItemConfig items;
 
     static {
-        items = new ItemsConfig();
+        items = new ItemConfig();
     }
 }
