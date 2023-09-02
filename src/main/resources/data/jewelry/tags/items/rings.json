@@ -1,5 +1,10 @@
 {
   "values": [
-    "jewelry:test_ring"
+    "jewelry:red_ring",
+    "jewelry:orange_ring",
+    "jewelry:yellow_ring",
+    "jewelry:green_ring",
+    "jewelry:blue_ring",
+    "jewelry:purple_ring"
   ]
 }

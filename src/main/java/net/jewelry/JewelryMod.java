@@ -32,6 +32,7 @@ public class JewelryMod implements ModInitializer {
         JewelryBlocks.register();
         Gems.register();
         JewelryItems.register(itemConfig.value);
+        itemConfig.save();
         OreGeneration.register();
     }
 }

@@ -37,7 +37,7 @@ public class AttributeResolver {
         // Check for custom attribute
         var attribute = attributes.get(id);
         if (attribute == null) {
-            Registries.ATTRIBUTE.get(id);
+            attribute = Registries.ATTRIBUTE.get(id);
         }
         return attribute;
     }

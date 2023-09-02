@@ -1,6 +1,7 @@
 package net.jewelry.config;
 
 import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.util.Identifier;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,6 +13,10 @@ public class ItemConfig {
         public String id = "";
         public float value = 0;
         public EntityAttributeModifier.Operation operation = EntityAttributeModifier.Operation.ADDITION;
+
+        public AttributeModifier(Identifier id, float value, EntityAttributeModifier.Operation operation) {
+            this(id.toString(), value, operation);
+        }
 
         public AttributeModifier(String id, float value, EntityAttributeModifier.Operation operation) {
             this.id = id;
