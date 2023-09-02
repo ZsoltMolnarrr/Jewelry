@@ -29,6 +29,35 @@ public class JewelryItems {
 
     // MARK: Rings
 
+    public static Entry copper_ring = add(new Identifier(JewelryMod.ID, "copper_ring"), new ItemConfig.Item(
+            List.of(
+                    new ItemConfig.AttributeModifier("generic.armor", 0.5F, EntityAttributeModifier.Operation.ADDITION)
+            )
+    ));
+
+    public static Entry iron_ring = add(new Identifier(JewelryMod.ID, "iron_ring"), new ItemConfig.Item(
+            List.of(
+                    new ItemConfig.AttributeModifier("generic.armor", 1, EntityAttributeModifier.Operation.ADDITION)
+            )
+    ));
+
+    public static Entry gold_ring = add(new Identifier(JewelryMod.ID, "gold_ring"), new ItemConfig.Item(
+            List.of(
+            )
+    ));
+
+    public static Entry emerald_necklace = add(new Identifier(JewelryMod.ID, "emerald_necklace"), new ItemConfig.Item(
+            List.of(
+                    new ItemConfig.AttributeModifier("generic.luck", 1, EntityAttributeModifier.Operation.ADDITION)
+            )
+    ));
+
+    public static Entry diamond_necklace = add(new Identifier(JewelryMod.ID, "diamond_necklace"), new ItemConfig.Item(
+            List.of(
+                    new ItemConfig.AttributeModifier("generic.movement_speed", 0.1F, EntityAttributeModifier.Operation.MULTIPLY_BASE)
+            )
+    ));
+
     // bold
     public static Entry red_ring = add(new Identifier(JewelryMod.ID, "red_ring"), new ItemConfig.Item(
             List.of(
@@ -60,7 +89,7 @@ public class JewelryItems {
 
     public static Entry blue_ring = add(new Identifier(JewelryMod.ID, "blue_ring"), new ItemConfig.Item(
             List.of(
-                    new ItemConfig.AttributeModifier("minecraft:generic.max_health", 1, EntityAttributeModifier.Operation.ADDITION)
+                    new ItemConfig.AttributeModifier("minecraft:generic.max_health", 2, EntityAttributeModifier.Operation.ADDITION)
             )
     ));
 
@@ -103,7 +132,7 @@ public class JewelryItems {
 
     public static Entry blue_necklace = add(new Identifier(JewelryMod.ID, "blue_necklace"), new ItemConfig.Item(
             List.of(
-                    new ItemConfig.AttributeModifier("minecraft:generic.max_health", 1, EntityAttributeModifier.Operation.ADDITION)
+                    new ItemConfig.AttributeModifier("minecraft:generic.max_health", 2, EntityAttributeModifier.Operation.ADDITION)
             )
     ));
 
@@ -113,6 +142,11 @@ public class JewelryItems {
                     new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.SOUL).id, 1, EntityAttributeModifier.Operation.ADDITION)
             )
     ));
+
+
+    // Copy of all entries from `red_ring` to `purple_necklace` with "netherite_" name prefix
+
+
 
     public static void register(ItemConfig allConfigs) {
         for (var entry : all) {

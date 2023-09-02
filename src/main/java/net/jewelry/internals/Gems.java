@@ -21,7 +21,7 @@ public class Gems {
 
     public static final Entry crimson_spinel = gem(new Identifier(JewelryMod.ID, "crimson_spinel"));
     public static final Entry fire_opal = gem(new Identifier(JewelryMod.ID, "fire_opal"));
-    public static final Entry lionseye = gem(new Identifier(JewelryMod.ID, "lionseye"));
+    public static final Entry citrine = gem(new Identifier(JewelryMod.ID, "citrine"));
     public static final Entry jade = gem(new Identifier(JewelryMod.ID, "jade"));
     public static final Entry sapphire = gem(new Identifier(JewelryMod.ID, "sapphire"));
     public static final Entry tanzanite = gem(new Identifier(JewelryMod.ID, "tanzanite"));

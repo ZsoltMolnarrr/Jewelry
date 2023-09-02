@@ -4,8 +4,14 @@
   "block.jewelry.deepslate_gem_vein": "Deepslate Gem Vein",
   "item.jewelry.crimson_spinel": "Crimson Spinel",
   "item.jewelry.fire_opal": "Fire Opal",
-  "item.jewelry.lionseye": "Lionseye",
+  "item.jewelry.citrine": "Citrine",
   "item.jewelry.jade": "Jade",
   "item.jewelry.sapphire": "Sapphire",
-  "item.jewelry.tanzanite": "Tanzanite"
+  "item.jewelry.tanzanite": "Tanzanite",
+
+  "item.jewelry.copper_ring": "Copper Ring",
+  "item.jewelry.iron_ring": "Iron Ring",
+  "item.jewelry.gold_ring": "Gold Ring",
+  "item.jewelry.emerald_necklace": "Emerald Necklace",
+  "item.jewelry.diamond_necklace": "Diamond Necklace"
 }
