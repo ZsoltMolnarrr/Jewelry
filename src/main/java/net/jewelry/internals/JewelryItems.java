@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.jewelry.JewelryMod;
 import net.jewelry.api.AttributeResolver;
+import net.jewelry.api.JewelryItem;
 import net.jewelry.config.ItemConfig;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.registry.Registries;
@@ -18,10 +19,10 @@ import java.util.List;
 import java.util.UUID;
 
 public class JewelryItems {
-    public record Entry(Identifier id, RingItem item, ItemConfig.Item config) {  }
+    public record Entry(Identifier id, JewelryItem item, ItemConfig.Item config) {  }
     public static ArrayList<Entry> all = new ArrayList<>();
     public static Entry add(Identifier id, ItemConfig.Item config) {
-        var entry = new Entry(id, new RingItem(new FabricItemSettings()), config);
+        var entry = new Entry(id, new JewelryItem(new FabricItemSettings()), config);
         all.add(entry);
         return entry;
     }
@@ -59,6 +60,7 @@ public class JewelryItems {
 
     public static Entry blue_ring = add(new Identifier(JewelryMod.ID, "blue_ring"), new ItemConfig.Item(
             List.of(
+                    new ItemConfig.AttributeModifier("minecraft:generic.max_health", 1, EntityAttributeModifier.Operation.ADDITION)
             )
     ));
 
@@ -101,6 +103,7 @@ public class JewelryItems {
 
     public static Entry blue_necklace = add(new Identifier(JewelryMod.ID, "blue_necklace"), new ItemConfig.Item(
             List.of(
+                    new ItemConfig.AttributeModifier("minecraft:generic.max_health", 1, EntityAttributeModifier.Operation.ADDITION)
             )
     ));
 
@@ -119,14 +122,14 @@ public class JewelryItems {
                 allConfigs.items.put(entry.id.toString(), entry.config);
             }
 
-            var modifiers = new ArrayList<RingItem.Modifier>();
+            var modifiers = new ArrayList<JewelryItem.Modifier>();
             for (var modifier : itemConfig.attributes) {
                 var attribute = AttributeResolver.get(new Identifier(modifier.id));
                 if (attribute == null) {
                     System.err.println("Failed to resolve EntityAttribute with id: " + modifier.id);
                     continue;
                 }
-                modifiers.add(new RingItem.Modifier(
+                modifiers.add(new JewelryItem.Modifier(
                         attribute,
                         "Jewelry Attribute",
                         modifier.value,

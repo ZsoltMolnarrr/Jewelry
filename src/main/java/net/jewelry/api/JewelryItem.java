@@ -1,4 +1,4 @@
-package net.jewelry.internals;
+package net.jewelry.api;
 
 import com.google.common.collect.Multimap;
 import dev.emi.trinkets.api.SlotReference;
@@ -11,10 +11,10 @@ import net.minecraft.item.ItemStack;
 import java.util.List;
 import java.util.UUID;
 
-public class RingItem extends TrinketItem {
+public class JewelryItem extends TrinketItem {
     private List<Modifier> configurableModifiers = List.of();
 
-    public RingItem(Settings settings) {
+    public JewelryItem(Settings settings) {
         super(settings.maxCount(1));
     }
 

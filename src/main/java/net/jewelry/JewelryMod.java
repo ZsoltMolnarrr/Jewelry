@@ -19,7 +19,6 @@ public class JewelryMod implements ModInitializer {
             .sanitize(true)
             .build();
 
-
     /**
      * Runs the mod initializer.
      */
