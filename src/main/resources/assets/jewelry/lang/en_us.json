@@ -2,6 +2,10 @@
   "itemGroup.jewelry": "Jewelry",
   "block.jewelry.gem_vein": "Gem Vein",
   "block.jewelry.deepslate_gem_vein": "Deepslate Gem Vein",
+  "block.jewelry.jewelers_kit": "Jeweler's Kit",
+
+  "entity.minecraft.villager.jeweler": "Jeweler",
+
   "item.jewelry.crimson_spinel": "Crimson Spinel",
   "item.jewelry.fire_opal": "Fire Opal",
   "item.jewelry.citrine": "Citrine",

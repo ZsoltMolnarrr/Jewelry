@@ -1,4 +1,4 @@
-package net.jewelry.internals;
+package net.jewelry.items;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
@@ -11,6 +11,7 @@ import net.minecraft.block.enums.Instrument;
 import net.minecraft.item.BlockItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 
@@ -48,6 +49,14 @@ public class JewelryBlocks {
                     .requiresTool()
                     .strength(3.0F, 3.0F),
             UniformIntProvider.create(3, 7)
+    ));
+
+    public static final Entry JEWELERS_KIT = entry("jewelers_kit", new Block(
+            FabricBlockSettings.create()
+                    .mapColor(MapColor.OAK_TAN)
+                    .instrument(Instrument.BASS)
+                    .strength(2.5F)
+                    .sounds(BlockSoundGroup.WOOD)
     ));
 
     public static void register() {

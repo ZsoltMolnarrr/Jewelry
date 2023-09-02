@@ -1,4 +1,4 @@
-package net.jewelry.internals;
+package net.jewelry.items;
 
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.jewelry.JewelryMod;

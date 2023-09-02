@@ -4,7 +4,8 @@ import net.fabricmc.api.ModInitializer;
 import net.jewelry.api.AttributeResolver;
 import net.jewelry.config.Default;
 import net.jewelry.config.ItemConfig;
-import net.jewelry.internals.*;
+import net.jewelry.items.*;
+import net.jewelry.village.JewelryVillagers;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.tinyconfig.ConfigManager;
@@ -33,5 +34,6 @@ public class JewelryMod implements ModInitializer {
         JewelryItems.register(itemConfig.value);
         itemConfig.save();
         OreGeneration.register();
+        JewelryVillagers.register();
     }
 }
