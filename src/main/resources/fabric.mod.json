@@ -3,10 +3,15 @@
   "id": "jewelry",
   "version": "${version}",
   "name": "Jewelry",
-  "description": "",
-  "authors": [],
+  "description": "Dig down deep to find some precious gems, and craft them into powerful jewelry!",
+  "authors": [
+    "Daedelus"
+  ],
+  "contributors": [
+    "Ron (Artwork)"
+  ],
   "contact": {
-    "repo": "https://github.com/zsoltmolnar/Jewelry"
+    "repo": "https://github.com/zsoltmolnarrr/Jewelry"
   },
   "license": "All Rights Reserved",
   "icon": "assets/jewelry/icon.png",
@@ -25,6 +30,8 @@
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
-    "minecraft": "${minecraft_version}"
+    "minecraft": "${minecraft_version}",
+    "spell_power": "*",
+    "projectile_damage": "*"
   }
 }
