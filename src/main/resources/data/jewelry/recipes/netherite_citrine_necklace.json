@@ -1,22 +1,25 @@
 {
   "type": "minecraft:crafting_shaped",
   "key": {
+    "T": {
+      "item": "minecraft:gold_nugget"
+    },
     "S": {
       "item": "minecraft:string"
     },
     "M": {
-      "item": "minecraft:gold_ingot"
+      "item": "minecraft:netherite_ingot"
     },
     "G": {
-      "item": "jewelry:ruby"
+      "item": "jewelry:citrine"
     }
   },
   "pattern": [
     " S ",
-    " M ",
+    "TMT",
     " G "
   ],
   "result": {
-    "item": "jewelry:ruby_necklace"
+    "item": "jewelry:netherite_citrine_necklace"
   }
 }

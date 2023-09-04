@@ -1,22 +1,22 @@
 {
   "type": "minecraft:crafting_shaped",
   "key": {
-    "S": {
-      "item": "minecraft:string"
+    "N": {
+      "item": "minecraft:netherite_ingot"
     },
     "M": {
       "item": "minecraft:gold_ingot"
     },
     "G": {
-      "item": "jewelry:ruby"
+      "item": "jewelry:citrine"
     }
   },
   "pattern": [
-    " S ",
-    " M ",
-    " G "
+    " G ",
+    "M M",
+    " N "
   ],
   "result": {
-    "item": "jewelry:ruby_necklace"
+    "item": "jewelry:netherite_citrine_ring"
   }
 }
