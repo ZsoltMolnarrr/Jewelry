@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "jewelry:item/crimson_spinel_ring"
+    "layer0": "jewelry:item/ruby"
   }
 }

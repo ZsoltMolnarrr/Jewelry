@@ -44,7 +44,7 @@
                       "function": "minecraft:explosion_decay"
                     }
                   ],
-                  "name": "jewelry:crimson_spinel"
+                  "name": "jewelry:ruby"
                 },
                 {
                   "type": "minecraft:item",
@@ -61,7 +61,7 @@
                       "function": "minecraft:explosion_decay"
                     }
                   ],
-                  "name": "jewelry:fire_opal"
+                  "name": "jewelry:topaz"
                 },
                 {
                   "type": "minecraft:item",

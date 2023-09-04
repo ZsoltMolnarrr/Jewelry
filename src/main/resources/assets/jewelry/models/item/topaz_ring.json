@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "jewelry:item/fire_opal_ring"
+    "layer0": "jewelry:item/topaz_ring"
   }
 }

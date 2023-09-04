@@ -13,7 +13,7 @@ public class Group {
     public static Identifier ID = new Identifier(JewelryMod.ID, "generic");
     public static RegistryKey<ItemGroup> KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), ID);
     public static ItemGroup JEWELRY = FabricItemGroup.builder()
-            .icon(() -> new ItemStack(JewelryItems.crimson_spinel_ring.item()))
+            .icon(() -> new ItemStack(JewelryItems.ruby_ring.item()))
             .displayName(Text.translatable("itemGroup." + JewelryMod.ID))
             .build();
 }

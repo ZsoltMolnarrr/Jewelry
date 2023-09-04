@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "jewelry:item/fire_opal"
+    "layer0": "jewelry:item/netherite_ruby_necklace"
   }
 }

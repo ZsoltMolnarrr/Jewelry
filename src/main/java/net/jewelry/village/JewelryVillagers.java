@@ -94,8 +94,8 @@ public class JewelryVillagers {
 
                 // T1 Rings
 
-                Offer.sell(4, JewelryItems.crimson_spinel_ring.item().getDefaultStack(), 35, 5, 13, 0.1f),
-                Offer.sell(4, JewelryItems.fire_opal_ring.item().getDefaultStack(), 35, 5, 13, 0.1f),
+                Offer.sell(4, JewelryItems.ruby_ring.item().getDefaultStack(), 35, 5, 13, 0.1f),
+                Offer.sell(4, JewelryItems.topaz_ring.item().getDefaultStack(), 35, 5, 13, 0.1f),
                 Offer.sell(4, JewelryItems.citrine_ring.item().getDefaultStack(), 35, 5, 13, 0.1f),
                 Offer.sell(4, JewelryItems.jade_ring.item().getDefaultStack(), 35, 5, 13, 0.1f),
                 Offer.sell(4, JewelryItems.sapphire_ring.item().getDefaultStack(), 35, 5, 13, 0.1f),
@@ -103,8 +103,8 @@ public class JewelryVillagers {
 
                 // T1 Necklaces
 
-                Offer.sell(5, JewelryItems.crimson_spinel_necklace.item().getDefaultStack(), 45, 3, 13, 0.1f),
-                Offer.sell(5, JewelryItems.fire_opal_necklace.item().getDefaultStack(), 45, 3, 13, 0.1f),
+                Offer.sell(5, JewelryItems.ruby_necklace.item().getDefaultStack(), 45, 3, 13, 0.1f),
+                Offer.sell(5, JewelryItems.topaz_necklace.item().getDefaultStack(), 45, 3, 13, 0.1f),
                 Offer.sell(5, JewelryItems.citrine_necklace.item().getDefaultStack(), 45, 3, 13, 0.1f),
                 Offer.sell(5, JewelryItems.jade_necklace.item().getDefaultStack(), 45, 3, 13, 0.1f),
                 Offer.sell(5, JewelryItems.sapphire_necklace.item().getDefaultStack(), 45, 3, 13, 0.1f),
