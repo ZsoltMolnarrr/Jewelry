@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "jewelry:item/green_necklace"
+    "layer0": "jewelry:item/sapphire_necklace"
   }
 }

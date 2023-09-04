@@ -2,17 +2,17 @@
   "values": [
     "jewelry:emerald_necklace",
     "jewelry:diamond_necklace",
-    "jewelry:red_necklace",
-    "jewelry:orange_necklace",
-    "jewelry:yellow_necklace",
-    "jewelry:green_necklace",
-    "jewelry:blue_necklace",
-    "jewelry:purple_necklace",
-    "jewelry:netherite_red_necklace",
-    "jewelry:netherite_orange_necklace",
-    "jewelry:netherite_yellow_necklace",
-    "jewelry:netherite_green_necklace",
-    "jewelry:netherite_blue_necklace",
-    "jewelry:netherite_purple_necklace"
+    "jewelry:crimson_spinel_necklace",
+    "jewelry:fire_opal_necklace",
+    "jewelry:citrine_necklace",
+    "jewelry:jade_necklace",
+    "jewelry:sapphire_necklace",
+    "jewelry:tanzanite_necklace",
+    "jewelry:netherite_crimson_spinel_necklace",
+    "jewelry:netherite_fire_opal_necklace",
+    "jewelry:netherite_citrine_necklace",
+    "jewelry:netherite_jade_necklace",
+    "jewelry:netherite_sapphire_necklace",
+    "jewelry:netherite_tanzanite_necklace"
   ]
 }

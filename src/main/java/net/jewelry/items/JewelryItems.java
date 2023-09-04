@@ -67,21 +67,21 @@ public class JewelryItems {
     // MARK: Custom gem rings
 
     // bold
-    public static Entry red_ring = add(new Identifier(JewelryMod.ID, "red_ring"), Rarity.UNCOMMON, new ItemConfig.Item(
+    public static Entry crimson_spinel_ring = add(new Identifier(JewelryMod.ID, "crimson_spinel_ring"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
                     new ItemConfig.AttributeModifier("minecraft:generic.attack_damage", 1, EntityAttributeModifier.Operation.ADDITION)
             )
     ));
 
     // sunfire
-    public static Entry orange_ring = add(new Identifier(JewelryMod.ID, "orange_ring"), Rarity.UNCOMMON, new ItemConfig.Item(
+    public static Entry fire_opal_ring = add(new Identifier(JewelryMod.ID, "fire_opal_ring"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
                     new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.ARCANE).id, 1, EntityAttributeModifier.Operation.ADDITION),
                     new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.FIRE).id, 1, EntityAttributeModifier.Operation.ADDITION)
             )
     ));
 
-    public static Entry yellow_ring = add(new Identifier(JewelryMod.ID, "yellow_ring"), Rarity.UNCOMMON, new ItemConfig.Item(
+    public static Entry citrine_ring = add(new Identifier(JewelryMod.ID, "citrine_ring"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
                     new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.HEALING).id, 1, EntityAttributeModifier.Operation.ADDITION),
                     new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.LIGHTNING).id, 1, EntityAttributeModifier.Operation.ADDITION)
@@ -89,19 +89,19 @@ public class JewelryItems {
     ));
 
     // delicate
-    public static Entry green_ring = add(new Identifier(JewelryMod.ID, "green_ring"), Rarity.UNCOMMON, new ItemConfig.Item(
+    public static Entry jade_ring = add(new Identifier(JewelryMod.ID, "jade_ring"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
                     new ItemConfig.AttributeModifier(EntityAttributes_ProjectileDamage.attributeId, 1, EntityAttributeModifier.Operation.ADDITION)
             )
     ));
 
-    public static Entry blue_ring = add(new Identifier(JewelryMod.ID, "blue_ring"), Rarity.UNCOMMON, new ItemConfig.Item(
+    public static Entry sapphire_ring = add(new Identifier(JewelryMod.ID, "sapphire_ring"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
                     new ItemConfig.AttributeModifier("minecraft:generic.max_health", 2, EntityAttributeModifier.Operation.ADDITION)
             )
     ));
 
-    public static Entry purple_ring = add(new Identifier(JewelryMod.ID, "purple_ring"), Rarity.UNCOMMON, new ItemConfig.Item(
+    public static Entry tanzanite_ring = add(new Identifier(JewelryMod.ID, "tanzanite_ring"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
                     new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.FROST).id, 1, EntityAttributeModifier.Operation.ADDITION),
                     new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.SOUL).id, 1, EntityAttributeModifier.Operation.ADDITION)
@@ -110,21 +110,21 @@ public class JewelryItems {
 
     // MARK: Custom gen necklaces
 
-    public static Entry red_necklace = add(new Identifier(JewelryMod.ID, "red_necklace"), Rarity.UNCOMMON, new ItemConfig.Item(
+    public static Entry crimson_spinel_necklace = add(new Identifier(JewelryMod.ID, "crimson_spinel_necklace"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
                     new ItemConfig.AttributeModifier("generic.attack_damage", 1, EntityAttributeModifier.Operation.ADDITION)
             )
     ));
 
     // sunfire
-    public static Entry orange_necklace = add(new Identifier(JewelryMod.ID, "orange_necklace"), Rarity.UNCOMMON, new ItemConfig.Item(
+    public static Entry fire_opal_necklace = add(new Identifier(JewelryMod.ID, "fire_opal_necklace"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
                     new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.ARCANE).id, 1, EntityAttributeModifier.Operation.ADDITION),
                     new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.FIRE).id, 1, EntityAttributeModifier.Operation.ADDITION)
             )
     ));
 
-    public static Entry yellow_necklace = add(new Identifier(JewelryMod.ID, "yellow_necklace"), Rarity.UNCOMMON, new ItemConfig.Item(
+    public static Entry citrine_necklace = add(new Identifier(JewelryMod.ID, "citrine_necklace"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
                     new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.HEALING).id, 1, EntityAttributeModifier.Operation.ADDITION),
                     new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.LIGHTNING).id, 1, EntityAttributeModifier.Operation.ADDITION)
@@ -132,19 +132,19 @@ public class JewelryItems {
     ));
 
     // delicate
-    public static Entry green_necklace = add(new Identifier(JewelryMod.ID, "green_necklace"), Rarity.UNCOMMON, new ItemConfig.Item(
+    public static Entry jade_necklace = add(new Identifier(JewelryMod.ID, "jade_necklace"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
                     new ItemConfig.AttributeModifier(EntityAttributes_ProjectileDamage.attributeId, 1, EntityAttributeModifier.Operation.ADDITION)
             )
     ));
 
-    public static Entry blue_necklace = add(new Identifier(JewelryMod.ID, "blue_necklace"), Rarity.UNCOMMON, new ItemConfig.Item(
+    public static Entry sapphire_necklace = add(new Identifier(JewelryMod.ID, "sapphire_necklace"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
                     new ItemConfig.AttributeModifier("minecraft:generic.max_health", 2, EntityAttributeModifier.Operation.ADDITION)
             )
     ));
 
-    public static Entry purple_necklace = add(new Identifier(JewelryMod.ID, "purple_necklace"), Rarity.UNCOMMON, new ItemConfig.Item(
+    public static Entry tanzanite_necklace = add(new Identifier(JewelryMod.ID, "tanzanite_necklace"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
                     new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.FROST).id, 1, EntityAttributeModifier.Operation.ADDITION),
                     new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.SOUL).id, 1, EntityAttributeModifier.Operation.ADDITION)
@@ -154,78 +154,78 @@ public class JewelryItems {
 
     // MARK: Netherite variants
 
-    public static Entry netherite_red_ring = add(new Identifier(JewelryMod.ID, "netherite_red_ring"), Rarity.UNCOMMON, new ItemConfig.Item(
+    public static Entry netherite_crimson_spinel_ring = add(new Identifier(JewelryMod.ID, "netherite_crimson_spinel_ring"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
                     new ItemConfig.AttributeModifier("minecraft:generic.attack_damage", 2, EntityAttributeModifier.Operation.ADDITION)
             )
     ));
 
-    public static Entry netherite_orange_ring = add(new Identifier(JewelryMod.ID, "netherite_orange_ring"), Rarity.UNCOMMON, new ItemConfig.Item(
+    public static Entry netherite_fire_opal_ring = add(new Identifier(JewelryMod.ID, "netherite_fire_opal_ring"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
                     new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.ARCANE).id, 2, EntityAttributeModifier.Operation.ADDITION),
                     new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.FIRE).id, 2, EntityAttributeModifier.Operation.ADDITION)
             )
     ));
 
-    public static Entry netherite_yellow_ring = add(new Identifier(JewelryMod.ID, "netherite_yellow_ring"), Rarity.UNCOMMON, new ItemConfig.Item(
+    public static Entry netherite_citrine_ring = add(new Identifier(JewelryMod.ID, "netherite_citrine_ring"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
                     new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.HEALING).id, 2, EntityAttributeModifier.Operation.ADDITION),
                     new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.LIGHTNING).id, 2, EntityAttributeModifier.Operation.ADDITION)
             )
     ));
 
-    public static Entry netherite_green_ring = add(new Identifier(JewelryMod.ID, "netherite_green_ring"), Rarity.UNCOMMON, new ItemConfig.Item(
+    public static Entry netherite_jade_ring = add(new Identifier(JewelryMod.ID, "netherite_jade_ring"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
                     new ItemConfig.AttributeModifier(EntityAttributes_ProjectileDamage.attributeId, 2, EntityAttributeModifier.Operation.ADDITION)
             )
     ));
 
-    public static Entry netherite_blue_ring = add(new Identifier(JewelryMod.ID, "netherite_blue_ring"), Rarity.UNCOMMON, new ItemConfig.Item(
+    public static Entry netherite_sapphire_ring = add(new Identifier(JewelryMod.ID, "netherite_sapphire_ring"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
                     new ItemConfig.AttributeModifier("minecraft:generic.max_health", 4, EntityAttributeModifier.Operation.ADDITION)
             )
     ));
 
-    public static Entry netherite_purple_ring = add(new Identifier(JewelryMod.ID, "netherite_purple_ring"), Rarity.UNCOMMON, new ItemConfig.Item(
+    public static Entry netherite_tanzanite_ring = add(new Identifier(JewelryMod.ID, "netherite_tanzanite_ring"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
                     new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.FROST).id, 2, EntityAttributeModifier.Operation.ADDITION),
                     new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.SOUL).id, 2, EntityAttributeModifier.Operation.ADDITION)
             )
     ));
 
-    public static Entry netherite_red_necklace = add(new Identifier(JewelryMod.ID, "netherite_red_necklace"), Rarity.UNCOMMON, new ItemConfig.Item(
+    public static Entry netherite_crimson_spinel_necklace = add(new Identifier(JewelryMod.ID, "netherite_crimson_spinel_necklace"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
                     new ItemConfig.AttributeModifier("generic.attack_damage", 2, EntityAttributeModifier.Operation.ADDITION)
             )
     ));
 
-    public static Entry netherite_orange_necklace = add(new Identifier(JewelryMod.ID, "netherite_orange_necklace"), Rarity.UNCOMMON, new ItemConfig.Item(
+    public static Entry netherite_fire_opal_necklace = add(new Identifier(JewelryMod.ID, "netherite_fire_opal_necklace"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
                     new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.ARCANE).id, 2, EntityAttributeModifier.Operation.ADDITION),
                     new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.FIRE).id, 2, EntityAttributeModifier.Operation.ADDITION)
             )
     ));
 
-    public static Entry netherite_yellow_necklace = add(new Identifier(JewelryMod.ID, "netherite_yellow_necklace"), Rarity.UNCOMMON, new ItemConfig.Item(
+    public static Entry netherite_citrine_necklace = add(new Identifier(JewelryMod.ID, "netherite_citrine_necklace"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
                     new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.HEALING).id, 2, EntityAttributeModifier.Operation.ADDITION),
                     new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.LIGHTNING).id, 2, EntityAttributeModifier.Operation.ADDITION)
             )
     ));
 
-    public static Entry netherite_green_necklace = add(new Identifier(JewelryMod.ID, "netherite_green_necklace"), Rarity.UNCOMMON, new ItemConfig.Item(
+    public static Entry netherite_jade_necklace = add(new Identifier(JewelryMod.ID, "netherite_jade_necklace"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
                     new ItemConfig.AttributeModifier(EntityAttributes_ProjectileDamage.attributeId, 2, EntityAttributeModifier.Operation.ADDITION)
             )
     ));
 
-    public static Entry netherite_blue_necklace = add(new Identifier(JewelryMod.ID, "netherite_blue_necklace"), Rarity.UNCOMMON, new ItemConfig.Item(
+    public static Entry netherite_sapphire_necklace = add(new Identifier(JewelryMod.ID, "netherite_sapphire_necklace"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
                     new ItemConfig.AttributeModifier("minecraft:generic.max_health", 4, EntityAttributeModifier.Operation.ADDITION)
             )
     ));
 
-    public static Entry netherite_purple_necklace = add(new Identifier(JewelryMod.ID, "netherite_purple_necklace"), Rarity.UNCOMMON, new ItemConfig.Item(
+    public static Entry netherite_tanzanite_necklace = add(new Identifier(JewelryMod.ID, "netherite_tanzanite_necklace"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
                     new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.FROST).id, 2, EntityAttributeModifier.Operation.ADDITION),
                     new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.SOUL).id, 2, EntityAttributeModifier.Operation.ADDITION)

@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "jewelry:item/netherite_red_necklace"
+    "layer0": "jewelry:item/sapphire_ring"
   }
 }

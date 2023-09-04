@@ -94,21 +94,21 @@ public class JewelryVillagers {
 
                 // T1 Rings
 
-                Offer.sell(4, JewelryItems.red_ring.item().getDefaultStack(), 35, 5, 13, 0.1f),
-                Offer.sell(4, JewelryItems.orange_ring.item().getDefaultStack(), 35, 5, 13, 0.1f),
-                Offer.sell(4, JewelryItems.yellow_ring.item().getDefaultStack(), 35, 5, 13, 0.1f),
-                Offer.sell(4, JewelryItems.green_ring.item().getDefaultStack(), 35, 5, 13, 0.1f),
-                Offer.sell(4, JewelryItems.blue_ring.item().getDefaultStack(), 35, 5, 13, 0.1f),
-                Offer.sell(4, JewelryItems.purple_ring.item().getDefaultStack(), 35, 5, 13, 0.1f),
+                Offer.sell(4, JewelryItems.crimson_spinel_ring.item().getDefaultStack(), 35, 5, 13, 0.1f),
+                Offer.sell(4, JewelryItems.fire_opal_ring.item().getDefaultStack(), 35, 5, 13, 0.1f),
+                Offer.sell(4, JewelryItems.citrine_ring.item().getDefaultStack(), 35, 5, 13, 0.1f),
+                Offer.sell(4, JewelryItems.jade_ring.item().getDefaultStack(), 35, 5, 13, 0.1f),
+                Offer.sell(4, JewelryItems.sapphire_ring.item().getDefaultStack(), 35, 5, 13, 0.1f),
+                Offer.sell(4, JewelryItems.tanzanite_ring.item().getDefaultStack(), 35, 5, 13, 0.1f),
 
                 // T1 Necklaces
 
-                Offer.sell(5, JewelryItems.red_necklace.item().getDefaultStack(), 45, 3, 13, 0.1f),
-                Offer.sell(5, JewelryItems.orange_necklace.item().getDefaultStack(), 45, 3, 13, 0.1f),
-                Offer.sell(5, JewelryItems.yellow_necklace.item().getDefaultStack(), 45, 3, 13, 0.1f),
-                Offer.sell(5, JewelryItems.green_necklace.item().getDefaultStack(), 45, 3, 13, 0.1f),
-                Offer.sell(5, JewelryItems.blue_necklace.item().getDefaultStack(), 45, 3, 13, 0.1f),
-                Offer.sell(5, JewelryItems.purple_necklace.item().getDefaultStack(), 45, 3, 13, 0.1f)
+                Offer.sell(5, JewelryItems.crimson_spinel_necklace.item().getDefaultStack(), 45, 3, 13, 0.1f),
+                Offer.sell(5, JewelryItems.fire_opal_necklace.item().getDefaultStack(), 45, 3, 13, 0.1f),
+                Offer.sell(5, JewelryItems.citrine_necklace.item().getDefaultStack(), 45, 3, 13, 0.1f),
+                Offer.sell(5, JewelryItems.jade_necklace.item().getDefaultStack(), 45, 3, 13, 0.1f),
+                Offer.sell(5, JewelryItems.sapphire_necklace.item().getDefaultStack(), 45, 3, 13, 0.1f),
+                Offer.sell(5, JewelryItems.tanzanite_necklace.item().getDefaultStack(), 45, 3, 13, 0.1f)
         );
 
         for(var offer: wizardMerchantOffers) {
