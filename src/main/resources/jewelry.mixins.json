@@ -4,6 +4,7 @@
   "package": "net.jewelry.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "StructurePoolAccessor"
   ],
   "client": [
   ],

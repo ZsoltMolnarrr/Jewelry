@@ -1,4 +1,4 @@
-package net.jewelry.items;
+package net.jewelry.worldgen;
 
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
