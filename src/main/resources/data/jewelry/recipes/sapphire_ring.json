@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "M": {
+      "item": "minecraft:gold_ingot"
+    },
+    "G": {
+      "item": "jewelry:sapphire"
+    }
+  },
+  "pattern": [
+    " G ",
+    "M M",
+    " M "
+  ],
+  "result": {
+    "item": "jewelry:sapphire_ring"
+  }
+}

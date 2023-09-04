@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "S": {
+      "item": "minecraft:string"
+    },
+    "M": {
+      "item": "minecraft:gold_ingot"
+    },
+    "G": {
+      "item": "jewelry:ruby"
+    }
+  },
+  "pattern": [
+    " S ",
+    "SMS",
+    " G "
+  ],
+  "result": {
+    "item": "jewelry:ruby_necklace"
+  }
+}
