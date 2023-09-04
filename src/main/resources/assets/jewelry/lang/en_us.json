@@ -17,5 +17,31 @@
   "item.jewelry.iron_ring": "Iron Ring",
   "item.jewelry.gold_ring": "Gold Ring",
   "item.jewelry.emerald_necklace": "Emerald Necklace",
-  "item.jewelry.diamond_necklace": "Diamond Necklace"
+  "item.jewelry.diamond_necklace": "Diamond Necklace",
+
+  "item.jewelry.red_ring": "Copper Ring",
+  "item.jewelry.orange_ring": "Iron Ring",
+  "item.jewelry.yellow_ring": "Gold Ring",
+  "item.jewelry.green_ring": "Copper Ring",
+  "item.jewelry.blue_ring": "Iron Ring",
+  "item.jewelry.purple_ring": "Gold Ring",
+  "item.jewelry.red_necklace": "Copper Ring",
+  "item.jewelry.orange_necklace": "Iron Ring",
+  "item.jewelry.yellow_necklace": "Gold Ring",
+  "item.jewelry.green_necklace": "Copper Ring",
+  "item.jewelry.blue_necklace": "Iron Ring",
+  "item.jewelry.purple_necklace": "Gold Ring",
+
+  "item.jewelry.netherite_red_ring": "Copper Ring",
+  "item.jewelry.netherite_orange_ring": "Iron Ring",
+  "item.jewelry.netherite_yellow_ring": "Gold Ring",
+  "item.jewelry.netherite_green_ring": "Copper Ring",
+  "item.jewelry.netherite_blue_ring": "Iron Ring",
+  "item.jewelry.netherite_purple_ring": "Gold Ring",
+  "item.jewelry.netherite_red_necklace": "Copper Ring",
+  "item.jewelry.netherite_orange_necklace": "Iron Ring",
+  "item.jewelry.netherite_yellow_necklace": "Gold Ring",
+  "item.jewelry.netherite_green_necklace": "Copper Ring",
+  "item.jewelry.netherite_blue_necklace": "Iron Ring",
+  "item.jewelry.netherite_purple_necklace": "Gold Ring"
 }

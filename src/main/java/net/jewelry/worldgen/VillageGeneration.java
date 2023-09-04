@@ -39,7 +39,7 @@ public class VillageGeneration {
                 .getOrEmpty(poolId);
 
         if (poolGetter.isEmpty()) {
-            System.err.println("Wizards: cannot add to " + poolId + " as it cannot be found!");
+            System.err.println(JewelryMod.ID + ": cannot add to " + poolId + " as it cannot be found!");
             return;
         }
 
