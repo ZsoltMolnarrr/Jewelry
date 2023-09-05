@@ -28,7 +28,7 @@
     "jewelry.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=${loader_version}",
+    "fabricloader": ">=0.14.20",
     "fabric": "*",
     "minecraft": "${minecraft_version}",
     "spell_power": "*",
