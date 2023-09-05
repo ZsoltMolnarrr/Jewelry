@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableSet;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.object.builder.v1.world.poi.PointOfInterestHelper;
 import net.jewelry.JewelryMod;
-import net.jewelry.items.JewelryBlocks;
+import net.jewelry.blocks.JewelryBlocks;
 import net.jewelry.items.JewelryItems;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;

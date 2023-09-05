@@ -1,15 +1,14 @@
 package net.jewelry;
 
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.jewelry.api.AttributeResolver;
+import net.jewelry.blocks.JewelryBlocks;
 import net.jewelry.config.Default;
 import net.jewelry.config.ItemConfig;
 import net.jewelry.config.WorldGenConfig;
 import net.jewelry.items.*;
 import net.jewelry.village.JewelryVillagers;
 import net.jewelry.worldgen.OreGeneration;
-import net.jewelry.worldgen.VillageGeneration;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.tinyconfig.ConfigManager;

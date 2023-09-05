@@ -1,9 +1,10 @@
-package net.jewelry.items;
+package net.jewelry.blocks;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.jewelry.JewelryMod;
+import net.jewelry.items.Group;
 import net.minecraft.block.Block;
 import net.minecraft.block.ExperienceDroppingBlock;
 import net.minecraft.block.MapColor;
@@ -51,12 +52,13 @@ public class JewelryBlocks {
             UniformIntProvider.create(3, 7)
     ));
 
-    public static final Entry JEWELERS_KIT = entry("jewelers_kit", new Block(
+    public static final Entry JEWELERS_KIT = entry("jewelers_kit", new JewelersKitBlock(
             FabricBlockSettings.create()
                     .mapColor(MapColor.OAK_TAN)
                     .instrument(Instrument.BASS)
                     .strength(2.5F)
                     .sounds(BlockSoundGroup.WOOD)
+                    .nonOpaque()
     ));
 
     public static void register() {

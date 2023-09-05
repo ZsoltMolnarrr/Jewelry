@@ -1,5 +1,19 @@
 {
   "variants": {
-    "": { "model": "jewelry:block/jewelers_kit" }
+    "facing=north": {
+      "model": "jewelry:block/jewelers_kit"
+    },
+    "facing=south": {
+      "model": "jewelry:block/jewelers_kit",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "jewelry:block/jewelers_kit",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "jewelry:block/jewelers_kit",
+      "y": 270
+    }
   }
 }
