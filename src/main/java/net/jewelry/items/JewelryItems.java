@@ -24,11 +24,19 @@ public class JewelryItems {
     public static ArrayList<Entry> all = new ArrayList<>();
 
     public static Entry add(Identifier id, ItemConfig.Item config) {
-        return add(id, Rarity.COMMON, config);
+        return add(id, Rarity.COMMON, config, null);
     }
 
     public static Entry add(Identifier id, Rarity rarity, ItemConfig.Item config) {
-        var entry = new Entry(id, new JewelryItem(new FabricItemSettings().rarity(rarity)), config);
+        return add(id, rarity, config, null);
+    }
+
+    public static Entry add(Identifier id, Rarity rarity, ItemConfig.Item config, boolean addLore) {
+        return add(id, rarity, config, addLore ? ("item." + id.getNamespace() + "." + id.getPath() + ".lore") : null);
+    }
+
+    public static Entry add(Identifier id, Rarity rarity, ItemConfig.Item config, String lore) {
+        var entry = new Entry(id, new JewelryItem(new FabricItemSettings().rarity(rarity), lore), config);
         all.add(entry);
         return entry;
     }
