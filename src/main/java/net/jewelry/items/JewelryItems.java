@@ -41,6 +41,9 @@ public class JewelryItems {
         return entry;
     }
 
+    private static final float tier_1_multiplier = 0.04F;
+    private static final float tier_2_multiplier = 0.08F;
+
     // MARK: Rings
 
     public static Entry copper_ring = add(new Identifier(JewelryMod.ID, "copper_ring"), new ItemConfig.Item(
@@ -77,7 +80,7 @@ public class JewelryItems {
     // bold
     public static Entry ruby_ring = add(new Identifier(JewelryMod.ID, "ruby_ring"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
-                    new ItemConfig.AttributeModifier("minecraft:generic.attack_damage", 1, EntityAttributeModifier.Operation.ADDITION)
+                    new ItemConfig.AttributeModifier("minecraft:generic.attack_damage", tier_1_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE)
             )
     ));
 
@@ -99,7 +102,7 @@ public class JewelryItems {
     // delicate
     public static Entry jade_ring = add(new Identifier(JewelryMod.ID, "jade_ring"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
-                    new ItemConfig.AttributeModifier(EntityAttributes_ProjectileDamage.attributeId, 1, EntityAttributeModifier.Operation.ADDITION)
+                    new ItemConfig.AttributeModifier(EntityAttributes_ProjectileDamage.attributeId, tier_1_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE)
             )
     ));
 
@@ -116,11 +119,11 @@ public class JewelryItems {
             )
     ));
 
-    // MARK: Custom gen necklaces
+    // MARK: Custom gem necklaces
 
     public static Entry ruby_necklace = add(new Identifier(JewelryMod.ID, "ruby_necklace"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
-                    new ItemConfig.AttributeModifier("generic.attack_damage", 1, EntityAttributeModifier.Operation.ADDITION)
+                    new ItemConfig.AttributeModifier("generic.attack_damage", tier_1_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE)
             )
     ));
 
@@ -142,7 +145,7 @@ public class JewelryItems {
     // delicate
     public static Entry jade_necklace = add(new Identifier(JewelryMod.ID, "jade_necklace"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
-                    new ItemConfig.AttributeModifier(EntityAttributes_ProjectileDamage.attributeId, 1, EntityAttributeModifier.Operation.ADDITION)
+                    new ItemConfig.AttributeModifier(EntityAttributes_ProjectileDamage.attributeId, tier_1_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE)
             )
     ));
 
@@ -164,7 +167,7 @@ public class JewelryItems {
 
     public static Entry netherite_ruby_ring = add(new Identifier(JewelryMod.ID, "netherite_ruby_ring"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
-                    new ItemConfig.AttributeModifier("minecraft:generic.attack_damage", 2, EntityAttributeModifier.Operation.ADDITION)
+                    new ItemConfig.AttributeModifier("minecraft:generic.attack_damage", tier_2_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE)
             )
     ));
 
@@ -184,7 +187,7 @@ public class JewelryItems {
 
     public static Entry netherite_jade_ring = add(new Identifier(JewelryMod.ID, "netherite_jade_ring"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
-                    new ItemConfig.AttributeModifier(EntityAttributes_ProjectileDamage.attributeId, 2, EntityAttributeModifier.Operation.ADDITION)
+                    new ItemConfig.AttributeModifier(EntityAttributes_ProjectileDamage.attributeId, tier_2_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE)
             )
     ));
 
@@ -203,7 +206,7 @@ public class JewelryItems {
 
     public static Entry netherite_ruby_necklace = add(new Identifier(JewelryMod.ID, "netherite_ruby_necklace"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
-                    new ItemConfig.AttributeModifier("generic.attack_damage", 2, EntityAttributeModifier.Operation.ADDITION)
+                    new ItemConfig.AttributeModifier("generic.attack_damage", tier_2_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE)
             )
     ));
 
@@ -223,7 +226,7 @@ public class JewelryItems {
 
     public static Entry netherite_jade_necklace = add(new Identifier(JewelryMod.ID, "netherite_jade_necklace"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
-                    new ItemConfig.AttributeModifier(EntityAttributes_ProjectileDamage.attributeId, 2, EntityAttributeModifier.Operation.ADDITION)
+                    new ItemConfig.AttributeModifier(EntityAttributes_ProjectileDamage.attributeId, tier_2_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE)
             )
     ));
 
@@ -258,7 +261,7 @@ public class JewelryItems {
                 }
                 modifiers.add(new JewelryItem.Modifier(
                         attribute,
-                        "Jewelry Attribute",
+                        "Jewelry modifier",
                         modifier.value,
                         modifier.operation));
             }
