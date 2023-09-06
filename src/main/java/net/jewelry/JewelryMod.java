@@ -8,6 +8,7 @@ import net.jewelry.config.Default;
 import net.jewelry.config.ItemConfig;
 import net.jewelry.config.WorldGenConfig;
 import net.jewelry.items.*;
+import net.jewelry.util.SoundHelper;
 import net.jewelry.village.JewelryVillagers;
 import net.jewelry.worldgen.OreGeneration;
 import net.jewelry.worldgen.VillageGeneration;
@@ -48,6 +49,7 @@ public class JewelryMod implements ModInitializer {
         itemConfig.save();
 
         JewelryVillagers.register();
+        SoundHelper.register();
 
         OreGeneration.register();
         ServerLifecycleEvents.SERVER_STARTING.register(VillageGeneration::init);

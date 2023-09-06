@@ -3,11 +3,13 @@ package net.jewelry.api;
 import com.google.common.collect.Multimap;
 import dev.emi.trinkets.api.SlotReference;
 import dev.emi.trinkets.api.TrinketItem;
+import net.jewelry.util.SoundHelper;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.item.ItemStack;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
@@ -47,5 +49,9 @@ public class JewelryItem extends TrinketItem {
 
     public void setConfigurableModifiers(List<Modifier> configurableModifiers) {
         this.configurableModifiers = configurableModifiers;
+    }
+
+    public SoundEvent getEquipSound(ItemStack itemStack) {
+        return SoundHelper.JEWELRY_EQUIP;
     }
 }
