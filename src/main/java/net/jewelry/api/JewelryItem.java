@@ -5,11 +5,13 @@ import dev.emi.trinkets.api.SlotReference;
 import dev.emi.trinkets.api.TrinketItem;
 import net.jewelry.util.SoundHelper;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
@@ -51,7 +53,14 @@ public class JewelryItem extends TrinketItem {
         this.configurableModifiers = configurableModifiers;
     }
 
-    public SoundEvent getEquipSound(ItemStack itemStack) {
-        return SoundHelper.JEWELRY_EQUIP;
+    @Override
+    public void onEquip(ItemStack stack, SlotReference slot, LivingEntity entity) {
+        super.onEquip(stack, slot, entity);
+
+        if (entity.getWorld().isClient() // Play sound only on client
+                && entity.age > 100      // Avoid playing sound on entering world / dimension
+        ) {
+            entity.playSound(SoundHelper.JEWELRY_EQUIP, 1.0F, 1.0F);
+        }
     }
 }

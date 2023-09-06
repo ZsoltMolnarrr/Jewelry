@@ -1,7 +1,7 @@
 {
-  "jewelry:jewelry_equip": {
+  "jewelry_equip": {
     "sounds": [
-      "jewelry_equip"
+      "jewelry:jewelry_equip"
     ]
   }
 }
