@@ -6,13 +6,13 @@ import net.fabricmc.fabric.api.object.builder.v1.world.poi.PointOfInterestHelper
 import net.jewelry.JewelryMod;
 import net.jewelry.blocks.JewelryBlocks;
 import net.jewelry.items.JewelryItems;
+import net.jewelry.util.SoundHelper;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.village.TradeOffer;
 import net.minecraft.village.VillagerProfession;
@@ -40,7 +40,7 @@ public class JewelryVillagers {
                 },
                 ImmutableSet.of(),
                 ImmutableSet.of(),
-                SoundEvents.ITEM_ARMOR_EQUIP_LEATHER)
+                SoundHelper.JEWELRY_WORKBENCH)
         );
     }
 

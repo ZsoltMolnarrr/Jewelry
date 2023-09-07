@@ -3,5 +3,10 @@
     "sounds": [
       "jewelry:jewelry_equip"
     ]
+  },
+  "jewelry_workbench": {
+    "sounds": [
+      "jewelry:jewelry_workbench"
+    ]
   }
 }

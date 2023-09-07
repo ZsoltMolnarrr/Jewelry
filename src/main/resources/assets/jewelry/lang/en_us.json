@@ -3,6 +3,7 @@
   "block.jewelry.gem_vein": "Gem Vein",
   "block.jewelry.deepslate_gem_vein": "Deepslate Gem Vein",
   "block.jewelry.jewelers_kit": "Jeweler's Kit",
+  "block.jewelry.jewelers_kit.hint": "Workbench for Jeweler Villagers.",
 
   "entity.minecraft.villager.jeweler": "Jeweler",
 
