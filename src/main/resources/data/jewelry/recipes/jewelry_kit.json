@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "#": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    "CIG",
+    "###"
+  ],
+  "result": {
+    "item": "jewelry:jewelers_kit"
+  },
+  "show_notification": false
+}
