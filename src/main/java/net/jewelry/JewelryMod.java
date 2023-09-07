@@ -15,8 +15,6 @@ import net.jewelry.util.SoundHelper;
 import net.jewelry.village.JewelryVillagers;
 import net.jewelry.worldgen.OreGeneration;
 import net.jewelry.worldgen.VillageGeneration;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 import net.tinyconfig.ConfigManager;
 
 public class JewelryMod implements ModInitializer {
@@ -53,7 +51,7 @@ public class JewelryMod implements ModInitializer {
         worldGenConfig.refresh();
         lootConfig.refresh();
 
-        Registry.register(Registries.ITEM_GROUP, Group.KEY, Group.JEWELRY);
+        var load = Group.JEWELRY;
         JewelryBlocks.register();
         Gems.register();
         JewelryItems.register(itemConfig.value);

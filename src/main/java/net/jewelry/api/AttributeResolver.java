@@ -2,8 +2,8 @@ package net.jewelry.api;
 
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.attribute.EntityAttribute;
-import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 import net.projectile_damage.api.EntityAttributes_ProjectileDamage;
 import net.spell_power.api.attributes.SpellAttributes;
 
@@ -37,7 +37,7 @@ public class AttributeResolver {
         // Check for custom attribute
         var attribute = attributes.get(id);
         if (attribute == null) {
-            attribute = Registries.ATTRIBUTE.get(id);
+            attribute = Registry.ATTRIBUTE.get(id);
         }
         return attribute;
     }

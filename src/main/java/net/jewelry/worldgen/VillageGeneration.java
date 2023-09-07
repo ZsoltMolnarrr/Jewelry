@@ -3,14 +3,14 @@ package net.jewelry.worldgen;
 import com.mojang.datafixers.util.Pair;
 import net.jewelry.JewelryMod;
 import net.jewelry.mixin.StructurePoolAccessor;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.structure.pool.StructurePool;
 import net.minecraft.structure.pool.StructurePoolElement;
 import net.minecraft.structure.processor.StructureProcessorList;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.RegistryEntry;
+import net.minecraft.util.registry.RegistryKey;
 
 import java.util.ArrayList;
 
@@ -26,16 +26,16 @@ public class VillageGeneration {
     }
 
     private static final RegistryKey<StructureProcessorList> EMPTY_PROCESSOR_LIST_KEY = RegistryKey.of(
-            RegistryKeys.PROCESSOR_LIST, new Identifier("minecraft", "empty"));
+            Registry.STRUCTURE_PROCESSOR_LIST_KEY, new Identifier("minecraft", "empty"));
 
 
     private static void addToStructurePool(MinecraftServer server, Identifier poolId, Identifier structureId, int weight) {
         RegistryEntry<StructureProcessorList> emptyProcessorList = server.getRegistryManager()
-                .get(RegistryKeys.PROCESSOR_LIST)
+                .get(Registry.STRUCTURE_PROCESSOR_LIST_KEY)
                 .entryOf(EMPTY_PROCESSOR_LIST_KEY);
 
         var poolGetter = server.getRegistryManager()
-                .get(RegistryKeys.TEMPLATE_POOL)
+                .get(Registry.STRUCTURE_POOL_KEY)
                 .getOrEmpty(poolId);
 
         if (poolGetter.isEmpty()) {

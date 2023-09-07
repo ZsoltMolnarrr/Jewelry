@@ -1,19 +1,18 @@
 package net.jewelry.util;
 
 import net.jewelry.JewelryMod;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
 public class SoundHelper {
     public static final Identifier JEWELRY_EQUIP_ID = new Identifier(JewelryMod.ID, "jewelry_equip");
-    public static final SoundEvent JEWELRY_EQUIP = SoundEvent.of(JEWELRY_EQUIP_ID);
+    public static final SoundEvent JEWELRY_EQUIP = new SoundEvent(JEWELRY_EQUIP_ID);
     public static final Identifier JEWELRY_WORKBENCH_ID = new Identifier(JewelryMod.ID, "jewelry_workbench");
-    public static final SoundEvent JEWELRY_WORKBENCH = SoundEvent.of(JEWELRY_WORKBENCH_ID);
+    public static final SoundEvent JEWELRY_WORKBENCH = new SoundEvent(JEWELRY_WORKBENCH_ID);
 
     public static void register() {
-        Registry.register(Registries.SOUND_EVENT, JEWELRY_EQUIP_ID, JEWELRY_EQUIP);
-        Registry.register(Registries.SOUND_EVENT, JEWELRY_WORKBENCH_ID, JEWELRY_WORKBENCH);
+        Registry.register(Registry.SOUND_EVENT, JEWELRY_EQUIP_ID, JEWELRY_EQUIP);
+        Registry.register(Registry.SOUND_EVENT, JEWELRY_WORKBENCH_ID, JEWELRY_WORKBENCH);
     }
 }

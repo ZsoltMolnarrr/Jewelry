@@ -1,17 +1,15 @@
 package net.jewelry.items;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.jewelry.JewelryMod;
 import net.jewelry.api.AttributeResolver;
 import net.jewelry.api.JewelryItem;
 import net.jewelry.config.ItemConfig;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.item.Item;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
+import net.minecraft.util.registry.Registry;
 import net.projectile_damage.api.EntityAttributes_ProjectileDamage;
 import net.spell_power.api.MagicSchool;
 import net.spell_power.api.attributes.SpellAttributes;
@@ -36,7 +34,7 @@ public class JewelryItems {
     }
 
     public static Entry add(Identifier id, Rarity rarity, ItemConfig.Item config, String lore) {
-        var entry = new Entry(id, new JewelryItem(new FabricItemSettings().rarity(rarity), lore), config);
+        var entry = new Entry(id, new JewelryItem(new FabricItemSettings().rarity(rarity).group(Group.JEWELRY), lore), config);
         all.add(entry);
         entryMap.put(id.toString(), entry.item());
         return entry;
@@ -267,14 +265,8 @@ public class JewelryItems {
                         modifier.operation));
             }
             entry.item().setConfigurableModifiers(modifiers);
-            Registry.register(Registries.ITEM, entry.id(), entry.item());
+            Registry.register(Registry.ITEM, entry.id(), entry.item());
         }
-
-        ItemGroupEvents.modifyEntriesEvent(Group.KEY).register((content) -> {
-            for (var entry : all) {
-                content.add(entry.item());
-            }
-        });
     }
 
     private static final UUID placeHolderUUID = UUID.randomUUID();

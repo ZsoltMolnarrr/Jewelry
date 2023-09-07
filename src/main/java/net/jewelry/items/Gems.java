@@ -1,13 +1,11 @@
 package net.jewelry.items;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.jewelry.JewelryMod;
 import net.minecraft.item.Item;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
+import net.minecraft.util.registry.Registry;
 
 import java.util.ArrayList;
 
@@ -15,7 +13,7 @@ public class Gems {
     public record Entry(Identifier id, Item item) { }
     public static ArrayList<Entry> all = new ArrayList<>();
     public static Entry gem(Identifier id) {
-        var entry = new Entry(id, new Item(new FabricItemSettings().rarity(Rarity.UNCOMMON)));
+        var entry = new Entry(id, new Item(new FabricItemSettings().rarity(Rarity.UNCOMMON).group(Group.JEWELRY)));
         all.add(entry);
         return entry;
     }
@@ -29,13 +27,7 @@ public class Gems {
 
     public static void register() {
         for (var entry : all) {
-            Registry.register(Registries.ITEM, entry.id(), entry.item());
+            Registry.register(Registry.ITEM, entry.id(), entry.item());
         }
-
-        ItemGroupEvents.modifyEntriesEvent(Group.KEY).register((content) -> {
-            for (var entry : all) {
-                content.add(entry.item());
-            }
-        });
     }
 }

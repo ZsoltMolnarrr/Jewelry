@@ -10,10 +10,9 @@ import net.jewelry.util.SoundHelper;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.village.TradeOffer;
 import net.minecraft.village.VillagerProfession;
 import net.minecraft.world.poi.PointOfInterestType;
@@ -30,7 +29,7 @@ public class JewelryVillagers {
 
     public static VillagerProfession registerProfession(String name, RegistryKey<PointOfInterestType> workStation) {
         var id = new Identifier(JewelryMod.ID, name);
-        return Registry.register(Registries.VILLAGER_PROFESSION, new Identifier(JewelryMod.ID, name), new VillagerProfession(
+        return Registry.register(Registry.VILLAGER_PROFESSION, new Identifier(JewelryMod.ID, name), new VillagerProfession(
                 id.toString(),
                 (entry) -> {
                     return entry.matchesKey(workStation);
@@ -74,7 +73,7 @@ public class JewelryVillagers {
         var wizardPOI = registerPOI(JEWELER, JewelryBlocks.JEWELERS_KIT.block());
         var wizardMerchantProfession = registerProfession(
                 JEWELER,
-                RegistryKey.of(Registries.POINT_OF_INTEREST_TYPE.getKey(), new Identifier(JewelryMod.ID, JEWELER)));
+                RegistryKey.of(Registry.POINT_OF_INTEREST_TYPE_KEY, new Identifier(JewelryMod.ID, JEWELER)));
 
         List<Offer> wizardMerchantOffers = List.of(
                 Offer.buy(1, new ItemStack(Items.COPPER_INGOT, 8), 4, 8, 1, 0.01f),
