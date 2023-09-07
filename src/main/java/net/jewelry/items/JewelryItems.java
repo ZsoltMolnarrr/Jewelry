@@ -7,6 +7,7 @@ import net.jewelry.api.AttributeResolver;
 import net.jewelry.api.JewelryItem;
 import net.jewelry.config.ItemConfig;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
@@ -15,13 +16,12 @@ import net.projectile_damage.api.EntityAttributes_ProjectileDamage;
 import net.spell_power.api.MagicSchool;
 import net.spell_power.api.attributes.SpellAttributes;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class JewelryItems {
     public record Entry(Identifier id, JewelryItem item, ItemConfig.Item config) {  }
-    public static ArrayList<Entry> all = new ArrayList<>();
+    public static final ArrayList<Entry> all = new ArrayList<>();
+    public static final Map<String, Item> entryMap = new HashMap<>();
 
     public static Entry add(Identifier id, ItemConfig.Item config) {
         return add(id, Rarity.COMMON, config, null);
@@ -38,6 +38,7 @@ public class JewelryItems {
     public static Entry add(Identifier id, Rarity rarity, ItemConfig.Item config, String lore) {
         var entry = new Entry(id, new JewelryItem(new FabricItemSettings().rarity(rarity), lore), config);
         all.add(entry);
+        entryMap.put(id.toString(), entry.item());
         return entry;
     }
 
