@@ -9,6 +9,8 @@ import java.util.Map;
 
 public class ItemConfig {
     public Map<String, Item> items = new HashMap();
+
+    public record Bonus(float value, EntityAttributeModifier.Operation operation) { }
     public static class AttributeModifier { AttributeModifier() { }
         public String id = "";
         public float value = 0;
@@ -16,6 +18,14 @@ public class ItemConfig {
 
         public AttributeModifier(Identifier id, float value, EntityAttributeModifier.Operation operation) {
             this(id.toString(), value, operation);
+        }
+
+        public AttributeModifier(Identifier id, Bonus bonus) {
+            this(id.toString(), bonus.value, bonus.operation);
+        }
+
+        public AttributeModifier(String id, Bonus bonus) {
+            this(id, bonus.value, bonus.operation);
         }
 
         public AttributeModifier(String id, float value, EntityAttributeModifier.Operation operation) {

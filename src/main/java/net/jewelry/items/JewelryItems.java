@@ -43,7 +43,10 @@ public class JewelryItems {
     }
 
     private static final float tier_1_multiplier = 0.04F;
+    private static final ItemConfig.Bonus tier_1_bonus = new ItemConfig.Bonus(tier_1_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE);
     private static final float tier_2_multiplier = 0.08F;
+    private static final ItemConfig.Bonus tier_2_bonus = new ItemConfig.Bonus(tier_2_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE);
+
 
     // MARK: Rings
 
@@ -88,15 +91,15 @@ public class JewelryItems {
     // sunfire
     public static Entry topaz_ring = add(new Identifier(JewelryMod.ID, "topaz_ring"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
-                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.ARCANE).id, 1, EntityAttributeModifier.Operation.ADDITION),
-                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.FIRE).id, 1, EntityAttributeModifier.Operation.ADDITION)
+                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.ARCANE).id, tier_1_bonus),
+                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.FIRE).id, tier_1_bonus)
             )
     ));
 
     public static Entry citrine_ring = add(new Identifier(JewelryMod.ID, "citrine_ring"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
-                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.HEALING).id, 1, EntityAttributeModifier.Operation.ADDITION),
-                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.LIGHTNING).id, 1, EntityAttributeModifier.Operation.ADDITION)
+                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.HEALING).id, tier_1_bonus),
+                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.LIGHTNING).id, tier_1_bonus)
             )
     ));
 
@@ -115,8 +118,8 @@ public class JewelryItems {
 
     public static Entry tanzanite_ring = add(new Identifier(JewelryMod.ID, "tanzanite_ring"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
-                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.FROST).id, 1, EntityAttributeModifier.Operation.ADDITION),
-                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.SOUL).id, 1, EntityAttributeModifier.Operation.ADDITION)
+                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.FROST).id, tier_1_bonus),
+                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.SOUL).id, tier_1_bonus)
             )
     ));
 
@@ -124,22 +127,22 @@ public class JewelryItems {
 
     public static Entry ruby_necklace = add(new Identifier(JewelryMod.ID, "ruby_necklace"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
-                    new ItemConfig.AttributeModifier("generic.attack_damage", tier_1_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE)
+                    new ItemConfig.AttributeModifier("generic.attack_damage", tier_1_bonus)
             )
     ));
 
     // sunfire
     public static Entry topaz_necklace = add(new Identifier(JewelryMod.ID, "topaz_necklace"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
-                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.ARCANE).id, 1, EntityAttributeModifier.Operation.ADDITION),
-                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.FIRE).id, 1, EntityAttributeModifier.Operation.ADDITION)
+                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.ARCANE).id, tier_1_bonus),
+                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.FIRE).id, tier_1_bonus)
             )
     ));
 
     public static Entry citrine_necklace = add(new Identifier(JewelryMod.ID, "citrine_necklace"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
-                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.HEALING).id, 1, EntityAttributeModifier.Operation.ADDITION),
-                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.LIGHTNING).id, 1, EntityAttributeModifier.Operation.ADDITION)
+                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.HEALING).id, tier_1_bonus),
+                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.LIGHTNING).id, tier_1_bonus)
             )
     ));
 
@@ -158,8 +161,8 @@ public class JewelryItems {
 
     public static Entry tanzanite_necklace = add(new Identifier(JewelryMod.ID, "tanzanite_necklace"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
-                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.FROST).id, 1, EntityAttributeModifier.Operation.ADDITION),
-                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.SOUL).id, 1, EntityAttributeModifier.Operation.ADDITION)
+                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.FROST).id, tier_1_bonus),
+                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.SOUL).id, tier_1_bonus)
             )
     ));
 
@@ -168,40 +171,40 @@ public class JewelryItems {
 
     public static Entry netherite_ruby_ring = add(new Identifier(JewelryMod.ID, "netherite_ruby_ring"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
-                    new ItemConfig.AttributeModifier("minecraft:generic.attack_damage", tier_2_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE)
+                    new ItemConfig.AttributeModifier("minecraft:generic.attack_damage", tier_2_bonus)
             )
     ));
 
     public static Entry netherite_topaz_ring = add(new Identifier(JewelryMod.ID, "netherite_topaz_ring"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
-                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.ARCANE).id, 2, EntityAttributeModifier.Operation.ADDITION),
-                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.FIRE).id, 2, EntityAttributeModifier.Operation.ADDITION)
+                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.ARCANE).id, tier_2_bonus),
+                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.FIRE).id, tier_2_bonus)
             )
     ));
 
     public static Entry netherite_citrine_ring = add(new Identifier(JewelryMod.ID, "netherite_citrine_ring"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
-                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.HEALING).id, 2, EntityAttributeModifier.Operation.ADDITION),
-                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.LIGHTNING).id, 2, EntityAttributeModifier.Operation.ADDITION)
+                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.HEALING).id, tier_2_bonus),
+                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.LIGHTNING).id, tier_2_bonus)
             )
     ));
 
     public static Entry netherite_jade_ring = add(new Identifier(JewelryMod.ID, "netherite_jade_ring"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
-                    new ItemConfig.AttributeModifier(EntityAttributes_ProjectileDamage.attributeId, tier_2_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE)
+                    new ItemConfig.AttributeModifier(EntityAttributes_ProjectileDamage.attributeId, tier_2_bonus)
             )
     ));
 
     public static Entry netherite_sapphire_ring = add(new Identifier(JewelryMod.ID, "netherite_sapphire_ring"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
-                    new ItemConfig.AttributeModifier("minecraft:generic.max_health", 4, EntityAttributeModifier.Operation.ADDITION)
+                    new ItemConfig.AttributeModifier("minecraft:generic.max_health", tier_2_bonus)
             )
     ));
 
     public static Entry netherite_tanzanite_ring = add(new Identifier(JewelryMod.ID, "netherite_tanzanite_ring"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
-                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.FROST).id, 2, EntityAttributeModifier.Operation.ADDITION),
-                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.SOUL).id, 2, EntityAttributeModifier.Operation.ADDITION)
+                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.FROST).id, tier_2_bonus),
+                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.SOUL).id, tier_2_bonus)
             )
     ));
 
@@ -213,21 +216,21 @@ public class JewelryItems {
 
     public static Entry netherite_topaz_necklace = add(new Identifier(JewelryMod.ID, "netherite_topaz_necklace"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
-                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.ARCANE).id, 2, EntityAttributeModifier.Operation.ADDITION),
-                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.FIRE).id, 2, EntityAttributeModifier.Operation.ADDITION)
+                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.ARCANE).id, tier_2_bonus),
+                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.FIRE).id, tier_2_bonus)
             )
     ));
 
     public static Entry netherite_citrine_necklace = add(new Identifier(JewelryMod.ID, "netherite_citrine_necklace"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
-                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.HEALING).id, 2, EntityAttributeModifier.Operation.ADDITION),
-                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.LIGHTNING).id, 2, EntityAttributeModifier.Operation.ADDITION)
+                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.HEALING).id, tier_2_bonus),
+                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.LIGHTNING).id, tier_2_bonus)
             )
     ));
 
     public static Entry netherite_jade_necklace = add(new Identifier(JewelryMod.ID, "netherite_jade_necklace"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
-                    new ItemConfig.AttributeModifier(EntityAttributes_ProjectileDamage.attributeId, tier_2_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE)
+                    new ItemConfig.AttributeModifier(EntityAttributes_ProjectileDamage.attributeId, tier_2_bonus)
             )
     ));
 
@@ -239,8 +242,8 @@ public class JewelryItems {
 
     public static Entry netherite_tanzanite_necklace = add(new Identifier(JewelryMod.ID, "netherite_tanzanite_necklace"), Rarity.UNCOMMON, new ItemConfig.Item(
             List.of(
-                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.FROST).id, 2, EntityAttributeModifier.Operation.ADDITION),
-                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.SOUL).id, 2, EntityAttributeModifier.Operation.ADDITION)
+                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.FROST).id, tier_2_bonus),
+                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.SOUL).id, tier_2_bonus)
             )
     ));
 
