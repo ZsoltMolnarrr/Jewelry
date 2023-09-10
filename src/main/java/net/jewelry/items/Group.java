@@ -14,6 +14,7 @@ public class Group {
     public static RegistryKey<ItemGroup> KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), ID);
     public static ItemGroup JEWELRY = FabricItemGroup.builder()
             .icon(() -> new ItemStack(JewelryItems.ruby_ring.item()))
-            .displayName(Text.translatable("itemGroup." + JewelryMod.ID))
+            // `.generic` suffix is required by older versions, keeping it for translation consistency
+            .displayName(Text.translatable("itemGroup." + JewelryMod.ID + ".generic"))
             .build();
 }
