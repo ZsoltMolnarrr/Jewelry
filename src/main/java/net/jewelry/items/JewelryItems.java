@@ -31,7 +31,7 @@ public class JewelryItems {
         return add(id, rarity, config, null);
     }
 
-    public static Entry add(Identifier id, Rarity rarity, ItemConfig.Item config, boolean addLore) {
+    public static Entry add(Identifier id, Rarity rarity, boolean addLore, ItemConfig.Item config) {
         return add(id, rarity, config, addLore ? ("item." + id.getNamespace() + "." + id.getPath() + ".lore") : null);
     }
 
@@ -247,6 +247,157 @@ public class JewelryItems {
             )
     ));
 
+    // MARK: Unique pieces
+    private static final float tier_3_physical_multiplier = 0.12F;
+    private static final ItemConfig.Bonus tier_3_primary_bonus = new ItemConfig.Bonus(tier_3_physical_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE);
+
+    private static final float tier_3_spell_multiplier = 0.08F;
+    private static final float tier_3_secondary_multiplier = 0.03F;
+    private static final ItemConfig.Bonus tier_3_spell_bonus = new ItemConfig.Bonus(tier_3_spell_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE);
+
+
+    public static Entry unique_attack_ring = add(new Identifier(JewelryMod.ID, "unique_attack_ring"), Rarity.RARE, true, new ItemConfig.Item(
+            List.of(
+                    new ItemConfig.AttributeModifier("minecraft:generic.attack_damage", tier_3_primary_bonus)
+            )
+    ));
+
+    public static Entry unique_attack_necklace = add(new Identifier(JewelryMod.ID, "unique_attack_necklace"), Rarity.RARE, true, new ItemConfig.Item(
+            List.of(
+                    new ItemConfig.AttributeModifier("minecraft:generic.attack_damage", tier_3_primary_bonus)
+            )
+    ));
+
+    public static Entry unique_dex_ring = add(new Identifier(JewelryMod.ID, "unique_dex_ring"), Rarity.RARE, true, new ItemConfig.Item(
+            List.of(
+                    new ItemConfig.AttributeModifier("minecraft:generic.attack_damage", 0.08F, EntityAttributeModifier.Operation.MULTIPLY_BASE),
+                    new ItemConfig.AttributeModifier("combatroll:recharge", 0.1F, EntityAttributeModifier.Operation.MULTIPLY_BASE)
+            )
+    ));
+
+    public static Entry unique_dex_necklace = add(new Identifier(JewelryMod.ID, "unique_dex_necklace"), Rarity.RARE, true, new ItemConfig.Item(
+            List.of(
+                    new ItemConfig.AttributeModifier("minecraft:generic.attack_damage", 0.08F, EntityAttributeModifier.Operation.MULTIPLY_BASE),
+                    new ItemConfig.AttributeModifier("combatroll:count", 1F, EntityAttributeModifier.Operation.ADDITION)
+            )
+    ));
+
+    public static Entry unique_tank_ring = add(new Identifier(JewelryMod.ID, "unique_tank_ring"), Rarity.RARE, true, new ItemConfig.Item(
+            List.of(
+                    new ItemConfig.AttributeModifier("minecraft:generic.max_health", 6F, EntityAttributeModifier.Operation.ADDITION),
+                    new ItemConfig.AttributeModifier("minecraft:generic.armor_toughness", 1F, EntityAttributeModifier.Operation.ADDITION)
+            )
+    ));
+
+    public static Entry unique_tank_necklace = add(new Identifier(JewelryMod.ID, "unique_tank_necklace"), Rarity.RARE, true, new ItemConfig.Item(
+            List.of(
+                    new ItemConfig.AttributeModifier("minecraft:generic.max_health", 6F, EntityAttributeModifier.Operation.ADDITION),
+                    new ItemConfig.AttributeModifier("minecraft:generic.armor_toughness", 1F, EntityAttributeModifier.Operation.ADDITION)
+            )
+    ));
+
+    public static Entry unique_archer_ring = add(new Identifier(JewelryMod.ID, "unique_archer_ring"), Rarity.RARE, true, new ItemConfig.Item(
+            List.of(
+                    new ItemConfig.AttributeModifier(EntityAttributes_ProjectileDamage.attributeId, tier_3_physical_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE),
+                    new ItemConfig.AttributeModifier("minecraft:generic.movement_speed", 0.05F, EntityAttributeModifier.Operation.MULTIPLY_BASE)
+            )
+    ));
+
+    public static Entry unique_archer_necklace = add(new Identifier(JewelryMod.ID, "unique_archer_necklace"), Rarity.RARE, true, new ItemConfig.Item(
+            List.of(
+                    new ItemConfig.AttributeModifier(EntityAttributes_ProjectileDamage.attributeId, tier_3_physical_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE),
+                    new ItemConfig.AttributeModifier("minecraft:generic.movement_speed", 0.05F, EntityAttributeModifier.Operation.MULTIPLY_BASE)
+            )
+    ));
+
+    public static Entry unique_arcane_ring = add(new Identifier(JewelryMod.ID, "unique_arcane_ring"), Rarity.RARE, true, new ItemConfig.Item(
+            List.of(
+                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.ARCANE).id, tier_3_spell_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE),
+                    new ItemConfig.AttributeModifier(SpellAttributes.CRITICAL_CHANCE.id , tier_3_secondary_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE),
+                    new ItemConfig.AttributeModifier(SpellAttributes.HASTE.id , tier_3_secondary_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE)
+            )
+    ));
+    public static Entry unique_arcane_necklace = add(new Identifier(JewelryMod.ID, "unique_arcane_necklace"), Rarity.RARE, true, new ItemConfig.Item(
+            List.of(
+                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.ARCANE).id, tier_3_spell_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE),
+                    new ItemConfig.AttributeModifier(SpellAttributes.CRITICAL_CHANCE.id , tier_3_secondary_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE),
+                    new ItemConfig.AttributeModifier(SpellAttributes.HASTE.id , tier_3_secondary_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE)
+            )
+    ));
+
+    public static Entry unique_fire_ring = add(new Identifier(JewelryMod.ID, "unique_fire_ring"), Rarity.RARE, true, new ItemConfig.Item(
+            List.of(
+                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.FIRE).id, tier_3_spell_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE),
+                    new ItemConfig.AttributeModifier(SpellAttributes.CRITICAL_CHANCE.id , tier_3_secondary_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE),
+                    new ItemConfig.AttributeModifier(SpellAttributes.CRITICAL_DAMAGE.id , 0.1F, EntityAttributeModifier.Operation.MULTIPLY_BASE)
+            )
+    ));
+
+    public static Entry unique_fire_necklace = add(new Identifier(JewelryMod.ID, "unique_fire_necklace"), Rarity.RARE, true, new ItemConfig.Item(
+            List.of(
+                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.FIRE).id, tier_3_spell_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE),
+                    new ItemConfig.AttributeModifier(SpellAttributes.CRITICAL_CHANCE.id , tier_3_secondary_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE),
+                    new ItemConfig.AttributeModifier(SpellAttributes.CRITICAL_DAMAGE.id , 0.1F, EntityAttributeModifier.Operation.MULTIPLY_BASE)
+            )
+    ));
+
+    public static Entry unique_frost_ring = add(new Identifier(JewelryMod.ID, "unique_frost_ring"), Rarity.RARE, true, new ItemConfig.Item(
+            List.of(
+                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.FROST).id, tier_3_spell_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE),
+                    new ItemConfig.AttributeModifier(SpellAttributes.HASTE.id , tier_3_secondary_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE),
+                    new ItemConfig.AttributeModifier(SpellAttributes.CRITICAL_DAMAGE.id , 0.1F, EntityAttributeModifier.Operation.MULTIPLY_BASE)
+            )
+    ));
+
+    public static Entry unique_frost_necklace = add(new Identifier(JewelryMod.ID, "unique_frost_necklace"), Rarity.RARE, true, new ItemConfig.Item(
+            List.of(
+                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.FROST).id, tier_3_spell_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE),
+                    new ItemConfig.AttributeModifier(SpellAttributes.HASTE.id , tier_3_secondary_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE),
+                    new ItemConfig.AttributeModifier(SpellAttributes.CRITICAL_DAMAGE.id , 0.1F, EntityAttributeModifier.Operation.MULTIPLY_BASE)
+            )
+    ));
+
+    public static Entry unique_healing_ring = add(new Identifier(JewelryMod.ID, "unique_healing_ring"), Rarity.RARE, true, new ItemConfig.Item(
+            List.of(
+                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.HEALING).id, tier_3_spell_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE),
+                    new ItemConfig.AttributeModifier(SpellAttributes.HASTE.id , tier_3_secondary_multiplier * 2, EntityAttributeModifier.Operation.MULTIPLY_BASE)
+                )
+    ));
+
+    public static Entry unique_healing_necklace = add(new Identifier(JewelryMod.ID, "unique_healing_necklace"), Rarity.RARE, true, new ItemConfig.Item(
+            List.of(
+                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.HEALING).id, tier_3_spell_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE),
+                    new ItemConfig.AttributeModifier(SpellAttributes.HASTE.id , tier_3_secondary_multiplier * 2, EntityAttributeModifier.Operation.MULTIPLY_BASE)
+            )
+    ));
+
+    public static Entry unique_lightning_ring = add(new Identifier(JewelryMod.ID, "unique_lightning_ring"), Rarity.RARE, true, new ItemConfig.Item(
+            List.of(
+                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.LIGHTNING).id, tier_3_spell_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE),
+                    new ItemConfig.AttributeModifier(SpellAttributes.CRITICAL_CHANCE.id, tier_3_secondary_multiplier * 2, EntityAttributeModifier.Operation.MULTIPLY_BASE)
+            )
+    ));
+
+    public static Entry unique_lightning_necklace = add(new Identifier(JewelryMod.ID, "unique_lightning_necklace"), Rarity.RARE, true, new ItemConfig.Item(
+            List.of(
+                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.LIGHTNING).id, tier_3_spell_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE),
+                    new ItemConfig.AttributeModifier(SpellAttributes.CRITICAL_CHANCE.id, tier_3_secondary_multiplier * 2, EntityAttributeModifier.Operation.MULTIPLY_BASE)
+            )
+    ));
+
+    public static Entry unique_soul_ring = add(new Identifier(JewelryMod.ID, "unique_soul_ring"), Rarity.RARE, true, new ItemConfig.Item(
+            List.of(
+                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.SOUL).id, tier_3_spell_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE),
+                    new ItemConfig.AttributeModifier(SpellAttributes.HASTE.id, tier_3_secondary_multiplier * 2, EntityAttributeModifier.Operation.MULTIPLY_BASE)
+            )
+    ));
+
+    public static Entry unique_soul_necklace = add(new Identifier(JewelryMod.ID, "unique_soul_necklace"), Rarity.RARE, true, new ItemConfig.Item(
+            List.of(
+                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.SOUL).id, tier_3_spell_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE),
+                    new ItemConfig.AttributeModifier(SpellAttributes.HASTE.id, tier_3_secondary_multiplier * 2, EntityAttributeModifier.Operation.MULTIPLY_BASE)
+            )
+    ));
 
     public static void register(ItemConfig allConfigs) {
         for (var entry : all) {

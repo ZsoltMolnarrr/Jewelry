@@ -37,7 +37,7 @@ public class JewelryMod implements ModInitializer {
             .build();
 
     public static ConfigManager<LootConfig> lootConfig = new ConfigManager<>
-            ("loot", Default.loot)
+            ("loot_v2", Default.loot)
             .builder()
             .setDirectory(ID)
             .sanitize(true)

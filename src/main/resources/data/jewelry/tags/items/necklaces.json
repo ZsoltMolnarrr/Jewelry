@@ -13,6 +13,16 @@
     "jewelry:netherite_citrine_necklace",
     "jewelry:netherite_jade_necklace",
     "jewelry:netherite_sapphire_necklace",
-    "jewelry:netherite_tanzanite_necklace"
+    "jewelry:netherite_tanzanite_necklace",
+    "jewelry:unique_arcane_necklace",
+    "jewelry:unique_archer_necklace",
+    "jewelry:unique_attack_necklace",
+    "jewelry:unique_dex_necklace",
+    "jewelry:unique_fire_necklace",
+    "jewelry:unique_frost_necklace",
+    "jewelry:unique_healing_necklace",
+    "jewelry:unique_lightning_necklace",
+    "jewelry:unique_soul_necklace",
+    "jewelry:unique_tank_necklace"
   ]
 }
