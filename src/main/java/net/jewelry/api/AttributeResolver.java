@@ -1,5 +1,6 @@
 package net.jewelry.api;
 
+import net.combatroll.api.EntityAttributes_CombatRoll;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.util.Identifier;
@@ -26,6 +27,11 @@ public class AttributeResolver {
                 EntityAttributes_ProjectileDamage.attributeId,
                 EntityAttributes_ProjectileDamage.GENERIC_PROJECTILE_DAMAGE
             );
+        }
+        if (FabricLoader.getInstance().isModLoaded("combatroll")) {
+            register(EntityAttributes_CombatRoll.countId, EntityAttributes_CombatRoll.COUNT);
+            register(EntityAttributes_CombatRoll.distanceId, EntityAttributes_CombatRoll.DISTANCE);
+            register(EntityAttributes_CombatRoll.rechargeId, EntityAttributes_CombatRoll.RECHARGE);
         }
     }
 

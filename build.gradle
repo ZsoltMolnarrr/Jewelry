@@ -37,6 +37,7 @@ dependencies {
     modImplementation "maven.modrinth:spell-power:${project.spell_power_version}-fabric"
     modImplementation "maven.modrinth:projectile-damage-attribute:${project.projectile_damage_version}-fabric"
     modImplementation "dev.emi:trinkets:${project.trinkets_version}"
+    modImplementation "maven.modrinth:combat-roll:${project.combat_roll_version}-fabric"
 }
 
 processResources {

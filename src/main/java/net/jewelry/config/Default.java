@@ -72,6 +72,32 @@ public class Default {
                 .chance(0.2F)
         );
 
+        var jewelry_tier_3 = "jewelry_tier_3";
+        loot.item_groups.put(jewelry_tier_3, new LootConfig.ItemGroup(List.of(
+                JewelryItems.unique_attack_ring.id().toString(),
+                JewelryItems.unique_attack_necklace.id().toString(),
+                JewelryItems.unique_dex_ring.id().toString(),
+                JewelryItems.unique_dex_necklace.id().toString(),
+                JewelryItems.unique_tank_ring.id().toString(),
+                JewelryItems.unique_tank_necklace.id().toString(),
+                JewelryItems.unique_archer_ring.id().toString(),
+                JewelryItems.unique_archer_necklace.id().toString(),
+                JewelryItems.unique_arcane_ring.id().toString(),
+                JewelryItems.unique_arcane_necklace.id().toString(),
+                JewelryItems.unique_fire_ring.id().toString(),
+                JewelryItems.unique_fire_necklace.id().toString(),
+                JewelryItems.unique_frost_ring.id().toString(),
+                JewelryItems.unique_frost_necklace.id().toString(),
+                JewelryItems.unique_healing_ring.id().toString(),
+                JewelryItems.unique_healing_necklace.id().toString()
+//                JewelryItems.unique_lightning_ring.id().toString(),
+//                JewelryItems.unique_lightning_necklace.id().toString(),
+//                JewelryItems.unique_soul_ring.id().toString(),
+//                JewelryItems.unique_soul_necklace.id().toString()
+                ), 1)
+                .chance(0.5F)
+        );
+
         List.of("minecraft:chests/abandoned_mineshaft",
                         "minecraft:chests/igloo_chest",
                         "minecraft:chests/shipwreck_supply",
@@ -89,5 +115,7 @@ public class Default {
         List.of("minecraft:chests/bastion_treasure")
                 .forEach(id -> loot.loot_tables.put(id, List.of(jewelry_tier_2)));
 
+        List.of("minecraft:chests/end_city_treasure")
+                .forEach(id -> loot.loot_tables.put(id, List.of(jewelry_tier_3)));
     }
 }
