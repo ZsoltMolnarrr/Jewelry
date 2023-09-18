@@ -371,33 +371,33 @@ public class JewelryItems {
             )
     ));
 
-    public static Entry unique_lightning_ring = add(new Identifier(JewelryMod.ID, "unique_lightning_ring"), Rarity.RARE, true, new ItemConfig.Item(
-            List.of(
-                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.LIGHTNING).id, tier_3_spell_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE),
-                    new ItemConfig.AttributeModifier(SpellAttributes.CRITICAL_CHANCE.id, tier_3_secondary_multiplier * 2, EntityAttributeModifier.Operation.MULTIPLY_BASE)
-            )
-    ));
-
-    public static Entry unique_lightning_necklace = add(new Identifier(JewelryMod.ID, "unique_lightning_necklace"), Rarity.RARE, true, new ItemConfig.Item(
-            List.of(
-                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.LIGHTNING).id, tier_3_spell_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE),
-                    new ItemConfig.AttributeModifier(SpellAttributes.CRITICAL_CHANCE.id, tier_3_secondary_multiplier * 2, EntityAttributeModifier.Operation.MULTIPLY_BASE)
-            )
-    ));
-
-    public static Entry unique_soul_ring = add(new Identifier(JewelryMod.ID, "unique_soul_ring"), Rarity.RARE, true, new ItemConfig.Item(
-            List.of(
-                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.SOUL).id, tier_3_spell_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE),
-                    new ItemConfig.AttributeModifier(SpellAttributes.HASTE.id, tier_3_secondary_multiplier * 2, EntityAttributeModifier.Operation.MULTIPLY_BASE)
-            )
-    ));
-
-    public static Entry unique_soul_necklace = add(new Identifier(JewelryMod.ID, "unique_soul_necklace"), Rarity.RARE, true, new ItemConfig.Item(
-            List.of(
-                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.SOUL).id, tier_3_spell_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE),
-                    new ItemConfig.AttributeModifier(SpellAttributes.HASTE.id, tier_3_secondary_multiplier * 2, EntityAttributeModifier.Operation.MULTIPLY_BASE)
-            )
-    ));
+//    public static Entry unique_lightning_ring = add(new Identifier(JewelryMod.ID, "unique_lightning_ring"), Rarity.RARE, true, new ItemConfig.Item(
+//            List.of(
+//                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.LIGHTNING).id, tier_3_spell_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE),
+//                    new ItemConfig.AttributeModifier(SpellAttributes.CRITICAL_CHANCE.id, tier_3_secondary_multiplier * 2, EntityAttributeModifier.Operation.MULTIPLY_BASE)
+//            )
+//    ));
+//
+//    public static Entry unique_lightning_necklace = add(new Identifier(JewelryMod.ID, "unique_lightning_necklace"), Rarity.RARE, true, new ItemConfig.Item(
+//            List.of(
+//                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.LIGHTNING).id, tier_3_spell_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE),
+//                    new ItemConfig.AttributeModifier(SpellAttributes.CRITICAL_CHANCE.id, tier_3_secondary_multiplier * 2, EntityAttributeModifier.Operation.MULTIPLY_BASE)
+//            )
+//    ));
+//
+//    public static Entry unique_soul_ring = add(new Identifier(JewelryMod.ID, "unique_soul_ring"), Rarity.RARE, true, new ItemConfig.Item(
+//            List.of(
+//                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.SOUL).id, tier_3_spell_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE),
+//                    new ItemConfig.AttributeModifier(SpellAttributes.HASTE.id, tier_3_secondary_multiplier * 2, EntityAttributeModifier.Operation.MULTIPLY_BASE)
+//            )
+//    ));
+//
+//    public static Entry unique_soul_necklace = add(new Identifier(JewelryMod.ID, "unique_soul_necklace"), Rarity.RARE, true, new ItemConfig.Item(
+//            List.of(
+//                    new ItemConfig.AttributeModifier(SpellAttributes.POWER.get(MagicSchool.SOUL).id, tier_3_spell_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE),
+//                    new ItemConfig.AttributeModifier(SpellAttributes.HASTE.id, tier_3_secondary_multiplier * 2, EntityAttributeModifier.Operation.MULTIPLY_BASE)
+//            )
+//    ));
 
     public static void register(ItemConfig allConfigs) {
         for (var entry : all) {

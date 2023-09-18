@@ -89,11 +89,11 @@ public class Default {
                 JewelryItems.unique_frost_ring.id().toString(),
                 JewelryItems.unique_frost_necklace.id().toString(),
                 JewelryItems.unique_healing_ring.id().toString(),
-                JewelryItems.unique_healing_necklace.id().toString(),
-                JewelryItems.unique_lightning_ring.id().toString(),
-                JewelryItems.unique_lightning_necklace.id().toString(),
-                JewelryItems.unique_soul_ring.id().toString(),
-                JewelryItems.unique_soul_necklace.id().toString()
+                JewelryItems.unique_healing_necklace.id().toString()
+//                JewelryItems.unique_lightning_ring.id().toString(),
+//                JewelryItems.unique_lightning_necklace.id().toString(),
+//                JewelryItems.unique_soul_ring.id().toString(),
+//                JewelryItems.unique_soul_necklace.id().toString()
                 ), 1)
                 .chance(0.5F)
         );
