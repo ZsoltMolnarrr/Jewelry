@@ -102,20 +102,23 @@ public class Default {
                         "minecraft:chests/igloo_chest",
                         "minecraft:chests/shipwreck_supply",
                         "minecraft:chests/jungle_temple",
-                        "minecraft:chests/desert_pyramid",
-                        "minecraft:chests/simple_dungeon")
+                        "minecraft:chests/desert_pyramid")
                 .forEach(id -> loot.loot_tables.put(id, List.of(jewelry_tier_0)));
 
-        List.of("minecraft:chests/stronghold_library",
+        List.of("minecraft:chests/stronghold_crossing",
+                        "minecraft:chests/stronghold_library",
                         "minecraft:chests/underwater_ruin_big",
-                        "minecraft:chests/ancient_city",
+                        "minecraft:chests/simple_dungeon",
                         "minecraft:chests/woodland_mansion")
                 .forEach(id -> loot.loot_tables.put(id, List.of(jewelry_tier_1)));
 
-        List.of("minecraft:chests/bastion_treasure")
+        List.of("minecraft:chests/bastion_other",
+                        "minecraft:chests/nether_bridge")
                 .forEach(id -> loot.loot_tables.put(id, List.of(jewelry_tier_2)));
 
-        List.of("minecraft:chests/end_city_treasure")
+        List.of("minecraft:chests/ancient_city",
+                        "minecraft:chests/end_city_treasure",
+                        "minecraft:chests/bastion_treasure")
                 .forEach(id -> loot.loot_tables.put(id, List.of(jewelry_tier_3)));
     }
 }
