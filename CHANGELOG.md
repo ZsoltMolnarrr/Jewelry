@@ -1,3 +1,7 @@
+# 1.1.2
+
+- Nerf Emeralds received from Jewelery Villager trades, thanks to @CaptainSparklez
+
 # 1.1.1
 
 - Add chinese translation, thanks to @Love1painting1

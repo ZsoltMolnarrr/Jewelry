@@ -77,18 +77,18 @@ public class JewelryVillagers {
                 RegistryKey.of(Registries.POINT_OF_INTEREST_TYPE.getKey(), new Identifier(JewelryMod.ID, JEWELER)));
 
         List<Offer> wizardMerchantOffers = List.of(
-                Offer.buy(1, new ItemStack(Items.COPPER_INGOT, 8), 4, 8, 1, 0.01f),
-                Offer.buy(1, new ItemStack(Items.STRING, 8), 3, 6, 1, 0.01f),
-                Offer.sell(1, JewelryItems.copper_ring.item().getDefaultStack(), 4, 12, 2, 0.2f),
+                Offer.buy(1, new ItemStack(Items.COPPER_INGOT, 8), 2, 8, 2, 0.1f),
+                Offer.buy(1, new ItemStack(Items.STRING, 7), 1, 6, 2, 0.1f),
+                Offer.sell(1, JewelryItems.copper_ring.item().getDefaultStack(), 4, 12, 3, 0.2f),
 
 
-                Offer.buy(2, new ItemStack(Items.GOLD_INGOT, 5), 8, 8, 5, 0.05f),
+                Offer.buy(2, new ItemStack(Items.GOLD_INGOT, 7), 2, 8, 5, 0.1f),
                 Offer.sell(2, JewelryItems.iron_ring.item().getDefaultStack(), 4, 4, 4, 0.2f),
-                Offer.sell(2, JewelryItems.gold_ring.item().getDefaultStack(), 18, 4, 5, 0.1f),
+                Offer.sell(2, JewelryItems.gold_ring.item().getDefaultStack(), 18, 4, 5, 0.2f),
 
                 // Mediocre necklaces and material buys
 
-                Offer.buy(3, new ItemStack(Items.DIAMOND, 1), 8, 12, 10, 0.05f),
+                Offer.buy(3, new ItemStack(Items.DIAMOND, 1), 4, 12, 10, 0.05f),
                 Offer.sell(3, JewelryItems.emerald_necklace.item().getDefaultStack(), 20, 8, 10, 0.2f),
                 Offer.sell(3, JewelryItems.diamond_necklace.item().getDefaultStack(), 25, 8, 10, 0.2f),
 
