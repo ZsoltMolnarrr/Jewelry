@@ -1,3 +1,7 @@
+# 1.1.3
+
+- Add bonus combat roll for archer unique necklace
+
 # 1.1.2
 
 - Nerf Emeralds received from Jewelery Villager trades, thanks to @CaptainSparklez

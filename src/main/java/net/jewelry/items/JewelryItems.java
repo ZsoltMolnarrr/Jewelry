@@ -306,7 +306,7 @@ public class JewelryItems {
     public static Entry unique_archer_necklace = add(new Identifier(JewelryMod.ID, "unique_archer_necklace"), Rarity.RARE, true, new ItemConfig.Item(
             List.of(
                     new ItemConfig.AttributeModifier(EntityAttributes_ProjectileDamage.attributeId, tier_3_physical_multiplier, EntityAttributeModifier.Operation.MULTIPLY_BASE),
-                    new ItemConfig.AttributeModifier("minecraft:generic.movement_speed", 0.05F, EntityAttributeModifier.Operation.MULTIPLY_BASE)
+                    new ItemConfig.AttributeModifier("combatroll:count", 1F, EntityAttributeModifier.Operation.ADDITION)
             )
     ));
 
