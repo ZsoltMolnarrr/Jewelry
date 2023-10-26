@@ -1,3 +1,7 @@
+# 1.2.0
+
+- Limit Jewelry Shops spawned in villages to 1 per village (configurable), thanks to the Structure Pool API
+
 # 1.1.3
 
 - Add bonus combat roll for archer unique necklace
