@@ -129,6 +129,7 @@ if(project.hasProperty('release_type')) {
                 requiredDependency 'trinkets'
                 requiredDependency 'spell-power'
                 requiredDependency 'projectile-damage-attribute'
+                requiredDependency 'structure-pool-api'
             }
 
             mainArtifact(remapJar)
@@ -158,6 +159,7 @@ if(project.hasProperty('release_type')) {
             required.project "trinkets"
             required.project "spell-power"
             required.project "projectile-damage-attribute"
+            required.project 'structure-pool-api'
         }
     }
 
