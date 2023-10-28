@@ -1,0 +1,98 @@
+{
+  "itemGroup.jewelry.generic": "Jewelry",
+  "block.jewelry.gem_vein": "Minerale di gemme",
+  "block.jewelry.deepslate_gem_vein": "Minerale di ardesia di gemme",
+  "block.jewelry.jewelers_kit": "Banco del gioielliere",
+  "block.jewelry.jewelers_kit.hint": "Banco da lavoro per villici.",
+
+  "entity.minecraft.villager.jeweler": "Gioielliere",
+
+  "item.jewelry.ruby": "Rubino",
+  "item.jewelry.topaz": "Topazio",
+  "item.jewelry.citrine": "Citrino",
+  "item.jewelry.jade": "Giada",
+  "item.jewelry.sapphire": "Zaffiro",
+  "item.jewelry.tanzanite": "Tanzanite",
+
+  "item.jewelry.copper_ring": "Anello di rame",
+  "item.jewelry.iron_ring": "Anello di ferro",
+  "item.jewelry.gold_ring": "Anello d'oro",
+  "item.jewelry.emerald_necklace": "Collana di smeraldi",
+  "item.jewelry.diamond_necklace": "Collana di diamanti",
+
+  "item.jewelry.ruby_ring": "Anello di rubino",
+  "item.jewelry.topaz_ring": "Anello di topazio",
+  "item.jewelry.citrine_ring": "Anello di citrino",
+  "item.jewelry.jade_ring": "Anello di giada",
+  "item.jewelry.sapphire_ring": "Anello di zaffiro",
+  "item.jewelry.tanzanite_ring": "Anello di tanzanite",
+  "item.jewelry.ruby_necklace": "Collana di rubini",
+  "item.jewelry.topaz_necklace": "Collana di topazi",
+  "item.jewelry.citrine_necklace": "Collana di citrini",
+  "item.jewelry.jade_necklace": "Collana di giade",
+  "item.jewelry.sapphire_necklace": "Collana di zaffiri",
+  "item.jewelry.tanzanite_necklace": "Collana di tanzanite",
+
+  "item.jewelry.netherite_ruby_ring": "Anello di netherite con rubino",
+  "item.jewelry.netherite_topaz_ring": "Anello di netherite con topazio",
+  "item.jewelry.netherite_citrine_ring": "Anello di netherite con citrino",
+  "item.jewelry.netherite_jade_ring": "Anello di netherite con giada",
+  "item.jewelry.netherite_sapphire_ring": "Anello di netherite con zaffiro",
+  "item.jewelry.netherite_tanzanite_ring": "Anello di netherite con tanzanite",
+  "item.jewelry.netherite_ruby_necklace": "Collana di netherite con rubini",
+  "item.jewelry.netherite_topaz_necklace": "Collana di netherite con topazi",
+  "item.jewelry.netherite_citrine_necklace": "Collana di netherite con citrini",
+  "item.jewelry.netherite_jade_necklace": "Collana di netherite con giade",
+  "item.jewelry.netherite_sapphire_necklace": "Collana di netherite con zaffiri",
+  "item.jewelry.netherite_tanzanite_necklace": "Collana di netherite con tanzanite",
+
+  "item.jewelry.unique_attack_ring": "Anello della furia",
+  "item.jewelry.unique_attack_ring.lore": "Un pezzo di onice frantumato, ricomposto in modo grezzo.",
+  "item.jewelry.unique_attack_necklace": "Amuleto della tortura",
+  "item.jewelry.unique_attack_necklace.lore": "Il proprietario originale non doveva essere molto popolare.",
+
+  "item.jewelry.unique_dex_ring": "La vendetta di Angelista",
+  "item.jewelry.unique_dex_ring.lore": "Non ti vedranno arrivare, ma sicuramente ti vedranno partire.",
+  "item.jewelry.unique_dex_necklace": "Medaglione del disprezzo",
+  "item.jewelry.unique_dex_necklace.lore": "Fai attenzione a non soffocare con le tue aspirazioni.",
+
+  "item.jewelry.unique_archer_ring": "Banda dei Ranger Talassiani",
+  "item.jewelry.unique_archer_ring.lore": "L'artigianato elfico al suo meglio.",
+  "item.jewelry.unique_archer_necklace": "Amuleto del Grampasso Darnassiano",
+  "item.jewelry.unique_archer_necklace.lore": "Artefatto degli Alti Nobili, tramandato di generazione in generazione.",
+
+  "item.jewelry.unique_tank_ring": "Banda dei Juggernaut",
+  "item.jewelry.unique_tank_ring.lore": "Leggero ma resistente. Realizzato in titanio.",
+  "item.jewelry.unique_tank_necklace": "Amuleto della sentinella",
+  "item.jewelry.unique_tank_necklace.lore": "Baluardo per il cuore dei protettori.",
+
+  "item.jewelry.unique_arcane_ring": "Anello dell'onnipotenza",
+  "item.jewelry.unique_arcane_ring.lore": "L'energia dell'universo scorre attraverso questo anello.",
+  "item.jewelry.unique_arcane_necklace": "Amuleto della Magia Illimitata",
+  "item.jewelry.unique_arcane_necklace.lore": "Le iscrizioni brillano così intensamente da leggere, forse qualcosa sulle radiazioni?",
+
+  "item.jewelry.unique_fire_ring": "Sigillo del sole",
+  "item.jewelry.unique_fire_ring.lore": "Delicato design elfico, forgiato nel cuore del Pozzo Solare.",
+  "item.jewelry.unique_fire_necklace": "Ciondolo del Sole",
+  "item.jewelry.unique_fire_necklace.lore": "Un regalo del proprietario di Terrazza dei Maghi, ai più grandi maghi.",
+
+  "item.jewelry.unique_frost_ring": "Pietra del permafrost",
+  "item.jewelry.unique_frost_ring.lore": "I tempi cambiano, ma questo pezzo resta.",
+  "item.jewelry.unique_frost_necklace": "Frammento glaciale",
+  "item.jewelry.unique_frost_necklace.lore": "Bordi insolitamente affilati, ma risultano morbidi al tatto.",
+
+  "item.jewelry.unique_healing_ring": "L'abbraccio di Anett",
+  "item.jewelry.unique_healing_ring.lore": "Quasi impagabile.",
+  "item.jewelry.unique_healing_necklace": "Ciondolo di Adria",
+  "item.jewelry.unique_healing_necklace.lore": "Contiene un pezzo della Città Santa di Celestis.",
+
+  "item.jewelry.unique_lightning_ring": "Anello delle correnti instabili",
+  "item.jewelry.unique_lightning_ring.lore": "Controlla l'incontrollabile!",
+  "item.jewelry.unique_lightning_necklace": "Amuleto delle Tempeste Inesorabili",
+  "item.jewelry.unique_lightning_necklace.lore": "Estrae l'energia del vuoto da una regione artificiale del subspazio-tempo fino a raggiungere la massima entropia.",
+
+  "item.jewelry.unique_soul_ring": "Sigillo delle anime catturate",
+  "item.jewelry.unique_soul_ring.lore": "Per non essere distrutte, le anime all'interno sono tenute lì per un motivo.",
+  "item.jewelry.unique_soul_necklace": "Collana occulta",
+  "item.jewelry.unique_soul_necklace.lore": "Le zanne attaccate suggeriscono qualcosa di veramente sinistro."  
+}
