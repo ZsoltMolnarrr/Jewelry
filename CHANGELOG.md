@@ -1,5 +1,6 @@
 # 1.2.1
 
+- Add Ukrainian translation, thanks to @SKZGx
 - Add Italian translation, thanks to @Zano1999
 
 # 1.2.0
