@@ -1,3 +1,7 @@
+# 1.2.1
+
+- Add Italian translation, thanks to @Zano1999
+
 # 1.2.0
 
 - Limit Jewelry Shops spawned in villages to 1 per village (configurable), thanks to the Structure Pool API
