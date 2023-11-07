@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "jewelry",
   "version": "${version}",
-  "name": "Jewelry",
+  "name": "Jewelry (RPG Series)",
   "description": "Find precious gems deep down, and craft them into powerful jewelry!",
   "authors": [
     "Daedelus"

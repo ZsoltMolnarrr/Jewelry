@@ -1,5 +1,6 @@
 # 1.2.1
 
+- Update name for Mod Menu
 - Add Ukrainian translation, thanks to @SKZGx
 - Add Italian translation, thanks to @Zano1999
 
