@@ -1,3 +1,7 @@
+# 1.2.2
+
+- Fix default attribute configuration for Netherite Sapphire Ring 
+
 # 1.2.1
 
 - Update name for Mod Menu
