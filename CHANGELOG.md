@@ -1,3 +1,7 @@
+# 1.2.3
+
+- Add Spanish translation, thanks to SirColor #5
+
 # 1.2.2
 
 - Fix default attribute configuration for Netherite Sapphire Ring 
