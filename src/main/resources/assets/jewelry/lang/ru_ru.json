@@ -1,0 +1,98 @@
+{
+   "itemGroup.jewelry.generic": "Ювелирные изделия",
+   "block.jewelry.gem_vein": "Жила с самоцветами",
+   "block.jewelry.deepslate_gem_vein": "Глубинная жила с самоцветами",
+   "block.jewelry.jewelers_kit": "Набор ювелира",
+   "block.jewelry.jewelers_kit.hint": "Верстак для ювелиров.",
+
+   "entity.minecraft.villager.jeweler": "Ювелир",
+
+   "item.jewelry.ruby": "Рубин",
+   "item.jewelry.topaz": "Топаз",
+   "item.jewelry.citrine": "Цитрин",
+   "item.jewelry.jade": "Нефрит",
+   "item.jewelry.sapphire": "Сапфир",
+   "item.jewelry.tanzanite": "Танзанит",
+
+   "item.jewelry.copper_ring": "Медное кольцо",
+   "item.jewelry.iron_ring": "Железное кольцо",
+   "item.jewelry.gold_ring": "Золотое кольцо",
+   "item.jewelry.emerald_necklace": "Изумрудное ожерелье",
+   "item.jewelry.diamond_necklace": "Бриллиантовое ожерелье",
+
+   "item.jewelry.ruby_ring": "Рубиновое кольцо",
+   "item.jewelry.topaz_ring": "Кольцо с топазом",
+   "item.jewelry.citrine_ring": "Цитриновое кольцо",
+   "item.jewelry.jade_ring": "Нефритовое кольцо",
+   "item.jewelry.sapphire_ring": "Сапфировое кольцо",
+   "item.jewelry.tanzanite_ring": "Кольцо с танзанитом",
+   "item.jewelry.ruby_necklace": "Рубиновое ожерелье",
+   "item.jewelry.topaz_necklace": "Ожерелье с топазом",
+   "item.jewelry.citrine_necklace": "Цитриновое ожерелье",
+   "item.jewelry.jade_necklace": "Нефритовое ожерелье",
+   "item.jewelry.sapphire_necklace": "Сапфировое ожерелье",
+   "item.jewelry.tanzanite_necklace": "Ожерелье с танзанитом",
+
+   "item.jewelry.netherite_ruby_ring": "Кольцо с незеритовым рубином",
+   "item.jewelry.netherite_topaz_ring": "Кольцо с незеритовым топазом",
+   "item.jewelry.netherite_citrine_ring": "Кольцо с незеритом и цитрином",
+   "item.jewelry.netherite_jade_ring": "Кольцо из незеритового нефрита",
+   "item.jewelry.netherite_sapphire_ring": "Кольцо с незеритовым сапфиром",
+   "item.jewelry.netherite_tanzanite_ring": "Кольцо с незеритовым танзанитом",
+   "item.jewelry.netherite_ruby_necklace": "Ожерелье с незеритовым рубином",
+   "item.jewelry.netherite_topaz_necklace": "Ожерелье с незеритовым топазом",
+   "item.jewelry.netherite_citrine_necklace": "Ожерелье с незеритовым цитрином",
+   "item.jewelry.netherite_jade_necklace": "Ожерелье из незеритового нефрита",
+   "item.jewelry.netherite_sapphire_necklace": "Ожерелье из незеритового сапфира",
+   "item.jewelry.netherite_tanzanite_necklace": "Ожерелье с незеритовым танзанитом",
+
+   "item.jewelry.unique_attack_ring": "Кольцо ярости",
+   "item.jewelry.unique_attack_ring.lore": "Расколотый кусок оникса, грубо переработанный.",
+   "item.jewelry.unique_attack_necklace": "Амулет пыток",
+   "item.jewelry.unique_attack_necklace.lore": "Первоначальный владелец, должно быть, не пользовался большой популярностью.",
+
+   "item.jewelry.unique_dex_ring": "Месть Анхелисты",
+   "item.jewelry.unique_dex_ring.lore": "Они не увидят вашего прихода, но обязательно увидят, как вы уходите.",
+   "item.jewelry.unique_dex_necklace": "Медальон презрения",
+   "item.jewelry.unique_dex_necklace.lore": "Будьте осторожны, не подавитесь своими стремлениями.",
+
+   "item.jewelry.unique_archer_ring": "Талассийское кольцо рейнджеров",
+   "item.jewelry.unique_archer_ring.lore": "Эльфийское мастерство во всей красе.",
+   "item.jewelry.unique_archer_necklace": "Амулет дарнасского долгонога",
+   "item.jewelry.unique_archer_necklace.lore": "Артефакт высокорожденных, передаваемый из поколения в поколение.",
+
+   "item.jewelry.unique_tank_ring": "Кольцо Джаггернаута",
+   "item.jewelry.unique_tank_ring.lore": "Лёгкое, но прочное. Изготовлено из титана.",
+   "item.jewelry.unique_tank_necklace": "Амулет стража",
+   "item.jewelry.unique_tank_necklace.lore": "Оплот сердца защитников.",
+
+   "item.jewelry.unique_arcane_ring": "Кольцо всемогущества",
+   "item.jewelry.unique_arcane_ring.lore": "Через это кольцо течет энергия Вселенной.",
+   "item.jewelry.unique_arcane_necklace": "Амулет неограниченной магии",
+   "item.jewelry.unique_arcane_necklace.lore": "Надписи слишком ярко светятся, чтобы их можно было прочитать, может быть, что-то о радиации?",
+
+   "item.jewelry.unique_fire_ring": "Печать солнечного сияния",
+   "item.jewelry.unique_fire_ring.lore": "Изысканный эльфийский дизайн, выкованный в самом сердце Солнечного Колодца.",
+   "item.jewelry.unique_fire_necklace": "Кулон Солнечного огня",
+   "item.jewelry.unique_fire_necklace.lore": "Подарок владельца Террасы Магистра величайшим волшебникам.",
+
+   "item.jewelry.unique_frost_ring": "Камень вечной мерзлоты",
+   "item.jewelry.unique_frost_ring.lore": "Времена меняются, но этот предмет остается.",
+   "item.jewelry.unique_frost_necklace": "Ледяной осколок",
+   "item.jewelry.unique_frost_necklace.lore": "Необычно острые края, но на ощупь гладкие.",
+
+   "item.jewelry.unique_healing_ring": "Объятия Анетт",
+   "item.jewelry.unique_healing_ring.lore": "Примерно бесценно.",
+   "item.jewelry.unique_healing_necklace": "Подвеска Адрии",
+   "item.jewelry.unique_healing_necklace.lore": "Содержит часть Святого города Селестиды.",
+   
+   "item.jewelry.unique_lightning_ring": "Кольцо нестабильных токов",
+   "item.jewelry.unique_lightning_ring.lore": "Управляйте неконтролируемым!",
+   "item.jewelry.unique_lightning_necklace": "Амулет неумолимых бурь",
+   "item.jewelry.unique_lightning_necklace.lore": "Извлекает энергию вакуума из искусственной области подпространства-времени, пока она не достигнет максимальной энтропии.",
+
+   "item.jewelry.unique_soul_ring": "Печать плененных душ",
+   "item.jewelry.unique_soul_ring.lore": "Не разбить, души внутри хранятся там не просто так.",
+   "item.jewelry.unique_soul_necklace": "Оккультное ожерелье",
+   "item.jewelry.unique_soul_necklace.lore": "Прикрепленные клыки намекают на что-то поистине зловещее."
+}
