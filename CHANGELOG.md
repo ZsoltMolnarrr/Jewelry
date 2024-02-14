@@ -1,6 +1,8 @@
 # 1.2.3
 
 - Add Spanish translation, thanks to SirColor #5
+- Add Russian translation, thanks to y0nkers #7
+- Update chinese translation, thanks to painting11 #8
 
 # 1.2.2
 
