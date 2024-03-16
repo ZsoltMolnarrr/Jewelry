@@ -1,3 +1,7 @@
+# 1.2.4
+
+- Update loot config defaults (to take effect, delete `config/jewelry/loot.json`)
+
 # 1.2.3
 
 - Add Spanish translation, thanks to SirColor #5

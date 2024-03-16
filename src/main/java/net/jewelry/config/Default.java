@@ -36,6 +36,15 @@ public class Default {
 
         var jewelry_tier_1 = "jewelry_tier_1";
         loot.item_groups.put(jewelry_tier_1, new LootConfig.ItemGroup(List.of(
+                JewelryItems.diamond_necklace.id().toString(),
+                JewelryItems.emerald_necklace.id().toString()
+                ),
+                1)
+                .chance(0.3F)
+        );
+
+        var jewelry_tier_2 = "jewelry_tier_2";
+        loot.item_groups.put(jewelry_tier_2, new LootConfig.ItemGroup(List.of(
                 JewelryItems.ruby_ring.id().toString(),
                 JewelryItems.topaz_ring.id().toString(),
                 JewelryItems.citrine_ring.id().toString(),
@@ -54,8 +63,8 @@ public class Default {
                 .chance(0.2F)
         );
 
-        var jewelry_tier_2 = "jewelry_tier_2";
-        loot.item_groups.put(jewelry_tier_2, new LootConfig.ItemGroup(List.of(
+        var jewelry_tier_3 = "jewelry_tier_3";
+        loot.item_groups.put(jewelry_tier_3, new LootConfig.ItemGroup(List.of(
                 JewelryItems.netherite_ruby_ring.id().toString(),
                 JewelryItems.netherite_topaz_ring.id().toString(),
                 JewelryItems.netherite_citrine_ring.id().toString(),
@@ -74,8 +83,8 @@ public class Default {
                 .chance(0.2F)
         );
 
-        var jewelry_tier_3 = "jewelry_tier_3";
-        loot.item_groups.put(jewelry_tier_3, new LootConfig.ItemGroup(List.of(
+        var jewelry_tier_4 = "jewelry_tier_4";
+        loot.item_groups.put(jewelry_tier_4, new LootConfig.ItemGroup(List.of(
                 JewelryItems.unique_attack_ring.id().toString(),
                 JewelryItems.unique_attack_necklace.id().toString(),
                 JewelryItems.unique_dex_ring.id().toString(),
@@ -102,25 +111,27 @@ public class Default {
 
         List.of("minecraft:chests/abandoned_mineshaft",
                         "minecraft:chests/igloo_chest",
-                        "minecraft:chests/shipwreck_supply",
-                        "minecraft:chests/jungle_temple",
-                        "minecraft:chests/desert_pyramid")
+                        "minecraft:chests/shipwreck_supply")
                 .forEach(id -> loot.loot_tables.put(id, List.of(jewelry_tier_0)));
+
+        List.of("minecraft:chests/jungle_temple",
+                        "minecraft:chests/desert_pyramid")
+                .forEach(id -> loot.loot_tables.put(id, List.of(jewelry_tier_1)));
 
         List.of("minecraft:chests/stronghold_crossing",
                         "minecraft:chests/stronghold_library",
                         "minecraft:chests/underwater_ruin_big",
                         "minecraft:chests/simple_dungeon",
                         "minecraft:chests/woodland_mansion")
-                .forEach(id -> loot.loot_tables.put(id, List.of(jewelry_tier_1)));
-
-        List.of("minecraft:chests/bastion_other",
-                        "minecraft:chests/nether_bridge")
                 .forEach(id -> loot.loot_tables.put(id, List.of(jewelry_tier_2)));
 
-        List.of("minecraft:chests/ancient_city",
-                        "minecraft:chests/end_city_treasure",
-                        "minecraft:chests/bastion_treasure")
+        List.of("minecraft:chests/bastion_treasure",
+                        "minecraft:chests/bastion_other",
+                        "minecraft:chests/nether_bridge")
                 .forEach(id -> loot.loot_tables.put(id, List.of(jewelry_tier_3)));
+
+        List.of("minecraft:chests/ancient_city",
+                        "minecraft:chests/end_city_treasure")
+                .forEach(id -> loot.loot_tables.put(id, List.of(jewelry_tier_4)));
     }
 }
