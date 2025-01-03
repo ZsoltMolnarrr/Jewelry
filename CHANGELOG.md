@@ -1,6 +1,7 @@
 # 2.0.3
 
 - Add support for Lithostitched village structure injection
+- Update structure files for newer NBT version
 
 # 2.0.2
 
