@@ -1,3 +1,7 @@
+# 2.0.3
+
+- Add support for Lithostitched village structure injection
+
 # 2.0.2
 
 - Fix gem vein loot tables

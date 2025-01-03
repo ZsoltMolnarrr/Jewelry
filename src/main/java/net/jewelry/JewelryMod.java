@@ -3,6 +3,7 @@ package net.jewelry;
 import net.fabric_extras.structure_pool.api.StructurePoolAPI;
 import net.fabric_extras.structure_pool.api.StructurePoolConfig;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.loader.api.FabricLoader;
 import net.jewelry.blocks.JewelryBlocks;
 import net.jewelry.config.Default;
 import net.jewelry.config.ItemConfig;
@@ -51,6 +52,10 @@ public class JewelryMod implements ModInitializer {
         SoundHelper.register();
 
         OreGeneration.register();
-        StructurePoolAPI.injectAll(villageConfig.value);
+
+        if (!FabricLoader.getInstance().isModLoaded("lithostitched")) {
+            // Only inject the village if the Lithostitched is not present
+            StructurePoolAPI.injectAll(villageConfig.value);
+        }
     }
 }
