@@ -1,3 +1,6 @@
+
+- Add lapis lazuli to jewelry shop loot table
+
 # 2.0.3
 
 - Add support for Lithostitched village structure injection

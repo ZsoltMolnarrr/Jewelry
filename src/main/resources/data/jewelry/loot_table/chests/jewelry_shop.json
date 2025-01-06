@@ -124,14 +124,14 @@
         {
           "type": "minecraft:item",
           "weight": 1,
-          "name": "minecraft:emerald",
+          "name": "minecraft:lapis_lazuli",
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 1,
-                "max": 3
+                "min": 3,
+                "max": 5
               },
               "add": false
             }
