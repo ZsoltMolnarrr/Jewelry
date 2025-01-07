@@ -376,7 +376,7 @@ public class JewelryItems {
     public static Entry unique_archer_ring = add(Identifier.of(JewelryMod.ID, "unique_archer_ring"), Rarity.RARE, true, new ItemConfig.Item(
             List.of(
                     new ItemConfig.AttributeModifier(EntityAttributes_RangedWeapon.DAMAGE.id, tier_3_ranged_multiplier, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE),
-                    new ItemConfig.AttributeModifier(COMBATROLL_RECHARGE, 0.1F, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE),
+                    new ItemConfig.AttributeModifier(EntityAttributes_RangedWeapon.VELOCITY.id, 0.5F, EntityAttributeModifier.Operation.ADD_VALUE),
                     new ItemConfig.AttributeModifier(EntityAttributes_RangedWeapon.HASTE.id , 0.04F, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE)
             )
     ));

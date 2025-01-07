@@ -1,4 +1,6 @@
+# 2.0.4
 
+- Update unique archer ring attribute defaults
 - Add lapis lazuli to jewelry shop loot table
 
 # 2.0.3
