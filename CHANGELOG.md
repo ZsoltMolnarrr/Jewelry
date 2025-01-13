@@ -1,3 +1,7 @@
+# 2.0.5
+
+- Support Lithostitched v1.4
+
 # 2.0.4
 
 - Update unique archer ring attribute defaults
