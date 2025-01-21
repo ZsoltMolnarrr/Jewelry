@@ -1,3 +1,7 @@
+# 2.0.6
+
+- Add category for all crafting recipes
+
 # 2.0.5
 
 - Support Lithostitched v1.4
