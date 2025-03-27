@@ -1,3 +1,7 @@
+# 2.0.7
+
+- Update loot tags
+
 # 2.0.6
 
 - Add category for all crafting recipes
