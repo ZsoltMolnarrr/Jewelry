@@ -1,3 +1,7 @@
+# 2.0.8
+
+- Add emissive block texture support
+
 # 2.0.7
 
 - Update loot tags
