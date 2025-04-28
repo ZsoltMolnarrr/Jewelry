@@ -31,6 +31,10 @@ public class JewelryDataGenerator implements DataGeneratorEntrypoint {
 
         @Override
         public void generate(RecipeExporter exporter) {
+            disassemble(exporter, List.of(JewelryItems.gold_ring.item), Items.GOLD_NUGGET);
+            disassemble(exporter, List.of(JewelryItems.iron_ring.item), Items.IRON_NUGGET);
+            disassemble(exporter, List.of(JewelryItems.emerald_necklace.item), Items.EMERALD);
+            disassemble(exporter, List.of(JewelryItems.diamond_necklace.item), Items.DIAMOND);
             disassemble(exporter,
                     JewelryItems.all.stream()
                             .filter(entry -> entry.tier() == 2)

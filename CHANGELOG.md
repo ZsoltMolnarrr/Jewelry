@@ -1,3 +1,7 @@
+# 2.0.9
+
+- Add smelting recipes to disassemble some jewelry
+
 # 2.0.8
 
 - Add emissive block texture support

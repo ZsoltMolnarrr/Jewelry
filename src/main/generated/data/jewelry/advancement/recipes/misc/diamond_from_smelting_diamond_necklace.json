@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_diamond_necklace": {
+      "conditions": {
+        "items": [
+          {
+            "items": "jewelry:diamond_necklace"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:diamond_from_smelting_diamond_necklace"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_diamond_necklace"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:diamond_from_smelting_diamond_necklace"
+    ]
+  }
+}

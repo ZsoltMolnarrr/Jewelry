@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:gold_nugget_from_blasting_topaz_necklace"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_topaz_necklace": {
+      "conditions": {
+        "items": [
+          {
+            "items": "jewelry:topaz_necklace"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_topaz_necklace"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:gold_nugget_from_blasting_topaz_necklace"
+    ]
+  }
+}
