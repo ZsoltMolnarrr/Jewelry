@@ -1,3 +1,7 @@
+# 2.0.10
+
+- Update translations
+
 # 2.0.9
 
 - Add smelting recipes to disassemble some jewelry
