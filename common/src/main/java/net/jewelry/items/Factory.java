@@ -7,6 +7,11 @@ public interface Factory {
     JewelryItem create(Item.Settings settings, AttributeModifiersComponent attributes, String lore);
 
     public static class Holder {
-        public static Factory factory = null;
+        public static Factory factory = new Factory() {
+            @Override
+            public JewelryItem create(Item.Settings settings, AttributeModifiersComponent attributes, String lore) {
+                return new VanillaJewelryItem(settings.attributeModifiers(attributes));
+            }
+        };
     }
 }
