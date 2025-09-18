@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "id": "jewelry",
+  "version": "${version}",
+  "name": "Jewelry (RPG Series)",
+  "description": "Find precious gems deep down, and craft them into powerful jewelry!",
+  "authors": [
+    "Daedelus"
+  ],
+  "contributors": [
+    "Ron (Artwork)"
+  ],
+  "contact": {
+    "repo": "https://github.com/zsoltmolnarrr/Jewelry"
+  },
+  "license": "All Rights Reserved",
+  "icon": "icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "net.jewelry.fabric.client.FabricClientMod"
+    ],
+    "main": [
+      "net.jewelry.fabric.FabricMod"
+    ],
+    "fabric-datagen": [
+      "net.jewelry.datagen.JewelryDataGenerator"
+    ]
+  },
+  "mixins": [
+    "jewelry.mixins.json"
+  ],
+  "depends": {
+    "minecraft": ">=${minecraft_compat_version}",
+    "fabricloader": ">=${fabric_loader_version}",
+    "fabric-api": "*",
+    "spell_power": "*",
+    "ranged_weapon_api": "*",
+    "structure_pool_api": "*"
+  },
+  "recommends": {
+    "trinkets": "*"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.discord": "https://discord.gg/KN9b3pjFTM"
+      }
+    }
+  }
+}
