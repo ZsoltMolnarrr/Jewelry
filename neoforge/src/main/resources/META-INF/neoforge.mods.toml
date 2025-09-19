@@ -1,29 +1,43 @@
 modLoader = "javafml"
 loaderVersion = "[4,)"
-#issueTrackerURL = ""
-license = "Insert License Here"
+issueTrackerURL = "https://github.com/zsoltmolnarrr/Jewelry/issues"
+license = "All Rights Reserved"
 
 [[mods]]
 modId = "jewelry"
 version = "${version}"
-displayName = "Jewelry"
-authors = "Me!"
+displayName = "Jewelry (RPG Series)"
+authors = "Daedelus"
 description = '''
-This is an example description! Tell everyone what your mod is about!
+Find precious gems deep down, and craft them into powerful jewelry!
 '''
-#logoFile = ""
+logoFile = "icon.png"
 
 [[dependencies.jewelry]]
 modId = "neoforge"
 type = "required"
-versionRange = "[21.1,)"
+versionRange = "[${neoforge_version},)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.jewelry]]
 modId = "minecraft"
 type = "required"
-versionRange = "[1.21.1,)"
+versionRange = "[${minecraft_compat_version},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.jewelry]]
+modId = "spell_power"
+type = "required"
+versionRange = "[${spell_power_version},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.jewelry]]
+modId = "ranged_weapon_api"
+type = "required"
+versionRange = "[${ranged_weapon_api_version},)"
 ordering = "NONE"
 side = "BOTH"
 
