@@ -39,21 +39,35 @@ public class JewelryMod {
     public static void init() {
         itemConfig.refresh();
         villageConfig.refresh();
+        if (!FabricLoader.getInstance().isModLoaded("lithostitched")) {
+            StructurePoolAPI.injectAll(JewelryMod.villageConfig.value);
+        }
+    }
 
-        Registry.register(Registries.ITEM_GROUP, Group.KEY, Group.JEWELRY);
+    public static void registerSounds() {
+        SoundHelper.register();
+    }
+
+    public static void registerBlocks() {
         JewelryBlocks.register();
+    }
+
+    public static void registerItems() {
+        Registry.register(Registries.ITEM_GROUP, Group.KEY, Group.JEWELRY);
         Gems.register();
         JewelryItems.register(itemConfig.value);
         itemConfig.save();
+    }
 
-        JewelryVillagers.register();
-        SoundHelper.register();
+    public static void registerPOI() {
+        JewelryVillagers.registerPOI();
+    }
 
+    public static void registerVillagers() {
+        JewelryVillagers.registerVillagers();
+    }
+
+    public static void registerWorldGen() {
         OreGeneration.register();
-
-        if (!FabricLoader.getInstance().isModLoaded("lithostitched")) {
-            // Only inject the village if the Lithostitched is not present
-            StructurePoolAPI.injectAll(villageConfig.value);
-        }
     }
 }

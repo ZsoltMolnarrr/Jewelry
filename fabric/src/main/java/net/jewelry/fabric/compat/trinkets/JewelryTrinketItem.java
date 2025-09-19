@@ -9,7 +9,6 @@ import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.registry.entry.RegistryEntry;
@@ -20,10 +19,6 @@ import net.minecraft.util.Identifier;
 import java.util.List;
 
 public class JewelryTrinketItem extends TrinketItem implements JewelryItem {
-    public Item asItem() {
-        return this;
-    }
-
     private AttributeModifiersComponent customAttributes = AttributeModifiersComponent.builder().build();
     private final String lore;
 
