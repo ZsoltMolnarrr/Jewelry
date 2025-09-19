@@ -6,6 +6,7 @@
   "block.jewelry.jewelers_kit.hint": "Workbench for Jeweler Villagers.",
 
   "entity.minecraft.villager.jeweler": "Jeweler",
+  "entity.minecraft.villager.jewelry.jeweler": "Jeweler",
 
   "item.jewelry.ruby": "Ruby",
   "item.jewelry.topaz": "Topaz",

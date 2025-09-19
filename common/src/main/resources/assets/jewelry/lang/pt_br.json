@@ -6,6 +6,7 @@
   "block.jewelry.jewelers_kit.hint": "Banco de trabalho para aldeões joalheiros.",
 
   "entity.minecraft.villager.jeweler": "Joalheiro",
+  "entity.minecraft.villager.jewelry.jeweler": "Joalheiro",
 
   "item.jewelry.ruby": "Rubi",
   "item.jewelry.topaz": "Topázio",

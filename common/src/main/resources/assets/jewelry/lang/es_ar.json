@@ -6,6 +6,7 @@
   "block.jewelry.jewelers_kit.hint": "Mesa de trabajo para aldeanos joyeros.",
 
   "entity.minecraft.villager.jeweler": "Joyero",
+  "entity.minecraft.villager.jewelry.jeweler": "Joyero",
 
   "item.jewelry.ruby": "Rubí",
   "item.jewelry.topaz": "Topacio",

@@ -6,6 +6,7 @@
   "block.jewelry.jewelers_kit.hint": "Banco da lavoro per villici.",
 
   "entity.minecraft.villager.jeweler": "Gioielliere",
+  "entity.minecraft.villager.jewelry.jeweler": "Gioielliere",
 
   "item.jewelry.ruby": "Rubino",
   "item.jewelry.topaz": "Topazio",

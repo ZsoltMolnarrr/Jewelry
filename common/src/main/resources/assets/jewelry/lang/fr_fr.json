@@ -6,6 +6,7 @@
   "block.jewelry.jewelers_kit.hint": "Établi pour les villageois bijoutiers.",
 
   "entity.minecraft.villager.jeweler": "Bijoutier",
+  "entity.minecraft.villager.jewelry.jeweler": "Bijoutier",
 
   "item.jewelry.ruby": "Rubis",
   "item.jewelry.topaz": "Topaze",

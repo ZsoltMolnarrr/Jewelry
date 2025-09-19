@@ -6,6 +6,7 @@
 "block.jewelry.jewelers_kit.hint":"珠宝商村民的工作台。",
 
 "entity.minecraft.villager.jeweler":"珠宝商",
+"entity.minecraft.villager.jewelry.jeweler":"珠宝商",
 
 "item.jewelry.ruby":"红宝石",
 "item.jewelry.topaz":"黄玉",

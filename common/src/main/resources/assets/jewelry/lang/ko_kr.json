@@ -6,6 +6,7 @@
   "block.jewelry.jewelers_kit.hint": "보석공 주민을 위한 작업대입니다.",
 
   "entity.minecraft.villager.jeweler": "보석공",
+  "entity.minecraft.villager.jewelry.jeweler": "보석공",
 
   "item.jewelry.ruby": "루비",
   "item.jewelry.topaz": "토파즈",

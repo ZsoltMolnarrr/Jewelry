@@ -6,6 +6,7 @@
   "block.jewelry.jewelers_kit.hint": "Верстак для селян-ювелірів.",
 
   "entity.minecraft.villager.jeweler": "Ювелір",
+  "entity.minecraft.villager.jewelry.jeweler": "Ювелір",
 
   "item.jewelry.ruby": "Рубін",
   "item.jewelry.topaz": "Топаз",
