@@ -65,7 +65,8 @@ public class JewelryItems {
         }
 
         public JewelryItem create(Item.Settings settings, AttributeModifiersComponent attributes) {
-            item = factory.create(settings, attributes, lore);
+            var slot = (id.getPath().contains("ring") ? "ring" : (id.getPath().contains("necklace") ? "necklace" : null));
+            item = factory.create(settings, attributes, lore, slot);
             return item;
         }
 
