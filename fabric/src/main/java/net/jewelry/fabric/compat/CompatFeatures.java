@@ -2,6 +2,7 @@ package net.jewelry.fabric.compat;
 
 import net.fabricmc.loader.api.FabricLoader;
 import net.jewelry.JewelryMod;
+import net.jewelry.compat.AccessoriesCompat;
 import net.jewelry.fabric.compat.trinkets.TrinketsCompat;
 import net.tiny_config.ConfigManager;
 
@@ -52,7 +53,7 @@ public class CompatFeatures {
 
     private static boolean initAccessories() {
         if (FabricLoader.getInstance().isModLoaded("accessories")) {
-            CompatFeatures.init();
+            AccessoriesCompat.init();
             return true;
         }
         return false;

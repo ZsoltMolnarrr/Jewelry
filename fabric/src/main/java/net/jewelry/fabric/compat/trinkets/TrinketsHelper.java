@@ -1,13 +1,16 @@
 package net.jewelry.fabric.compat.trinkets;
 
-import net.jewelry.items.Factory;
+import net.jewelry.items.JewelryFactory;
 
 public class TrinketsHelper {
     public static void registerFactory() {
-        Factory.Holder.factory = (settings, attributes, lore, slot) -> {
-            var item = new JewelryTrinketItem(settings, lore);
-            // Passing attriubtes here instead Item.Settings, because Trinkets ignores `AttributeModifiersComponent`
-            item.setConfigurableModifiers(attributes);
+        JewelryFactory.factory = args -> {
+            var attributes = args.attributes();
+            var item = new JewelryTrinketItem(args.settings(), args.lore());
+            // Passing attributes here instead Item.Settings, because Trinkets ignores `AttributeModifiersComponent`
+            if (attributes != null) {
+                item.setConfigurableModifiers(attributes);
+            }
             return item;
         };
     }

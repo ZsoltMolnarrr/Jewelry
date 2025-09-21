@@ -22,18 +22,16 @@ public class JewelryItems {
     public static final ArrayList<Entry> all = new ArrayList<>();
     public static final class Entry {
         private final Identifier id;
-        private final Factory factory;
         private final Rarity rarity;
         private final ItemConfig.Item config;
         private final String lore;
         private boolean fireproof;
         int tier = 0;
 
-        public JewelryItem item;
+        public Item item;
 
-        public Entry(Identifier id, Factory factory, Rarity rarity, ItemConfig.Item config, String lore, boolean fireproof) {
+        public Entry(Identifier id, Rarity rarity, ItemConfig.Item config, String lore, boolean fireproof) {
             this.id = id;
-            this.factory = factory;
             this.rarity = rarity;
             this.config = config;
             this.lore = lore;
@@ -44,9 +42,6 @@ public class JewelryItems {
             return id;
         }
 
-        public Factory factory() {
-            return factory;
-        }
 
         public Rarity rarity() {
             return rarity;
@@ -64,14 +59,14 @@ public class JewelryItems {
             return fireproof;
         }
 
-        public JewelryItem create(Item.Settings settings, AttributeModifiersComponent attributes) {
+        public Item create(Item.Settings settings, AttributeModifiersComponent attributes) {
             var slot = (id.getPath().contains("ring") ? "ring" : (id.getPath().contains("necklace") ? "necklace" : null));
-            item = factory.create(settings, attributes, lore, slot);
+            item = JewelryFactory.getFactory().apply(new JewelryFactory.ItemArgs(settings, attributes, lore, slot));
             return item;
         }
 
         public Item item() {
-            return item.asItem();
+            return item;
         }
 
         public Entry setTier(int tier) {
@@ -102,7 +97,7 @@ public class JewelryItems {
     }
 
     public static Entry add(Identifier id, Rarity rarity, ItemConfig.Item config, String lore, boolean fireproof) {
-        var entry = new Entry(id, Factory.Holder.factory, rarity, config, lore, fireproof);
+        var entry = new Entry(id, rarity, config, lore, fireproof);
         all.add(entry);
         return entry;
     }
@@ -535,7 +530,7 @@ public class JewelryItems {
 
             var item = entry.create(settings.maxCount(1), attributes.build());
 
-            Registry.register(Registries.ITEM, entry.id(), item.asItem());
+            Registry.register(Registries.ITEM, entry.id(), item);
         }
 
         ItemGroupEvents.modifyEntriesEvent(Group.KEY).register((content) -> {

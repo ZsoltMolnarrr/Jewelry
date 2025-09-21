@@ -3,7 +3,6 @@ package net.jewelry.compat;
 import io.wispforest.accessories.api.AccessoryItem;
 import io.wispforest.accessories.api.SoundEventData;
 import io.wispforest.accessories.api.slot.SlotReference;
-import net.jewelry.items.JewelryItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.registry.entry.RegistryEntry;
@@ -14,7 +13,7 @@ import net.minecraft.util.Formatting;
 import java.util.List;
 import java.util.function.Supplier;
 
-public class JewelryAccessoriesItem extends AccessoryItem implements JewelryItem {
+public class JewelryAccessoriesItem extends AccessoryItem {
     private final Supplier<RegistryEntry<SoundEvent>> equipSound;
     public JewelryAccessoriesItem(Settings properties, String lore, Supplier<RegistryEntry<SoundEvent>> equipSound) {
         super(properties);
