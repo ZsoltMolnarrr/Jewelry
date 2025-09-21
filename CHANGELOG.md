@@ -1,3 +1,8 @@
+# 2.1.1
+
+- Fix Trinkets compatibility on Fabric
+- Rework compat abstraction
+
 # 2.1.0
 
 - Migrate to Architectury
