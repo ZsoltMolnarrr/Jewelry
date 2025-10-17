@@ -1,3 +1,7 @@
+# 2.1.2
+
+- Upgrade translations
+
 # 2.1.1
 
 - Fix Trinkets compatibility on Fabric
