@@ -13,21 +13,20 @@ public class CompatFeatures {
             .setDirectory(JewelryMod.ID)
             .sanitize(true)
             .build();
-    private static boolean configLoaded = false;
-    private static FabricCompatConfig safeConfig() {
-        if (!configLoaded) {
-            config.refresh();
-            configLoaded = true;
-        }
-        return config.value;
-    }
 
     public static void init() {
         initSlotCompat();
     }
 
     private static void initSlotCompat() {
-        var preferred = safeConfig().preferred_slot_mod_id;
+        var loadedConfig = config.safeValue();
+        var preferred = loadedConfig.preferred_slot_mod;
+        try {
+            if (FabricLoader.getInstance().isModLoaded("spell_engine")) {
+                preferred = SpellEngineHelper.initSlotCompat();
+            }
+        } catch (Exception e) { }
+
         if ("trinkets".equals(preferred)) {
             if (initTrinkets()) {
                 return;

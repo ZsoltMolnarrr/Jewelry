@@ -1,3 +1,7 @@
+# 2.2.0
+
+- Update slot mod compatibility
+
 # 2.1.2
 
 - Upgrade translations
