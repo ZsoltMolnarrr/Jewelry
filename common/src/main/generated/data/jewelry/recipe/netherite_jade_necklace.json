@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "G": {
+      "item": "jewelry:jade"
+    },
+    "M": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "S": {
+      "item": "minecraft:string"
+    },
+    "T": {
+      "item": "minecraft:gold_nugget"
+    }
+  },
+  "pattern": [
+    " S ",
+    "TMT",
+    " G "
+  ],
+  "result": {
+    "count": 1,
+    "id": "jewelry:netherite_jade_necklace"
+  }
+}

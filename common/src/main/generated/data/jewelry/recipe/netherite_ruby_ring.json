@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "G": {
+      "item": "jewelry:ruby"
+    },
+    "M": {
+      "item": "minecraft:gold_ingot"
+    },
+    "N": {
+      "item": "minecraft:netherite_ingot"
+    }
+  },
+  "pattern": [
+    " G ",
+    "M M",
+    " N "
+  ],
+  "result": {
+    "count": 1,
+    "id": "jewelry:netherite_ruby_ring"
+  }
+}

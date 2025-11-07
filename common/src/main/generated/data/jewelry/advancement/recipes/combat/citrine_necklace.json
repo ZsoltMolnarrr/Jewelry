@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_citrine": {
+      "conditions": {
+        "items": [
+          {
+            "items": "jewelry:citrine"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "jewelry:citrine_necklace"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_citrine"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "jewelry:citrine_necklace"
+    ]
+  }
+}

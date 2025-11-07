@@ -3,8 +3,14 @@ package net.jewelry.datagen;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
+import net.jewelry.items.Gems;
+import net.jewelry.items.JewelryItem;
 import net.jewelry.items.JewelryItems;
+import net.minecraft.data.client.BlockStateModelGenerator;
+import net.minecraft.data.client.ItemModelGenerator;
+import net.minecraft.data.client.Models;
 import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
@@ -19,7 +25,30 @@ public class JewelryDataGenerator implements DataGeneratorEntrypoint {
     @Override
     public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
         FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
+        pack.addProvider(JewelryCraftingRecipes::new);
+        pack.addProvider(ModelProvider::new);
         pack.addProvider(UnsmeltGenerator::new);
+    }
+
+    public static class ModelProvider extends FabricModelProvider {
+        public ModelProvider(FabricDataOutput output) {
+            super(output);
+        }
+
+        @Override
+        public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
+
+        }
+
+        @Override
+        public void generateItemModels(ItemModelGenerator itemModelGenerator) {
+            Gems.all.forEach(gem -> {
+                itemModelGenerator.register(gem.item(), Models.GENERATED);
+            });
+            JewelryItems.all.forEach(entry -> {
+                itemModelGenerator.register(entry.item(), Models.GENERATED);
+            });
+        }
     }
 
     public static class UnsmeltGenerator extends FabricRecipeProvider {
@@ -28,6 +57,11 @@ public class JewelryDataGenerator implements DataGeneratorEntrypoint {
         }
 
         public static int UNSMELT_TIME = 300;
+
+        @Override
+        public String getName() {
+            return "Jewelry Unsmelt Recipes";
+        }
 
         @Override
         public void generate(RecipeExporter exporter) {
