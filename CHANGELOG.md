@@ -1,3 +1,11 @@
+# 2.3.0
+
+- Add new critical strike related unique jewelry: Ring of Torment, Necklace of Anguish
+- Add new common jewelry: Diamong Ring
+- Diamond Necklace now grants Attack Speed bonus
+- Add support for modId based attribute bonuses
+- Add vanilla recipe book support
+
 # 2.2.0
 
 - Update slot mod compatibility
