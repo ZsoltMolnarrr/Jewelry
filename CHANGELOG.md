@@ -1,8 +1,8 @@
 # 2.3.0
 
 - Add new critical strike related unique jewelry: Ring of Torment, Necklace of Anguish
-- Add new common jewelry: Diamong Ring
-- Diamond Necklace now grants Attack Speed bonus
+- Add new common jewelry: Diamond Ring
+- Diamond jewelry now grants Attack Speed bonus
 - Add support for modId based attribute bonuses
 - Add vanilla recipe book support
 
