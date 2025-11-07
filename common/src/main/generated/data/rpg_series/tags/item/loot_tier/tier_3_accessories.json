@@ -1,0 +1,52 @@
+{
+  "values": [
+    {
+      "id": "jewelry:netherite_jade_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:netherite_sapphire_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:netherite_tanzanite_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:netherite_jade_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:netherite_citrine_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:netherite_topaz_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:netherite_citrine_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:netherite_tanzanite_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:netherite_ruby_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:netherite_ruby_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:netherite_topaz_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:netherite_sapphire_ring",
+      "required": false
+    }
+  ]
+}

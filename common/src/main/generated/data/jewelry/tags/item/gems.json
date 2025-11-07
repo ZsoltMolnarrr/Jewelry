@@ -1,0 +1,28 @@
+{
+  "values": [
+    {
+      "id": "jewelry:ruby",
+      "required": false
+    },
+    {
+      "id": "jewelry:topaz",
+      "required": false
+    },
+    {
+      "id": "jewelry:citrine",
+      "required": false
+    },
+    {
+      "id": "jewelry:jade",
+      "required": false
+    },
+    {
+      "id": "jewelry:sapphire",
+      "required": false
+    },
+    {
+      "id": "jewelry:tanzanite",
+      "required": false
+    }
+  ]
+}

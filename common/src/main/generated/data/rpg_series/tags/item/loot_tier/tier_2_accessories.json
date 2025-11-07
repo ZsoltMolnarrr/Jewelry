@@ -1,0 +1,52 @@
+{
+  "values": [
+    {
+      "id": "jewelry:ruby_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:citrine_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:jade_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:tanzanite_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:sapphire_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:topaz_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:citrine_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:sapphire_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:tanzanite_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:ruby_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:topaz_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:jade_ring",
+      "required": false
+    }
+  ]
+}

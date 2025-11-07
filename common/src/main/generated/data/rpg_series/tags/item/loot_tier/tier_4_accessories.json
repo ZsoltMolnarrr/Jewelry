@@ -1,0 +1,84 @@
+{
+  "values": [
+    {
+      "id": "jewelry:unique_arcane_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:unique_healing_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:unique_crit_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:unique_attack_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:unique_arcane_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:unique_spell_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:unique_tank_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:unique_crit_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:unique_archer_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:unique_dex_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:unique_fire_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:unique_healing_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:unique_attack_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:unique_frost_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:unique_fire_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:unique_archer_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:unique_spell_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:unique_frost_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:unique_tank_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:unique_dex_ring",
+      "required": false
+    }
+  ]
+}

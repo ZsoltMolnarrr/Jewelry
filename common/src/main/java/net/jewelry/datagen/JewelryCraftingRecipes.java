@@ -28,7 +28,7 @@ public class JewelryCraftingRecipes extends FabricRecipeProvider {
     @Override
     public void generate(RecipeExporter exporter) {
         generateBasicRings(exporter);
-        generateVanillaNecklaces(exporter);
+        generateGemJewelry(exporter);
         generateGemRings(exporter);
         generateGemNecklaces(exporter);
         generateNetheriteRings(exporter);
@@ -61,11 +61,12 @@ public class JewelryCraftingRecipes extends FabricRecipeProvider {
     }
 
     // ========================================
-    // VANILLA NECKLACE RECIPES
+    // VANILLA Jewelry
     // ========================================
 
-    private void generateVanillaNecklaces(RecipeExporter exporter) {
+    private void generateGemJewelry(RecipeExporter exporter) {
         vanillaNecklace(exporter, JewelryItems.diamond_necklace.item(), Items.DIAMOND);
+        gemRing(exporter, JewelryItems.diamond_ring.item(), Items.DIAMOND);
         vanillaNecklace(exporter, JewelryItems.emerald_necklace.item(), Items.EMERALD);
     }
 

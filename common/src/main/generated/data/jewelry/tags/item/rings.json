@@ -1,0 +1,108 @@
+{
+  "values": [
+    {
+      "id": "jewelry:copper_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:iron_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:gold_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:diamond_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:ruby_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:topaz_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:citrine_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:jade_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:sapphire_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:tanzanite_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:netherite_ruby_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:netherite_topaz_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:netherite_citrine_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:netherite_jade_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:netherite_sapphire_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:netherite_tanzanite_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:unique_attack_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:unique_dex_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:unique_tank_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:unique_archer_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:unique_arcane_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:unique_fire_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:unique_frost_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:unique_healing_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:unique_spell_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:unique_crit_ring",
+      "required": false
+    }
+  ]
+}

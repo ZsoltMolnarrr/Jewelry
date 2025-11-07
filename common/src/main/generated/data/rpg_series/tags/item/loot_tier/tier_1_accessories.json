@@ -1,0 +1,16 @@
+{
+  "values": [
+    {
+      "id": "jewelry:diamond_ring",
+      "required": false
+    },
+    {
+      "id": "jewelry:emerald_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:diamond_necklace",
+      "required": false
+    }
+  ]
+}

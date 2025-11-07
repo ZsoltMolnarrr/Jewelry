@@ -1,0 +1,100 @@
+{
+  "values": [
+    {
+      "id": "jewelry:emerald_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:diamond_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:ruby_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:topaz_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:citrine_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:jade_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:sapphire_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:tanzanite_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:netherite_ruby_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:netherite_topaz_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:netherite_citrine_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:netherite_jade_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:netherite_sapphire_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:netherite_tanzanite_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:unique_attack_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:unique_dex_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:unique_tank_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:unique_archer_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:unique_arcane_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:unique_fire_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:unique_frost_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:unique_healing_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:unique_spell_necklace",
+      "required": false
+    },
+    {
+      "id": "jewelry:unique_crit_necklace",
+      "required": false
+    }
+  ]
+}

@@ -150,13 +150,13 @@ public class JewelryItems {
 
     public static Entry diamond_necklace = add(Identifier.of(JewelryMod.ID, "diamond_necklace"), ItemConfig.item(
             List.of(
-                    new ItemConfig.AttributeModifier(GENERIC_ATTACK_SPEED, 0.05F, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE)
+                    new ItemConfig.AttributeModifier(GENERIC_ATTACK_SPEED, tier_1_multiplier, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE)
             )
     )).setTier(1);
 
     public static Entry diamond_ring = add(Identifier.of(JewelryMod.ID, "diamond_ring"), ItemConfig.item(
             List.of(
-                    new ItemConfig.AttributeModifier(GENERIC_ATTACK_SPEED, 0.05F, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE)
+                    new ItemConfig.AttributeModifier(GENERIC_ATTACK_SPEED, tier_1_multiplier, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE)
             )
     )).setTier(1);
 
@@ -403,10 +403,16 @@ public class JewelryItems {
             )
     )).setTier(4);
 
-    public static Entry unique_archer_necklace = add(Identifier.of(JewelryMod.ID, "unique_archer_necklace"), Rarity.RARE, true, ItemConfig.item(
+    public static Entry unique_archer_necklace = add(Identifier.of(JewelryMod.ID, "unique_archer_necklace"), Rarity.RARE, true, ItemConfig.itemWithCondition(
+            COMBAT_ROLL_MOD_ID,
             List.of(
                     new ItemConfig.AttributeModifier(EntityAttributes_RangedWeapon.DAMAGE.id, tier_3_ranged_multiplier, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE),
                     new ItemConfig.AttributeModifier(COMBATROLL_COUNT, 1F, EntityAttributeModifier.Operation.ADD_VALUE),
+                    new ItemConfig.AttributeModifier(EntityAttributes_RangedWeapon.HASTE.id , 0.04F, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE)
+            ),
+            List.of(
+                    new ItemConfig.AttributeModifier(EntityAttributes_RangedWeapon.DAMAGE.id, tier_3_ranged_multiplier, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE),
+                    new ItemConfig.AttributeModifier(GENERIC_MOVEMENT_SPEED, 0.1F, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE),
                     new ItemConfig.AttributeModifier(EntityAttributes_RangedWeapon.HASTE.id , 0.04F, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE)
             )
     )).setTier(4);
