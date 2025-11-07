@@ -21,6 +21,7 @@
   "item.jewelry.gold_ring.lore": "Shows affection to your loved one.",
   "item.jewelry.emerald_necklace": "Emerald Necklace",
   "item.jewelry.diamond_necklace": "Diamond Necklace",
+  "item.jewelry.diamond_ring": "Diamond Ring",
 
   "item.jewelry.ruby_ring": "Ruby Ring",
   "item.jewelry.topaz_ring": "Topaz Ring",
@@ -101,5 +102,10 @@
   "item.jewelry.unique_spell_ring": "Ring of Omnipotence",
   "item.jewelry.unique_spell_ring.lore": "The energy of the universe flows through this ring.",
   "item.jewelry.unique_spell_necklace": "Pendant of Acumen",
-  "item.jewelry.unique_spell_necklace.lore": "Focuses the mind, sharpens the senses."
+  "item.jewelry.unique_spell_necklace.lore": "Focuses the mind, sharpens the senses.",
+
+  "item.jewelry.unique_crit_ring": "Band of Torment",
+  "item.jewelry.unique_crit_ring.lore": "",
+  "item.jewelry.unique_crit_necklace": "Necklace of Anguish",
+  "item.jewelry.unique_crit_necklace.lore": ""
 }
