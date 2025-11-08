@@ -1,3 +1,7 @@
+# 2.3.1
+
+- Rebalance some item attribute values
+
 # 2.3.0
 
 - Add new critical strike related unique jewelry: Ring of Torment, Necklace of Anguish

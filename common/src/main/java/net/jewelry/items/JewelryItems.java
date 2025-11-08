@@ -117,9 +117,14 @@ public class JewelryItems {
     public static final String GENERIC_ATTACK_SPEED = "generic.attack_speed";
     public static final String GENERIC_ARMOR_TOUGHNESS = "generic.armor_toughness";
     public static final String GENERIC_KNOCKBACK_RESISTANCE = "generic.knockback_resistance";
+
     public static final String COMBAT_ROLL_MOD_ID = "combat_roll";
     public static final String COMBATROLL_RECHARGE = COMBAT_ROLL_MOD_ID + ":recharge";
     public static final String COMBATROLL_COUNT = COMBAT_ROLL_MOD_ID + ":count";
+
+    public static final String CRIT_MOD_ID = "critical_strike";
+    public static final String CRITICAL_CHANCE_ID = CRIT_MOD_ID + ":chance";
+    public static final String CRITICAL_DAMAGE_ID = CRIT_MOD_ID + ":damage";
 
     // MARK: Rings
 
@@ -148,13 +153,21 @@ public class JewelryItems {
     )).setTier(1);
 
 
-    public static Entry diamond_necklace = add(Identifier.of(JewelryMod.ID, "diamond_necklace"), ItemConfig.item(
+    public static Entry diamond_necklace = add(Identifier.of(JewelryMod.ID, "diamond_necklace"), ItemConfig.itemWithCondition(
+            CRIT_MOD_ID,
+            List.of(
+                    new ItemConfig.AttributeModifier(CRITICAL_DAMAGE_ID , 0.08F, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE)
+            ),
             List.of(
                     new ItemConfig.AttributeModifier(GENERIC_ATTACK_SPEED, tier_1_multiplier, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE)
             )
     )).setTier(1);
 
-    public static Entry diamond_ring = add(Identifier.of(JewelryMod.ID, "diamond_ring"), ItemConfig.item(
+    public static Entry diamond_ring = add(Identifier.of(JewelryMod.ID, "diamond_ring"), ItemConfig.itemWithCondition(
+            CRIT_MOD_ID,
+            List.of(
+                    new ItemConfig.AttributeModifier(CRITICAL_CHANCE_ID , 0.04F, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE)
+            ),
             List.of(
                     new ItemConfig.AttributeModifier(GENERIC_ATTACK_SPEED, tier_1_multiplier, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE)
             )
@@ -517,20 +530,20 @@ public class JewelryItems {
     )).setTier(4);
     public static Entry unique_spell_necklace = add(Identifier.of(JewelryMod.ID, "unique_spell_necklace"), Rarity.RARE, true, ItemConfig.item(
             List.of(
-                    new ItemConfig.AttributeModifier(SpellSchools.GENERIC.id, tier_3_spell_multiplier * 1.25F, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE)
+                    new ItemConfig.AttributeModifier(SpellSchools.GENERIC.id, tier_3_spell_multiplier * 1.25F, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE),
+                    new ItemConfig.AttributeModifier(SpellPowerMechanics.CRITICAL_DAMAGE.id , 0.1F, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE)
 //                    new ItemConfig.AttributeModifier(SpellPowerMechanics.CRITICAL_CHANCE.id , tier_3_secondary_multiplier, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE),
 //                    new ItemConfig.AttributeModifier(SpellPowerMechanics.HASTE.id , tier_3_secondary_multiplier, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE)
             )
     )).setTier(4);
 
-    public static final String CRIT_MOD_ID = "critical_strike";
-    public static final String CRITICAL_CHANCE_ID = CRIT_MOD_ID + ":chance";
-    public static final String CRITICAL_DAMAGE_ID = CRIT_MOD_ID + ":damage";
+    public static final float tier_4_crit_chance = 0.04F;
+    public static final float tier_4_crit_damage = 0.08F;
     public static Entry unique_crit_ring = add(Identifier.of(JewelryMod.ID, "unique_crit_ring"), Rarity.RARE, true, ItemConfig.itemWithCondition(
             CRIT_MOD_ID,
             List.of(
-                    new ItemConfig.AttributeModifier(CRITICAL_CHANCE_ID , tier_3_secondary_multiplier * 2F, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE),
-                    new ItemConfig.AttributeModifier(CRITICAL_DAMAGE_ID , 0.1F, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE)
+                    new ItemConfig.AttributeModifier(CRITICAL_CHANCE_ID , tier_4_crit_chance * 2F, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE),
+                    new ItemConfig.AttributeModifier(CRITICAL_DAMAGE_ID , tier_4_crit_damage, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE)
             ),
             List.of(
                     new ItemConfig.AttributeModifier(GENERIC_ATTACK_DAMAGE , 0.15F, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE)
@@ -540,8 +553,8 @@ public class JewelryItems {
     public static Entry unique_crit_necklace = add(Identifier.of(JewelryMod.ID, "unique_crit_necklace"), Rarity.RARE, true, ItemConfig.itemWithCondition(
             CRIT_MOD_ID,
             List.of(
-                    new ItemConfig.AttributeModifier(CRITICAL_CHANCE_ID , tier_3_secondary_multiplier, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE),
-                    new ItemConfig.AttributeModifier(CRITICAL_DAMAGE_ID , 0.1F * 2F, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE)
+                    new ItemConfig.AttributeModifier(CRITICAL_CHANCE_ID , tier_4_crit_chance, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE),
+                    new ItemConfig.AttributeModifier(CRITICAL_DAMAGE_ID , tier_4_crit_damage * 2F, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE)
             ),
             List.of(
                     new ItemConfig.AttributeModifier(GENERIC_ATTACK_DAMAGE , 0.15F, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE)
