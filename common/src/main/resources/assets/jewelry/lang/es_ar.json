@@ -21,6 +21,7 @@
   "item.jewelry.gold_ring.lore": "Demuestra cariño a tu persona especial.",
   "item.jewelry.emerald_necklace": "Collar de esmeralda",
   "item.jewelry.diamond_necklace": "Collar de diamante",
+  "item.jewelry.diamond_ring": "Anillo de Diamante"
 
   "item.jewelry.ruby_ring": "Anillo de rubí",
   "item.jewelry.topaz_ring": "Anillo de topacio",
@@ -101,5 +102,10 @@
   "item.jewelry.unique_spell_ring": "Anillo de omnipotencia",
   "item.jewelry.unique_spell_ring.lore": "La energía del universo fluye a través de este anillo.",
   "item.jewelry.unique_spell_necklace": "Colgante de agudeza",
-  "item.jewelry.unique_spell_necklace.lore": "Enfoca la mente, agudiza los sentidos."
+  "item.jewelry.unique_spell_necklace.lore": "Enfoca la mente, agudiza los sentidos.",
+
+  "item.jewelry.unique_crit_ring": "Anillo del Sufrimiento",
+  "item.jewelry.unique_crit_ring.lore": "Cada golpe duele dos veces. Una al darlo, otra al recordarlo.",
+  "item.jewelry.unique_crit_necklace": "Collar de la Angustia",
+  "item.jewelry.unique_crit_necklace.lore": "Los gritos cesaron hace tiempo, pero el eco aún parece golpear un punto débil."
 }
