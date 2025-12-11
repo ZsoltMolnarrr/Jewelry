@@ -1,3 +1,7 @@
+# 2.3.2
+
+- Update several translations
+
 # 2.3.1
 
 - Rebalance some item attribute values
