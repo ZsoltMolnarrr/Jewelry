@@ -1,5 +1,6 @@
 package net.jewelry.fabric.compat.trinkets;
 
+import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import dev.emi.trinkets.api.SlotReference;
 import dev.emi.trinkets.api.TrinketItem;
@@ -36,14 +37,18 @@ public class JewelryTrinketItem extends TrinketItem implements JewelryItem {
     }
 
     public Multimap<RegistryEntry<EntityAttribute>, EntityAttributeModifier> getModifiers(ItemStack stack, SlotReference slot, LivingEntity entity, Identifier slotIdentifier) {
-        var modifiers = super.getModifiers(stack, slot, entity, slotIdentifier);
-        for (var entry : this.customAttributes.modifiers()) {
-            modifiers.put(entry.attribute(),
-                    new EntityAttributeModifier(slotIdentifier, entry.modifier().value(), entry.modifier().operation()));
-        }
-        return modifiers;
-    }
+        var defaultModifiers = super.getModifiers(stack, slot, entity, slotIdentifier);
+        Multimap<RegistryEntry<EntityAttribute>, EntityAttributeModifier> mutableModifiers = ArrayListMultimap.create(defaultModifiers);
+        String itemName = net.minecraft.registry.Registries.ITEM.getId(stack.getItem()).getPath();
 
+        for (var entry : this.customAttributes.modifiers()) {
+            Identifier uniqueModId = Identifier.of(slotIdentifier.getNamespace(),
+                    slotIdentifier.getPath() + "_" + itemName + "_" + entry.modifier().id().getPath());
+            mutableModifiers.put(entry.attribute(),
+                    new EntityAttributeModifier(uniqueModId, entry.modifier().value(), entry.modifier().operation()));
+        }
+        return mutableModifiers;
+    }
     public void setConfigurableModifiers(AttributeModifiersComponent component) {
         this.customAttributes = component;
     }

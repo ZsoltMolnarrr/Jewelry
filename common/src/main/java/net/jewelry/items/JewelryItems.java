@@ -561,7 +561,8 @@ public class JewelryItems {
             )
     )).setTier(4);
 
-    private static final Identifier modifierId = Identifier.of(JewelryMod.ID, "equipment_bonus");
+    //this line cause stacking bug
+//    private static final Identifier modifierId = Identifier.of(JewelryMod.ID, "equipment_bonus");
     public static void register(ItemConfig allConfigs) {
         for (var entry : all) {
             ItemConfig.Item itemConfig = allConfigs.items.get(entry.id.toString());
@@ -575,11 +576,20 @@ public class JewelryItems {
                 var id = Identifier.of(modifier.id);
                 var attribute = Registries.ATTRIBUTE.getEntry(id);
                 if (attribute.isPresent()) {
+
+                    // --- FIX STACKING BUG ---
+                    // Create Unique ID.
+                    String safeAttributeName = id.getPath().replace(".", "_");
+                    Identifier dynamicModifierId = Identifier.of(JewelryMod.ID,
+                            entry.id().getPath() + "_" + safeAttributeName + "_bonus");
+
                     attributes.add(attribute.get(),
                             new EntityAttributeModifier(
-                                    modifierId,
+                                    dynamicModifierId,
                                     modifier.value,
                                     modifier.operation), AttributeModifierSlot.ANY);
+                    // --------------------------------------------------------
+
                 } else {
                     System.err.println("Failed to resolve EntityAttribute with id: " + modifier.id);
                 }
