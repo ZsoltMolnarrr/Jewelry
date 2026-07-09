@@ -4,24 +4,21 @@
   "block.jewelry.deepslate_gem_vein": "Veia de gema de ardósia",
   "block.jewelry.jewelers_kit": "Kit de joalheiro",
   "block.jewelry.jewelers_kit.hint": "Banco de trabalho para aldeões joalheiros.",
-
   "entity.minecraft.villager.jeweler": "Joalheiro",
   "entity.minecraft.villager.jewelry.jeweler": "Joalheiro",
-
   "item.jewelry.ruby": "Rubi",
   "item.jewelry.topaz": "Topázio",
   "item.jewelry.citrine": "Citrino",
   "item.jewelry.jade": "Jade",
   "item.jewelry.sapphire": "Safira",
   "item.jewelry.tanzanite": "Tanzanita",
-
   "item.jewelry.copper_ring": "Anel de cobre",
   "item.jewelry.iron_ring": "Anel de ferro",
   "item.jewelry.gold_ring": "Anel de ouro",
   "item.jewelry.gold_ring.lore": "Demonstra afeto por seu ente querido.",
   "item.jewelry.emerald_necklace": "Colar de esmeralda",
   "item.jewelry.diamond_necklace": "Colar de diamante",
-
+  "item.jewelry.diamond_ring": "Anel de diamante",
   "item.jewelry.ruby_ring": "Anel de rubi",
   "item.jewelry.topaz_ring": "Anel de topázio",
   "item.jewelry.citrine_ring": "Anel de citrino",
@@ -34,7 +31,6 @@
   "item.jewelry.jade_necklace": "Colar de jade",
   "item.jewelry.sapphire_necklace": "Colar de safira",
   "item.jewelry.tanzanite_necklace": "Colar de tanzanita",
-
   "item.jewelry.netherite_ruby_ring": "Anel de rubi de netherita",
   "item.jewelry.netherite_topaz_ring": "Anel de topázio de netherita",
   "item.jewelry.netherite_citrine_ring": "Anel de citrino de netherita",
@@ -47,59 +43,52 @@
   "item.jewelry.netherite_jade_necklace": "Colar de jade de netherita",
   "item.jewelry.netherite_sapphire_necklace": "Colar de safira de netherita",
   "item.jewelry.netherite_tanzanite_necklace": "Colar de tanzanita de netherita",
-
   "item.jewelry.unique_attack_ring": "Anel da fúria",
   "item.jewelry.unique_attack_ring.lore": "Um pedaço quebrado de ônix, reutilizado de forma rudimentar.",
   "item.jewelry.unique_attack_necklace": "Amuleto da tortura",
   "item.jewelry.unique_attack_necklace.lore": "O proprietário original não deve ter sido muito popular.",
-
   "item.jewelry.unique_dex_ring": "Vingança da angelista",
   "item.jewelry.unique_dex_ring.lore": "Eles não vão te ver chegando, mas com certeza vão te ver saindo.",
   "item.jewelry.unique_dex_necklace": "Colar do intento vil",
   "item.jewelry.unique_dex_necklace.lore": "Cuidado para não se engasgar com suas aspirações.",
-
   "item.jewelry.unique_archer_ring": "Anel do ranger thalassiano",
   "item.jewelry.unique_archer_ring.lore": "Artesanato élfico em seu melhor.",
   "item.jewelry.unique_archer_necklace": "Amuleto do estride darnassiano",
   "item.jewelry.unique_archer_necklace.lore": "Artefato Altaneiro, passado de geração para geração.",
-
   "item.jewelry.unique_tank_ring": "Anel do juggernaut",
   "item.jewelry.unique_tank_ring.lore": "Leve, mas durável. Feito de titânio.",
   "item.jewelry.unique_tank_necklace": "Amuleto do sentinela",
   "item.jewelry.unique_tank_necklace.lore": "Baluarte do coração dos protetores.",
-
   "item.jewelry.unique_arcane_ring": "Anel da subjugação",
   "item.jewelry.unique_arcane_ring.lore": "Projetado para destruição!",
   "item.jewelry.unique_arcane_necklace": "Amuleto das magias desimpedidas",
   "item.jewelry.unique_arcane_necklace.lore": "As inscrições brilham intensamente para serem lidas, talvez algo sobre radiação?",
-
   "item.jewelry.unique_fire_ring": "Anel do sol radiante",
   "item.jewelry.unique_fire_ring.lore": "Design élfico delicado, forjado no coração do Poço Solar.",
   "item.jewelry.unique_fire_necklace": "Pendente do fogo solar",
   "item.jewelry.unique_fire_necklace.lore": "Presente antigo do Terraço do Magister.",
-
   "item.jewelry.unique_frost_ring": "Anel de permafrost",
   "item.jewelry.unique_frost_ring.lore": "Os tempos mudam, mas esta pedra permanece.",
   "item.jewelry.unique_frost_necklace": "Fragmento glacial",
   "item.jewelry.unique_frost_necklace.lore": "Bordas incomumente afiadas, mas se sente suave ao toque.",
-
   "item.jewelry.unique_healing_ring": "Abraço de anett",
   "item.jewelry.unique_healing_ring.lore": "Aproximadamente sem preço.",
   "item.jewelry.unique_healing_necklace": "Pendente de adria",
   "item.jewelry.unique_healing_necklace.lore": "Possui um pedaço da Cidade Sagrada de Celestis.",
-
   "item.jewelry.unique_lightning_ring": "Anel das correntes instáveis",
   "item.jewelry.unique_lightning_ring.lore": "Controle o incontrolável!",
   "item.jewelry.unique_lightning_necklace": "Amuleto das tempestades incessantes",
   "item.jewelry.unique_lightning_necklace.lore": "Extrai energia do vácuo de uma região artificial do subespaço-tempo até atingir a máxima entropia.",
-
   "item.jewelry.unique_soul_ring": "Anel das almas capturadas",
   "item.jewelry.unique_soul_ring.lore": "Não deve ser quebrado, as almas dentro são mantidas ali por um motivo.",
   "item.jewelry.unique_soul_necklace": "Colar oculto",
   "item.jewelry.unique_soul_necklace.lore": "As presas anexadas sugerem algo realmente sinistro.",
-
   "item.jewelry.unique_spell_ring": "Anel da onipotência",
   "item.jewelry.unique_spell_ring.lore": "A energia do universo flui através deste anel.",
   "item.jewelry.unique_spell_necklace": "Pendente da perspicácia",
-  "item.jewelry.unique_spell_necklace.lore": "Focaliza a mente, aguça os sentidos."
+  "item.jewelry.unique_spell_necklace.lore": "Focaliza a mente, aguça os sentidos.",
+  "item.jewelry.unique_crit_ring": "Anel do sofrimento",
+  "item.jewelry.unique_crit_ring.lore": "Cada golpe dói duas vezes. Uma para dar, outra para lembrar.",
+  "item.jewelry.unique_crit_necklace": "Colar da angústia",
+  "item.jewelry.unique_crit_necklace.lore": "Os gritos cessaram há muito tempo, mas o eco ainda parece atingir um ponto fraco."
 }
