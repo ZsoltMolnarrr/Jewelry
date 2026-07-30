@@ -51,32 +51,32 @@
 
   "item.jewelry.unique_attack_ring": "Перстень люті",
   "item.jewelry.unique_attack_ring.lore": "Розбитий шматок оніксу, перероблений у грубий спосіб.",
-  "item.jewelry.unique_attack_necklace": "Амулет тортур",
+  "item.jewelry.unique_attack_necklace": "Намисто тортур",
   "item.jewelry.unique_attack_necklace.lore": "Первісний власник, мабуть, не був дуже популярним.",
 
   "item.jewelry.unique_dex_ring": "Помста Анжелісти",
-  "item.jewelry.unique_dex_ring.lore": "Вони не побачать вас, але точно побачать, як ви йдете.",
-  "item.jewelry.unique_dex_necklace": "Чокер лихих намірів",
+  "item.jewelry.unique_dex_ring.lore": "Вони не помітять, як ти з'явишся, але точно запам'ятають, як ти підеш",
+  "item.jewelry.unique_dex_necklace": "Намисто лихих намірів",
   "item.jewelry.unique_dex_necklace.lore": "Будьте обережні, щоб не захлинутися у своїх прагненнях.",
 
   "item.jewelry.unique_archer_ring": "Таласійський перстень",
   "item.jewelry.unique_archer_ring.lore": "Ельфійська майстерність у найкращому вигляді.",
-  "item.jewelry.unique_archer_necklace": "Амулет дарнаського блукача",
+  "item.jewelry.unique_archer_necklace": "Намисто дарнаського блукача",
   "item.jewelry.unique_archer_necklace.lore": "Високородний артефакт, що передається з покоління в покоління.",
 
   "item.jewelry.unique_tank_ring": "Перстень джаггернаута",
   "item.jewelry.unique_tank_ring.lore": "Легкий, але міцний. Виготовлений з титану.",
-  "item.jewelry.unique_tank_necklace": "Амулет вартового",
+  "item.jewelry.unique_tank_necklace": "Намисто вартового",
   "item.jewelry.unique_tank_necklace.lore": "Опора для сердець захисників.",
 
-  "item.jewelry.unique_arcane_ring": "Перстень підкорення",
+  "item.jewelry.unique_arcane_ring": "Перстень всемогутності",
   "item.jewelry.unique_arcane_ring.lore": "Створений для руйнування!",
-  "item.jewelry.unique_arcane_necklace": "Амулет необмеженої магії",
+  "item.jewelry.unique_arcane_necklace": "Намисто необмеженої магії",
   "item.jewelry.unique_arcane_necklace.lore": "Написи світяться надто яскраво, щоб їх можна було прочитати, можливо, щось про радіацію?",
 
   "item.jewelry.unique_fire_ring": "Перстень сонячного спалаху",
   "item.jewelry.unique_fire_ring.lore": "Витончений ельфійський дизайн, викуваний у самому серці Сонячного Колодязя.",
-  "item.jewelry.unique_fire_necklace": "Кулон сонячного вогню",
+  "item.jewelry.unique_fire_necklace": "Намисто сонячного вогню",
   "item.jewelry.unique_fire_necklace.lore": "Стародавній подарунок від Тераси Магістрів.",
 
   "item.jewelry.unique_frost_ring": "Вічномерзлий камінь",
@@ -86,12 +86,12 @@
 
   "item.jewelry.unique_healing_ring": "Обійми Анетт",
   "item.jewelry.unique_healing_ring.lore": "Майже безцінний.",
-  "item.jewelry.unique_healing_necklace": "Кулон Адрії",
+  "item.jewelry.unique_healing_necklace": "Намисто Адрії",
   "item.jewelry.unique_healing_necklace.lore": "Тримає частинку святого міста Селестис.",
 
   "item.jewelry.unique_lightning_ring": "Перстень нестабільних течій",
   "item.jewelry.unique_lightning_ring.lore": "Контролюйте неконтрольоване!",
-  "item.jewelry.unique_lightning_necklace": "Амулет невблаганних штормів",
+  "item.jewelry.unique_lightning_necklace": "Намисто невблаганних штормів",
   "item.jewelry.unique_lightning_necklace.lore": "Витягує енергію вакууму зі штучної області підпростору-часу, поки вона не досягне максимальної ентропії.",
 
   "item.jewelry.unique_soul_ring": "Перстень полонених душ",
@@ -101,7 +101,7 @@
 
   "item.jewelry.unique_spell_ring": "Перстень всемогутності",
   "item.jewelry.unique_spell_ring.lore": "Через цей перстень протікає енергія всесвіту.",
-  "item.jewelry.unique_spell_necklace": "Кулон проникливості",
+  "item.jewelry.unique_spell_necklace": "Намисто проникливості",
   "item.jewelry.unique_spell_necklace.lore": "Концентрує розум, загострює почуття.",
 
   "item.jewelry.unique_crit_ring": "Перстень страждань",
