@@ -1,3 +1,7 @@
+# 2.3.3
+
+- Update several translations
+
 # 2.3.2
 
 - Update several translations
