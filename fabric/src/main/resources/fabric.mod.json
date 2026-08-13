@@ -24,7 +24,7 @@
       "net.jewelry.fabric.FabricMod"
     ],
     "fabric-datagen": [
-      "net.jewelry.datagen.JewelryDataGenerator"
+      "net.jewelry.fabric.datagen.JewelryDataGenerator"
     ]
   },
   "mixins": [

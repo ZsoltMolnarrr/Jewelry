@@ -1,4 +1,4 @@
-package net.jewelry.datagen;
+package net.jewelry.fabric.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
@@ -21,7 +21,7 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
-import net.spell_engine.api.item.Equipment;
+import net.spell_engine.rpg_series.item.Equipment;
 import net.spell_engine.rpg_series.datagen.RPGSeriesDataGen;
 import net.spell_engine.rpg_series.tags.RPGSeriesItemTags;
 

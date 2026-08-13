@@ -1,10 +1,10 @@
 package net.jewelry.compat;
 
-import net.fabricmc.loader.api.FabricLoader;
+import net.jewelry.Platform;
 
 public class AccessoriesCompat {
     public static void init() {
-        if (FabricLoader.getInstance().isModLoaded("accessories")) {
+        if (Platform.util().isModLoaded("accessories")) {
             // Outsource to avoid class loading issues
             AccessoriesHelper.registerFactory();
         }

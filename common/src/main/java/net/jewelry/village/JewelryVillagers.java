@@ -1,13 +1,11 @@
 package net.jewelry.village;
 
 import com.google.common.collect.ImmutableSet;
-import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
-import net.fabricmc.fabric.api.object.builder.v1.world.poi.PointOfInterestHelper;
 import net.jewelry.JewelryMod;
 import net.jewelry.blocks.JewelryBlocks;
 import net.jewelry.items.JewelryItems;
 import net.jewelry.util.SoundHelper;
-import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -19,6 +17,7 @@ import net.minecraft.world.poi.PointOfInterestType;
 
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Set;
 
 public class JewelryVillagers {
     public static final String JEWELER = "jeweler";
@@ -26,6 +25,15 @@ public class JewelryVillagers {
     // These will be set by platform-specific code
     public static VillagerProfession JEWELER_PROFESSION;
     public static Identifier POI_ID = Identifier.of(JewelryMod.ID, JEWELER);
+    public static final int POI_TICKET_COUNT = 1;
+    public static final int POI_SEARCH_DISTANCE = 10;
+
+    /// The jeweler's-kit workstation block states for the POI. Registration itself is loader-specific
+    /// (Fabric: `PointOfInterestHelper`; NeoForge: a plain `Registry.register` of a `PointOfInterestType`)
+    /// and lives in each platform's entrypoint; this only exposes the shared state set.
+    public static Set<BlockState> poiBlockStates() {
+        return ImmutableSet.copyOf(JewelryBlocks.JEWELERS_KIT.block().getStateManager().getStates());
+    }
 
     public static VillagerProfession createProfession(String name, RegistryKey<PointOfInterestType> workStation) {
         var id = Identifier.of(JewelryMod.ID, name);
@@ -43,23 +51,12 @@ public class JewelryVillagers {
         );
     }
 
-    public static void registerPOI() {
-        PointOfInterestHelper.register(POI_ID,
-                1, 10, ImmutableSet.copyOf(JewelryBlocks.JEWELERS_KIT.block().getStateManager().getStates())
-        );
-    }
-
     public static void registerVillagers() {
-        // Register profession and trades
+        // Register the profession only; trade-offer registration is loader-specific and lives in each
+        // platform's entrypoint (Fabric `TradeOfferHelper` / NeoForge `VillagerTradesEvent`), consuming
+        // the shared #createTrades() map.
         var workStation = RegistryKey.of(Registries.POINT_OF_INTEREST_TYPE.getKey(), POI_ID);
         JEWELER_PROFESSION = Registry.register(Registries.VILLAGER_PROFESSION, Identifier.of(JewelryMod.ID, JEWELER), createProfession(JEWELER, workStation));
-
-        var trades = JewelryVillagers.createTrades();
-        for (var entry : trades.entrySet()) {
-            TradeOfferHelper.registerVillagerOffers(JewelryVillagers.JEWELER_PROFESSION, entry.getKey(), factories -> {
-                factories.addAll(entry.getValue());
-            });
-        }
     }
 
     public static LinkedHashMap<Integer, List<TradeOffers.Factory>> createTrades() {

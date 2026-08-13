@@ -1,7 +1,6 @@
 package net.jewelry.items;
 
 import net.fabric_extras.ranged_weapon.api.EntityAttributes_RangedWeapon;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.jewelry.JewelryMod;
 import net.jewelry.config.ItemConfig;
 import net.minecraft.component.type.AttributeModifierSlot;
@@ -596,10 +595,6 @@ public class JewelryItems {
             Registry.register(Registries.ITEM, entry.id(), item);
         }
 
-        ItemGroupEvents.modifyEntriesEvent(Group.KEY).register((content) -> {
-            for (var entry : all) {
-                content.add(entry.item());
-            }
-        });
+        // Creative-tab placement is registered per-platform from each loader's entrypoint (iterating JewelryItems.all).
     }
 }

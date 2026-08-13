@@ -1,4 +1,4 @@
-package net.jewelry.datagen;
+package net.jewelry.fabric.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;

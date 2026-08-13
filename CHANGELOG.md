@@ -1,3 +1,7 @@
+# 2.4.0
+
+- NeoForge version no longer depends on Forgified Fabric API
+
 # 2.3.3
 
 - Update several translations

@@ -1,6 +1,5 @@
 package net.jewelry.items;
 
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.jewelry.JewelryMod;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -30,11 +29,6 @@ public class Gems {
         for (var entry : all) {
             Registry.register(Registries.ITEM, entry.id(), entry.item());
         }
-
-        ItemGroupEvents.modifyEntriesEvent(Group.KEY).register((content) -> {
-            for (var entry : all) {
-                content.add(entry.item());
-            }
-        });
+        // Creative-tab placement is registered per-platform from each loader's entrypoint (iterating Gems.all).
     }
 }

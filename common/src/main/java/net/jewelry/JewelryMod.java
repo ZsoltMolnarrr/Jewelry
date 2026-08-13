@@ -2,7 +2,6 @@ package net.jewelry;
 
 import net.fabric_extras.structure_pool.api.StructurePoolAPI;
 import net.fabric_extras.structure_pool.api.StructurePoolConfig;
-import net.fabricmc.loader.api.FabricLoader;
 import net.jewelry.blocks.JewelryBlocks;
 import net.jewelry.config.Default;
 import net.jewelry.config.ItemConfig;
@@ -11,7 +10,6 @@ import net.jewelry.items.Group;
 import net.jewelry.items.JewelryItems;
 import net.jewelry.util.SoundHelper;
 import net.jewelry.village.JewelryVillagers;
-import net.jewelry.worldgen.OreGeneration;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.tiny_config.ConfigManager;
@@ -39,7 +37,7 @@ public class JewelryMod {
     public static void init() {
         itemConfig.refresh();
         villageConfig.refresh();
-        if (!FabricLoader.getInstance().isModLoaded("lithostitched")) {
+        if (!Platform.util().isModLoaded("lithostitched")) {
             StructurePoolAPI.injectAll(JewelryMod.villageConfig.value);
         }
     }
@@ -59,15 +57,7 @@ public class JewelryMod {
         itemConfig.save();
     }
 
-    public static void registerPOI() {
-        JewelryVillagers.registerPOI();
-    }
-
     public static void registerVillagers() {
         JewelryVillagers.registerVillagers();
-    }
-
-    public static void registerWorldGen() {
-        OreGeneration.register();
     }
 }
