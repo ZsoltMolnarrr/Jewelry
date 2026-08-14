@@ -560,7 +560,6 @@ public class JewelryItems {
             )
     )).setTier(4);
 
-    private static final Identifier modifierId = Identifier.of(JewelryMod.ID, "equipment_bonus");
     public static void register(ItemConfig allConfigs) {
         for (var entry : all) {
             ItemConfig.Item itemConfig = allConfigs.items.get(entry.id.toString());
@@ -574,6 +573,11 @@ public class JewelryItems {
                 var id = Identifier.of(modifier.id);
                 var attribute = Registries.ATTRIBUTE.getEntry(id);
                 if (attribute.isPresent()) {
+                    // A per-item, per-attribute modifier id. A single shared id would make
+                    // equipped jewelry pieces overwrite (rather than stack) each other's bonuses,
+                    // since an attribute keys its modifiers by identifier.
+                    var modifierId = Identifier.of(JewelryMod.ID,
+                            entry.id().getPath() + "_" + id.getPath().replace('.', '_') + "_bonus");
                     attributes.add(attribute.get(),
                             new EntityAttributeModifier(
                                     modifierId,

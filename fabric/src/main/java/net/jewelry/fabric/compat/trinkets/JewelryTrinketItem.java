@@ -11,6 +11,7 @@ import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.registry.Registries;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -35,11 +36,17 @@ public class JewelryTrinketItem extends TrinketItem implements JewelryItem {
         }
     }
 
+    @Override
     public Multimap<RegistryEntry<EntityAttribute>, EntityAttributeModifier> getModifiers(ItemStack stack, SlotReference slot, LivingEntity entity, Identifier slotIdentifier) {
         var modifiers = super.getModifiers(stack, slot, entity, slotIdentifier);
+        // `slotIdentifier` is already unique per equipped slot (…/<slot>/<index>), so bonuses
+        // stack across slots. Tie the id to the item as well so quickly swapping a different
+        // item within the same slot doesn't reuse an id and trip vanilla's "Modifier is already
+        // applied" guard.
+        var modifierId = slotIdentifier.withSuffixedPath("/" + Registries.ITEM.getId(stack.getItem()).getPath());
         for (var entry : this.customAttributes.modifiers()) {
             modifiers.put(entry.attribute(),
-                    new EntityAttributeModifier(slotIdentifier, entry.modifier().value(), entry.modifier().operation()));
+                    new EntityAttributeModifier(modifierId, entry.modifier().value(), entry.modifier().operation()));
         }
         return modifiers;
     }
