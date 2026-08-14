@@ -4,23 +4,19 @@
   "block.jewelry.deepslate_gem_vein": "심층암 보석 광맥",
   "block.jewelry.jewelers_kit": "보석공의 도구",
   "block.jewelry.jewelers_kit.hint": "보석공 주민을 위한 작업대입니다.",
-
   "entity.minecraft.villager.jeweler": "보석공",
   "entity.minecraft.villager.jewelry.jeweler": "보석공",
-
   "item.jewelry.ruby": "루비",
   "item.jewelry.topaz": "토파즈",
   "item.jewelry.citrine": "시트린",
   "item.jewelry.jade": "비취",
   "item.jewelry.sapphire": "사파이어",
   "item.jewelry.tanzanite": "탄자나이트",
-
   "item.jewelry.copper_ring": "구리 반지",
   "item.jewelry.iron_ring": "철 반지",
   "item.jewelry.gold_ring": "금 반지",
   "item.jewelry.emerald_necklace": "에메랄드 목걸이",
   "item.jewelry.diamond_necklace": "다이아몬드 목걸이",
-
   "item.jewelry.ruby_ring": "루비 반지",
   "item.jewelry.topaz_ring": "토파즈 반지",
   "item.jewelry.citrine_ring": "시트린 반지",
@@ -33,7 +29,6 @@
   "item.jewelry.jade_necklace": "비취 목걸이",
   "item.jewelry.sapphire_necklace": "사파이어 목걸이",
   "item.jewelry.tanzanite_necklace": "탄자나이트 목걸이",
-
   "item.jewelry.netherite_ruby_ring": "네더라이트 루비 반지",
   "item.jewelry.netherite_topaz_ring": "네더라이트 토파즈 반지",
   "item.jewelry.netherite_citrine_ring": "네더라이트 시트린 반지",
@@ -46,54 +41,54 @@
   "item.jewelry.netherite_jade_necklace": "네더라이트 비취 목걸이",
   "item.jewelry.netherite_sapphire_necklace": "네더라이트 사파이어 목걸이",
   "item.jewelry.netherite_tanzanite_necklace": "네더라이트 탄자나이트 목걸이",
-
   "item.jewelry.unique_attack_ring": "격노의 반지",
   "item.jewelry.unique_attack_ring.lore": "부서진 오닉스 조각을 조잡하게 재활용한 것입니다.",
   "item.jewelry.unique_attack_necklace": "고문의 부적",
   "item.jewelry.unique_attack_necklace.lore": "원래 주인은 그다지 인기가 없었을 것입니다.",
-
   "item.jewelry.unique_dex_ring": "엔젤리스타의 복수",
   "item.jewelry.unique_dex_ring.lore": "당신이 오는 것을 보지 못하겠지만, 떠나는 것을 확실히 볼 것입니다.",
   "item.jewelry.unique_dex_necklace": "경멸의 메달",
   "item.jewelry.unique_dex_necklace.lore": "당신의 야망에 질식하지 않도록 조심하십시오.",
-
   "item.jewelry.unique_archer_ring": "탈라시안 레인저 밴드",
   "item.jewelry.unique_archer_ring.lore": "엘프의 솜씨가 돋보입니다.",
   "item.jewelry.unique_archer_necklace": "다르나시안 스트라이더 부적",
   "item.jewelry.unique_archer_necklace.lore": "대대로 전해져 내려온 고귀한 유물입니다.",
-
   "item.jewelry.unique_tank_ring": "거대 전차 밴드",
   "item.jewelry.unique_tank_ring.lore": "가볍지만 내구성이 뛰어납니다. 티타늄으로 만들어졌습니다.",
   "item.jewelry.unique_tank_necklace": "파수꾼의 부적",
   "item.jewelry.unique_tank_necklace.lore": "보호자의 심장을 위한 방벽입니다.",
-
   "item.jewelry.unique_arcane_ring": "전능의 반지",
   "item.jewelry.unique_arcane_ring.lore": "이 반지에는 우주의 에너지가 흐릅니다.",
   "item.jewelry.unique_arcane_necklace": "무제한 마법의 부적",
   "item.jewelry.unique_arcane_necklace.lore": "너무 밝게 빛나는 글씨가 있어 읽기 어렵지만, 방사선에 관한 것일지도 모릅니다.",
-
   "item.jewelry.unique_fire_ring": "태양섬광 인장",
   "item.jewelry.unique_fire_ring.lore": "섬세한 엘프 디자인으로, 태양우물의 심장에서 단련되었습니다.",
   "item.jewelry.unique_fire_necklace": "태양불의 펜던트",
   "item.jewelry.unique_fire_necklace.lore": "마법사의 테라스 소유주가 가장 위대한 마법사에게 준 선물입니다.",
-
   "item.jewelry.unique_frost_ring": "영구동토 돌",
   "item.jewelry.unique_frost_ring.lore": "시간이 흘러도 이 조각은 변함이 없습니다.",
   "item.jewelry.unique_frost_necklace": "빙하 조각",
   "item.jewelry.unique_frost_necklace.lore": "평소에는 부드러운데, 날카로운 가장자리가 있습니다.",
-
   "item.jewelry.unique_healing_ring": "아네트의 포옹",
   "item.jewelry.unique_healing_ring.lore": "거의 무한의 가치를 지니고 있습니다.",
   "item.jewelry.unique_healing_necklace": "아드리아의 펜던트",
   "item.jewelry.unique_healing_necklace.lore": "성도시 셀레스티스의 한 조각을 담고 있습니다.",
-
   "item.jewelry.unique_lightning_ring": "불안정한 전류의 반지",
   "item.jewelry.unique_lightning_ring.lore": "통제 불가능한 것을 통제하세요!",
   "item.jewelry.unique_lightning_necklace": "끊임없는 폭풍의 부적",
   "item.jewelry.unique_lightning_necklace.lore": "최대 엔트로피에 도달할 때까지 인공적인 차원 공간에서 진공 에너지를 추출합니다.",
-
   "item.jewelry.unique_soul_ring": "포획된 영혼의 인장",
   "item.jewelry.unique_soul_ring.lore": "깨지면 안 됩니다, 내부의 영혼은 이유가 있어서 갇혀 있습니다.",
   "item.jewelry.unique_soul_necklace": "오컬트 목걸이",
-  "item.jewelry.unique_soul_necklace.lore": "부착된 송곳니가 진정한 사악함을 암시합니다."
+  "item.jewelry.unique_soul_necklace.lore": "부착된 송곳니가 진정한 사악함을 암시합니다.",
+  "item.jewelry.gold_ring.lore": "사랑하는 사람에게 애정을 표현합니다.",
+  "item.jewelry.diamond_ring": "다이아몬드 반지",
+  "item.jewelry.unique_spell_ring": "전능의 반지",
+  "item.jewelry.unique_spell_ring.lore": "이 반지에는 우주의 에너지가 흐릅니다.",
+  "item.jewelry.unique_spell_necklace": "총명의 펜던트",
+  "item.jewelry.unique_spell_necklace.lore": "정신을 집중시키고 감각을 예리하게 합니다.",
+  "item.jewelry.unique_crit_ring": "고통의 반지",
+  "item.jewelry.unique_crit_ring.lore": "모든 일격은 두 번 아픕니다. 한 번은 가하는 순간에, 한 번은 기억 속에서.",
+  "item.jewelry.unique_crit_necklace": "고뇌의 목걸이",
+  "item.jewelry.unique_crit_necklace.lore": "비명은 오래전에 멈췄지만, 그 메아리는 여전히 급소를 찌르는 듯합니다."
 }
