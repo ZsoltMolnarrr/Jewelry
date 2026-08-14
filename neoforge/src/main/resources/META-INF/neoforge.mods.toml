@@ -41,5 +41,12 @@ versionRange = "[${ranged_weapon_api_version},)"
 ordering = "NONE"
 side = "BOTH"
 
+[[dependencies.jewelry]]
+modId = "structure_pool_api"
+type = "required"
+versionRange = "[${structure_pool_api_version},)"
+ordering = "NONE"
+side = "BOTH"
+
 [[mixins]]
 config = "jewelry.mixins.json"
