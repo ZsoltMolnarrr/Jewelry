@@ -1,5 +1,7 @@
 # 2.4.0
 
+**Important disclaimer** - NeoForge users need to unequip their spell books, jewelry, relics and quivers to preserve it, before updating to this version!
+
 - NeoForge version no longer depends on Forgified Fabric API
 - Fully translated content, now supporting 20 languages
 - Removed Accessories mod support
