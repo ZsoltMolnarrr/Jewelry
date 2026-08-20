@@ -1,6 +1,9 @@
 # 2.4.0
 
 - NeoForge version no longer depends on Forgified Fabric API
+- Fully translated content, now supporting 20 languages
+- Removed Accessories mod support
+- Added Curious API slot mod support (NeoForge only) 
 
 # 2.3.3
 

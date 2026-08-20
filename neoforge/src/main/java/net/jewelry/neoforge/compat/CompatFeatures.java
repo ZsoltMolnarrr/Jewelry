@@ -1,9 +1,9 @@
 package net.jewelry.neoforge.compat;
 
-import net.jewelry.compat.AccessoriesCompat;
+import net.jewelry.neoforge.compat.curios.CuriosCompat;
 
 public class CompatFeatures {
     public static void init() {
-        AccessoriesCompat.init();
+        CuriosCompat.init();
     }
 }

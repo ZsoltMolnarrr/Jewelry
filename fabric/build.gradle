@@ -55,7 +55,6 @@ repositories {
         name = "Ladysnake Libs"
         url = 'https://maven.ladysnake.org/releases'
     }
-    maven { url 'https://maven.wispforest.io/releases' }
 
     mavenLocal()
 }
@@ -79,8 +78,6 @@ dependencies {
     } else {
         modImplementation("dev.emi:trinkets:${project.trinkets_version}")
     }
-    modCompileOnly "maven.modrinth:owo-lib:${project.owo_version}" // Accessories needs this
-    modCompileOnly("io.wispforest:accessories-${platform}:${project.accessories_version}") // Appearantly this doesn't work as a modCompileOnly?
 
     modImplementation("maven.modrinth:structure-pool-api:${project.structure_pool_api_version}-${platform}")
 //    modImplementation("net.foundation:structure_pool_api-${platform}:${project.structure_pool_api_version}")
