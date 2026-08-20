@@ -58,7 +58,7 @@ repositories {
         url = 'https://maven.ladysnake.org/releases'
     }
 
-    // For Accessories
+    // For Curios
     maven { url 'https://maven.theillusivec4.top/' }
     maven { url 'https://maven.su5ed.dev/releases' }
     maven { url 'https://maven.fabricmc.net' }

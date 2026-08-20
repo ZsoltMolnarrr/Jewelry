@@ -88,7 +88,7 @@ dependencies {
 
     // Compat only
     // modImplementation("maven.modrinth:spell-engine:${project.spell_engine_version}-${platform}")
-    modCompileOnly("net.spell_engine:spell_engine-${platform}:${project.spell_engine_version}")
+    modImplementation("net.spell_engine:spell_engine-${platform}:${project.spell_engine_version}")
 }
 
 processResources {
