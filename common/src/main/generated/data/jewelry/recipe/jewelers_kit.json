@@ -2,18 +2,10 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "tag": "minecraft:planks"
-    },
-    "C": {
-      "item": "minecraft:copper_ingot"
-    },
-    "G": {
-      "item": "minecraft:gold_ingot"
-    },
-    "I": {
-      "item": "minecraft:iron_ingot"
-    }
+    "#": "#minecraft:planks",
+    "C": "minecraft:copper_ingot",
+    "G": "minecraft:gold_ingot",
+    "I": "minecraft:iron_ingot"
   },
   "pattern": [
     "CIG",

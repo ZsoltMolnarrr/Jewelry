@@ -4,9 +4,7 @@
   "cookingtime": 300,
   "experience": 0.1,
   "group": "disassemble",
-  "ingredient": {
-    "item": "jewelry:netherite_citrine_ring"
-  },
+  "ingredient": "jewelry:netherite_citrine_ring",
   "result": {
     "id": "minecraft:netherite_scrap"
   }

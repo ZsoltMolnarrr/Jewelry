@@ -2,18 +2,10 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "G": {
-      "item": "jewelry:ruby"
-    },
-    "M": {
-      "item": "minecraft:netherite_ingot"
-    },
-    "S": {
-      "item": "minecraft:string"
-    },
-    "T": {
-      "item": "minecraft:gold_nugget"
-    }
+    "G": "jewelry:ruby",
+    "M": "minecraft:netherite_ingot",
+    "S": "minecraft:string",
+    "T": "minecraft:gold_nugget"
   },
   "pattern": [
     " S ",

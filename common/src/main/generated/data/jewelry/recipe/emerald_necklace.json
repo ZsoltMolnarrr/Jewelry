@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "G": {
-      "item": "minecraft:emerald"
-    },
-    "M": {
-      "item": "minecraft:gold_ingot"
-    },
-    "S": {
-      "item": "minecraft:string"
-    }
+    "G": "minecraft:emerald",
+    "M": "minecraft:gold_ingot",
+    "S": "minecraft:string"
   },
   "pattern": [
     " S ",

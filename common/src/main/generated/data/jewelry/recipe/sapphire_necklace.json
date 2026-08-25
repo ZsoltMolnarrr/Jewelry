@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "G": {
-      "item": "jewelry:sapphire"
-    },
-    "M": {
-      "item": "minecraft:gold_ingot"
-    },
-    "S": {
-      "item": "minecraft:string"
-    }
+    "G": "jewelry:sapphire",
+    "M": "minecraft:gold_ingot",
+    "S": "minecraft:string"
   },
   "pattern": [
     " S ",

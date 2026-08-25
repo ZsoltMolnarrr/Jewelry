@@ -4,9 +4,7 @@
   "cookingtime": 300,
   "experience": 0.1,
   "group": "disassemble",
-  "ingredient": {
-    "item": "jewelry:iron_ring"
-  },
+  "ingredient": "jewelry:iron_ring",
   "result": {
     "id": "minecraft:iron_nugget"
   }

@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "G": {
-      "item": "jewelry:topaz"
-    },
-    "M": {
-      "item": "minecraft:gold_ingot"
-    }
+    "G": "jewelry:topaz",
+    "M": "minecraft:gold_ingot"
   },
   "pattern": [
     " G ",

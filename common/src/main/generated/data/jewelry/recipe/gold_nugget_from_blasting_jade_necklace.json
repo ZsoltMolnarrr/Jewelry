@@ -4,9 +4,7 @@
   "cookingtime": 150,
   "experience": 0.1,
   "group": "disassemble",
-  "ingredient": {
-    "item": "jewelry:jade_necklace"
-  },
+  "ingredient": "jewelry:jade_necklace",
   "result": {
     "id": "minecraft:gold_nugget"
   }

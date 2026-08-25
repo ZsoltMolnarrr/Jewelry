@@ -4,9 +4,7 @@
   "cookingtime": 150,
   "experience": 0.1,
   "group": "disassemble",
-  "ingredient": {
-    "item": "jewelry:diamond_necklace"
-  },
+  "ingredient": "jewelry:diamond_necklace",
   "result": {
     "id": "minecraft:diamond"
   }

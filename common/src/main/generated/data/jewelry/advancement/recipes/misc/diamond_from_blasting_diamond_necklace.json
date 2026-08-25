@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:diamond_from_blasting_diamond_necklace"
+        "recipe": "jewelry:diamond_from_blasting_diamond_necklace"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:diamond_from_blasting_diamond_necklace"
+      "jewelry:diamond_from_blasting_diamond_necklace"
     ]
   }
 }
