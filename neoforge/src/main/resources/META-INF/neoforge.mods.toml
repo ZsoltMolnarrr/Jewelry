@@ -16,14 +16,14 @@ logoFile = "icon.png"
 [[dependencies.jewelry]]
 modId = "neoforge"
 type = "required"
-versionRange = "[${neoforge_version},)"
+versionRange = "[21.11,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.jewelry]]
 modId = "minecraft"
 type = "required"
-versionRange = "[${minecraft_compat_version},)"
+versionRange = "[1.21.11,)"
 ordering = "NONE"
 side = "BOTH"
 
@@ -51,6 +51,7 @@ side = "BOTH"
 [[dependencies.jewelry]]
 modId = "curios"
 type = "optional"
+versionRange = "[14.0.0,)"
 ordering = "AFTER"
 side = "BOTH"
 

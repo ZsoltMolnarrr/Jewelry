@@ -48,8 +48,8 @@ repositories {
     }
 
     // For Curios
-    maven { url 'https://maven.theillusivec4.top/' }
-    maven { url 'https://maven.fabricmc.net' }
+    maven { url = 'https://maven.theillusivec4.top/' }
+    maven { url = 'https://maven.fabricmc.net' }
 
     mavenLocal()
 }
@@ -65,12 +65,12 @@ dependencies {
     modImplementation("top.theillusivec4.curios:curios-neoforge:${project.curios_version}")
     forgeRuntimeLibrary("blue.endless:jankson:1.2.2")
 
-    modImplementation("maven.modrinth:structure-pool-api:${project.structure_pool_api_version}-${platform}")
-//    modImplementation("net.foundation:structure_pool_api-${platform}:${project.structure_pool_api_version}")
-    modImplementation("maven.modrinth:spell-power:${project.spell_power_version}-${platform}")
-//    modImplementation("net.spell_power:spell_power-${platform}:${project.spell_power_version}")
-    modImplementation("maven.modrinth:ranged-weapon-api:${project.ranged_weapon_api_version}-${platform}")
-//    modImplementation("net.foundation:ranged_weapon_api-${platform}:${project.ranged_weapon_api_version}")
+//    modImplementation("maven.modrinth:structure-pool-api:${project.structure_pool_api_version}-${platform}")
+    modImplementation("net.foundation:structure_pool_api-${platform}:${project.structure_pool_api_version}")
+//    modImplementation("maven.modrinth:spell-power:${project.spell_power_version}-${platform}")
+    modImplementation("net.spell_power:spell_power-${platform}:${project.spell_power_version}")
+//    modImplementation("maven.modrinth:ranged-weapon-api:${project.ranged_weapon_api_version}-${platform}")
+    modImplementation("net.foundation:ranged_weapon_api-${platform}:${project.ranged_weapon_api_version}")
 
     // Compat only
     // modCompileOnly("maven.modrinth:spell-engine:${project.spell_engine_version}-${platform}")
