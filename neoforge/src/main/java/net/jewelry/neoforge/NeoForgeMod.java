@@ -73,7 +73,7 @@ public final class NeoForgeMod {
     }
 
     private static void onVillagerTrades(VillagerTradesEvent event) {
-        if (event.getType() != JewelryVillagers.JEWELER_PROFESSION) {
+        if (event.getType() != JewelryVillagers.JEWELER_PROFESSION_KEY) {
             return;
         }
         JewelryVillagers.createTrades().forEach((tier, factories) -> {

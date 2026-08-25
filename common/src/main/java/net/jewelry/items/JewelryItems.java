@@ -7,8 +7,12 @@ import net.minecraft.component.type.AttributeModifierSlot;
 import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.item.Item;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.spell_power.api.SpellPowerMechanics;
@@ -108,14 +112,22 @@ public class JewelryItems {
 
     // Attribute ids
 
-    public static final String GENERIC_ARMOR = "generic.armor";
-    public static final String GENERIC_LUCK = "generic.luck";
-    public static final String GENERIC_MOVEMENT_SPEED = "generic.movement_speed";
-    public static final String GENERIC_ATTACK_DAMAGE = "generic.attack_damage";
-    public static final String GENERIC_MAX_HEALTH = "generic.max_health";
-    public static final String GENERIC_ATTACK_SPEED = "generic.attack_speed";
-    public static final String GENERIC_ARMOR_TOUGHNESS = "generic.armor_toughness";
-    public static final String GENERIC_KNOCKBACK_RESISTANCE = "generic.knockback_resistance";
+    // 1.21.2 dropped the `generic.` prefix from every vanilla attribute id (`minecraft:attack_damage`,
+    // not `minecraft:generic.attack_damage`). These strings are persisted into the item config file,
+    // so the config schema version was bumped (`items_v8` -> `items_v9`) alongside them. Derived from
+    // the registry rather than written out, so a future rename cannot silently drop bonuses again.
+    private static String idOf(RegistryEntry<net.minecraft.entity.attribute.EntityAttribute> attribute) {
+        return attribute.getKey().orElseThrow().getValue().toString();
+    }
+
+    public static final String GENERIC_ARMOR = idOf(EntityAttributes.ARMOR);
+    public static final String GENERIC_LUCK = idOf(EntityAttributes.LUCK);
+    public static final String GENERIC_MOVEMENT_SPEED = idOf(EntityAttributes.MOVEMENT_SPEED);
+    public static final String GENERIC_ATTACK_DAMAGE = idOf(EntityAttributes.ATTACK_DAMAGE);
+    public static final String GENERIC_MAX_HEALTH = idOf(EntityAttributes.MAX_HEALTH);
+    public static final String GENERIC_ATTACK_SPEED = idOf(EntityAttributes.ATTACK_SPEED);
+    public static final String GENERIC_ARMOR_TOUGHNESS = idOf(EntityAttributes.ARMOR_TOUGHNESS);
+    public static final String GENERIC_KNOCKBACK_RESISTANCE = idOf(EntityAttributes.KNOCKBACK_RESISTANCE);
 
     public static final String COMBAT_ROLL_MOD_ID = "combat_roll";
     public static final String COMBATROLL_RECHARGE = COMBAT_ROLL_MOD_ID + ":recharge";
@@ -588,6 +600,8 @@ public class JewelryItems {
                 }
             }
             var settings = new Item.Settings()
+                    // 1.21.2+: without its own registry key the item constructor throws `Item id not set`.
+                    .registryKey(RegistryKey.of(RegistryKeys.ITEM, entry.id()))
                     .rarity(entry.rarity)
                     .maxCount(1);
             if (entry.fireproof()) {

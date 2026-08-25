@@ -4,6 +4,8 @@ import net.jewelry.JewelryMod;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 
@@ -13,7 +15,10 @@ public class Gems {
     public record Entry(Identifier id, Item item) { }
     public static ArrayList<Entry> all = new ArrayList<>();
     public static Entry gem(Identifier id) {
-        var entry = new Entry(id, new Item(new Item.Settings().rarity(Rarity.UNCOMMON)));
+        // 1.21.2+: settings must carry the item's own registry key or the constructor throws `Item id not set`.
+        var entry = new Entry(id, new Item(new Item.Settings()
+                .registryKey(RegistryKey.of(RegistryKeys.ITEM, id))
+                .rarity(Rarity.UNCOMMON)));
         all.add(entry);
         return entry;
     }

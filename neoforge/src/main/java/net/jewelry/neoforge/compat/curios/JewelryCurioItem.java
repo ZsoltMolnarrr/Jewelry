@@ -5,6 +5,7 @@ import com.google.common.collect.Multimap;
 import net.jewelry.items.JewelryItem;
 import net.jewelry.util.SoundHelper;
 import net.minecraft.component.type.AttributeModifiersComponent;
+import net.minecraft.component.type.TooltipDisplayComponent;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.item.Item;
@@ -19,7 +20,7 @@ import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
-import java.util.List;
+import java.util.function.Consumer;
 
 public class JewelryCurioItem extends Item implements ICurioItem, JewelryItem {
     private AttributeModifiersComponent customAttributes = AttributeModifiersComponent.builder().build();
@@ -30,11 +31,13 @@ public class JewelryCurioItem extends Item implements ICurioItem, JewelryItem {
         this.lore = lore;
     }
 
+    // 1.21.6+: `appendTooltip` takes a `TooltipDisplayComponent` and a `Consumer<Text>` sink.
     @Override
-    public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
-        super.appendTooltip(stack, context, tooltip, type);
+    public void appendTooltip(ItemStack stack, TooltipContext context, TooltipDisplayComponent displayComponent,
+                              Consumer<Text> textConsumer, TooltipType type) {
+        super.appendTooltip(stack, context, displayComponent, textConsumer, type);
         if (lore != null && !lore.isEmpty()) {
-            tooltip.add(Text.translatable(lore).formatted(Formatting.ITALIC, Formatting.GOLD));
+            textConsumer.accept(Text.translatable(lore).formatted(Formatting.ITALIC, Formatting.GOLD));
         }
     }
 
@@ -69,7 +72,7 @@ public class JewelryCurioItem extends Item implements ICurioItem, JewelryItem {
         if (entity == null) {
             return;
         }
-        var world = entity.getWorld();
+        var world = entity.getEntityWorld();
         if (world.isClient()                        // the server broadcast below reaches every nearby client
                 || entity.age <= 100                // gear already worn when entering a world/dimension
                 || prevStack.isOf(stack.getItem())) // same item, only its data changed

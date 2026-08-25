@@ -18,7 +18,7 @@ public class JewelryMod {
     public static final String ID = "jewelry";
 
     public static ConfigManager<ItemConfig> itemConfig = new ConfigManager<>
-            ("items_v8", Default.items)
+            ("items_v9", Default.items)
             .builder()
             .setDirectory(ID)
             .sanitize(true)

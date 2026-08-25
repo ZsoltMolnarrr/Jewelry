@@ -6,6 +6,7 @@ import dev.emi.trinkets.api.TrinketItem;
 import net.jewelry.items.JewelryItem;
 import net.jewelry.util.SoundHelper;
 import net.minecraft.component.type.AttributeModifiersComponent;
+import net.minecraft.component.type.TooltipDisplayComponent;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
@@ -17,7 +18,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 
-import java.util.List;
+import java.util.function.Consumer;
 
 public class JewelryTrinketItem extends TrinketItem implements JewelryItem {
     private AttributeModifiersComponent customAttributes = AttributeModifiersComponent.builder().build();
@@ -28,11 +29,13 @@ public class JewelryTrinketItem extends TrinketItem implements JewelryItem {
         this.lore = lore;
     }
 
+    // 1.21.6+: `appendTooltip` takes a `TooltipDisplayComponent` and a `Consumer<Text>` sink.
     @Override
-    public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
-        super.appendTooltip(stack, context, tooltip, type);
+    public void appendTooltip(ItemStack stack, TooltipContext context, TooltipDisplayComponent displayComponent,
+                              Consumer<Text> textConsumer, TooltipType type) {
+        super.appendTooltip(stack, context, displayComponent, textConsumer, type);
         if (lore != null && !lore.isEmpty()) {
-            tooltip.add(Text.translatable(lore).formatted(Formatting.ITALIC, Formatting.GOLD));
+            textConsumer.accept(Text.translatable(lore).formatted(Formatting.ITALIC, Formatting.GOLD));
         }
     }
 
@@ -59,7 +62,7 @@ public class JewelryTrinketItem extends TrinketItem implements JewelryItem {
     public void onEquip(ItemStack stack, SlotReference slot, LivingEntity entity) {
         super.onEquip(stack, slot, entity);
 
-        if (entity.getWorld().isClient() // Play sound only on client
+        if (entity.getEntityWorld().isClient() // Play sound only on client
                 && entity.age > 100      // Avoid playing sound on entering world / dimension
         ) {
             entity.playSound(SoundHelper.JEWELRY_EQUIP, 1.0F, 1.0F);

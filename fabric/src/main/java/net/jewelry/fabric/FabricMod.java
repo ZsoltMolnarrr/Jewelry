@@ -28,7 +28,7 @@ public final class FabricMod implements ModInitializer {
                 JewelryVillagers.poiBlockStates());
         JewelryMod.registerVillagers(); // registers the jeweler profession
         JewelryVillagers.createTrades().forEach((tier, factories) ->
-                TradeOfferHelper.registerVillagerOffers(JewelryVillagers.JEWELER_PROFESSION, tier,
+                TradeOfferHelper.registerVillagerOffers(JewelryVillagers.JEWELER_PROFESSION_KEY, tier,
                         list -> list.addAll(factories)));
 
         // Ore world-gen injection — Fabric API BiomeModifications (NeoForge uses a biome_modifier JSON).

@@ -1,29 +1,29 @@
 package net.jewelry.fabric.datagen;
 
+import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.jewelry.JewelryMod;
 import net.jewelry.items.Gems;
-import net.jewelry.items.JewelryItem;
 import net.jewelry.items.JewelryItems;
-import net.minecraft.data.client.BlockStateModelGenerator;
-import net.minecraft.data.client.ItemModelGenerator;
-import net.minecraft.data.client.Models;
-import net.minecraft.data.server.recipe.RecipeExporter;
+import net.minecraft.client.data.BlockStateModelGenerator;
+import net.minecraft.client.data.ItemModelGenerator;
+import net.minecraft.client.data.Models;
+import net.minecraft.data.recipe.RecipeExporter;
+import net.minecraft.data.recipe.RecipeGenerator;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.spell_engine.rpg_series.item.Equipment;
 import net.spell_engine.rpg_series.datagen.RPGSeriesDataGen;
-import net.spell_engine.rpg_series.tags.RPGSeriesItemTags;
 
 import java.util.HashMap;
 import java.util.List;
@@ -62,24 +62,27 @@ public class JewelryDataGenerator implements DataGeneratorEntrypoint {
          * Generate jewelry-specific tags: gems, rings, and necklaces
          */
         private void generateJewelryTags() {
+            // 1.21.6 split the tag-provider API: `getOrCreateTagBuilder` → key-based `builder(TagKey)`,
+            // whose values are `RegistryKey`s rather than `Identifier`s.
+
             // jewelry:gems tag
-            var gemsTag = getOrCreateTagBuilder(TagKey.of(RegistryKeys.ITEM,
+            var gemsTag = builder(TagKey.of(RegistryKeys.ITEM,
                     Identifier.of(JewelryMod.ID, "gems")));
-            Gems.all.forEach(gem -> gemsTag.addOptional(gem.id()));
+            Gems.all.forEach(gem -> gemsTag.addOptional(RegistryKey.of(RegistryKeys.ITEM, gem.id())));
 
             // jewelry:rings tag
-            var ringsTag = getOrCreateTagBuilder(TagKey.of(RegistryKeys.ITEM,
+            var ringsTag = builder(TagKey.of(RegistryKeys.ITEM,
                     Identifier.of(JewelryMod.ID, "rings")));
             JewelryItems.all.stream()
                     .filter(entry -> entry.id().getPath().contains("ring"))
-                    .forEach(entry -> ringsTag.addOptional(entry.id()));
+                    .forEach(entry -> ringsTag.addOptional(RegistryKey.of(RegistryKeys.ITEM, entry.id())));
 
             // jewelry:necklaces tag
-            var necklacesTag = getOrCreateTagBuilder(TagKey.of(RegistryKeys.ITEM,
+            var necklacesTag = builder(TagKey.of(RegistryKeys.ITEM,
                     Identifier.of(JewelryMod.ID, "necklaces")));
             JewelryItems.all.stream()
                     .filter(entry -> entry.id().getPath().contains("necklace"))
-                    .forEach(entry -> necklacesTag.addOptional(entry.id()));
+                    .forEach(entry -> necklacesTag.addOptional(RegistryKey.of(RegistryKeys.ITEM, entry.id())));
         }
 
         /**
@@ -104,6 +107,10 @@ public class JewelryDataGenerator implements DataGeneratorEntrypoint {
     // MODEL GENERATION
     // ========================================
 
+    /// 1.21.4 moved the model datagen classes to `net.minecraft.client.data` and Fabric's provider to
+    /// `api.client.datagen.v1.provider`. `ItemModelGenerator#register` now emits **two** files per item:
+    /// the model itself (`models/item/<id>.json`) and the item-model *definition*
+    /// (`items/<id>.json`) that the `minecraft:item_model` component resolves.
     public static class ModelProvider extends FabricModelProvider {
         public ModelProvider(FabricDataOutput output) {
             super(output);
@@ -138,40 +145,51 @@ public class JewelryDataGenerator implements DataGeneratorEntrypoint {
         }
 
         @Override
-        public void generate(RecipeExporter exporter) {
-            disassemble(exporter, List.of(JewelryItems.gold_ring.item()), Items.GOLD_NUGGET);
-            disassemble(exporter, List.of(JewelryItems.iron_ring.item()), Items.IRON_NUGGET);
-            disassemble(exporter, List.of(JewelryItems.emerald_necklace.item()), Items.EMERALD);
-            disassemble(exporter, List.of(JewelryItems.diamond_necklace.item()), Items.DIAMOND);
-            disassemble(exporter,
-                    JewelryItems.all.stream()
-                            .filter(entry -> entry.tier() == 2)
-                            .map(entry -> (ItemConvertible) entry.item()).toList(),
-                    Items.GOLD_NUGGET);
-            disassemble(exporter,
-                    JewelryItems.all.stream()
-                            .filter(entry -> entry.id().getPath().contains("netherite"))
-                            .map(entry -> (ItemConvertible) entry.item()).toList(),
-                    Items.NETHERITE_SCRAP);
+        protected RecipeGenerator getRecipeGenerator(RegistryWrapper.WrapperLookup registries, RecipeExporter exporter) {
+            return new Generator(registries, exporter);
         }
 
-        private static void disassemble(RecipeExporter exporter, List<ItemConvertible> items, Item output) {
-            FabricRecipeProvider.offerSmelting(exporter,
-                    items,
-                    RecipeCategory.MISC,
-                    output,
-                    0.1f,
-                    UNSMELT_TIME,
-                    "disassemble"
-            );
-            FabricRecipeProvider.offerBlasting(exporter,
-                    items,
-                    RecipeCategory.MISC,
-                    output,
-                    0.1f,
-                    UNSMELT_TIME / 2,
-                    "disassemble"
-            );
+        private static class Generator extends RecipeGenerator {
+            Generator(RegistryWrapper.WrapperLookup registries, RecipeExporter exporter) {
+                super(registries, exporter);
+            }
+
+            @Override
+            public void generate() {
+                disassemble(List.of(JewelryItems.gold_ring.item()), Items.GOLD_NUGGET);
+                disassemble(List.of(JewelryItems.iron_ring.item()), Items.IRON_NUGGET);
+                disassemble(List.of(JewelryItems.emerald_necklace.item()), Items.EMERALD);
+                disassemble(List.of(JewelryItems.diamond_necklace.item()), Items.DIAMOND);
+                disassemble(
+                        JewelryItems.all.stream()
+                                .filter(entry -> entry.tier() == 2)
+                                .map(entry -> (ItemConvertible) entry.item()).toList(),
+                        Items.GOLD_NUGGET);
+                disassemble(
+                        JewelryItems.all.stream()
+                                .filter(entry -> entry.id().getPath().contains("netherite"))
+                                .map(entry -> (ItemConvertible) entry.item()).toList(),
+                        Items.NETHERITE_SCRAP);
+            }
+
+            private void disassemble(List<ItemConvertible> items, Item output) {
+                offerSmelting(
+                        items,
+                        RecipeCategory.MISC,
+                        output,
+                        0.1f,
+                        UNSMELT_TIME,
+                        "disassemble"
+                );
+                offerBlasting(
+                        items,
+                        RecipeCategory.MISC,
+                        output,
+                        0.1f,
+                        UNSMELT_TIME / 2,
+                        "disassemble"
+                );
+            }
         }
     }
 }
