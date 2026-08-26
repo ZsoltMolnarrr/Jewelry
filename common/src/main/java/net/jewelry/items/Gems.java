@@ -34,6 +34,6 @@ public class Gems {
         for (var entry : all) {
             Registry.register(Registries.ITEM, entry.id(), entry.item());
         }
-        // Creative-tab placement is registered per-platform from each loader's entrypoint (iterating Gems.all).
+        // Creative-tab placement: see `Group.orderedEntries` (single ordered list for both loaders).
     }
 }

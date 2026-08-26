@@ -1,10 +1,7 @@
 package net.jewelry.neoforge;
 
 import net.jewelry.JewelryMod;
-import net.jewelry.blocks.JewelryBlocks;
-import net.jewelry.items.Gems;
 import net.jewelry.items.Group;
-import net.jewelry.items.JewelryItems;
 import net.jewelry.neoforge.compat.CompatFeatures;
 import net.jewelry.village.JewelryVillagers;
 import net.minecraft.registry.Registries;
@@ -61,14 +58,9 @@ public final class NeoForgeMod {
         if (!event.getTabKey().equals(Group.KEY)) {
             return;
         }
-        for (var entry : Gems.all) {
-            event.add(entry.item());
-        }
-        for (var entry : JewelryItems.all) {
-            event.add(entry.item());
-        }
-        for (var entry : JewelryBlocks.all) {
-            event.add(entry.item());
+        // Order comes from `Group.orderedEntries()` so it matches Fabric exactly.
+        for (var item : Group.orderedEntries()) {
+            event.add(item);
         }
     }
 

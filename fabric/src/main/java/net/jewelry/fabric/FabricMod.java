@@ -5,12 +5,9 @@ import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.object.builder.v1.world.poi.PointOfInterestHelper;
 import net.jewelry.JewelryMod;
-import net.jewelry.blocks.JewelryBlocks;
 import net.jewelry.fabric.compat.CompatFeatures;
 import net.jewelry.fabric.worldgen.OreGeneration;
-import net.jewelry.items.Gems;
 import net.jewelry.items.Group;
-import net.jewelry.items.JewelryItems;
 import net.jewelry.village.JewelryVillagers;
 
 public final class FabricMod implements ModInitializer {
@@ -35,15 +32,10 @@ public final class FabricMod implements ModInitializer {
         OreGeneration.register();
 
         // Creative-tab placement (Jewelry group) — Fabric API.
+        // Order comes from `Group.orderedEntries()` so it matches NeoForge exactly.
         ItemGroupEvents.modifyEntriesEvent(Group.KEY).register(content -> {
-            for (var entry : Gems.all) {
-                content.add(entry.item());
-            }
-            for (var entry : JewelryItems.all) {
-                content.add(entry.item());
-            }
-            for (var entry : JewelryBlocks.all) {
-                content.add(entry.item());
+            for (var item : Group.orderedEntries()) {
+                content.add(item);
             }
         });
     }
