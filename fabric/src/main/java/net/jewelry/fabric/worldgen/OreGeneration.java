@@ -7,7 +7,7 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.feature.PlacedFeature;
 
 public class OreGeneration {
     public static final Identifier GEM_VEIN_ID = Identifier.of(JewelryMod.ID, "gem_vein_placed");
