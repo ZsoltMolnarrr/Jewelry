@@ -8,20 +8,20 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.jewelry.JewelryMod;
 import net.jewelry.items.Gems;
 import net.jewelry.items.JewelryItems;
-import net.minecraft.client.data.BlockStateModelGenerator;
-import net.minecraft.client.data.ItemModelGenerator;
-import net.minecraft.client.data.Models;
-import net.minecraft.data.recipe.RecipeExporter;
-import net.minecraft.data.recipe.RecipeGenerator;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemConvertible;
-import net.minecraft.item.Items;
-import net.minecraft.recipe.book.RecipeCategory;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.client.data.models.ItemModelGenerators;
+import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ItemLike;
 import net.spell_engine.rpg_series.item.Equipment;
 import net.spell_engine.rpg_series.datagen.RPGSeriesDataGen;
 
@@ -45,12 +45,12 @@ public class JewelryDataGenerator implements DataGeneratorEntrypoint {
     // ========================================
 
     public static class ItemTagGenerator extends RPGSeriesDataGen.ItemTagGenerator {
-        public ItemTagGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+        public ItemTagGenerator(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
             super(output, registriesFuture);
         }
 
         @Override
-        protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
+        protected void addTags(HolderLookup.Provider wrapperLookup) {
             // Generate custom Jewelry tags
             generateJewelryTags();
 
@@ -66,23 +66,23 @@ public class JewelryDataGenerator implements DataGeneratorEntrypoint {
             // whose values are `RegistryKey`s rather than `Identifier`s.
 
             // jewelry:gems tag
-            var gemsTag = builder(TagKey.of(RegistryKeys.ITEM,
-                    Identifier.of(JewelryMod.ID, "gems")));
-            Gems.all.forEach(gem -> gemsTag.addOptional(RegistryKey.of(RegistryKeys.ITEM, gem.id())));
+            var gemsTag = builder(TagKey.create(Registries.ITEM,
+                    Identifier.fromNamespaceAndPath(JewelryMod.ID, "gems")));
+            Gems.all.forEach(gem -> gemsTag.addOptional(ResourceKey.create(Registries.ITEM, gem.id())));
 
             // jewelry:rings tag
-            var ringsTag = builder(TagKey.of(RegistryKeys.ITEM,
-                    Identifier.of(JewelryMod.ID, "rings")));
+            var ringsTag = builder(TagKey.create(Registries.ITEM,
+                    Identifier.fromNamespaceAndPath(JewelryMod.ID, "rings")));
             JewelryItems.all.stream()
                     .filter(entry -> entry.id().getPath().contains("ring"))
-                    .forEach(entry -> ringsTag.addOptional(RegistryKey.of(RegistryKeys.ITEM, entry.id())));
+                    .forEach(entry -> ringsTag.addOptional(ResourceKey.create(Registries.ITEM, entry.id())));
 
             // jewelry:necklaces tag
-            var necklacesTag = builder(TagKey.of(RegistryKeys.ITEM,
-                    Identifier.of(JewelryMod.ID, "necklaces")));
+            var necklacesTag = builder(TagKey.create(Registries.ITEM,
+                    Identifier.fromNamespaceAndPath(JewelryMod.ID, "necklaces")));
             JewelryItems.all.stream()
                     .filter(entry -> entry.id().getPath().contains("necklace"))
-                    .forEach(entry -> necklacesTag.addOptional(RegistryKey.of(RegistryKeys.ITEM, entry.id())));
+                    .forEach(entry -> necklacesTag.addOptional(ResourceKey.create(Registries.ITEM, entry.id())));
         }
 
         /**
@@ -117,23 +117,23 @@ public class JewelryDataGenerator implements DataGeneratorEntrypoint {
         }
 
         @Override
-        public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
+        public void generateBlockStateModels(BlockModelGenerators blockStateModelGenerator) {
 
         }
 
         @Override
-        public void generateItemModels(ItemModelGenerator itemModelGenerator) {
+        public void generateItemModels(ItemModelGenerators itemModelGenerator) {
             Gems.all.forEach(gem -> {
-                itemModelGenerator.register(gem.item(), Models.GENERATED);
+                itemModelGenerator.generateFlatItem(gem.item(), ModelTemplates.FLAT_ITEM);
             });
             JewelryItems.all.forEach(entry -> {
-                itemModelGenerator.register(entry.item(), Models.GENERATED);
+                itemModelGenerator.generateFlatItem(entry.item(), ModelTemplates.FLAT_ITEM);
             });
         }
     }
 
     public static class UnsmeltGenerator extends FabricRecipeProvider {
-        public UnsmeltGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+        public UnsmeltGenerator(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
             super(output, registriesFuture);
         }
 
@@ -145,17 +145,17 @@ public class JewelryDataGenerator implements DataGeneratorEntrypoint {
         }
 
         @Override
-        protected RecipeGenerator getRecipeGenerator(RegistryWrapper.WrapperLookup registries, RecipeExporter exporter) {
+        protected RecipeProvider createRecipeProvider(HolderLookup.Provider registries, RecipeOutput exporter) {
             return new Generator(registries, exporter);
         }
 
-        private static class Generator extends RecipeGenerator {
-            Generator(RegistryWrapper.WrapperLookup registries, RecipeExporter exporter) {
+        private static class Generator extends RecipeProvider {
+            Generator(HolderLookup.Provider registries, RecipeOutput exporter) {
                 super(registries, exporter);
             }
 
             @Override
-            public void generate() {
+            public void buildRecipes() {
                 disassemble(List.of(JewelryItems.gold_ring.item()), Items.GOLD_NUGGET);
                 disassemble(List.of(JewelryItems.iron_ring.item()), Items.IRON_NUGGET);
                 disassemble(List.of(JewelryItems.emerald_necklace.item()), Items.EMERALD);
@@ -163,17 +163,17 @@ public class JewelryDataGenerator implements DataGeneratorEntrypoint {
                 disassemble(
                         JewelryItems.all.stream()
                                 .filter(entry -> entry.tier() == 2)
-                                .map(entry -> (ItemConvertible) entry.item()).toList(),
+                                .map(entry -> (ItemLike) entry.item()).toList(),
                         Items.GOLD_NUGGET);
                 disassemble(
                         JewelryItems.all.stream()
                                 .filter(entry -> entry.id().getPath().contains("netherite"))
-                                .map(entry -> (ItemConvertible) entry.item()).toList(),
+                                .map(entry -> (ItemLike) entry.item()).toList(),
                         Items.NETHERITE_SCRAP);
             }
 
-            private void disassemble(List<ItemConvertible> items, Item output) {
-                offerSmelting(
+            private void disassemble(List<ItemLike> items, Item output) {
+                oreSmelting(
                         items,
                         RecipeCategory.MISC,
                         output,
@@ -181,7 +181,7 @@ public class JewelryDataGenerator implements DataGeneratorEntrypoint {
                         UNSMELT_TIME,
                         "disassemble"
                 );
-                offerBlasting(
+                oreBlasting(
                         items,
                         RecipeCategory.MISC,
                         output,

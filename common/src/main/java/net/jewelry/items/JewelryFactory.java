@@ -1,18 +1,18 @@
 package net.jewelry.items;
 
-import net.minecraft.component.type.AttributeModifiersComponent;
-import net.minecraft.item.Item;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Function;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 
 public class JewelryFactory {
-    public record ItemArgs(Item.Settings settings, @Nullable AttributeModifiersComponent attributes, @Nullable String lore, @Nullable String slot) { }
+    public record ItemArgs(Item.Properties settings, @Nullable ItemAttributeModifiers attributes, @Nullable String lore, @Nullable String slot) { }
 
     public static Function<ItemArgs, Item> factory = args -> {
         var settings = args.settings;
         if (args.attributes != null) {
-            settings.attributeModifiers(args.attributes);
+            settings.attributes(args.attributes);
         }
         return new VanillaJewelryItem(settings, args.lore);
     };

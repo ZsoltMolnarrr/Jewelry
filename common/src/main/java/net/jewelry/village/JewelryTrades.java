@@ -1,15 +1,15 @@
 package net.jewelry.village;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemConvertible;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.village.TradeOffer;
-import net.minecraft.village.TradeOffers;
-import net.minecraft.village.TradedItem;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.npc.villager.VillagerTrades;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.trading.ItemCost;
+import net.minecraft.world.item.trading.MerchantOffer;
+import net.minecraft.world.level.ItemLike;
 
 /// Trade-offer factories for the jeweler.
 ///
@@ -23,26 +23,26 @@ public final class JewelryTrades {
     /// Villager sells `count` x `item` for `price` emeralds.
     /// Mirrors vanilla `TradeOffers.SellItemFactory(item, price, count, maxUses, experience)`.
     public record Sell(Item item, int price, int count, int maxUses, int experience, float multiplier)
-            implements TradeOffers.Factory {
+            implements VillagerTrades.ItemListing {
         public Sell(Item item, int price, int count, int maxUses, int experience) {
             this(item, price, count, maxUses, experience, 0.05F);
         }
 
         @Override
-        public TradeOffer create(ServerWorld world, Entity entity, Random random) {
+        public MerchantOffer getOffer(ServerLevel world, Entity entity, RandomSource random) {
             var sold = new ItemStack(item);
             sold.setCount(count);
-            return new TradeOffer(new TradedItem(Items.EMERALD, price), sold, maxUses, experience, multiplier);
+            return new MerchantOffer(new ItemCost(Items.EMERALD, price), sold, maxUses, experience, multiplier);
         }
     }
 
     /// Villager buys `count` x `item` for `price` emeralds.
     /// Mirrors vanilla `TradeOffers.BuyItemFactory(item, count, maxUses, experience, price)`.
-    public record Buy(ItemConvertible item, int count, int maxUses, int experience, int price)
-            implements TradeOffers.Factory {
+    public record Buy(ItemLike item, int count, int maxUses, int experience, int price)
+            implements VillagerTrades.ItemListing {
         @Override
-        public TradeOffer create(ServerWorld world, Entity entity, Random random) {
-            return new TradeOffer(new TradedItem(item.asItem(), count),
+        public MerchantOffer getOffer(ServerLevel world, Entity entity, RandomSource random) {
+            return new MerchantOffer(new ItemCost(item.asItem(), count),
                     new ItemStack(Items.EMERALD, price), maxUses, experience, 0.05F);
         }
     }

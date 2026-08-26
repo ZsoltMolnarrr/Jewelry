@@ -1,7 +1,7 @@
 package net.jewelry.neoforge.compat.curios;
 
 import net.jewelry.items.JewelryFactory;
-import net.minecraft.component.type.AttributeModifiersComponent;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 import top.theillusivec4.curios.api.CurioAttributeModifiers;
 import top.theillusivec4.curios.api.CuriosDataComponents;
 
@@ -25,7 +25,7 @@ public class CuriosHelper {
      * Converts the config-built component into Curios' one. Modifier ids stay per-item, per-attribute;
      * Curios itself suffixes them with the slot id + index on equip, so bonuses stack across slots.
      */
-    private static CurioAttributeModifiers curioModifiers(AttributeModifiersComponent attributes) {
+    private static CurioAttributeModifiers curioModifiers(ItemAttributeModifiers attributes) {
         var builder = CurioAttributeModifiers.builder();
         for (var entry : attributes.modifiers()) {
             builder.addModifier(entry.attribute(), entry.modifier());

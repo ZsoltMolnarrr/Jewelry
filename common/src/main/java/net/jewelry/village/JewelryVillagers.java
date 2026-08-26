@@ -5,18 +5,17 @@ import net.jewelry.JewelryMod;
 import net.jewelry.blocks.JewelryBlocks;
 import net.jewelry.items.JewelryItems;
 import net.jewelry.util.SoundHelper;
-import net.minecraft.block.BlockState;
-import net.minecraft.item.Items;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
-import net.minecraft.village.TradeOffers;
-import net.minecraft.village.VillagerProfession;
-import net.minecraft.world.poi.PointOfInterestType;
-
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.ai.village.poi.PoiType;
+import net.minecraft.world.entity.npc.villager.VillagerProfession;
+import net.minecraft.world.entity.npc.villager.VillagerTrades;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.state.BlockState;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
@@ -26,35 +25,35 @@ public class JewelryVillagers {
 
     // These will be set by platform-specific code
     public static VillagerProfession JEWELER_PROFESSION;
-    public static Identifier POI_ID = Identifier.of(JewelryMod.ID, JEWELER);
+    public static Identifier POI_ID = Identifier.fromNamespaceAndPath(JewelryMod.ID, JEWELER);
     public static final int POI_TICKET_COUNT = 1;
     public static final int POI_SEARCH_DISTANCE = 10;
 
     /// Registry key of {@link #JEWELER_PROFESSION} — since 1.21.2 both loaders' trade-registration APIs
     /// (Fabric `TradeOfferHelper.registerVillagerOffers`, NeoForge `VillagerTradesEvent#getType`) are
     /// keyed by it rather than by the profession object.
-    public static final RegistryKey<VillagerProfession> JEWELER_PROFESSION_KEY =
-            RegistryKey.of(RegistryKeys.VILLAGER_PROFESSION, Identifier.of(JewelryMod.ID, JEWELER));
+    public static final ResourceKey<VillagerProfession> JEWELER_PROFESSION_KEY =
+            ResourceKey.create(Registries.VILLAGER_PROFESSION, Identifier.fromNamespaceAndPath(JewelryMod.ID, JEWELER));
 
     /// The jeweler's-kit workstation block states for the POI. Registration itself is loader-specific
     /// (Fabric: `PointOfInterestHelper`; NeoForge: a plain `Registry.register` of a `PointOfInterestType`)
     /// and lives in each platform's entrypoint; this only exposes the shared state set.
     public static Set<BlockState> poiBlockStates() {
-        return ImmutableSet.copyOf(JewelryBlocks.JEWELERS_KIT.block().getStateManager().getStates());
+        return ImmutableSet.copyOf(JewelryBlocks.JEWELERS_KIT.block().getStateDefinition().getPossibleStates());
     }
 
-    public static VillagerProfession createProfession(String name, RegistryKey<PointOfInterestType> workStation) {
-        var id = Identifier.of(JewelryMod.ID, name);
+    public static VillagerProfession createProfession(String name, ResourceKey<PoiType> workStation) {
+        var id = Identifier.fromNamespaceAndPath(JewelryMod.ID, name);
         return new VillagerProfession(
                 // 1.21.11: the record's first component is the displayed name as a `Text`, not the id
                 // string vanilla used to build `entity.minecraft.villager.<id>` from. Pass the key the
                 // existing translation files already carry: `entity.minecraft.villager.jewelry.jeweler`.
-                Text.translatable("entity.minecraft.villager." + id.getNamespace() + "." + id.getPath()),
+                Component.translatable("entity.minecraft.villager." + id.getNamespace() + "." + id.getPath()),
                 (entry) -> {
-                    return entry.matchesKey(workStation);
+                    return entry.is(workStation);
                 },
                 (entry) -> {
-                    return entry.matchesKey(workStation);
+                    return entry.is(workStation);
                 },
                 ImmutableSet.of(),
                 ImmutableSet.of(),
@@ -66,12 +65,12 @@ public class JewelryVillagers {
         // Register the profession only; trade-offer registration is loader-specific and lives in each
         // platform's entrypoint (Fabric `TradeOfferHelper` / NeoForge `VillagerTradesEvent`), consuming
         // the shared #createTrades() map.
-        var workStation = RegistryKey.of(Registries.POINT_OF_INTEREST_TYPE.getKey(), POI_ID);
-        JEWELER_PROFESSION = Registry.register(Registries.VILLAGER_PROFESSION, Identifier.of(JewelryMod.ID, JEWELER), createProfession(JEWELER, workStation));
+        var workStation = ResourceKey.create(BuiltInRegistries.POINT_OF_INTEREST_TYPE.key(), POI_ID);
+        JEWELER_PROFESSION = Registry.register(BuiltInRegistries.VILLAGER_PROFESSION, Identifier.fromNamespaceAndPath(JewelryMod.ID, JEWELER), createProfession(JEWELER, workStation));
     }
 
-    public static LinkedHashMap<Integer, List<TradeOffers.Factory>> createTrades() {
-        LinkedHashMap<Integer, List<TradeOffers.Factory>> trades = new LinkedHashMap<>();
+    public static LinkedHashMap<Integer, List<VillagerTrades.ItemListing>> createTrades() {
+        LinkedHashMap<Integer, List<VillagerTrades.ItemListing>> trades = new LinkedHashMap<>();
 
         trades.put(1, List.of(
                 new JewelryTrades.Buy(Items.COPPER_INGOT, 8, 8, 3, 2),

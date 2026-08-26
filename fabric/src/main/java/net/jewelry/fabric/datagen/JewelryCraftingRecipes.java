@@ -5,18 +5,17 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.jewelry.blocks.JewelryBlocks;
 import net.jewelry.items.Gems;
 import net.jewelry.items.JewelryItems;
-import net.minecraft.data.recipe.RecipeExporter;
-import net.minecraft.data.recipe.RecipeGenerator;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.recipe.book.RecipeCategory;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.tag.ItemTags;
-
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import java.util.concurrent.CompletableFuture;
 
 public class JewelryCraftingRecipes extends FabricRecipeProvider {
-    public JewelryCraftingRecipes(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+    public JewelryCraftingRecipes(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }
 
@@ -29,17 +28,17 @@ public class JewelryCraftingRecipes extends FabricRecipeProvider {
     /// helpers (`createShaped`, `hasItem`, `conditionsFromItem`) are instance members of the generator,
     /// which also holds the exporter.
     @Override
-    protected RecipeGenerator getRecipeGenerator(RegistryWrapper.WrapperLookup registries, RecipeExporter exporter) {
+    protected RecipeProvider createRecipeProvider(HolderLookup.Provider registries, RecipeOutput exporter) {
         return new Generator(registries, exporter);
     }
 
-    private static class Generator extends RecipeGenerator {
-        Generator(RegistryWrapper.WrapperLookup registries, RecipeExporter exporter) {
+    private static class Generator extends RecipeProvider {
+        Generator(HolderLookup.Provider registries, RecipeOutput exporter) {
             super(registries, exporter);
         }
 
         @Override
-        public void generate() {
+        public void buildRecipes() {
             generateBasicRings();
             generateGemJewelry();
             generateGemRings();
@@ -64,13 +63,13 @@ public class JewelryCraftingRecipes extends FabricRecipeProvider {
          * Pattern: " M " / "M M" / " M "
          */
         private void metalRing(Item result, Item metal) {
-            createShaped(RecipeCategory.COMBAT, result)
+            shaped(RecipeCategory.COMBAT, result)
                     .pattern(" M ")
                     .pattern("M M")
                     .pattern(" M ")
-                    .input('M', metal)
-                    .criterion(hasItem(metal), conditionsFromItem(metal))
-                    .offerTo(exporter);
+                    .define('M', metal)
+                    .unlockedBy(getHasName(metal), has(metal))
+                    .save(output);
         }
 
         // ========================================
@@ -88,15 +87,15 @@ public class JewelryCraftingRecipes extends FabricRecipeProvider {
          * Pattern: " S " / " M " / " G "
          */
         private void vanillaNecklace(Item result, Item gem) {
-            createShaped(RecipeCategory.COMBAT, result)
+            shaped(RecipeCategory.COMBAT, result)
                     .pattern(" S ")
                     .pattern(" M ")
                     .pattern(" G ")
-                    .input('S', Items.STRING)
-                    .input('M', Items.GOLD_INGOT)
-                    .input('G', gem)
-                    .criterion(hasItem(gem), conditionsFromItem(gem))
-                    .offerTo(exporter);
+                    .define('S', Items.STRING)
+                    .define('M', Items.GOLD_INGOT)
+                    .define('G', gem)
+                    .unlockedBy(getHasName(gem), has(gem))
+                    .save(output);
         }
 
         // ========================================
@@ -117,14 +116,14 @@ public class JewelryCraftingRecipes extends FabricRecipeProvider {
          * Pattern: " G " / "M M" / " M "
          */
         private void gemRing(Item result, Item gem) {
-            createShaped(RecipeCategory.COMBAT, result)
+            shaped(RecipeCategory.COMBAT, result)
                     .pattern(" G ")
                     .pattern("M M")
                     .pattern(" M ")
-                    .input('G', gem)
-                    .input('M', Items.GOLD_INGOT)
-                    .criterion(hasItem(gem), conditionsFromItem(gem))
-                    .offerTo(exporter);
+                    .define('G', gem)
+                    .define('M', Items.GOLD_INGOT)
+                    .unlockedBy(getHasName(gem), has(gem))
+                    .save(output);
         }
 
         // ========================================
@@ -145,15 +144,15 @@ public class JewelryCraftingRecipes extends FabricRecipeProvider {
          * Pattern: " S " / " M " / " G "
          */
         private void gemNecklace(Item result, Item gem) {
-            createShaped(RecipeCategory.COMBAT, result)
+            shaped(RecipeCategory.COMBAT, result)
                     .pattern(" S ")
                     .pattern(" M ")
                     .pattern(" G ")
-                    .input('S', Items.STRING)
-                    .input('M', Items.GOLD_INGOT)
-                    .input('G', gem)
-                    .criterion(hasItem(gem), conditionsFromItem(gem))
-                    .offerTo(exporter);
+                    .define('S', Items.STRING)
+                    .define('M', Items.GOLD_INGOT)
+                    .define('G', gem)
+                    .unlockedBy(getHasName(gem), has(gem))
+                    .save(output);
         }
 
         // ========================================
@@ -174,15 +173,15 @@ public class JewelryCraftingRecipes extends FabricRecipeProvider {
          * Pattern: " G " / "M M" / " N "
          */
         private void netheriteRing(Item result, Item gem) {
-            createShaped(RecipeCategory.COMBAT, result)
+            shaped(RecipeCategory.COMBAT, result)
                     .pattern(" G ")
                     .pattern("M M")
                     .pattern(" N ")
-                    .input('G', gem)
-                    .input('M', Items.GOLD_INGOT)
-                    .input('N', Items.NETHERITE_INGOT)
-                    .criterion(hasItem(Items.NETHERITE_INGOT), conditionsFromItem(gem))
-                    .offerTo(exporter);
+                    .define('G', gem)
+                    .define('M', Items.GOLD_INGOT)
+                    .define('N', Items.NETHERITE_INGOT)
+                    .unlockedBy(getHasName(Items.NETHERITE_INGOT), has(gem))
+                    .save(output);
         }
 
         // ========================================
@@ -203,16 +202,16 @@ public class JewelryCraftingRecipes extends FabricRecipeProvider {
          * Pattern: " S " / "TMT" / " G "
          */
         private void netheriteNecklace(Item result, Item gem) {
-            createShaped(RecipeCategory.COMBAT, result)
+            shaped(RecipeCategory.COMBAT, result)
                     .pattern(" S ")
                     .pattern("TMT")
                     .pattern(" G ")
-                    .input('S', Items.STRING)
-                    .input('T', Items.GOLD_NUGGET)
-                    .input('M', Items.NETHERITE_INGOT)
-                    .input('G', gem)
-                    .criterion(hasItem(Items.NETHERITE_INGOT), conditionsFromItem(gem))
-                    .offerTo(exporter);
+                    .define('S', Items.STRING)
+                    .define('T', Items.GOLD_NUGGET)
+                    .define('M', Items.NETHERITE_INGOT)
+                    .define('G', gem)
+                    .unlockedBy(getHasName(Items.NETHERITE_INGOT), has(gem))
+                    .save(output);
         }
 
         // ========================================
@@ -229,16 +228,16 @@ public class JewelryCraftingRecipes extends FabricRecipeProvider {
          * Special: Uses misc category and disables notification
          */
         private void jewelryKit() {
-            createShaped(RecipeCategory.MISC, JewelryBlocks.JEWELERS_KIT.item())
+            shaped(RecipeCategory.MISC, JewelryBlocks.JEWELERS_KIT.item())
                     .pattern("CIG")
                     .pattern("###")
-                    .input('C', Items.COPPER_INGOT)
-                    .input('I', Items.IRON_INGOT)
-                    .input('G', Items.GOLD_INGOT)
-                    .input('#', ItemTags.PLANKS)
-                    .criterion(hasItem(Items.COPPER_INGOT), conditionsFromItem(Items.COPPER_INGOT))
+                    .define('C', Items.COPPER_INGOT)
+                    .define('I', Items.IRON_INGOT)
+                    .define('G', Items.GOLD_INGOT)
+                    .define('#', ItemTags.PLANKS)
+                    .unlockedBy(getHasName(Items.COPPER_INGOT), has(Items.COPPER_INGOT))
                     .showNotification(false)
-                    .offerTo(exporter);
+                    .save(output);
         }
     }
 }

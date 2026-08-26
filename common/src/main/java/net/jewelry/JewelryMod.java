@@ -10,8 +10,8 @@ import net.jewelry.items.Group;
 import net.jewelry.items.JewelryItems;
 import net.jewelry.util.SoundHelper;
 import net.jewelry.village.JewelryVillagers;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.tiny_config.ConfigManager;
 
 public class JewelryMod {
@@ -51,7 +51,7 @@ public class JewelryMod {
     }
 
     public static void registerItems() {
-        Registry.register(Registries.ITEM_GROUP, Group.KEY, Group.JEWELRY);
+        Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, Group.KEY, Group.JEWELRY);
         Gems.register();
         JewelryItems.register(itemConfig.value);
         itemConfig.save();

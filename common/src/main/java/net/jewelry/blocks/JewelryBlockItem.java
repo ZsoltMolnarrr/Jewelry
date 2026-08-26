@@ -1,14 +1,13 @@
 package net.jewelry.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.component.type.TooltipDisplayComponent;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.tooltip.TooltipType;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
-
 import java.util.function.Consumer;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
+import net.minecraft.world.level.block.Block;
 
 /// `BlockItem` carrying an optional grey/italic hint line.
 ///
@@ -18,17 +17,17 @@ import java.util.function.Consumer;
 public class JewelryBlockItem extends BlockItem {
     private final String hint;
 
-    public JewelryBlockItem(Block block, Settings settings, String hint) {
+    public JewelryBlockItem(Block block, Properties settings, String hint) {
         super(block, settings);
         this.hint = hint;
     }
 
     @Override
-    public void appendTooltip(ItemStack stack, TooltipContext context, TooltipDisplayComponent displayComponent,
-                              Consumer<Text> textConsumer, TooltipType type) {
-        super.appendTooltip(stack, context, displayComponent, textConsumer, type);
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay displayComponent,
+                              Consumer<Component> textConsumer, TooltipFlag type) {
+        super.appendHoverText(stack, context, displayComponent, textConsumer, type);
         if (hint != null && !hint.isEmpty()) {
-            textConsumer.accept(Text.translatable(hint).formatted(Formatting.GRAY, Formatting.ITALIC));
+            textConsumer.accept(Component.translatable(hint).withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC));
         }
     }
 }

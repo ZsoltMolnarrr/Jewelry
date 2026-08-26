@@ -1,9 +1,7 @@
 package net.jewelry.config;
 
 import net.jewelry.Platform;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.util.Identifier;
-
+import net.minecraft.resources.Identifier;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,13 +9,13 @@ import java.util.Map;
 public class ItemConfig {
     public Map<String, Item> items = new HashMap();
 
-    public record Bonus(float value, EntityAttributeModifier.Operation operation) { }
+    public record Bonus(float value, net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation operation) { }
     public static class AttributeModifier { AttributeModifier() { }
         public String id = "";
         public float value = 0;
-        public EntityAttributeModifier.Operation operation = EntityAttributeModifier.Operation.ADD_VALUE;
+        public net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation operation = net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_VALUE;
 
-        public AttributeModifier(Identifier id, float value, EntityAttributeModifier.Operation operation) {
+        public AttributeModifier(Identifier id, float value, net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation operation) {
             this(id.toString(), value, operation);
         }
 
@@ -29,7 +27,7 @@ public class ItemConfig {
             this(id, bonus.value, bonus.operation);
         }
 
-        public AttributeModifier(String id, float value, EntityAttributeModifier.Operation operation) {
+        public AttributeModifier(String id, float value, net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation operation) {
             this.id = id;
             this.value = value;
             this.operation = operation;

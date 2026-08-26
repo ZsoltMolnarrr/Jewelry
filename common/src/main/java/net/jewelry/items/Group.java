@@ -2,29 +2,28 @@ package net.jewelry.items;
 
 import net.jewelry.JewelryMod;
 import net.jewelry.blocks.JewelryBlocks;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
-
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Group {
-    public static Identifier ID = Identifier.of(JewelryMod.ID, "generic");
-    public static RegistryKey<ItemGroup> KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), ID);
+    public static Identifier ID = Identifier.fromNamespaceAndPath(JewelryMod.ID, "generic");
+    public static ResourceKey<CreativeModeTab> KEY = ResourceKey.create(BuiltInRegistries.CREATIVE_MODE_TAB.key(), ID);
     // Vanilla ItemGroup.Builder — FabricItemGroup.builder() is Fabric-API-only and this static
     // initializer runs on both loaders (the group is created in common, registered from registerItems).
-    public static ItemGroup JEWELRY = new ItemGroup.Builder(ItemGroup.Row.TOP, 0)
+    public static CreativeModeTab JEWELRY = new CreativeModeTab.Builder(CreativeModeTab.Row.TOP, 0)
             .icon(() -> {
-                var item = Registries.ITEM.getEntry(JewelryItems.ruby_ring.id()).get().value();
+                var item = BuiltInRegistries.ITEM.get(JewelryItems.ruby_ring.id()).get().value();
                 return new ItemStack(item);
             })
             // `.generic` suffix is required by older versions, keeping it for translation consistency
-            .displayName(Text.translatable("itemGroup." + JewelryMod.ID + ".generic"))
+            .title(Component.translatable("itemGroup." + JewelryMod.ID + ".generic"))
             .build();
 
     /// The creative-tab contents in display order: block items first (gem veins, jeweler's kit),

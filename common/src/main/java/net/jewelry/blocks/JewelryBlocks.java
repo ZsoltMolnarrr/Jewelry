@@ -1,21 +1,20 @@
 package net.jewelry.blocks;
 
 import net.jewelry.JewelryMod;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.ExperienceDroppingBlock;
-import net.minecraft.block.MapColor;
-import net.minecraft.block.enums.NoteBlockInstrument;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.intprovider.UniformIntProvider;
-
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DropExperienceBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.world.level.material.MapColor;
 import java.util.ArrayList;
 import java.util.function.Function;
 
@@ -28,53 +27,53 @@ public class JewelryBlocks {
     /// 1.21.2+ requires every `AbstractBlock.Settings` / `Item.Settings` to carry its own
     /// `registryKey` (the game crashes with `Block id not set` on the first construction otherwise),
     /// so blocks are built from a factory that receives settings already keyed by their id.
-    private static Entry entry(String name, Function<AbstractBlock.Settings, Block> blockFactory) {
+    private static Entry entry(String name, Function<BlockBehaviour.Properties, Block> blockFactory) {
         return entry(name, blockFactory, null);
     }
 
-    private static Entry entry(String name, Function<AbstractBlock.Settings, Block> blockFactory, String hint) {
-        var id = Identifier.of(JewelryMod.ID, name);
-        var block = blockFactory.apply(AbstractBlock.Settings.create()
-                .registryKey(RegistryKey.of(RegistryKeys.BLOCK, id)));
-        var itemSettings = new Item.Settings()
-                .registryKey(RegistryKey.of(RegistryKeys.ITEM, id))
-                .useBlockPrefixedTranslationKey();
+    private static Entry entry(String name, Function<BlockBehaviour.Properties, Block> blockFactory, String hint) {
+        var id = Identifier.fromNamespaceAndPath(JewelryMod.ID, name);
+        var block = blockFactory.apply(BlockBehaviour.Properties.of()
+                .setId(ResourceKey.create(Registries.BLOCK, id)));
+        var itemSettings = new Item.Properties()
+                .setId(ResourceKey.create(Registries.ITEM, id))
+                .useBlockDescriptionPrefix();
         var entry = new Entry(name, block, new JewelryBlockItem(block, itemSettings, hint));
         all.add(entry);
         return entry;
     }
 
     public static final Entry GEM_VEIN = entry("gem_vein", settings ->
-            new ExperienceDroppingBlock(UniformIntProvider.create(3, 7), settings
-                .mapColor(MapColor.STONE_GRAY)
+            new DropExperienceBlock(UniformInt.of(3, 7), settings
+                .mapColor(MapColor.STONE)
                 .instrument(NoteBlockInstrument.BASEDRUM)
-                .requiresTool()
+                .requiresCorrectToolForDrops()
                 .strength(3.0F, 3.0F)
     ));
 
     public static final Entry DEEPSLATE_GEM_VEIN = entry("deepslate_gem_vein", settings ->
-            new ExperienceDroppingBlock(UniformIntProvider.create(3, 7), settings
+            new DropExperienceBlock(UniformInt.of(3, 7), settings
                 .instrument(NoteBlockInstrument.BASEDRUM)
-                .requiresTool()
+                .requiresCorrectToolForDrops()
                 // DeepSlate specific settings
-                .mapColor(MapColor.DEEPSLATE_GRAY)
-                .sounds(BlockSoundGroup.DEEPSLATE)
+                .mapColor(MapColor.DEEPSLATE)
+                .sound(SoundType.DEEPSLATE)
                 .strength(4.5F, 3.0F)
     ));
 
     public static final Entry JEWELERS_KIT = entry("jewelers_kit", settings ->
             new JewelersKitBlock(settings
-                .mapColor(MapColor.OAK_TAN)
+                .mapColor(MapColor.WOOD)
                 .instrument(NoteBlockInstrument.BASS)
                 .strength(2.5F)
-                .sounds(BlockSoundGroup.WOOD)
-                .nonOpaque()
+                .sound(SoundType.WOOD)
+                .noOcclusion()
     ), "block.jewelry.jewelers_kit.hint");
 
     public static void register() {
         for (var entry : all) {
-            Registry.register(Registries.BLOCK, Identifier.of(JewelryMod.ID, entry.name), entry.block);
-            Registry.register(Registries.ITEM, Identifier.of(JewelryMod.ID, entry.name), entry.item());
+            Registry.register(BuiltInRegistries.BLOCK, Identifier.fromNamespaceAndPath(JewelryMod.ID, entry.name), entry.block);
+            Registry.register(BuiltInRegistries.ITEM, Identifier.fromNamespaceAndPath(JewelryMod.ID, entry.name), entry.item());
         }
         // Creative-tab placement: see `Group.orderedEntries` (blocks come first in the tab).
     }

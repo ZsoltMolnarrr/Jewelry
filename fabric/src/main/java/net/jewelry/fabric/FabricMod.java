@@ -35,7 +35,7 @@ public final class FabricMod implements ModInitializer {
         // Order comes from `Group.orderedEntries()` so it matches NeoForge exactly.
         ItemGroupEvents.modifyEntriesEvent(Group.KEY).register(content -> {
             for (var item : Group.orderedEntries()) {
-                content.add(item);
+                content.accept(item);
             }
         });
     }
