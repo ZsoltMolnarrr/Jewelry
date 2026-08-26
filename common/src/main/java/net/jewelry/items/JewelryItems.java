@@ -1,6 +1,6 @@
 package net.jewelry.items;
 
-import net.fabric_extras.ranged_weapon.api.EntityAttributes_RangedWeapon;
+import net.rpg_foundation.ranged_weapon.api.EntityAttributes_RangedWeapon;
 import net.jewelry.JewelryMod;
 import net.jewelry.config.ItemConfig;
 import net.minecraft.component.type.AttributeModifierSlot;

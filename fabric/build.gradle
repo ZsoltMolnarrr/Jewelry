@@ -76,7 +76,7 @@ dependencies {
 //    modImplementation("maven.modrinth:spell-power:${project.spell_power_version}-${platform}")
     modImplementation("net.spell_power:spell_power-${platform}:${project.spell_power_version}")
 //    modImplementation("maven.modrinth:ranged-weapon-api:${project.ranged_weapon_api_version}-${platform}")
-    modImplementation("net.foundation:ranged_weapon_api-${platform}:${project.ranged_weapon_api_version}")
+    modImplementation("net.rpg_foundation:ranged_weapon_api-${platform}:${project.ranged_weapon_api_version}")
 
     // Datagen only (RPGSeriesDataGen loot-tier tags). Not a runtime dependency of the packaged mod,
     // but it must be resolvable in the dev runtime, so its own hard deps (PAL) come along transitively.
