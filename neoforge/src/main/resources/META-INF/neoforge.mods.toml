@@ -16,7 +16,7 @@ logoFile = "icon.png"
 [[dependencies.jewelry]]
 modId = "neoforge"
 type = "required"
-versionRange = "[21.11,)"
+versionRange = "[26.1,)"
 ordering = "NONE"
 side = "BOTH"
 
@@ -51,7 +51,7 @@ side = "BOTH"
 [[dependencies.jewelry]]
 modId = "curios"
 type = "optional"
-versionRange = "[14.0.0,)"
+versionRange = "[15.0.0,)"
 ordering = "AFTER"
 side = "BOTH"
 
