@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public class JewelersKitBlock extends Block {
     public JewelersKitBlock(BlockBehaviour.Properties settings) {
@@ -20,9 +20,8 @@ public class JewelersKitBlock extends Block {
     // 1.21.11: `DirectionProperty` is gone, `Properties.HORIZONTAL_FACING` is an `EnumProperty<Direction>`.
     private static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
 
-    @Nullable
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+    public @Nullable BlockState getStateForPlacement(BlockPlaceContext ctx) {
         return this.defaultBlockState().setValue(FACING, ctx.getHorizontalDirection().getOpposite());
     }
 

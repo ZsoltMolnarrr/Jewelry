@@ -10,9 +10,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
-import net.neoforged.neoforge.event.village.VillagerTradesEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
 
 @Mod(JewelryMod.ID)
@@ -23,8 +21,8 @@ public final class NeoForgeMod {
         modBus.addListener(RegisterEvent.class, NeoForgeMod::register);
         // Jewelry items into the Jewelry creative tab — NeoForge mod-bus event (replaces ItemGroupEvents).
         modBus.addListener(BuildCreativeModeTabContentsEvent.class, NeoForgeMod::buildTabContents);
-        // Villager trades — game-bus event (fired per profession); replaces Fabric API's TradeOfferHelper.
-        NeoForge.EVENT_BUS.addListener(VillagerTradesEvent.class, NeoForgeMod::onVillagerTrades);
+        // Villager trades are data driven since 26.1 (`data/jewelry/{villager_trade,trade_set}/**`)
+        // — `VillagerTradesEvent` no longer exists and nothing has to be registered here.
         // Ore world-gen injection is data-driven on NeoForge — see
         // data/jewelry/neoforge/biome_modifier/gem_vein.json (replaces Fabric's BiomeModifications).
     }
@@ -62,17 +60,5 @@ public final class NeoForgeMod {
         for (var item : Group.orderedEntries()) {
             event.accept(item);
         }
-    }
-
-    private static void onVillagerTrades(VillagerTradesEvent event) {
-        if (event.getType() != JewelryVillagers.JEWELER_PROFESSION_KEY) {
-            return;
-        }
-        JewelryVillagers.createTrades().forEach((tier, factories) -> {
-            var tierList = event.getTrades().get(tier.intValue());
-            if (tierList != null) {
-                tierList.addAll(factories);
-            }
-        });
     }
 }

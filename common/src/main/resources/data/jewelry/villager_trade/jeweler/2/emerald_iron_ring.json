@@ -1,0 +1,12 @@
+{
+  "gives": {
+    "id": "jewelry:iron_ring"
+  },
+  "max_uses": 6,
+  "reputation_discount": 0.05,
+  "wants": {
+    "count": 4,
+    "id": "minecraft:emerald"
+  },
+  "xp": 5
+}

@@ -1,0 +1,12 @@
+{
+  "gives": {
+    "id": "jewelry:topaz_necklace"
+  },
+  "max_uses": 3,
+  "reputation_discount": 0.05,
+  "wants": {
+    "count": 45,
+    "id": "minecraft:emerald"
+  },
+  "xp": 15
+}

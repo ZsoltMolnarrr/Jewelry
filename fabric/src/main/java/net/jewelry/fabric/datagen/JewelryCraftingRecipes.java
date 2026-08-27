@@ -1,6 +1,6 @@
 package net.jewelry.fabric.datagen;
 
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.jewelry.blocks.JewelryBlocks;
 import net.jewelry.items.Gems;
@@ -15,7 +15,7 @@ import net.minecraft.world.item.Items;
 import java.util.concurrent.CompletableFuture;
 
 public class JewelryCraftingRecipes extends FabricRecipeProvider {
-    public JewelryCraftingRecipes(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+    public JewelryCraftingRecipes(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }
 

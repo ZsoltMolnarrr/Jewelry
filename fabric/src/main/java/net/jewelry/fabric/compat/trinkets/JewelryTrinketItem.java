@@ -1,26 +1,34 @@
 package net.jewelry.fabric.compat.trinkets;
 
-import com.google.common.collect.Multimap;
-import dev.emi.trinkets.api.SlotReference;
-import dev.emi.trinkets.api.TrinketItem;
+import eu.pb4.trinkets.api.TrinketSlotAccess;
+import eu.pb4.trinkets.api.callback.TrinketCallback;
 import net.jewelry.items.JewelryItem;
 import net.jewelry.util.SoundHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.component.TooltipDisplay;
+import org.jspecify.annotations.Nullable;
 import java.util.function.Consumer;
 
-public class JewelryTrinketItem extends TrinketItem implements JewelryItem {
-    private ItemAttributeModifiers customAttributes = ItemAttributeModifiers.builder().build();
+/// Jewelry piece worn in a Trinkets slot.
+///
+/// Trinkets Updated 4.0 dropped the `TrinketItem` base class: per-item behaviour is a
+/// {@link TrinketCallback}, resolved by Trinkets through `item instanceof TrinketCallback`
+/// (`TrinketCallback.getCallback`). Slot compatibility stays data driven — the
+/// `data/trinkets/tags/item/{hand,offhand}/ring` and `chest/necklace` tags point at
+/// `#jewelry:rings` / `#jewelry:necklaces`, which the default slot validator accepts —
+/// so no `TrinketEquippable` component is needed.
+///
+/// Attribute bonuses are no longer an overridable `getModifiers`: they ride the
+/// `trinkets:attribute_modifiers` component (see {@link TrinketsHelper}), exactly like the
+/// Curios side rides `curios:attribute_modifiers`.
+public class JewelryTrinketItem extends Item implements TrinketCallback, JewelryItem {
     private final String lore;
 
     public JewelryTrinketItem(Properties settings, String lore) {
@@ -38,28 +46,23 @@ public class JewelryTrinketItem extends TrinketItem implements JewelryItem {
         }
     }
 
+    /// Right-click equips into the first free matching slot — the behaviour the old
+    /// `TrinketItem#use` provided for free. Trinkets Updated routes `Item#use` through this.
     @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> getModifiers(ItemStack stack, SlotReference slot, LivingEntity entity, Identifier slotIdentifier) {
-        var modifiers = super.getModifiers(stack, slot, entity, slotIdentifier);
-        // `slotIdentifier` is already unique per equipped slot (…/<slot>/<index>), so bonuses
-        // stack across slots. Tie the id to the item as well so quickly swapping a different
-        // item within the same slot doesn't reuse an id and trip vanilla's "Modifier is already
-        // applied" guard.
-        var modifierId = slotIdentifier.withSuffix("/" + BuiltInRegistries.ITEM.getKey(stack.getItem()).getPath());
-        for (var entry : this.customAttributes.modifiers()) {
-            modifiers.put(entry.attribute(),
-                    new AttributeModifier(modifierId, entry.modifier().amount(), entry.modifier().operation()));
-        }
-        return modifiers;
+    public boolean canEquipFromUse(ItemStack stack, LivingEntity entity) {
+        return true;
     }
 
-    public void setConfigurableModifiers(ItemAttributeModifiers component) {
-        this.customAttributes = component;
+    /// No Trinkets-side equip sound; it is played client side from {@link #onEquip} below,
+    /// which also covers GUI equips and keeps the "don't replay on world join" guard.
+    @Override
+    public @Nullable Holder<SoundEvent> getEquipSound(ItemStack stack, TrinketSlotAccess slot, LivingEntity entity) {
+        return null;
     }
 
     @Override
-    public void onEquip(ItemStack stack, SlotReference slot, LivingEntity entity) {
-        super.onEquip(stack, slot, entity);
+    public void onEquip(ItemStack stack, TrinketSlotAccess slot, LivingEntity entity) {
+        TrinketCallback.super.onEquip(stack, slot, entity);
 
         if (entity.level().isClientSide() // Play sound only on client
                 && entity.tickCount > 100      // Avoid playing sound on entering world / dimension

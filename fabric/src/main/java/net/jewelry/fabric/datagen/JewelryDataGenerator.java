@@ -3,7 +3,7 @@ package net.jewelry.fabric.datagen;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.jewelry.JewelryMod;
 import net.jewelry.items.Gems;
@@ -20,7 +20,9 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.level.ItemLike;
 import net.spell_engine.rpg_series.item.Equipment;
 import net.spell_engine.rpg_series.datagen.RPGSeriesDataGen;
@@ -45,7 +47,7 @@ public class JewelryDataGenerator implements DataGeneratorEntrypoint {
     // ========================================
 
     public static class ItemTagGenerator extends RPGSeriesDataGen.ItemTagGenerator {
-        public ItemTagGenerator(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+        public ItemTagGenerator(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
             super(output, registriesFuture);
         }
 
@@ -112,7 +114,7 @@ public class JewelryDataGenerator implements DataGeneratorEntrypoint {
     /// the model itself (`models/item/<id>.json`) and the item-model *definition*
     /// (`items/<id>.json`) that the `minecraft:item_model` component resolves.
     public static class ModelProvider extends FabricModelProvider {
-        public ModelProvider(FabricDataOutput output) {
+        public ModelProvider(FabricPackOutput output) {
             super(output);
         }
 
@@ -133,7 +135,7 @@ public class JewelryDataGenerator implements DataGeneratorEntrypoint {
     }
 
     public static class UnsmeltGenerator extends FabricRecipeProvider {
-        public UnsmeltGenerator(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+        public UnsmeltGenerator(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
             super(output, registriesFuture);
         }
 
@@ -173,9 +175,14 @@ public class JewelryDataGenerator implements DataGeneratorEntrypoint {
             }
 
             private void disassemble(List<ItemLike> items, Item output) {
+                // 26.1: `oreSmelting`/`oreBlasting` take the `CookingBookCategory` explicitly
+                // (it used to be derived inside `SimpleCookingRecipeBuilder.generic`). Reproduce
+                // vanilla's rule rather than hardcoding, so a block-item result keeps `blocks`.
+                var bookCategory = output instanceof BlockItem ? CookingBookCategory.BLOCKS : CookingBookCategory.MISC;
                 oreSmelting(
                         items,
                         RecipeCategory.MISC,
+                        bookCategory,
                         output,
                         0.1f,
                         UNSMELT_TIME,
@@ -184,6 +191,7 @@ public class JewelryDataGenerator implements DataGeneratorEntrypoint {
                 oreBlasting(
                         items,
                         RecipeCategory.MISC,
+                        bookCategory,
                         output,
                         0.1f,
                         UNSMELT_TIME / 2,

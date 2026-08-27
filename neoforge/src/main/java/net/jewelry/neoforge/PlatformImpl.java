@@ -1,7 +1,7 @@
 package net.jewelry.neoforge;
 
 import net.jewelry.Platform;
-import net.neoforged.fml.loading.LoadingModList;
+import net.neoforged.fml.loading.FMLLoader;
 
 public class PlatformImpl {
     public static class NeoForgeUtil implements Platform.Util {
@@ -10,7 +10,7 @@ public class PlatformImpl {
             // Exact same check as SpellEngine's Platform.Util: LoadingModList (not ModList) is populated
             // during mod discovery, before any constructor runs, so early compat gates in static
             // initializers / init match Fabric's "resolved up front" timing.
-            return LoadingModList.get().getModFileById(modid) != null;
+            return FMLLoader.getCurrent().getLoadingModList().getModFileById(modid) != null;
         }
     }
     private static final Platform.Util UTIL = new NeoForgeUtil();

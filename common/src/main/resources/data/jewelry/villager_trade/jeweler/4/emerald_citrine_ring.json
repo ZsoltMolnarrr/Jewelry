@@ -1,0 +1,12 @@
+{
+  "gives": {
+    "id": "jewelry:citrine_ring"
+  },
+  "max_uses": 5,
+  "reputation_discount": 0.05,
+  "wants": {
+    "count": 35,
+    "id": "minecraft:emerald"
+  },
+  "xp": 15
+}

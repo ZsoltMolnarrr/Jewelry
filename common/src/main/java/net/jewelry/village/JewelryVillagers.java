@@ -1,9 +1,9 @@
 package net.jewelry.village;
 
 import com.google.common.collect.ImmutableSet;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.jewelry.JewelryMod;
 import net.jewelry.blocks.JewelryBlocks;
-import net.jewelry.items.JewelryItems;
 import net.jewelry.util.SoundHelper;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -13,11 +13,8 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.entity.npc.villager.VillagerProfession;
-import net.minecraft.world.entity.npc.villager.VillagerTrades;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.trading.TradeSet;
 import net.minecraft.world.level.block.state.BlockState;
-import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Set;
 
 public class JewelryVillagers {
@@ -29,17 +26,36 @@ public class JewelryVillagers {
     public static final int POI_TICKET_COUNT = 1;
     public static final int POI_SEARCH_DISTANCE = 10;
 
-    /// Registry key of {@link #JEWELER_PROFESSION} — since 1.21.2 both loaders' trade-registration APIs
-    /// (Fabric `TradeOfferHelper.registerVillagerOffers`, NeoForge `VillagerTradesEvent#getType`) are
-    /// keyed by it rather than by the profession object.
+    /// Registry key of {@link #JEWELER_PROFESSION} — since 1.21.2 professions are addressed by key.
     public static final ResourceKey<VillagerProfession> JEWELER_PROFESSION_KEY =
             ResourceKey.create(Registries.VILLAGER_PROFESSION, Identifier.fromNamespaceAndPath(JewelryMod.ID, JEWELER));
 
     /// The jeweler's-kit workstation block states for the POI. Registration itself is loader-specific
-    /// (Fabric: `PointOfInterestHelper`; NeoForge: a plain `Registry.register` of a `PointOfInterestType`)
+    /// (Fabric: `PoiHelper`; NeoForge: a plain `Registry.register` of a `PointOfInterestType`)
     /// and lives in each platform's entrypoint; this only exposes the shared state set.
     public static Set<BlockState> poiBlockStates() {
         return ImmutableSet.copyOf(JewelryBlocks.JEWELERS_KIT.block().getStateDefinition().getPossibleStates());
+    }
+
+    /// 26.1 made villager trades data driven: the offers live in
+    /// `data/jewelry/villager_trade/jeweler/<level>/*.json`, are grouped by
+    /// `data/jewelry/tags/villager_trade/jeweler/level_<n>.json` and picked up by
+    /// `data/jewelry/trade_set/jeweler/level_<n>.json`. The profession only names the trade-set key
+    /// per merchant level — `VillagerTrades.ItemListing`, Fabric's `TradeOfferHelper` and NeoForge's
+    /// `VillagerTradesEvent` are all gone.
+    public static ResourceKey<TradeSet> tradeSet(int level) {
+        return ResourceKey.create(Registries.TRADE_SET,
+                Identifier.fromNamespaceAndPath(JewelryMod.ID, JEWELER + "/level_" + level));
+    }
+
+    public static Int2ObjectMap<ResourceKey<TradeSet>> tradeSetsByLevel() {
+        return Int2ObjectMap.ofEntries(
+                Int2ObjectMap.entry(1, tradeSet(1)),
+                Int2ObjectMap.entry(2, tradeSet(2)),
+                Int2ObjectMap.entry(3, tradeSet(3)),
+                Int2ObjectMap.entry(4, tradeSet(4)),
+                Int2ObjectMap.entry(5, tradeSet(5))
+        );
     }
 
     public static VillagerProfession createProfession(String name, ResourceKey<PoiType> workStation) {
@@ -57,53 +73,13 @@ public class JewelryVillagers {
                 },
                 ImmutableSet.of(),
                 ImmutableSet.of(),
-                SoundHelper.JEWELRY_WORKBENCH
+                SoundHelper.JEWELRY_WORKBENCH,
+                tradeSetsByLevel()
         );
     }
 
     public static void registerVillagers() {
-        // Register the profession only; trade-offer registration is loader-specific and lives in each
-        // platform's entrypoint (Fabric `TradeOfferHelper` / NeoForge `VillagerTradesEvent`), consuming
-        // the shared #createTrades() map.
         var workStation = ResourceKey.create(BuiltInRegistries.POINT_OF_INTEREST_TYPE.key(), POI_ID);
         JEWELER_PROFESSION = Registry.register(BuiltInRegistries.VILLAGER_PROFESSION, Identifier.fromNamespaceAndPath(JewelryMod.ID, JEWELER), createProfession(JEWELER, workStation));
-    }
-
-    public static LinkedHashMap<Integer, List<VillagerTrades.ItemListing>> createTrades() {
-        LinkedHashMap<Integer, List<VillagerTrades.ItemListing>> trades = new LinkedHashMap<>();
-
-        trades.put(1, List.of(
-                new JewelryTrades.Buy(Items.COPPER_INGOT, 8, 8, 3, 2),
-                new JewelryTrades.Buy(Items.STRING, 7, 6, 3, 2),
-                new JewelryTrades.Sell(JewelryItems.copper_ring.item(), 4, 1, 12, 4)
-        ));
-        trades.put(2, List.of(
-                new JewelryTrades.Buy(Items.GOLD_INGOT, 7, 8, 2, 8),
-                new JewelryTrades.Sell(JewelryItems.iron_ring.item(), 4, 1, 6, 5),
-                new JewelryTrades.Sell(JewelryItems.gold_ring.item(), 18, 1, 6, 5)
-        ));
-        trades.put(3, List.of(
-                new JewelryTrades.Buy(Items.DIAMOND, 1, 12, 10, 10),
-                new JewelryTrades.Sell(JewelryItems.emerald_necklace.item(), 20, 1, 12, 10),
-                new JewelryTrades.Sell(JewelryItems.diamond_necklace.item(), 25, 1, 12, 10)
-        ));
-        trades.put(4, List.of(
-                new JewelryTrades.Sell(JewelryItems.ruby_ring.item(), 35, 1, 5, 15),
-                new JewelryTrades.Sell(JewelryItems.topaz_ring.item(), 35, 1, 5, 15),
-                new JewelryTrades.Sell(JewelryItems.citrine_ring.item(), 35, 1, 5, 15),
-                new JewelryTrades.Sell(JewelryItems.jade_ring.item(), 35, 1, 5, 15),
-                new JewelryTrades.Sell(JewelryItems.sapphire_ring.item(), 35, 1, 5, 13),
-                new JewelryTrades.Sell(JewelryItems.tanzanite_ring.item(), 35, 1, 5, 13)
-        ));
-        trades.put(5, List.of(
-                new JewelryTrades.Sell(JewelryItems.ruby_necklace.item(), 45, 1, 3, 15),
-                new JewelryTrades.Sell(JewelryItems.topaz_necklace.item(), 45, 1, 3, 15),
-                new JewelryTrades.Sell(JewelryItems.citrine_necklace.item(), 45, 1, 3, 15),
-                new JewelryTrades.Sell(JewelryItems.jade_necklace.item(), 45, 1, 3, 15),
-                new JewelryTrades.Sell(JewelryItems.sapphire_necklace.item(), 45, 1, 3, 15),
-                new JewelryTrades.Sell(JewelryItems.tanzanite_necklace.item(), 45, 1, 3, 15)
-        ));
-
-        return trades;
     }
 }
