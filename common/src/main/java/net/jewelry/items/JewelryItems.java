@@ -122,9 +122,10 @@ public class JewelryItems {
     public static final String CRITICAL_CHANCE_ID = CRIT_MOD_ID + ":chance";
     public static final String CRITICAL_DAMAGE_ID = CRIT_MOD_ID + ":damage";
 
-    // RangedWeaponAPI attributes. RWA has no 1.20.1 two-platform artifact yet, so Jewelry does NOT
-    // compile against it: the ids are spelled out and resolved from the attribute registry at
-    // registration time (`register` below skips, and logs, whatever is missing).
+    // RangedWeaponAPI attributes. A two-platform 1.20.1 RWA artifact does exist now, but Jewelry still
+    // does NOT compile against it: these ids are only ever config strings, so they are spelled out and
+    // resolved from the attribute registry at registration time (`register` below skips, and logs,
+    // whatever is missing). No compile dependency, no `isModLoaded` holder class.
     public static final String RANGED_WEAPON_MOD_ID = "ranged_weapon";
     public static final String RANGED_WEAPON_DAMAGE = RANGED_WEAPON_MOD_ID + ":damage";
     public static final String RANGED_WEAPON_VELOCITY = RANGED_WEAPON_MOD_ID + ":velocity";
