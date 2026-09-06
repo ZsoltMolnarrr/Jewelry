@@ -10,8 +10,8 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.*;
 
 public class OreGeneration {
-    public static final Identifier GEM_VEIN_ID = Identifier.of(JewelryMod.ID, "gem_vein_placed");
-    public static final RegistryKey<PlacedFeature> GEM_VEIN_PLACED_KEY = RegistryKey.of(RegistryKeys.PLACED_FEATURE, Identifier.of(JewelryMod.ID, "gem_vein_placed"));
+    public static final Identifier GEM_VEIN_ID = new Identifier(JewelryMod.ID, "gem_vein_placed");
+    public static final RegistryKey<PlacedFeature> GEM_VEIN_PLACED_KEY = RegistryKey.of(RegistryKeys.PLACED_FEATURE, new Identifier(JewelryMod.ID, "gem_vein_placed"));
 
     public static void register() {
         BiomeModifications.addFeature(

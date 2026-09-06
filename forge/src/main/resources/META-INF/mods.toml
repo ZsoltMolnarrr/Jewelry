@@ -1,0 +1,54 @@
+modLoader = "javafml"
+loaderVersion = "[47,)"
+issueTrackerURL = "https://github.com/zsoltmolnarrr/Jewelry/issues"
+license = "All Rights Reserved"
+
+[[mods]]
+modId = "jewelry"
+version = "${version}"
+displayName = "Jewelry (RPG Series)"
+authors = "Daedelus"
+description = '''
+Find precious gems deep down, and craft them into powerful jewelry!
+'''
+logoFile = "icon.png"
+
+[[dependencies.jewelry]]
+modId = "forge"
+mandatory = true
+versionRange = "[47,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.jewelry]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.jewelry]]
+modId = "spell_power"
+mandatory = true
+versionRange = "[1.6,)"
+ordering = "NONE"
+side = "BOTH"
+
+# RangedWeaponAPI has no Forge build on 1.20.1. The `ranged_weapon:*` attributes are resolved by
+# registry id at item-registration time, so the dependency is optional on both loaders.
+[[dependencies.jewelry]]
+modId = "ranged_weapon_api"
+mandatory = false
+versionRange = "[1,)"
+ordering = "AFTER"
+side = "BOTH"
+
+# StructurePoolAPI is Fabric-only on 1.20.1: vanilla-village injection of the jewelry shop is a
+# Fabric-only feature here (the Lithostitched / data-driven paths still work on Forge).
+
+[[dependencies.jewelry]]
+modId = "curios"
+mandatory = false
+versionRange = "[5,)"
+ordering = "AFTER"
+side = "BOTH"

@@ -22,21 +22,17 @@ dependencies {
     // We depend on Fabric Loader here to use the Fabric @Environment annotations,
     // which get remapped to the correct annotations on each platform.
     // Do NOT use other classes from Fabric Loader.
-    modImplementation "net.fabricmc:fabric-loader:$project.fabric_loader_version"
-    modImplementation "net.fabricmc.fabric-api:fabric-api:$project.fabric_api_version"
+    modImplementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
+    // No Fabric API in common: there is no Forgified Fabric API on the 1.20.1 line, so loader API
+    // usage stays in the platform modules (fabric/ and forge/).
 
-    modImplementation("maven.modrinth:tiny-config:${project.tiny_config_version}-${platform}")
+    // Ecosystem libraries from mavenLocal (published by their 1.20.1-modern ports).
+    modImplementation("net.tiny_config:tiny_config-${platform}:${rootProject.tiny_config_version}")
+    modImplementation("net.spell_power:spell_power-${platform}:${rootProject.spell_power_version}")
 
-    modImplementation("maven.modrinth:structure-pool-api:${project.structure_pool_api_version}-${platform}")
-//    modImplementation("net.foundation:structure_pool_api-${platform}:${project.structure_pool_api_version}")
-    modImplementation("maven.modrinth:spell-power:${project.spell_power_version}-${platform}")
-//    modImplementation("net.spell_power:spell_power-${platform}:${project.spell_power_version}")
-    modImplementation("maven.modrinth:ranged-weapon-api:${project.ranged_weapon_api_version}-${platform}")
-//    modImplementation("net.foundation:ranged_weapon_api-${platform}:${project.ranged_weapon_api_version}")
-
-    // Compat only
-    // modCompileOnly("maven.modrinth:spell-engine:${project.spell_engine_version}-${platform}")
-
-    // Compatibility
-    // Fabric specific
+    // StructurePoolAPI: legacy published Fabric-only artifact (no Forge port on 1.20.1). Village
+    // structure injection therefore lives behind the `net.jewelry.village.VillageStructures` seam,
+    // whose only implementation is wired from the Fabric entrypoint.
+    // RangedWeaponAPI is NOT on the compile classpath: `ranged_weapon:*` attributes are resolved by
+    // registry id at item-registration time (null-safe when RWA is absent).
 }

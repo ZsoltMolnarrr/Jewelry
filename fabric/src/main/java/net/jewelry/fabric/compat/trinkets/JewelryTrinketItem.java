@@ -4,23 +4,23 @@ import com.google.common.collect.Multimap;
 import dev.emi.trinkets.api.SlotReference;
 import dev.emi.trinkets.api.TrinketItem;
 import net.jewelry.items.JewelryItem;
+import net.jewelry.items.JewelryModifiers;
 import net.jewelry.util.SoundHelper;
-import net.minecraft.component.type.AttributeModifiersComponent;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.tooltip.TooltipType;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.Identifier;
+import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.UUID;
 
 public class JewelryTrinketItem extends TrinketItem implements JewelryItem {
-    private AttributeModifiersComponent customAttributes = AttributeModifiersComponent.builder().build();
+    private JewelryModifiers customAttributes = JewelryModifiers.EMPTY;
     private final String lore;
 
     public JewelryTrinketItem(Settings settings, String lore) {
@@ -29,30 +29,26 @@ public class JewelryTrinketItem extends TrinketItem implements JewelryItem {
     }
 
     @Override
-    public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
-        super.appendTooltip(stack, context, tooltip, type);
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+        super.appendTooltip(stack, world, tooltip, context);
         if (lore != null && !lore.isEmpty()) {
             tooltip.add(Text.translatable(lore).formatted(Formatting.ITALIC, Formatting.GOLD));
         }
     }
 
     @Override
-    public Multimap<RegistryEntry<EntityAttribute>, EntityAttributeModifier> getModifiers(ItemStack stack, SlotReference slot, LivingEntity entity, Identifier slotIdentifier) {
-        var modifiers = super.getModifiers(stack, slot, entity, slotIdentifier);
-        // `slotIdentifier` is already unique per equipped slot (…/<slot>/<index>), so bonuses
-        // stack across slots. Tie the id to the item as well so quickly swapping a different
-        // item within the same slot doesn't reuse an id and trip vanilla's "Modifier is already
-        // applied" guard.
-        var modifierId = slotIdentifier.withSuffixedPath("/" + Registries.ITEM.getId(stack.getItem()).getPath());
-        for (var entry : this.customAttributes.modifiers()) {
-            modifiers.put(entry.attribute(),
-                    new EntityAttributeModifier(modifierId, entry.modifier().value(), entry.modifier().operation()));
-        }
+    public Multimap<EntityAttribute, EntityAttributeModifier> getModifiers(ItemStack stack, SlotReference slot,
+                                                                          LivingEntity entity, UUID uuid) {
+        var modifiers = super.getModifiers(stack, slot, entity, uuid);
+        // `uuid` is already unique per equipped slot, so bonuses stack across slots; JewelryModifiers
+        // folds the per-item modifier id into it so two attributes of one piece stay distinct and the
+        // derivation stays deterministic (which is what lets Trinkets remove them again on unequip).
+        modifiers.putAll(this.customAttributes.multimap(uuid));
         return modifiers;
     }
 
-    public void setConfigurableModifiers(AttributeModifiersComponent component) {
-        this.customAttributes = component;
+    public void setConfigurableModifiers(JewelryModifiers modifiers) {
+        this.customAttributes = modifiers != null ? modifiers : JewelryModifiers.EMPTY;
     }
 
     @Override

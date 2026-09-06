@@ -7,10 +7,9 @@ public class TrinketsHelper {
         JewelryFactory.factory = args -> {
             var attributes = args.attributes();
             var item = new JewelryTrinketItem(args.settings(), args.lore());
-            // Passing attributes here instead Item.Settings, because Trinkets ignores `AttributeModifiersComponent`
-            if (attributes != null) {
-                item.setConfigurableModifiers(attributes);
-            }
+            // Passed here instead of through Item.Settings, because Trinkets applies its own
+            // per-slot modifiers (`Trinket#getModifiers`) and ignores the vanilla item modifiers.
+            item.setConfigurableModifiers(attributes);
             return item;
         };
     }

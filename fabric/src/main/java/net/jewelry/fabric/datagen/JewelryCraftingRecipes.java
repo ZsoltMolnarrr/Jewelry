@@ -5,19 +5,20 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.jewelry.blocks.JewelryBlocks;
 import net.jewelry.items.Gems;
 import net.jewelry.items.JewelryItems;
-import net.minecraft.data.server.recipe.RecipeExporter;
+import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
-import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.ItemTags;
 
-import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
 
 public class JewelryCraftingRecipes extends FabricRecipeProvider {
-    public JewelryCraftingRecipes(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
-        super(output, registriesFuture);
+    /// 1.20.1 / Fabric API 0.92: `FabricRecipeProvider` takes only the data output, and recipes are
+    /// exported through a `Consumer<RecipeJsonProvider>` (the `RecipeExporter` interface arrived in 1.20.2).
+    public JewelryCraftingRecipes(FabricDataOutput output) {
+        super(output);
     }
 
     @Override
@@ -26,7 +27,7 @@ public class JewelryCraftingRecipes extends FabricRecipeProvider {
     }
 
     @Override
-    public void generate(RecipeExporter exporter) {
+    public void generate(Consumer<RecipeJsonProvider> exporter) {
         generateBasicRings(exporter);
         generateGemJewelry(exporter);
         generateGemRings(exporter);
@@ -40,7 +41,7 @@ public class JewelryCraftingRecipes extends FabricRecipeProvider {
     // BASIC RING RECIPES
     // ========================================
 
-    private void generateBasicRings(RecipeExporter exporter) {
+    private void generateBasicRings(Consumer<RecipeJsonProvider> exporter) {
         metalRing(exporter, JewelryItems.copper_ring.item(), Items.COPPER_INGOT);
         metalRing(exporter, JewelryItems.iron_ring.item(), Items.IRON_INGOT);
         metalRing(exporter, JewelryItems.gold_ring.item(), Items.GOLD_INGOT);
@@ -50,7 +51,7 @@ public class JewelryCraftingRecipes extends FabricRecipeProvider {
      * Generate a simple metal ring recipe.
      * Pattern: " M " / "M M" / " M "
      */
-    private void metalRing(RecipeExporter exporter, Item result, Item metal) {
+    private void metalRing(Consumer<RecipeJsonProvider> exporter, Item result, Item metal) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, result)
                 .pattern(" M ")
                 .pattern("M M")
@@ -64,7 +65,7 @@ public class JewelryCraftingRecipes extends FabricRecipeProvider {
     // VANILLA Jewelry
     // ========================================
 
-    private void generateGemJewelry(RecipeExporter exporter) {
+    private void generateGemJewelry(Consumer<RecipeJsonProvider> exporter) {
         vanillaNecklace(exporter, JewelryItems.diamond_necklace.item(), Items.DIAMOND);
         gemRing(exporter, JewelryItems.diamond_ring.item(), Items.DIAMOND);
         vanillaNecklace(exporter, JewelryItems.emerald_necklace.item(), Items.EMERALD);
@@ -74,7 +75,7 @@ public class JewelryCraftingRecipes extends FabricRecipeProvider {
      * Generate a vanilla necklace recipe (diamond, emerald).
      * Pattern: " S " / " M " / " G "
      */
-    private void vanillaNecklace(RecipeExporter exporter, Item result, Item gem) {
+    private void vanillaNecklace(Consumer<RecipeJsonProvider> exporter, Item result, Item gem) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, result)
                 .pattern(" S ")
                 .pattern(" M ")
@@ -90,7 +91,7 @@ public class JewelryCraftingRecipes extends FabricRecipeProvider {
     // GEM RING RECIPES
     // ========================================
 
-    private void generateGemRings(RecipeExporter exporter) {
+    private void generateGemRings(Consumer<RecipeJsonProvider> exporter) {
         gemRing(exporter, JewelryItems.ruby_ring.item(), Gems.ruby.item());
         gemRing(exporter, JewelryItems.topaz_ring.item(), Gems.topaz.item());
         gemRing(exporter, JewelryItems.citrine_ring.item(), Gems.citrine.item());
@@ -103,7 +104,7 @@ public class JewelryCraftingRecipes extends FabricRecipeProvider {
      * Generate a gem ring recipe.
      * Pattern: " G " / "M M" / " M "
      */
-    private void gemRing(RecipeExporter exporter, Item result, Item gem) {
+    private void gemRing(Consumer<RecipeJsonProvider> exporter, Item result, Item gem) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, result)
                 .pattern(" G ")
                 .pattern("M M")
@@ -118,7 +119,7 @@ public class JewelryCraftingRecipes extends FabricRecipeProvider {
     // GEM NECKLACE RECIPES
     // ========================================
 
-    private void generateGemNecklaces(RecipeExporter exporter) {
+    private void generateGemNecklaces(Consumer<RecipeJsonProvider> exporter) {
         gemNecklace(exporter, JewelryItems.ruby_necklace.item(), Gems.ruby.item());
         gemNecklace(exporter, JewelryItems.topaz_necklace.item(), Gems.topaz.item());
         gemNecklace(exporter, JewelryItems.citrine_necklace.item(), Gems.citrine.item());
@@ -131,7 +132,7 @@ public class JewelryCraftingRecipes extends FabricRecipeProvider {
      * Generate a gem necklace recipe.
      * Pattern: " S " / " M " / " G "
      */
-    private void gemNecklace(RecipeExporter exporter, Item result, Item gem) {
+    private void gemNecklace(Consumer<RecipeJsonProvider> exporter, Item result, Item gem) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, result)
                 .pattern(" S ")
                 .pattern(" M ")
@@ -147,7 +148,7 @@ public class JewelryCraftingRecipes extends FabricRecipeProvider {
     // NETHERITE RING RECIPES
     // ========================================
 
-    private void generateNetheriteRings(RecipeExporter exporter) {
+    private void generateNetheriteRings(Consumer<RecipeJsonProvider> exporter) {
         netheriteRing(exporter, JewelryItems.netherite_ruby_ring.item(), Gems.ruby.item());
         netheriteRing(exporter, JewelryItems.netherite_topaz_ring.item(), Gems.topaz.item());
         netheriteRing(exporter, JewelryItems.netherite_citrine_ring.item(), Gems.citrine.item());
@@ -160,7 +161,7 @@ public class JewelryCraftingRecipes extends FabricRecipeProvider {
      * Generate a netherite ring recipe.
      * Pattern: " G " / "M M" / " N "
      */
-    private void netheriteRing(RecipeExporter exporter, Item result, Item gem) {
+    private void netheriteRing(Consumer<RecipeJsonProvider> exporter, Item result, Item gem) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, result)
                 .pattern(" G ")
                 .pattern("M M")
@@ -176,7 +177,7 @@ public class JewelryCraftingRecipes extends FabricRecipeProvider {
     // NETHERITE NECKLACE RECIPES
     // ========================================
 
-    private void generateNetheriteNecklaces(RecipeExporter exporter) {
+    private void generateNetheriteNecklaces(Consumer<RecipeJsonProvider> exporter) {
         netheriteNecklace(exporter, JewelryItems.netherite_ruby_necklace.item(), Gems.ruby.item());
         netheriteNecklace(exporter, JewelryItems.netherite_topaz_necklace.item(), Gems.topaz.item());
         netheriteNecklace(exporter, JewelryItems.netherite_citrine_necklace.item(), Gems.citrine.item());
@@ -189,7 +190,7 @@ public class JewelryCraftingRecipes extends FabricRecipeProvider {
      * Generate a netherite necklace recipe.
      * Pattern: " S " / "TMT" / " G "
      */
-    private void netheriteNecklace(RecipeExporter exporter, Item result, Item gem) {
+    private void netheriteNecklace(Consumer<RecipeJsonProvider> exporter, Item result, Item gem) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, result)
                 .pattern(" S ")
                 .pattern("TMT")
@@ -206,7 +207,7 @@ public class JewelryCraftingRecipes extends FabricRecipeProvider {
     // SPECIAL ITEM RECIPES
     // ========================================
 
-    private void generateSpecialItems(RecipeExporter exporter) {
+    private void generateSpecialItems(Consumer<RecipeJsonProvider> exporter) {
         jewelryKit(exporter);
     }
 
@@ -215,7 +216,7 @@ public class JewelryCraftingRecipes extends FabricRecipeProvider {
      * Pattern: "CIG" / "###"
      * Special: Uses misc category and disables notification
      */
-    private void jewelryKit(RecipeExporter exporter) {
+    private void jewelryKit(Consumer<RecipeJsonProvider> exporter) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, JewelryBlocks.JEWELERS_KIT.item())
                 .pattern("CIG")
                 .pattern("###")

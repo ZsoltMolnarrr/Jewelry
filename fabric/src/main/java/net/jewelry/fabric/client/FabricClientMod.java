@@ -12,8 +12,9 @@ public final class FabricClientMod implements ClientModInitializer {
     public void onInitializeClient() {
         BlockRenderLayerMap.INSTANCE.putBlock(JewelryBlocks.JEWELERS_KIT.block(), RenderLayer.getCutout());
 
-        // Deduplicate jewelry tooltip lines — Fabric API (NeoForge uses ItemTooltipEvent).
-        ItemTooltipCallback.EVENT.register((stack, tooltipContext, tooltipType, lines) ->
+        // Deduplicate jewelry tooltip lines — Fabric API (Forge uses ItemTooltipEvent).
+        // Fabric API 0.92's callback is the 3-arg (stack, context, lines) shape.
+        ItemTooltipCallback.EVENT.register((stack, tooltipContext, lines) ->
                 JewelryModClient.removeTooltipDuplicates(stack, lines));
     }
 }

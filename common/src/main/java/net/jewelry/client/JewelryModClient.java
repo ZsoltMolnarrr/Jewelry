@@ -9,7 +9,7 @@ import java.util.List;
 public class JewelryModClient {
     /// Removes duplicate tooltip lines on jewelry items (needed where multiple Ring slots exist).
     /// Loader-neutral — each platform's client entrypoint calls this from its own tooltip event
-    /// (Fabric `ItemTooltipCallback`; NeoForge `ItemTooltipEvent`), so `common` needs no Fabric API.
+    /// (Fabric `ItemTooltipCallback`; Forge `ItemTooltipEvent`), so `common` needs no Fabric API.
     public static void removeTooltipDuplicates(ItemStack itemStack, List<Text> tooltip) {
         if (itemStack.getItem() instanceof JewelryItem) {
             for (int i = 0; i < tooltip.size(); i++) {

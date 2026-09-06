@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_sapphire": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jewelry:sapphire"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "jewelry:sapphire_necklace"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_sapphire",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "jewelry:sapphire_necklace"
+    ]
+  },
+  "sends_telemetry_event": false
+}

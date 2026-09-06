@@ -7,12 +7,11 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.jewelry.JewelryMod;
 import net.jewelry.items.Gems;
-import net.jewelry.items.JewelryItem;
 import net.jewelry.items.JewelryItems;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.ItemModelGenerator;
 import net.minecraft.data.client.Models;
-import net.minecraft.data.server.recipe.RecipeExporter;
+import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
@@ -23,12 +22,12 @@ import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.spell_engine.rpg_series.item.Equipment;
 import net.spell_engine.rpg_series.datagen.RPGSeriesDataGen;
-import net.spell_engine.rpg_series.tags.RPGSeriesItemTags;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
 
 public class JewelryDataGenerator implements DataGeneratorEntrypoint {
     @Override
@@ -64,19 +63,19 @@ public class JewelryDataGenerator implements DataGeneratorEntrypoint {
         private void generateJewelryTags() {
             // jewelry:gems tag
             var gemsTag = getOrCreateTagBuilder(TagKey.of(RegistryKeys.ITEM,
-                    Identifier.of(JewelryMod.ID, "gems")));
+                    new Identifier(JewelryMod.ID, "gems")));
             Gems.all.forEach(gem -> gemsTag.addOptional(gem.id()));
 
             // jewelry:rings tag
             var ringsTag = getOrCreateTagBuilder(TagKey.of(RegistryKeys.ITEM,
-                    Identifier.of(JewelryMod.ID, "rings")));
+                    new Identifier(JewelryMod.ID, "rings")));
             JewelryItems.all.stream()
                     .filter(entry -> entry.id().getPath().contains("ring"))
                     .forEach(entry -> ringsTag.addOptional(entry.id()));
 
             // jewelry:necklaces tag
             var necklacesTag = getOrCreateTagBuilder(TagKey.of(RegistryKeys.ITEM,
-                    Identifier.of(JewelryMod.ID, "necklaces")));
+                    new Identifier(JewelryMod.ID, "necklaces")));
             JewelryItems.all.stream()
                     .filter(entry -> entry.id().getPath().contains("necklace"))
                     .forEach(entry -> necklacesTag.addOptional(entry.id()));
@@ -126,8 +125,8 @@ public class JewelryDataGenerator implements DataGeneratorEntrypoint {
     }
 
     public static class UnsmeltGenerator extends FabricRecipeProvider {
-        public UnsmeltGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
-            super(output, registriesFuture);
+        public UnsmeltGenerator(FabricDataOutput output) {
+            super(output);
         }
 
         public static int UNSMELT_TIME = 300;
@@ -138,7 +137,7 @@ public class JewelryDataGenerator implements DataGeneratorEntrypoint {
         }
 
         @Override
-        public void generate(RecipeExporter exporter) {
+        public void generate(Consumer<RecipeJsonProvider> exporter) {
             disassemble(exporter, List.of(JewelryItems.gold_ring.item()), Items.GOLD_NUGGET);
             disassemble(exporter, List.of(JewelryItems.iron_ring.item()), Items.IRON_NUGGET);
             disassemble(exporter, List.of(JewelryItems.emerald_necklace.item()), Items.EMERALD);
@@ -155,7 +154,7 @@ public class JewelryDataGenerator implements DataGeneratorEntrypoint {
                     Items.NETHERITE_SCRAP);
         }
 
-        private static void disassemble(RecipeExporter exporter, List<ItemConvertible> items, Item output) {
+        private static void disassemble(Consumer<RecipeJsonProvider> exporter, List<ItemConvertible> items, Item output) {
             FabricRecipeProvider.offerSmelting(exporter,
                     items,
                     RecipeCategory.MISC,
