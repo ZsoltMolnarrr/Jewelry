@@ -39,14 +39,16 @@ public final class FabricMod implements ModInitializer {
         OreGeneration.register();
 
         // Creative-tab placement (Jewelry group) — Fabric API.
+        // Blocks first, then gems, then the jewelry items — keep this order in sync with the Forge
+        // entrypoint's `buildTabContents`, so both loaders show the same tab.
         ItemGroupEvents.modifyEntriesEvent(Group.KEY).register(content -> {
+            for (var entry : JewelryBlocks.all) {
+                content.add(entry.item());
+            }
             for (var entry : Gems.all) {
                 content.add(entry.item());
             }
             for (var entry : JewelryItems.all) {
-                content.add(entry.item());
-            }
-            for (var entry : JewelryBlocks.all) {
                 content.add(entry.item());
             }
         });

@@ -70,13 +70,15 @@ public final class ForgeMod {
         if (!event.getTabKey().equals(Group.KEY)) {
             return;
         }
+        // Blocks first, then gems, then the jewelry items — keep this order in sync with the Fabric
+        // entrypoint's `ItemGroupEvents` listener, so both loaders show the same tab.
+        for (var entry : JewelryBlocks.all) {
+            event.add(entry.item());
+        }
         for (var entry : Gems.all) {
             event.add(entry.item());
         }
         for (var entry : JewelryItems.all) {
-            event.add(entry.item());
-        }
-        for (var entry : JewelryBlocks.all) {
             event.add(entry.item());
         }
     }
