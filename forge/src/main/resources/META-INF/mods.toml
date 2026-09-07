@@ -43,8 +43,14 @@ versionRange = "[1,)"
 ordering = "AFTER"
 side = "BOTH"
 
-# StructurePoolAPI is Fabric-only on 1.20.1: vanilla-village injection of the jewelry shop is a
-# Fabric-only feature here (the Lithostitched / data-driven paths still work on Forge).
+# StructurePoolAPI injects the jewelry shop into the *vanilla* village pools. Since 1.2.1 it has a
+# Forge artifact, so this is a hard dependency on both loaders (mirrors the `fabric.mod.json` entry).
+[[dependencies.jewelry]]
+modId = "structure_pool_api"
+mandatory = true
+versionRange = "[1.2.1,)"
+ordering = "NONE"
+side = "BOTH"
 
 [[dependencies.jewelry]]
 modId = "curios"

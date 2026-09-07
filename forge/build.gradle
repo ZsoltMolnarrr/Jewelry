@@ -75,7 +75,9 @@ dependencies {
     // nested jars of classpath mods. `localRuntime` keeps it out of the published POM.
     localRuntime("io.github.llamalad7:mixinextras-forge:${rootProject.mixin_extras_version}")
 
-    // StructurePoolAPI has no Forge artifact on 1.20.1 - see jewelry-port-notes.md.
+    // StructurePoolAPI (1.20.1-modern port; mavenLocal). NOT JiJ'd - standalone library mod.
+    modImplementation("net.foundation:structure_pool_api-${platform}:${rootProject.structure_pool_api_version}")
+
     // RangedWeaponAPI is not a dependency on either loader (registry-id attribute lookups).
 }
 
@@ -131,6 +133,7 @@ publishMods {
         client = true                    // >=1 of client/server REQUIRED by CurseForge (Error 1021)
         server = true
         changelogType = "markdown"
+        requires("structure-pool-api")
         requires("curios")
     }
 
@@ -141,6 +144,7 @@ publishMods {
         accessToken = providers.environmentVariable("MODRINTH_API_KEY")
         minecraftVersions.add(project.minecraft_version)
         minecraftVersions.add(project.minecraft_compat_version)
+        requires { slug = "structure-pool-api" }
         requires { slug = "curios" }
     }
 

@@ -7,7 +7,6 @@ import net.fabricmc.fabric.api.object.builder.v1.world.poi.PointOfInterestHelper
 import net.jewelry.JewelryMod;
 import net.jewelry.blocks.JewelryBlocks;
 import net.jewelry.fabric.compat.CompatFeatures;
-import net.jewelry.fabric.village.FabricVillageStructures;
 import net.jewelry.fabric.worldgen.OreGeneration;
 import net.jewelry.items.Gems;
 import net.jewelry.items.Group;
@@ -18,9 +17,7 @@ public final class FabricMod implements ModInitializer {
     @Override
     public void onInitialize() {
         CompatFeatures.init();
-        // StructurePoolAPI is Fabric-only on 1.20.1; install the village injector (and load its config)
-        // before JewelryMod.init() calls VillageStructures.injectIfAvailable().
-        FabricVillageStructures.install();
+        // Common init also queues the vanilla-village structure injection (StructurePoolAPI).
         JewelryMod.init();
         JewelryMod.registerSounds();
         JewelryMod.registerBlocks();

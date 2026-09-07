@@ -30,9 +30,12 @@ dependencies {
     modImplementation("net.tiny_config:tiny_config-${platform}:${rootProject.tiny_config_version}")
     modImplementation("net.spell_power:spell_power-${platform}:${rootProject.spell_power_version}")
 
-    // StructurePoolAPI: legacy published Fabric-only artifact (no Forge port on 1.20.1). Village
-    // structure injection therefore lives behind the `net.jewelry.village.VillageStructures` seam,
-    // whose only implementation is wired from the Fabric entrypoint.
+    // StructurePoolAPI 1.2.1+ ships a Forge artifact too, and its `injectAll` touches no loader API,
+    // so the village injection and the `config/jewelry/villages.json` config live here in `common`.
+    // The `-common` artifact carries the whole API surface and no loader dependency. NOT JiJ'd: it is
+    // a standalone library mod the player installs.
+    modImplementation("net.foundation:structure_pool_api-common:${rootProject.structure_pool_api_version}")
+
     // RangedWeaponAPI is deliberately NOT on the compile classpath even though a two-platform 1.20.1
     // artifact now exists: `ranged_weapon:*` attributes are only ever config id strings, resolved from
     // the attribute registry at item-registration time and skipped when RWA is absent.
