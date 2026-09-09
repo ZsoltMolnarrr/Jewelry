@@ -23,6 +23,11 @@ public class JewelryBlocks {
         public Entry(String name, Block block) {
             this(name, block, new BlockItem(block, new Item.Settings()));
         }
+
+        /// The id the block and its `BlockItem` are both registered under.
+        public Identifier id() {
+            return new Identifier(JewelryMod.ID, name);
+        }
     }
 
     public static final ArrayList<Entry> all = new ArrayList<>();
@@ -63,18 +68,18 @@ public class JewelryBlocks {
                 .nonOpaque()
     ));
 
-    /// Blocks only. Forge 47 unfreezes exactly one registry per `RegisterEvent` window, so the
-    /// `BlockItem`s are registered separately from {@link #registerBlockItems()} (called from the ITEM
-    /// window); registering both here crashes the Forge boot with "Can not register to a locked registry".
+    /// Blocks only. Forge opens exactly one registry per `RegisterEvent` window, so the `BlockItem`s are
+    /// registered separately from {@link #registerBlockItems()} (called from the ITEM window);
+    /// registering both here crashes the Forge boot with "Can not register to a locked registry".
     public static void register() {
         for (var entry : all) {
-            Registry.register(Registries.BLOCK, new Identifier(JewelryMod.ID, entry.name), entry.block);
+            Registry.register(Registries.BLOCK, entry.id(), entry.block());
         }
     }
 
     public static void registerBlockItems() {
         for (var entry : all) {
-            Registry.register(Registries.ITEM, new Identifier(JewelryMod.ID, entry.name), entry.item());
+            Registry.register(Registries.ITEM, entry.id(), entry.item());
         }
         // Creative-tab placement is registered per-platform from each loader's entrypoint (iterating JewelryBlocks.all).
     }

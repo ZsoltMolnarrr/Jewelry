@@ -566,7 +566,22 @@ public class JewelryItems {
             )
     )).setTier(4);
 
-    public static void register(ItemConfig allConfigs) {
+    private static boolean itemsCreated = false;
+
+    /// Builds every jewelry item — resolving each configured attribute id and attaching the modifiers —
+    /// and stores it on its {@link Entry}. Creation only: nothing is registered here, so a loader that
+    /// registers items itself calls this and then iterates {@link #all}. Built once; repeated calls
+    /// do nothing.
+    ///
+    /// Must run inside the ITEM registration window on Forge: `Item`'s constructor takes an intrusive
+    /// registry holder, so the items cannot be built earlier. The `Registries.ATTRIBUTE` read below is
+    /// safe there — Forge posts the `attribute` event before the `item` one.
+    public static void create(ItemConfig allConfigs) {
+        if (itemsCreated) {
+            return;
+        }
+        itemsCreated = true;
+
         for (var entry : all) {
             ItemConfig.Item itemConfig = allConfigs.items.get(entry.id.toString());
             if (itemConfig == null) {
@@ -600,9 +615,14 @@ public class JewelryItems {
                 settings = settings.fireproof();
             }
 
-            var item = entry.create(settings.maxCount(1), new JewelryModifiers(List.copyOf(modifiers)));
+            entry.create(settings.maxCount(1), new JewelryModifiers(List.copyOf(modifiers)));
+        }
+    }
 
-            Registry.register(Registries.ITEM, entry.id(), item);
+    public static void register(ItemConfig allConfigs) {
+        create(allConfigs);
+        for (var entry : all) {
+            Registry.register(Registries.ITEM, entry.id(), entry.item());
         }
 
         // Creative-tab placement is registered per-platform from each loader's entrypoint (iterating JewelryItems.all).

@@ -57,6 +57,15 @@ public class JewelryMod {
         JewelryBlocks.register();
     }
 
+    /// Builds every jewelry item from the item config and writes back whatever the config was missing.
+    /// Creation only — nothing is registered here, so a loader that registers the items itself calls this
+    /// first and then iterates `JewelryItems.all`. Must run inside the ITEM registration window (see
+    /// {@link JewelryItems#create}).
+    public static void createJewelryItems() {
+        JewelryItems.create(itemConfig.value);
+        itemConfig.save();
+    }
+
     public static void registerItems() {
         Registry.register(Registries.ITEM_GROUP, Group.KEY, Group.JEWELRY);
         JewelryBlocks.registerBlockItems();

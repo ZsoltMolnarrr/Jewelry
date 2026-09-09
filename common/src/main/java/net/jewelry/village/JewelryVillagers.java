@@ -26,6 +26,7 @@ import java.util.Set;
 
 public class JewelryVillagers {
     public static final String JEWELER = "jeweler";
+    public static final Identifier JEWELER_ID = new Identifier(JewelryMod.ID, JEWELER);
 
     // These will be set by platform-specific code
     public static VillagerProfession JEWELER_PROFESSION;
@@ -34,8 +35,8 @@ public class JewelryVillagers {
     public static final int POI_SEARCH_DISTANCE = 10;
 
     /// The jeweler's-kit workstation block states for the POI. Registration itself is loader-specific
-    /// (Fabric: `PointOfInterestHelper`; Forge: a plain `Registry.register` of a `PointOfInterestType`)
-    /// and lives in each platform's entrypoint; this only exposes the shared state set.
+    /// (Fabric: `PointOfInterestHelper`; Forge: a `PointOfInterestType` handed to the `RegisterEvent`
+    /// helper) and lives in each platform's entrypoint; this only exposes the shared state set.
     public static Set<BlockState> poiBlockStates() {
         return ImmutableSet.copyOf(JewelryBlocks.JEWELERS_KIT.block().getStateManager().getStates());
     }
@@ -56,12 +57,38 @@ public class JewelryVillagers {
         );
     }
 
+    private static VillagerProfession jewelerProfession;
+
+    /// Builds the jeweler profession once, keyed by {@link #JEWELER_ID}. Creation only — nothing is
+    /// registered here, so a loader that registers the profession itself hands this to its own
+    /// registration API instead of duplicating the construction.
+    public static VillagerProfession jewelerProfessionToRegister() {
+        if (jewelerProfession == null) {
+            var workStation = RegistryKey.of(Registries.POINT_OF_INTEREST_TYPE.getKey(), POI_ID);
+            jewelerProfession = createProfession(JEWELER, workStation);
+        }
+        return jewelerProfession;
+    }
+
+    /// Reads {@link #JEWELER_PROFESSION} back out of the registry, for a loader that registered the
+    /// profession itself. `VillagerTradesEvent` filtering and the Fabric trade registration both compare
+    /// against this field, and Forge's `RegisterEvent` helper returns void, so Forge calls this straight
+    /// after its registration loop. Throws if the profession is missing — which is also what catches a
+    /// silently mis-keyed `event.register` block.
+    public static void linkProfessionEntry() {
+        if (JEWELER_PROFESSION == null) {
+            JEWELER_PROFESSION = Registries.VILLAGER_PROFESSION
+                    .getOrEmpty(JEWELER_ID)
+                    .orElseThrow(() -> new IllegalStateException(
+                            "Villager profession " + JEWELER_ID + " is not in the registry — register it first"));
+        }
+    }
+
     public static void registerVillagers() {
         // Register the profession only; trade-offer registration is loader-specific and lives in each
         // platform's entrypoint (Fabric `TradeOfferHelper` / Forge `VillagerTradesEvent`), consuming
         // the shared #createTrades() map.
-        var workStation = RegistryKey.of(Registries.POINT_OF_INTEREST_TYPE.getKey(), POI_ID);
-        JEWELER_PROFESSION = Registry.register(Registries.VILLAGER_PROFESSION, new Identifier(JewelryMod.ID, JEWELER), createProfession(JEWELER, workStation));
+        JEWELER_PROFESSION = Registry.register(Registries.VILLAGER_PROFESSION, JEWELER_ID, jewelerProfessionToRegister());
     }
 
     /// 1.20.1's `TradeOffers` has no `BuyItemFactory` at all, and `SellItemFactory` -- while public in
