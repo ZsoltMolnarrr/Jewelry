@@ -63,8 +63,8 @@ dependencies {
     common(project(path: ':common', configuration: 'namedElements')) { transitive = false }
     shadowBundle project(path: ':common', configuration: 'transformProductionForge')
 
-    // Ecosystem libraries from mavenLocal (published by their 1.20.1-modern ports).
-    include(modImplementation("net.tiny_config:tiny_config-${platform}:${rootProject.tiny_config_version}"))
+    // Ecosystem libraries: the Modrinth maven for the released ones, mavenLocal for the 1.20.1-modern ports.
+    include(modImplementation("maven.modrinth:tiny-config:${rootProject.tiny_config_version}-${platform}"))
     modImplementation("net.spell_power:spell_power-${platform}:${rootProject.spell_power_version}")
 
     // Curios 5.x (1.20.1) - https://docs.illusivesoulworks.com/category/curios
@@ -75,8 +75,8 @@ dependencies {
     // nested jars of classpath mods. `localRuntime` keeps it out of the published POM.
     localRuntime("io.github.llamalad7:mixinextras-forge:${rootProject.mixin_extras_version}")
 
-    // StructurePoolAPI (1.20.1-modern port; mavenLocal). NOT JiJ'd - standalone library mod.
-    modImplementation("net.foundation:structure_pool_api-${platform}:${rootProject.structure_pool_api_version}")
+    // StructurePoolAPI from the Modrinth maven. NOT JiJ'd - standalone library mod.
+    modImplementation("maven.modrinth:structure-pool-api:${rootProject.structure_pool_api_version}-${platform}")
 
     // RangedWeaponAPI is not a dependency on either loader (registry-id attribute lookups).
 }
