@@ -1,6 +1,7 @@
 package net.jewelry.items;
 
 import net.jewelry.JewelryMod;
+import net.jewelry.gems.GemItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -13,7 +14,7 @@ public class Gems {
     public record Entry(Identifier id, Item item) { }
     public static ArrayList<Entry> all = new ArrayList<>();
     public static Entry gem(Identifier id) {
-        var entry = new Entry(id, new Item(new Item.Settings().rarity(Rarity.UNCOMMON)));
+        var entry = new Entry(id, new GemItem(new Item.Settings().rarity(Rarity.UNCOMMON)));
         all.add(entry);
         return entry;
     }
@@ -29,6 +30,6 @@ public class Gems {
         for (var entry : all) {
             Registry.register(Registries.ITEM, entry.id(), entry.item());
         }
-        // Creative-tab placement is registered per-platform from each loader's entrypoint (iterating Gems.all).
+        // Creative-tab placement: gems live on the Gems tab, see Group.GEMS (built in common, vanilla API).
     }
 }

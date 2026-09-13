@@ -1,0 +1,8 @@
+{
+  "attribute": "minecraft:generic.max_health",
+  "color": "#3F79E8",
+  "gem": "jewelry:sapphire",
+  "model": "jewelry:item/gem_cut/solid_sapphire",
+  "operation": "add_value",
+  "value": 1.0
+}

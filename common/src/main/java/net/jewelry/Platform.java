@@ -1,6 +1,9 @@
 package net.jewelry;
 
+import com.mojang.serialization.Codec;
 import dev.architectury.injectables.annotations.ExpectPlatform;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
 
 /// Loader-neutral platform seam, mirroring SpellEngine's `net.spell_engine.Platform`. Jewelry depends on
 /// SpellEngine only at COMPILE time (`modCompileOnly`) and never at runtime, so it cannot borrow
@@ -13,6 +16,13 @@ public class Platform {
         /// `LoadingModList.get().getModFileById(modid) != null` SpellEngine uses — populated during mod
         /// discovery (before any constructor runs), so early compat gates read a correct answer.
         boolean isModLoaded(String modid);
+
+        /// Which loader is running; the item-model lookup differs (see `ItemRendererMixin`).
+        boolean isFabric();
+
+        /// Register a synced datapack registry (mirrors SpellEngine's seam). Fabric: `DynamicRegistries.registerSynced`;
+        /// NeoForge: buffered and flushed into `DataPackRegistryEvent.NewRegistry`, the only point NeoForge accepts one.
+        <T> void registerSyncedDataRegistry(RegistryKey<Registry<T>> key, Codec<T> localCodec, Codec<T> networkCodec);
     }
 
     @ExpectPlatform

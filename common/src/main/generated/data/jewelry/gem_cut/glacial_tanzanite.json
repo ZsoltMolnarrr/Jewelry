@@ -1,0 +1,8 @@
+{
+  "attribute": "spell_power:frost",
+  "color": "#8A5BE0",
+  "gem": "jewelry:tanzanite",
+  "model": "jewelry:item/gem_cut/glacial_tanzanite",
+  "operation": "add_multiplied_base",
+  "value": 0.05
+}

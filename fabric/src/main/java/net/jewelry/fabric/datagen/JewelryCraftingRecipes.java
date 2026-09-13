@@ -180,7 +180,7 @@ public class JewelryCraftingRecipes extends FabricRecipeProvider {
         netheriteNecklace(exporter, JewelryItems.netherite_ruby_necklace.item(), Gems.ruby.item());
         netheriteNecklace(exporter, JewelryItems.netherite_topaz_necklace.item(), Gems.topaz.item());
         netheriteNecklace(exporter, JewelryItems.netherite_citrine_necklace.item(), Gems.citrine.item());
-        netheriteNecklace(exporter, JewelryItems.nsetherite_jade_necklace.item(), Gems.jade.item());
+        netheriteNecklace(exporter, JewelryItems.netherite_jade_necklace.item(), Gems.jade.item());
         netheriteNecklace(exporter, JewelryItems.netherite_sapphire_necklace.item(), Gems.sapphire.item());
         netheriteNecklace(exporter, JewelryItems.netherite_tanzanite_necklace.item(), Gems.tanzanite.item());
     }

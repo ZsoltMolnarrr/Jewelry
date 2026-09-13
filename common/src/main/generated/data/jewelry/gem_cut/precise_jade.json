@@ -1,0 +1,8 @@
+{
+  "attribute": "ranged_weapon:damage",
+  "color": "#4EC272",
+  "gem": "jewelry:jade",
+  "model": "jewelry:item/gem_cut/precise_jade",
+  "operation": "add_multiplied_base",
+  "value": 0.05
+}

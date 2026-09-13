@@ -1,0 +1,8 @@
+{
+  "attribute": "minecraft:generic.attack_damage",
+  "color": "#E5404F",
+  "gem": "jewelry:ruby",
+  "model": "jewelry:item/gem_cut/bold_ruby",
+  "operation": "add_multiplied_base",
+  "value": 0.05
+}

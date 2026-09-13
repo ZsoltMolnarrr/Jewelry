@@ -1,0 +1,8 @@
+{
+  "attribute": "spell_power:arcane",
+  "color": "#F2A33A",
+  "gem": "jewelry:topaz",
+  "model": "jewelry:item/gem_cut/runed_topaz",
+  "operation": "add_multiplied_base",
+  "value": 0.05
+}

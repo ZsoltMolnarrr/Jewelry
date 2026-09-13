@@ -1,12 +1,16 @@
 package net.jewelry.items;
 
 import net.jewelry.JewelryMod;
+import net.jewelry.gems.GemCut;
+import net.jewelry.gems.GemCutRegistry;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+
+import java.util.Comparator;
 
 public class Group {
     public static Identifier ID = Identifier.of(JewelryMod.ID, "generic");
@@ -20,5 +24,29 @@ public class Group {
             })
             // `.generic` suffix is required by older versions, keeping it for translation consistency
             .displayName(Text.translatable("itemGroup." + JewelryMod.ID + ".generic"))
+            .build();
+
+    public static Identifier GEMS_ID = Identifier.of(JewelryMod.ID, "gems");
+    public static RegistryKey<ItemGroup> GEMS_KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), GEMS_ID);
+    /// Raw gems followed by every cut variant, enumerated from the `gem_cut` registry at display time
+    /// (the same way vanilla lists enchanted books), so data-pack cuts show up without code changes.
+    /// Built with the vanilla `entries` collector, which both loaders honour, so no per-platform code.
+    public static ItemGroup GEMS = new ItemGroup.Builder(ItemGroup.Row.TOP, 0)
+            .icon(() -> new ItemStack(Gems.ruby.item()))
+            .displayName(Text.translatable("itemGroup." + JewelryMod.ID + ".gems"))
+            .entries((context, entries) -> {
+                for (var gem : Gems.all) {
+                    entries.add(gem.item());
+                }
+                GemCutRegistry.from(context.lookup()).ifPresent(registry -> {
+                    // Grouped by gem, in gem declaration order; cuts of a gem in id order
+                    for (var gem : Gems.all) {
+                        registry.streamEntries()
+                                .filter(entry -> entry.value().gem().value() == gem.item())
+                                .sorted(Comparator.comparing(entry -> entry.registryKey().getValue()))
+                                .forEach(entry -> entries.add(GemCut.stack(entry)));
+                    }
+                });
+            })
             .build();
 }

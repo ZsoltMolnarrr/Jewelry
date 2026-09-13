@@ -321,7 +321,7 @@ public class JewelryItems {
             )
     )).setTier(3);
 
-    public static Entry nsetherite_jade_necklace = add(Identifier.of(JewelryMod.ID, "netherite_jade_necklace"), Rarity.UNCOMMON, ItemConfig.item(
+    public static Entry netherite_jade_necklace = add(Identifier.of(JewelryMod.ID, "netherite_jade_necklace"), Rarity.UNCOMMON, ItemConfig.item(
             List.of(
                     new ItemConfig.AttributeModifier(EntityAttributes_RangedWeapon.DAMAGE.id, tier_2_bonus)
             )

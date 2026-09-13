@@ -2,7 +2,6 @@ package net.jewelry.neoforge;
 
 import net.jewelry.JewelryMod;
 import net.jewelry.blocks.JewelryBlocks;
-import net.jewelry.items.Gems;
 import net.jewelry.items.Group;
 import net.jewelry.items.JewelryItems;
 import net.jewelry.neoforge.compat.CompatFeatures;
@@ -16,13 +15,16 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.village.VillagerTradesEvent;
+import net.neoforged.neoforge.registries.DataPackRegistryEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
 
 @Mod(JewelryMod.ID)
 public final class NeoForgeMod {
     public NeoForgeMod(IEventBus modBus) {
         CompatFeatures.init();
+        JewelryMod.registerDataRegistries(); // buffered, flushed by the listener below
         JewelryMod.init();
+        modBus.addListener(DataPackRegistryEvent.NewRegistry.class, SyncedDataRegistrar::onNewRegistry);
         modBus.addListener(RegisterEvent.class, NeoForgeMod::register);
         // Jewelry items into the Jewelry creative tab — NeoForge mod-bus event (replaces ItemGroupEvents).
         modBus.addListener(BuildCreativeModeTabContentsEvent.class, NeoForgeMod::buildTabContents);
@@ -33,6 +35,12 @@ public final class NeoForgeMod {
     }
 
     public static void register(RegisterEvent event) {
+        event.register(RegistryKeys.DATA_COMPONENT_TYPE, reg -> {
+            JewelryMod.registerComponents();
+        });
+        event.register(RegistryKeys.SCREEN_HANDLER, reg -> {
+            JewelryMod.registerScreenHandlers();
+        });
         event.register(RegistryKeys.SOUND_EVENT, reg -> {
             JewelryMod.registerSounds();
         });
@@ -61,9 +69,7 @@ public final class NeoForgeMod {
         if (!event.getTabKey().equals(Group.KEY)) {
             return;
         }
-        for (var entry : Gems.all) {
-            event.add(entry.item());
-        }
+        // (Gems + cut gems are on Group.GEMS, populated by its own vanilla entries collector.)
         for (var entry : JewelryItems.all) {
             event.add(entry.item());
         }

@@ -1,0 +1,40 @@
+package net.jewelry.gems;
+
+import net.minecraft.item.ItemStack;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
+
+import java.util.List;
+
+/// Socket lines of an item tooltip, one per socket, placed right after the enchantment lines:
+///
+///     ◆ Bold Ruby: +5% Attack Damage      (glyph tinted with the cut's colour, name plain)
+///     ◇ Empty Socket
+///
+/// The glyphs are bitmap characters registered in `assets/minecraft/font/default.json`; the filled one
+/// is drawn white so the text colour tints it.
+public class SocketTooltip {
+    /// Plane-15 private-use characters (U+F0100, U+F0101), far from the ranges other mods commonly claim.
+    public static final String EMPTY_GLYPH = "\uDB80\uDD00";
+    public static final String FILLED_GLYPH = "\uDB80\uDD01";
+
+    public static void appendLines(ItemStack stack, List<Text> lines) {
+        GemSockets.of(stack).ifPresent(sockets -> {
+            for (int i = 0; i < sockets.count(); i++) {
+                var gem = sockets.gemAt(i);
+                if (gem.isPresent()) {
+                    var cut = gem.get().value();
+                    lines.add(Text.literal(FILLED_GLYPH).styled(style -> style.withColor(cut.color()))
+                            .append(Text.literal(" "))
+                            .append(GemCut.name(gem.get()).formatted(Formatting.GRAY))
+                            .append(Text.literal(": ").formatted(Formatting.GRAY))
+                            .append(GemItem.bonusText(cut)));
+                } else {
+                    lines.add(Text.literal(EMPTY_GLYPH + " ")
+                            .append(Text.translatable("item.jewelry.socket.empty"))
+                            .formatted(Formatting.DARK_GRAY));
+                }
+            }
+        });
+    }
+}

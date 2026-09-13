@@ -8,7 +8,6 @@ import net.jewelry.JewelryMod;
 import net.jewelry.blocks.JewelryBlocks;
 import net.jewelry.fabric.compat.CompatFeatures;
 import net.jewelry.fabric.worldgen.OreGeneration;
-import net.jewelry.items.Gems;
 import net.jewelry.items.Group;
 import net.jewelry.items.JewelryItems;
 import net.jewelry.village.JewelryVillagers;
@@ -17,7 +16,10 @@ public final class FabricMod implements ModInitializer {
     @Override
     public void onInitialize() {
         CompatFeatures.init();
+        JewelryMod.registerDataRegistries();
         JewelryMod.init();
+        JewelryMod.registerComponents();
+        JewelryMod.registerScreenHandlers();
         JewelryMod.registerSounds();
         JewelryMod.registerBlocks();
         JewelryMod.registerItems();
@@ -35,10 +37,8 @@ public final class FabricMod implements ModInitializer {
         OreGeneration.register();
 
         // Creative-tab placement (Jewelry group) — Fabric API.
+        // (Gems + cut gems are on Group.GEMS, populated by its own vanilla entries collector.)
         ItemGroupEvents.modifyEntriesEvent(Group.KEY).register(content -> {
-            for (var entry : Gems.all) {
-                content.add(entry.item());
-            }
             for (var entry : JewelryItems.all) {
                 content.add(entry.item());
             }

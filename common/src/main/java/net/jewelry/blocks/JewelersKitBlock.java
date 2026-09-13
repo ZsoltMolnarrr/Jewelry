@@ -3,6 +3,14 @@ package net.jewelry.blocks;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.jewelry.gems.GemCuttingScreenHandler;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.screen.ScreenHandlerContext;
+import net.minecraft.screen.SimpleNamedScreenHandlerFactory;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.world.World;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
@@ -27,6 +35,25 @@ public class JewelersKitBlock extends Block {
     public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType options) {
         super.appendTooltip(stack, context, tooltip, options);
         tooltip.add(Text.translatable("block.jewelry.jewelers_kit.hint").formatted(Formatting.GRAY, Formatting.ITALIC));
+    }
+
+    // MARK: Gem cutting screen
+
+    @Override
+    protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+        if (world.isClient) {
+            return ActionResult.SUCCESS;
+        }
+        player.openHandledScreen(state.createScreenHandlerFactory(world, pos));
+        return ActionResult.CONSUME;
+    }
+
+    @Nullable
+    @Override
+    protected NamedScreenHandlerFactory createScreenHandlerFactory(BlockState state, World world, BlockPos pos) {
+        return new SimpleNamedScreenHandlerFactory(
+                (syncId, playerInventory, player) -> new GemCuttingScreenHandler(syncId, playerInventory, ScreenHandlerContext.create(world, pos)),
+                Text.translatable(this.getTranslationKey()));
     }
 
     // MARK: Facing
