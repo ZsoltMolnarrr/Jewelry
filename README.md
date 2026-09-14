@@ -8,12 +8,53 @@ No wiki is maintained at this moment, as all the information is available in-gam
 
 ### 💎 Gem cuts & sockets
 
-Raw gems are cut at the Jeweler's Kit into cut gems that socket into equipment at an anvil. Cuts are data (`data/<ns>/gem_cut/*.json`); other mods add their own through the datagen API — see [Adding gem cuts from another mod](#adding-gem-cuts-from-another-mod) below.
+Raw gems are cut at the Jeweler's Kit into cut gems that socket into equipment at an anvil. Cuts are data (`data/<ns>/gem_cut/*.json`): data packs add their own, see [Adding gem cuts with a data pack](#adding-gem-cuts-with-a-data-pack); mods can author them in datagen, see [Adding gem cuts from another mod](#adding-gem-cuts-from-another-mod).
 
 For under the hood technical details, check out the projects providing the custom attributes:
 - [Spell Power Attributes](https://github.com/ZsoltMolnarrr/SpellPower)
 - [Ranged Weapon API](https://github.com/FabricExtras/RangedWeaponAPI)
 - [Combat Roll](https://github.com/ZsoltMolnarrr/CombatRoll)
+
+# Adding gem cuts with a data pack
+
+Every gem cut is one JSON file in a data pack, no code needed. Jewelry's own cuts live at
+`data/jewelry/gem_cut/<name>.json`; put yours at `data/<your_namespace>/gem_cut/<name>.json`.
+
+```json
+{
+  "gem": "jewelry:ruby",
+  "attribute": "minecraft:generic.attack_damage",
+  "operation": "add_multiplied_base",
+  "value": 0.04,
+  "color": "#E5404F"
+}
+```
+
+| Field | Meaning |
+|---|---|
+| `gem` | The raw gem item this cut applies to. Jewelry's: `jewelry:ruby`, `sapphire`, `jade`, `topaz`, `citrine`, `tanzanite`. |
+| `attribute` | One attribute id, e.g. `minecraft:generic.max_health`, `spell_power:fire`, `ranged_weapon:damage`. Unknown ids load fine and grant nothing. |
+| `operation` | `add_value` (flat), `add_multiplied_base` (percent of base, `0.04` = +4 %) or `add_multiplied_total`. |
+| `value` | The bonus amount. |
+| `color` | Tint of the socket glyph on equipment tooltips, `#RRGGBB`. |
+| `model` | Optional. A custom item model for this cut, e.g. `mypack:item/gem_cut/bold_ruby`. Without it the cut uses its gem's default cut sprite. |
+
+**Name.** Add `"gem_cut.<your_namespace>.<name>": "Bold Ruby"` to a lang file in a resource pack
+(`assets/<your_namespace>/lang/en_us.json`). The whole name, e.g. "Bold Ruby", not just the prefix.
+
+**Custom icon (optional).** In a resource pack, add `assets/<your_namespace>/models/item/gem_cut/<name>.json`
+(a normal `minecraft:item/generated` model) with its texture, and reference it from the cut's `model` field.
+Jewelry finds and loads every model under `models/item/gem_cut/`.
+
+**Only with another mod installed.** Add both loaders' conditions to the cut; each loader ignores the other's:
+
+```json
+"fabric:load_conditions": [ { "condition": "fabric:all_mods_loaded", "values": [ "critical_strike" ] } ],
+"neoforge:conditions": [ { "type": "neoforge:mod_loaded", "modid": "critical_strike" } ]
+```
+
+The cut then appears in the Gems creative tab, in the Jeweler's Kit for its gem, and in EMI. The server log
+lists the loaded cuts at startup, handy for checking a pack.
 
 # Adding gem cuts from another mod
 

@@ -1,7 +1,6 @@
 package net.jewelry.neoforge;
 
 import net.jewelry.JewelryMod;
-import net.jewelry.blocks.JewelryBlocks;
 import net.jewelry.items.Group;
 import net.jewelry.items.JewelryItems;
 import net.jewelry.neoforge.compat.CompatFeatures;
@@ -72,11 +71,8 @@ public final class NeoForgeMod {
         if (!event.getTabKey().equals(Group.KEY)) {
             return;
         }
-        // (Gems + cut gems are on Group.GEMS, populated by its own vanilla entries collector.)
+        // (Blocks, gems and cut gems are on Group.GEMS, populated by its own vanilla entries collector.)
         for (var entry : JewelryItems.all) {
-            event.add(entry.item());
-        }
-        for (var entry : JewelryBlocks.all) {
             event.add(entry.item());
         }
     }

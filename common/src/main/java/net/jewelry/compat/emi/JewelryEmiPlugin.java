@@ -55,11 +55,13 @@ public class JewelryEmiPlugin implements EmiPlugin {
     }
 
     /**
-     * {@code jewelry:bold_ruby} → {@code jewelry:gem_cutting/bold_ruby}. EMI recipe ids share one
+     * {@code jewelry:bold_ruby} → {@code jewelry:/gem_cutting/bold_ruby}. EMI recipe ids share one
      * namespace with every real recipe id, so the category path segment keeps these synthetic
      * entries from colliding with a same-named recipe.
      */
     public static Identifier recipeId(Identifier cutId) {
-        return Identifier.of(cutId.getNamespace(), "gem_cutting/" + cutId.getPath());
+        // Leading "/" marks the id as synthetic to EMI (not backed by the recipe manager), silencing its
+        // "not present in recipe manager" error and keeping it out of recipe-manager lookups.
+        return Identifier.of(cutId.getNamespace(), "/gem_cutting/" + cutId.getPath());
     }
 }

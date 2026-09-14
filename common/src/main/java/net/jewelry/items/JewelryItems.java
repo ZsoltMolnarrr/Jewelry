@@ -101,7 +101,8 @@ public class JewelryItems {
         return entry;
     }
 
-    private static final float tier_1_multiplier = 0.04F;
+    /// Gem-ring (tier 2) percent bonus — also the anchor for gem cut bonuses (see GemCuts).
+    public static final float tier_1_multiplier = 0.04F;
     private static final ItemConfig.Bonus tier_1_bonus = new ItemConfig.Bonus(tier_1_multiplier, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
     private static final float tier_2_multiplier = 0.08F;
     private static final ItemConfig.Bonus tier_2_bonus = new ItemConfig.Bonus(tier_2_multiplier, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
@@ -346,7 +347,7 @@ public class JewelryItems {
 
     private static final float tier_3_spell_multiplier = 0.08F;
     private static final float tier_3_ranged_multiplier = 0.08F;
-    private static final float tier_3_secondary_multiplier = 0.03F;
+    public static final float tier_3_secondary_multiplier = 0.03F;
     private static final ItemConfig.Bonus tier_3_spell_bonus = new ItemConfig.Bonus(tier_3_spell_multiplier, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
 
 

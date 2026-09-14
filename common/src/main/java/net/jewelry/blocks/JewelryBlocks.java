@@ -65,6 +65,6 @@ public class JewelryBlocks {
             Registry.register(Registries.BLOCK, Identifier.of(JewelryMod.ID, entry.name), entry.block);
             Registry.register(Registries.ITEM, Identifier.of(JewelryMod.ID, entry.name), entry.item());
         }
-        // Creative-tab placement is registered per-platform from each loader's entrypoint (iterating JewelryBlocks.all).
+        // Creative-tab placement: these lead the Gems tab, see Group.GEMS (built in common, vanilla API).
     }
 }

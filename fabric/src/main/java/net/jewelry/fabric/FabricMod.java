@@ -7,7 +7,6 @@ import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.object.builder.v1.world.poi.PointOfInterestHelper;
 import net.jewelry.JewelryMod;
-import net.jewelry.blocks.JewelryBlocks;
 import net.jewelry.fabric.compat.CompatFeatures;
 import net.jewelry.fabric.worldgen.OreGeneration;
 import net.jewelry.items.Group;
@@ -41,12 +40,9 @@ public final class FabricMod implements ModInitializer {
         OreGeneration.register();
 
         // Creative-tab placement (Jewelry group) — Fabric API.
-        // (Gems + cut gems are on Group.GEMS, populated by its own vanilla entries collector.)
+        // (Blocks, gems and cut gems are on Group.GEMS, populated by its own vanilla entries collector.)
         ItemGroupEvents.modifyEntriesEvent(Group.KEY).register(content -> {
             for (var entry : JewelryItems.all) {
-                content.add(entry.item());
-            }
-            for (var entry : JewelryBlocks.all) {
                 content.add(entry.item());
             }
         });
