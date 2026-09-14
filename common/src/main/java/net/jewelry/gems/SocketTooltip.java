@@ -10,7 +10,7 @@ import java.util.List;
 
 /// Socket lines of an item tooltip, one per socket, placed right after the enchantment lines:
 ///
-///     ◆ Bold Ruby: +5% Attack Damage      (glyph tinted with the cut's colour, name plain)
+///     ◆ +4% Attack Damage      (glyph tinted with the cut's colour; the gem itself is not named)
 ///     ◇ Empty Socket
 ///
 /// The glyphs are bitmap characters registered in `assets/minecraft/font/default.json`; the filled one
@@ -33,8 +33,6 @@ public class SocketTooltip {
                     var cut = gem.get().value();
                     lines.add(Text.literal(FILLED_GLYPH).styled(style -> style.withColor(cut.color()))
                             .append(Text.literal(" "))
-                            .append(GemCut.name(gem.get()).formatted(Formatting.GRAY))
-                            .append(Text.literal(": ").formatted(Formatting.GRAY))
                             .append(GemItem.bonusText(cut)));
                 } else {
                     lines.add(Text.literal(EMPTY_GLYPH + " ")

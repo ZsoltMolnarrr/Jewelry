@@ -3,19 +3,19 @@
     {
       "condition": "fabric:all_mods_loaded",
       "values": [
-        "combat_roll"
+        "spell_engine"
       ]
     }
   ],
-  "attribute": "combat_roll:recharge",
-  "color": "#4EC272",
-  "gem": "jewelry:jade",
+  "attribute": "spell_engine:healing_taken",
+  "color": "#3F79E8",
+  "gem": "jewelry:sapphire",
   "neoforge:conditions": [
     {
       "type": "neoforge:mod_loaded",
-      "modid": "combat_roll"
+      "modid": "spell_engine"
     }
   ],
   "operation": "add_multiplied_base",
-  "value": 0.05
+  "value": 0.02
 }

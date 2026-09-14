@@ -15,7 +15,7 @@ import java.util.List;
 /// The cuts Jewelry ships, built with the public [GemCutBuilder]. Source of truth for datagen, which emits
 /// them as `data/jewelry/gem_cut/*.json`; other mods add theirs the same way (see docs/GEM_CUTS_API.md).
 ///
-/// Four cuts per gem (three for tanzanite), each gem a stat family (see docs/jewelry/GEM_CUTS_DESIGN.md):
+/// Four cuts per gem (five for sapphire), each gem a stat family (see docs/jewelry/GEM_CUTS_DESIGN.md):
 /// Ruby = melee might · Sapphire = fortitude · Jade = agility/ranged · Topaz = arcane/fire & spell offense ·
 /// Citrine = healing/lightning & tempo · Tanzanite = frost/soul & lethality.
 /// Prefixes are unique across the set, so the name alone says the stat ("Quick" is always Attack Speed).
@@ -30,6 +30,7 @@ public class GemCuts {
     private static final float HALF_UNIQUE_BONUS = 0.05F;                                  // 5 %: uniques' 10 % secondaries halved
     public static final String CRITICAL_STRIKE = "critical_strike";
     public static final String COMBAT_ROLL = "combat_roll";
+    public static final String SPELL_ENGINE = "spell_engine"; // not a dependency of Jewelry: its cuts are gated
 
     // One colour per gem, shared by all of its cuts
     private static final int RUBY = 0xE5404F;
@@ -74,6 +75,9 @@ public class GemCuts {
             .addValue(vanilla("generic.armor_toughness"), 0.5F));
     public static final GemCutBuilder.Entry STEADFAST_SAPPHIRE = add(cut("steadfast_sapphire", Gems.sapphire, SAPPHIRE)
             .addValue(vanilla("generic.knockback_resistance"), 0.1F));
+    public static final GemCutBuilder.Entry VITAL_SAPPHIRE = add(cut("vital_sapphire", Gems.sapphire, SAPPHIRE)
+            .multiplyBase(Identifier.of(SPELL_ENGINE, "healing_taken"), 0.02F)
+            .requiresMod(SPELL_ENGINE));
 
     // MARK: Jade — agility, ranged
     public static final GemCutBuilder.Entry PRECISE_JADE = add(cut("precise_jade", Gems.jade, JADE)
@@ -82,8 +86,8 @@ public class GemCuts {
             .multiplyBase(EntityAttributes_RangedWeapon.HASTE.id, PRIMARY_BONUS));
     public static final GemCutBuilder.Entry PIERCING_JADE = add(cut("piercing_jade", Gems.jade, JADE)
             .addValue(EntityAttributes_RangedWeapon.VELOCITY.id, 0.25F));
-    public static final GemCutBuilder.Entry EVASIVE_JADE = add(cut("evasive_jade", Gems.jade, JADE)
-            .multiplyBase(Identifier.of(COMBAT_ROLL, "recharge"), HALF_UNIQUE_BONUS)
+    public static final GemCutBuilder.Entry NIMBLE_JADE = add(cut("nimble_jade", Gems.jade, JADE)
+            .multiplyBase(Identifier.of(COMBAT_ROLL, "recharge"), PRIMARY_BONUS)
             .requiresMod(COMBAT_ROLL));
 
     // MARK: Topaz — arcane & fire, spell offense
@@ -106,11 +110,14 @@ public class GemCuts {
     public static final GemCutBuilder.Entry FLEET_CITRINE = add(cut("fleet_citrine", Gems.citrine, CITRINE)
             .multiplyBase(vanilla("generic.movement_speed"), HALF_UNIQUE_BONUS));
 
-    // MARK: Tanzanite — frost & soul, lethality
+    // MARK: Tanzanite — frost & soul, lethality & elusiveness
     public static final GemCutBuilder.Entry GLACIAL_TANZANITE = add(cut("glacial_tanzanite", Gems.tanzanite, TANZANITE)
             .multiplyBase(SpellSchools.FROST.id, PRIMARY_BONUS));
     public static final GemCutBuilder.Entry SHADOWY_TANZANITE = add(cut("shadowy_tanzanite", Gems.tanzanite, TANZANITE)
             .multiplyBase(SpellSchools.SOUL.id, PRIMARY_BONUS));
     public static final GemCutBuilder.Entry WICKED_TANZANITE = add(cut("wicked_tanzanite", Gems.tanzanite, TANZANITE)
             .multiplyBase(SpellPowerMechanics.CRITICAL_DAMAGE.id, HALF_UNIQUE_BONUS));
+    public static final GemCutBuilder.Entry ELUSIVE_TANZANITE = add(cut("elusive_tanzanite", Gems.tanzanite, TANZANITE)
+            .multiplyBase(Identifier.of(SPELL_ENGINE, "evasion_chance"), PRIMARY_BONUS)
+            .requiresMod(SPELL_ENGINE));
 }

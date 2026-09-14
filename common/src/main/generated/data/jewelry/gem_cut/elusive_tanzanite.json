@@ -1,0 +1,21 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "spell_engine"
+      ]
+    }
+  ],
+  "attribute": "spell_engine:evasion_chance",
+  "color": "#8A5BE0",
+  "gem": "jewelry:tanzanite",
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "spell_engine"
+    }
+  ],
+  "operation": "add_multiplied_base",
+  "value": 0.04
+}
