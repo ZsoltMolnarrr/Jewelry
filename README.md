@@ -8,12 +8,23 @@ No wiki is maintained at this moment, as all the information is available in-gam
 
 ### 💎 Gem cuts & sockets
 
-Raw gems are cut at the Jeweler's Kit into cut gems that socket into equipment at an anvil. Cuts are data (`data/<ns>/gem_cut/*.json`): data packs add their own, see [Adding gem cuts with a data pack](#adding-gem-cuts-with-a-data-pack); mods can author them in datagen, see [Adding gem cuts from another mod](#adding-gem-cuts-from-another-mod).
+Raw gems are cut at the Jeweler's Kit into cut gems that socket into equipment at an anvil.
+
+Cuts are data (`data/<ns>/gem_cut/*.json`): data packs add their own, see [Adding gem cuts with a data pack](#adding-gem-cuts-with-a-data-pack); mods can author them in datagen, see [Adding gem cuts from another mod](#adding-gem-cuts-from-another-mod).
 
 For under the hood technical details, check out the projects providing the custom attributes:
 - [Spell Power Attributes](https://github.com/ZsoltMolnarrr/SpellPower)
 - [Ranged Weapon API](https://github.com/FabricExtras/RangedWeaponAPI)
 - [Combat Roll](https://github.com/ZsoltMolnarrr/CombatRoll)
+
+### ⚙️ Feature flags
+
+`config/jewelry/features.json` can switch either half off, e.g. when another mod provides a similar system.
+
+| Flag | Default | Read by | Effect when `false` |
+|---|---|---|---|
+| `gem_cuts` | `true` | the server (the integrated one in singleplayer), on every datapack load, so `/reload` applies it | No gem cut data is loaded, from Jewelry or any pack. The synced registry reaches clients empty, so nothing of the system shows: no cuts in the Gems tab, an inert Jeweler's Kit, no socket lines, no EMI category. Cut gems already in the world are lost. |
+| `sockets` | `true` | each side from its own file, at runtime; set it on server and clients alike | No item resolves sockets: no socket tooltip lines, socketed gems grant nothing, the anvil won't socket. Item data is untouched, so turning it back on restores everything. |
 
 # Adding gem cuts with a data pack
 

@@ -3,6 +3,7 @@ package net.jewelry.blocks;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.jewelry.gems.GemCutRegistry;
 import net.jewelry.gems.GemCuttingScreenHandler;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.screen.NamedScreenHandlerFactory;
@@ -41,6 +42,9 @@ public class JewelersKitBlock extends Block {
 
     @Override
     protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+        if (!GemCutRegistry.isEnabled(world)) {
+            return ActionResult.PASS; // gem cuts disabled on this server: plain workstation block
+        }
         if (world.isClient) {
             return ActionResult.SUCCESS;
         }

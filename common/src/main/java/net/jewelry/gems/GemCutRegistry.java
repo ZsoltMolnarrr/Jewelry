@@ -5,6 +5,7 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
+import net.jewelry.JewelryMod;
 
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -29,6 +30,29 @@ public class GemCutRegistry {
     }
 
     private static final Logger LOGGER = LoggerFactory.getLogger("Jewelry/GemCuts");
+
+    // MARK: Feature switch
+
+    /// Server side: whether `gem_cut` data may be loaded at all (`features.gem_cuts`). Re-reads the config
+    /// so a `/reload` after editing it takes effect; called once per datapack load by the loader mixin.
+    public static boolean loadingEnabled() {
+        JewelryMod.featuresConfig.refresh();
+        var enabled = JewelryMod.featuresConfig.safeValue().gem_cuts;
+        if (!enabled) {
+            LOGGER.info("Gem cuts are disabled in config/jewelry/features.json — loading no gem_cut data");
+        }
+        return enabled;
+    }
+
+    /// Everywhere else (both sides): the feature is "on" exactly when the synced registry has entries.
+    /// A disabled server loads none, so clients need no flag of their own.
+    public static boolean isEnabled(World world) {
+        return world != null && from(world).size() > 0;
+    }
+
+    public static boolean isEnabled(@org.jetbrains.annotations.Nullable RegistryWrapper.WrapperLookup lookup) {
+        return lookup != null && from(lookup).map(registry -> registry.streamEntries().findAny().isPresent()).orElse(false);
+    }
 
     /// One line at server start listing the loaded cuts — makes load-conditioned cuts (present only with
     /// their mod) verifiable from the log. Each loader calls this from its server-started hook.

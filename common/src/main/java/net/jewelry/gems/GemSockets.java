@@ -1,5 +1,6 @@
 package net.jewelry.gems;
 
+import net.jewelry.JewelryMod;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.entity.EquipmentSlot;
@@ -20,8 +21,17 @@ import java.util.function.BiConsumer;
 /// (`settings.component(GemComponents.SOCKETS, SocketsComponent.empty(1))`, see [SocketsComponent#empty]);
 /// the stack's component then overrides it once gems are socketed.
 public class GemSockets {
-    /// The sockets of a stack: its `jewelry:sockets` component (the item's default counts), or none.
+    /// Runtime feature switch (`features.sockets`); each side reads its own config.
+    public static boolean enabled() {
+        return JewelryMod.featuresConfig.value.sockets;
+    }
+
+    /// The sockets of a stack: its `jewelry:sockets` component (the item's default counts), or none —
+    /// always none while sockets are disabled, which is what every consumer (tooltip, anvil, attributes) checks.
     public static Optional<SocketsComponent> of(ItemStack stack) {
+        if (!enabled()) {
+            return Optional.empty();
+        }
         return Optional.ofNullable(stack.get(GemComponents.SOCKETS));
     }
 
@@ -49,7 +59,7 @@ public class GemSockets {
     /// Ids are unique per (cut, slot, socket index), so the same cut stacks across sockets and across slots.
     public static void applyModifiers(ItemStack stack, EquipmentSlot slot,
                                       BiConsumer<RegistryEntry<EntityAttribute>, EntityAttributeModifier> consumer) {
-        var sockets = stack.get(GemComponents.SOCKETS);
+        var sockets = of(stack).orElse(null);
         if (sockets == null || sockets.gems().isEmpty() || !appliesTo(stack, slot)) {
             return;
         }

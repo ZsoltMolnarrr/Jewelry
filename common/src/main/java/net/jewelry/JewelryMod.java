@@ -4,6 +4,7 @@ import net.fabric_extras.structure_pool.api.StructurePoolAPI;
 import net.fabric_extras.structure_pool.api.StructurePoolConfig;
 import net.jewelry.blocks.JewelryBlocks;
 import net.jewelry.config.Default;
+import net.jewelry.config.FeaturesConfig;
 import net.jewelry.config.ItemConfig;
 import net.jewelry.gems.GemComponents;
 import net.jewelry.gems.GemCut;
@@ -35,12 +36,20 @@ public class JewelryMod {
             .sanitize(true)
             .build();
 
+    public static ConfigManager<FeaturesConfig> featuresConfig = new ConfigManager<>
+            ("features", new FeaturesConfig())
+            .builder()
+            .setDirectory(ID)
+            .sanitize(true)
+            .build();
+
     /**
      * Runs the mod initializer.
      */
     public static void init() {
         itemConfig.refresh();
         villageConfig.refresh();
+        featuresConfig.refresh();
         if (!Platform.util().isModLoaded("lithostitched")) {
             StructurePoolAPI.injectAll(JewelryMod.villageConfig.value);
         }

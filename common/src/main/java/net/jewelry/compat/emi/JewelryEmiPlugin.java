@@ -36,16 +36,17 @@ public class JewelryEmiPlugin implements EmiPlugin {
 
     @Override
     public void register(EmiRegistry registry) {
-        registry.addCategory(CATEGORY);
-        registry.addWorkstation(CATEGORY, JEWELERS_KIT);
-
         // The gem cut registry is datapack-driven and synced, so it is reachable only through the
         // client world's registry manager. EMI refuses to run plugins while `client.world` is null,
         // so this is populated by the time we get here — the guard is belt and braces.
+        // An empty registry means the server has gem cuts disabled: register nothing, not even the category.
         var world = MinecraftClient.getInstance().world;
-        if (world == null) {
+        if (world == null || !GemCutRegistry.isEnabled(world)) {
             return;
         }
+        registry.addCategory(CATEGORY);
+        registry.addWorkstation(CATEGORY, JEWELERS_KIT);
+
         // Iterating the registry (rather than Jewelry's own gem list) picks up cuts contributed by
         // other mods and data packs, including cuts for gems Jewelry does not own.
         GemCutRegistry.from(world).streamEntries().forEach(entry -> {

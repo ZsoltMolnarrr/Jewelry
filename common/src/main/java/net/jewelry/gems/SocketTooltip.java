@@ -1,6 +1,8 @@
 package net.jewelry.gems;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.RegistryWrapper;
+import org.jetbrains.annotations.Nullable;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
@@ -18,7 +20,12 @@ public class SocketTooltip {
     public static final String EMPTY_GLYPH = "\uDB80\uDD00";
     public static final String FILLED_GLYPH = "\uDB80\uDD01";
 
-    public static void appendLines(ItemStack stack, List<Text> lines) {
+    /// `lookup` is the tooltip context's registry lookup: no socket lines at all while the server has gem cuts
+    /// disabled (empty synced registry), so a disabled server shows no trace of the system.
+    public static void appendLines(ItemStack stack, List<Text> lines, @Nullable RegistryWrapper.WrapperLookup lookup) {
+        if (!GemCutRegistry.isEnabled(lookup)) {
+            return;
+        }
         GemSockets.of(stack).ifPresent(sockets -> {
             for (int i = 0; i < sockets.count(); i++) {
                 var gem = sockets.gemAt(i);
