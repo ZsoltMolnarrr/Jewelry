@@ -27,7 +27,8 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
     }
 
     /// Socketing: left = item with sockets, right = cut gem → the item with the gem socketed (a full item
-    /// is reset to the new gem alone), for
+    /// is reset to the new gem alone); or left = fitting equipment, right = socket mount → the item with a
+    /// socket added — repeated mounting past the cap only in creative. Both for
     /// [GemSocketing#LEVEL_COST] levels and one gem. Takes over the whole result computation for that
     /// pair (so no repair-cost bump, no "Too Expensive"); every other pair falls through to vanilla.
     /// A typed rename still applies, same rules as vanilla.
@@ -35,7 +36,7 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
     private void updateResult_HEAD_Jewelry(CallbackInfo ci) {
         var target = this.input.getStack(0);
         var gem = this.input.getStack(1);
-        var result = GemSocketing.socket(target, gem);
+        var result = GemSocketing.anvilResult(target, gem, this.player.isInCreativeMode());
         if (result == null) {
             return;
         }

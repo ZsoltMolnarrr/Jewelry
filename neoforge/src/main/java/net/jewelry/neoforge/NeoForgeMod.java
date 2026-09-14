@@ -37,9 +37,6 @@ public final class NeoForgeMod {
     }
 
     public static void register(RegisterEvent event) {
-        event.register(RegistryKeys.DATA_COMPONENT_TYPE, reg -> {
-            JewelryMod.registerComponents();
-        });
         event.register(RegistryKeys.SCREEN_HANDLER, reg -> {
             JewelryMod.registerScreenHandlers();
         });

@@ -8,6 +8,8 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.jewelry.JewelryMod;
 import net.jewelry.api.datagen.GemCutGenerator;
 import net.jewelry.gems.GemCuts;
+import net.jewelry.gems.SocketMounts;
+import net.minecraft.registry.tag.ItemTags;
 import net.jewelry.items.Gems;
 import net.jewelry.items.JewelryItem;
 import net.jewelry.items.JewelryItems;
@@ -59,6 +61,14 @@ public class JewelryDataGenerator implements DataGeneratorEntrypoint {
 
             // Generate loot tier tags using RPGSeries helper
             generateLootTierTags();
+
+            // What the armor socket mount fits: vanilla's armor tags plus the conventional c:armors
+            getOrCreateTagBuilder(SocketMounts.ARMOR_TARGETS)
+                    .addOptionalTag(ItemTags.HEAD_ARMOR)
+                    .addOptionalTag(ItemTags.CHEST_ARMOR)
+                    .addOptionalTag(ItemTags.LEG_ARMOR)
+                    .addOptionalTag(ItemTags.FOOT_ARMOR)
+                    .addOptionalTag(TagKey.of(RegistryKeys.ITEM, Identifier.of("c", "armors")));
         }
 
         /**
@@ -121,6 +131,9 @@ public class JewelryDataGenerator implements DataGeneratorEntrypoint {
         public void generateItemModels(ItemModelGenerator itemModelGenerator) {
             Gems.all.forEach(gem -> {
                 itemModelGenerator.register(gem.item(), Models.GENERATED);
+            });
+            SocketMounts.all.forEach(mount -> {
+                itemModelGenerator.register(mount.item(), Models.GENERATED);
             });
             JewelryItems.all.forEach(entry -> {
                 itemModelGenerator.register(entry.item(), Models.GENERATED);

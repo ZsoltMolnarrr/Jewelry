@@ -60,11 +60,15 @@ public class GemSockets {
     public static void applyModifiers(ItemStack stack, EquipmentSlot slot,
                                       BiConsumer<RegistryEntry<EntityAttribute>, EntityAttributeModifier> consumer) {
         var sockets = of(stack).orElse(null);
-        if (sockets == null || sockets.gems().isEmpty() || !appliesTo(stack, slot)) {
+        if (sockets == null || sockets.filled() == 0 || !appliesTo(stack, slot)) {
             return;
         }
-        for (int i = 0; i < sockets.filled(); i++) {
-            var gem = sockets.gems().get(i);
+        for (int i = 0; i < sockets.count(); i++) {
+            var socket = sockets.gemAt(i);
+            if (socket.isEmpty()) {
+                continue;
+            }
+            var gem = socket.get();
             var cutId = GemCut.idOf(gem);
             if (cutId.isEmpty()) {
                 continue;

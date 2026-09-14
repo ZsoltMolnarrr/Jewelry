@@ -4,6 +4,7 @@ import net.jewelry.JewelryMod;
 import net.jewelry.blocks.JewelryBlocks;
 import net.jewelry.gems.GemCut;
 import net.jewelry.gems.GemCutRegistry;
+import net.jewelry.gems.SocketMounts;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
@@ -39,6 +40,9 @@ public class Group {
             .entries((context, entries) -> {
                 for (var block : JewelryBlocks.all) {
                     entries.add(block.item());
+                }
+                for (var mount : SocketMounts.all) {
+                    entries.add(mount.item());
                 }
                 for (var gem : Gems.all) {
                     entries.add(gem.item());

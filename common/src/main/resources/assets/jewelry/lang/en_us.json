@@ -14,6 +14,8 @@
   "item.jewelry.jade": "Jade",
   "item.jewelry.sapphire": "Sapphire",
   "item.jewelry.tanzanite": "Tanzanite",
+  "item.jewelry.socket_mount": "Socket Mount",
+  "item.jewelry.socket_mount.hint": "Apply to a piece of armor at an anvil to add a socket.",
   "gem_cut.jewelry.bold_ruby": "Bold Ruby",
   "gem_cut.jewelry.quick_ruby": "Quick Ruby",
   "gem_cut.jewelry.fierce_ruby": "Fierce Ruby",

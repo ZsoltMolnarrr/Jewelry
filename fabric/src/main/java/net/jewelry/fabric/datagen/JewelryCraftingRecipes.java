@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.jewelry.blocks.JewelryBlocks;
 import net.jewelry.items.Gems;
+import net.jewelry.gems.SocketMounts;
 import net.jewelry.items.JewelryItems;
 import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
@@ -208,6 +209,23 @@ public class JewelryCraftingRecipes extends FabricRecipeProvider {
 
     private void generateSpecialItems(RecipeExporter exporter) {
         jewelryKit(exporter);
+        socketMount(exporter);
+    }
+
+    /**
+     * Socket Mount: metalwork around a diamond — gold corners, iron sides.
+     * Pattern: "GIG" / "IDI" / "GIG"
+     */
+    private void socketMount(RecipeExporter exporter) {
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, SocketMounts.SOCKET_MOUNT.item())
+                .pattern("GIG")
+                .pattern("IDI")
+                .pattern("GIG")
+                .input('G', Items.GOLD_INGOT)
+                .input('I', Items.IRON_INGOT)
+                .input('D', Items.DIAMOND)
+                .criterion(hasItem(Items.DIAMOND), conditionsFromItem(Items.DIAMOND))
+                .offerTo(exporter);
     }
 
     /**

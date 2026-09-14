@@ -10,6 +10,7 @@ import net.jewelry.gems.GemComponents;
 import net.jewelry.gems.GemCut;
 import net.jewelry.gems.GemCutRegistry;
 import net.jewelry.gems.GemCuttingScreenHandler;
+import net.jewelry.gems.SocketMounts;
 import net.jewelry.items.Gems;
 import net.jewelry.items.Group;
 import net.jewelry.items.JewelryItems;
@@ -61,10 +62,6 @@ public class JewelryMod {
         Platform.util().registerSyncedDataRegistry(GemCutRegistry.KEY, GemCut.CODEC, GemCut.CODEC);
     }
 
-    public static void registerComponents() {
-        GemComponents.register();
-    }
-
     public static void registerScreenHandlers() {
         Registry.register(Registries.SCREEN_HANDLER, GemCuttingScreenHandler.ID, GemCuttingScreenHandler.HANDLER_TYPE);
     }
@@ -81,6 +78,7 @@ public class JewelryMod {
         Registry.register(Registries.ITEM_GROUP, Group.KEY, Group.JEWELRY);
         Registry.register(Registries.ITEM_GROUP, Group.GEMS_KEY, Group.GEMS);
         Gems.register();
+        SocketMounts.register();
         JewelryItems.register(itemConfig.value);
         itemConfig.save();
     }

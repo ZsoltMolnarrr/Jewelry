@@ -19,7 +19,6 @@ public final class FabricMod implements ModInitializer {
         CompatFeatures.init();
         JewelryMod.registerDataRegistries();
         JewelryMod.init();
-        JewelryMod.registerComponents();
         JewelryMod.registerScreenHandlers();
         JewelryMod.registerSounds();
         JewelryMod.registerBlocks();

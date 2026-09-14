@@ -11,9 +11,9 @@ import net.minecraft.util.Identifier;
 
 /// Data component types of the gem system.
 ///
-/// The types are built statically but registered from [#register()], which each loader calls at the
-/// right moment (Fabric: mod init; NeoForge: the `DATA_COMPONENT_TYPE` `RegisterEvent`), because
-/// NeoForge freezes vanilla registries outside its register events.
+/// The types are built statically and registered by [#register()] from `DataComponentTypesMixin`, at the tail
+/// of vanilla's component bootstrap: earlier than any mod's item registration on both loaders, so other mods
+/// can look `jewelry:sockets` up by id while building their items.
 public class GemComponents {
     public static final Identifier CUT_ID = Identifier.of(JewelryMod.ID, "cut");
 
@@ -41,8 +41,23 @@ public class GemComponents {
             .packetCodec(Identifier.PACKET_CODEC)
             .build();
 
+    public static final Identifier SOCKET_MOUNT_ID = Identifier.of(JewelryMod.ID, "socket_mount");
+
+    /// On a socket mount item: what it fits and how many sockets it adds (see [SocketMountComponent]).
+    public static final ComponentType<SocketMountComponent> SOCKET_MOUNT = ComponentType.<SocketMountComponent>builder()
+            .codec(SocketMountComponent.CODEC)
+            .packetCodec(SocketMountComponent.PACKET_CODEC)
+            .build();
+
+    private static boolean registered = false;
+
     public static void register() {
+        if (registered) {
+            return;
+        }
+        registered = true;
         Registry.register(Registries.DATA_COMPONENT_TYPE, CUT_ID, CUT);
+        Registry.register(Registries.DATA_COMPONENT_TYPE, SOCKET_MOUNT_ID, SOCKET_MOUNT);
         Registry.register(Registries.DATA_COMPONENT_TYPE, ITEM_MODEL_ID, ITEM_MODEL);
         Registry.register(Registries.DATA_COMPONENT_TYPE, SOCKETS_ID, SOCKETS);
     }

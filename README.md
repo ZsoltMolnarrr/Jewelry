@@ -145,6 +145,32 @@ Make its item extend `net.jewelry.gems.GemItem`: that gives the cut gem its name
 line in its tooltip. Cuts for any gem show in Jewelry's Gems creative tab (Jewelry's gems first) and in the
 Jeweler's Kit when that gem is placed in it.
 
+## Giving your items sockets
+
+Sockets are the `jewelry:sockets` component: one entry per socket, e.g. `[{}]` for one empty socket,
+`[{}, {}]` for two. Set it as a default component on the item and the socket system does the rest
+(tooltip, anvil socketing, gem bonuses).
+
+With Jewelry on the compile classpath:
+
+```java
+new Item.Settings().component(GemComponents.SOCKETS, SocketsComponent.empty(1))
+```
+
+**Without depending on Jewelry** — resolve the component type by id and decode the value with its own codec,
+so your mod only needs to know the id and the JSON shape:
+
+```java
+if (isModLoaded("jewelry")) {   // FabricLoader.getInstance().isModLoaded / ModList.get().isLoaded
+    var type = Registries.DATA_COMPONENT_TYPE.get(Identifier.of("jewelry", "sockets"));
+    var value = type.getCodec().parse(JsonOps.INSTANCE, JsonParser.parseString("[{}]")).getOrThrow();
+    settings.component((ComponentType<Object>) type, value);   // unchecked cast, deliberately
+}
+```
+
+This works at item-construction time on both loaders regardless of mod load order, because Jewelry registers
+its component types during vanilla's component bootstrap (`DataComponentTypes`), before any mod registers items.
+
 ## Runtime pieces you may want
 
 - `GemComponents.CUT` — the cut on a gem stack; `GemCut.of(stack)` / `GemCut.stack(entry)`.
