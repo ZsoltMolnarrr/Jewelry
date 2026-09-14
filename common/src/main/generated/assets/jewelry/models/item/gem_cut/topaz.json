@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "jewelry:item/gem_cut/radiant_citrine"
+    "layer0": "jewelry:item/gem_cut/topaz"
   }
 }

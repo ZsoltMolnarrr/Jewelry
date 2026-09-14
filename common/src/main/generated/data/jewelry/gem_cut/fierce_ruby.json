@@ -10,7 +10,6 @@
   "attribute": "critical_strike:damage",
   "color": "#E5404F",
   "gem": "jewelry:ruby",
-  "model": "jewelry:item/gem_cut/fierce_ruby",
   "neoforge:conditions": [
     {
       "type": "neoforge:mod_loaded",

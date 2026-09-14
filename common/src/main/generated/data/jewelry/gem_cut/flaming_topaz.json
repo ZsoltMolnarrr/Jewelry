@@ -2,7 +2,6 @@
   "attribute": "spell_power:fire",
   "color": "#F2A33A",
   "gem": "jewelry:topaz",
-  "model": "jewelry:item/gem_cut/flaming_topaz",
   "operation": "add_multiplied_base",
   "value": 0.05
 }

@@ -29,8 +29,9 @@ public record GemCut(
         float value,
         EntityAttributeModifier.Operation operation,
         TextColor color,
-        /// Item model of the cut gem (e.g. `jewelry:item/gem_cut/bold_ruby`, a file under
-        /// `models/item/gem_cut/`); absent → renders as the raw gem.
+        /// Custom item model of the cut gem (opt-in, e.g. `jewelry:item/gem_cut/bold_ruby`, a file under
+        /// `models/item/gem_cut/`). Absent → the gem's default cut model ([#defaultModelId]), which every gem
+        /// ships; if even that is missing, the raw gem's own model.
         Optional<Identifier> model
 ) {
     public static final Codec<GemCut> CODEC = RecordCodecBuilder.create(instance -> instance.group(
@@ -42,9 +43,21 @@ public record GemCut(
             Identifier.CODEC.optionalFieldOf("model").forGetter(GemCut::model)
     ).apply(instance, GemCut::new));
 
-    /// Conventional model id of a cut: `<ns>:item/gem_cut/<path>`, a file under `models/item/gem_cut/`.
+    /// Model id of a cut's custom icon: `<ns>:item/gem_cut/<cut path>`, a file under `models/item/gem_cut/`.
     public static Identifier conventionalModelId(Identifier cutId) {
         return Identifier.of(cutId.getNamespace(), "item/gem_cut/" + cutId.getPath());
+    }
+
+    /// Model id of a gem's default cut look, shared by all its cuts without a custom icon:
+    /// `<gem ns>:item/gem_cut/<gem path>` (e.g. `jewelry:item/gem_cut/ruby`).
+    public static Identifier defaultModelId(Item gem) {
+        var gemId = Registries.ITEM.getId(gem);
+        return Identifier.of(gemId.getNamespace(), "item/gem_cut/" + gemId.getPath());
+    }
+
+    /// The model this cut gem renders with: its custom icon if opted in, else its gem's default cut model.
+    public Identifier effectiveModelId() {
+        return model.orElseGet(() -> defaultModelId(gem.value()));
     }
 
     // MARK: Naming

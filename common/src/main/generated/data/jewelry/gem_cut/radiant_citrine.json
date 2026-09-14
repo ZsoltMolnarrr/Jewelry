@@ -2,7 +2,6 @@
   "attribute": "spell_power:healing",
   "color": "#F4D44B",
   "gem": "jewelry:citrine",
-  "model": "jewelry:item/gem_cut/radiant_citrine",
   "operation": "add_multiplied_base",
   "value": 0.05
 }

@@ -13,6 +13,7 @@ import net.minecraft.data.DataWriter;
 import net.minecraft.data.client.ItemModelGenerator;
 import net.minecraft.data.client.Models;
 import net.minecraft.data.client.TextureMap;
+import net.minecraft.item.ItemConvertible;
 import net.minecraft.registry.RegistryWrapper;
 
 import java.util.ArrayList;
@@ -35,7 +36,8 @@ import java.util.concurrent.CompletableFuture;
 /// mod carries load conditions for BOTH loaders (`fabric:load_conditions` and `neoforge:conditions`), and
 /// the Fabric provider only knows its own. Each loader ignores the other's field.
 ///
-/// Item models are a separate concern of your model provider: call [#generateItemModel] per cut there.
+/// Item models are a separate concern of your model provider: call [#generateDefaultGemModel] per raw gem
+/// (the sprite all its cuts share) and [#generateItemModel] per cut that opted into a custom icon.
 public abstract class GemCutGenerator implements DataProvider {
     public interface Entries {
         void add(GemCutBuilder.Entry entry);
@@ -72,8 +74,16 @@ public abstract class GemCutGenerator implements DataProvider {
         });
     }
 
-    /// Flat "generated" item model for the cut at its model id, textured from the same path
-    /// (`jewelry:item/gem_cut/bold_ruby` → `textures/item/gem_cut/bold_ruby.png`). No-op for `noModel()` cuts.
+    /// The gem's default cut model, `<ns>:item/gem_cut/<gem path>`, textured from the same path
+    /// (`textures/item/gem_cut/<gem path>.png`). Every raw gem that has cuts should emit one.
+    public static void generateDefaultGemModel(ItemModelGenerator itemModelGenerator, ItemConvertible gem) {
+        var model = GemCut.defaultModelId(gem.asItem());
+        Models.GENERATED.upload(model, TextureMap.layer0(model), itemModelGenerator.writer);
+    }
+
+    /// Flat "generated" item model for a cut's custom icon, textured from the same path
+    /// (`jewelry:item/gem_cut/bold_ruby` → `textures/item/gem_cut/bold_ruby.png`). No-op for cuts
+    /// without a custom icon.
     public static void generateItemModel(ItemModelGenerator itemModelGenerator, GemCutBuilder.Entry cut) {
         cut.model().ifPresent(model ->
                 Models.GENERATED.upload(model, TextureMap.layer0(model), itemModelGenerator.writer));

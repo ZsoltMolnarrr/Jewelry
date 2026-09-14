@@ -22,8 +22,11 @@ import java.util.Optional;
 ///         .build();
 /// ```
 ///
-/// Defaults: the model is `<ns>:item/gem_cut/<path>` (a file under `models/item/gem_cut/`, which Jewelry
-/// discovers and bakes on both loaders; `GemCutGenerator.generateItemModel` emits it), the colour is white.
+/// Icons: by default every cut of a gem shares that gem's default cut sprite
+/// (`<gem ns>:item/gem_cut/<gem path>`, emitted by `GemCutGenerator.generateDefaultGemModel`). Call
+/// [#customIcon()] to give a cut its own sprite at `<ns>:item/gem_cut/<cut path>` (emitted by
+/// `GemCutGenerator.generateItemModel`). Jewelry discovers and bakes `models/item/gem_cut/*.json` from every
+/// namespace on both loaders. The colour defaults to white.
 /// The raw gem item should extend `net.jewelry.gems.GemItem` so the cut gem takes the cut's name and
 /// tooltip; the cut's name is the lang key `gem_cut.<ns>.<path>`, e.g. "Bold Garnet".
 public class GemCutBuilder {
@@ -48,7 +51,7 @@ public class GemCutBuilder {
     private GemCutBuilder(Identifier id, RegistryEntry<Item> gem) {
         this.id = id;
         this.gem = gem;
-        this.model = Optional.of(GemCut.conventionalModelId(id));
+        this.model = Optional.empty();
     }
 
     public static GemCutBuilder create(Identifier id, ItemConvertible gem) {
@@ -102,15 +105,16 @@ public class GemCutBuilder {
         return color(TextColor.fromRgb(rgb));
     }
 
-    /// Custom item model id instead of the `<ns>:item/gem_cut/<path>` default.
-    public GemCutBuilder model(Identifier model) {
-        this.model = Optional.of(model);
+    /// Opt in to a sprite of this cut's own, at `<ns>:item/gem_cut/<cut path>` (texture at
+    /// `textures/item/gem_cut/<cut path>.png`). Without it the cut uses its gem's default cut sprite.
+    public GemCutBuilder customIcon() {
+        this.model = Optional.of(GemCut.conventionalModelId(id));
         return this;
     }
 
-    /// Render the cut gem with the raw gem's own model.
-    public GemCutBuilder noModel() {
-        this.model = Optional.empty();
+    /// Custom icon at an explicit model id, for anything the convention does not cover.
+    public GemCutBuilder model(Identifier model) {
+        this.model = Optional.of(model);
         return this;
     }
 

@@ -17,7 +17,8 @@ import java.util.List;
 ///
 /// A stack renders with a custom model when either
 /// - it carries the explicit [GemComponents#ITEM_MODEL] component, or
-/// - it is a cut gem whose [GemCut#model] is set.
+/// - it is a cut gem: its custom icon if the cut opted in, else its gem's default cut model
+///   ([GemCut#effectiveModelId]). A model that was never baked falls back to the raw gem's own.
 ///
 /// Models are not bound to an item, so they must be registered for baking: every loader scans
 /// `assets/<ns>/models/item/gem_cut/*.json` via [#discover] at resource load — cuts added by resource
@@ -34,7 +35,7 @@ public class CustomModels {
         if (explicit != null) {
             return explicit;
         }
-        return GemCut.of(stack).flatMap(entry -> entry.value().model()).orElse(null);
+        return GemCut.of(stack).map(entry -> entry.value().effectiveModelId()).orElse(null);
     }
 
     /// Model ids of every `models/item/gem_cut/*.json` across all loaded resource packs.

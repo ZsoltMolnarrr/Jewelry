@@ -10,7 +10,6 @@
   "attribute": "critical_strike:chance",
   "color": "#E5404F",
   "gem": "jewelry:ruby",
-  "model": "jewelry:item/gem_cut/keen_ruby",
   "neoforge:conditions": [
     {
       "type": "neoforge:mod_loaded",

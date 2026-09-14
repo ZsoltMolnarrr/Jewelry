@@ -125,7 +125,9 @@ public class JewelryDataGenerator implements DataGeneratorEntrypoint {
             JewelryItems.all.forEach(entry -> {
                 itemModelGenerator.register(entry.item(), Models.GENERATED);
             });
-            // One standalone flat model per cut (`models/item/gem_cut/<cut>.json`), discovered and baked at runtime.
+            // Default cut sprite per gem (`models/item/gem_cut/<gem>.json`) plus one per cut with a custom icon;
+            // all discovered under models/item/gem_cut/ and baked at runtime.
+            Gems.all.forEach(gem -> GemCutGenerator.generateDefaultGemModel(itemModelGenerator, gem.item()));
             GemCuts.all.forEach(cut -> GemCutGenerator.generateItemModel(itemModelGenerator, cut));
         }
     }
