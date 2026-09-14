@@ -14,6 +14,10 @@ repositories {
         }
     }
     maven { url 'https://maven.fabricmc.net' }
+    maven {
+        name = 'TerraformersMC'
+        url = 'https://maven.terraformersmc.com/releases'
+    }
 
     mavenLocal()
 }
@@ -36,6 +40,11 @@ dependencies {
 
     // Compat only
     // modCompileOnly("maven.modrinth:spell-engine:${project.spell_engine_version}-${platform}")
+
+    // EMI (optional integration) — the `xplat-intermediary` `api` artifact is the loader-neutral
+    // subset EMI publishes for Architectury common modules. Compile-only: `net.jewelry.compat.emi`
+    // is only ever class-loaded by EMI itself, so the mod runs fine without EMI present.
+    modCompileOnly "dev.emi:emi-xplat-intermediary:${project.emi_version}:api"
 
     // Compatibility
     // Fabric specific

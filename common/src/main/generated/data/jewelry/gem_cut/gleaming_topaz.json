@@ -1,0 +1,7 @@
+{
+  "attribute": "spell_power:critical_chance",
+  "color": "#F2A33A",
+  "gem": "jewelry:topaz",
+  "operation": "add_multiplied_base",
+  "value": 0.03
+}

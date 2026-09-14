@@ -1,0 +1,7 @@
+{
+  "attribute": "minecraft:generic.movement_speed",
+  "color": "#F4D44B",
+  "gem": "jewelry:citrine",
+  "operation": "add_multiplied_base",
+  "value": 0.03
+}

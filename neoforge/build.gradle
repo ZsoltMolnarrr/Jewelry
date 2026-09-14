@@ -50,6 +50,10 @@ repositories {
     // For Curios
     maven { url 'https://maven.theillusivec4.top/' }
     maven { url 'https://maven.fabricmc.net' }
+    maven {
+        name = 'TerraformersMC'
+        url = 'https://maven.terraformersmc.com/releases'
+    }
 
     mavenLocal()
 }
@@ -74,6 +78,11 @@ dependencies {
 
     // Compat only
     // modCompileOnly("maven.modrinth:spell-engine:${project.spell_engine_version}-${platform}")
+
+    // EMI (optional integration) — dev runtime only, so `runClient` can verify the plugin.
+    // NOT bundled and NOT a declared dependency: the plugin lives in `common` and is
+    // compile-only there.
+    modLocalRuntime "dev.emi:emi-neoforge:${project.emi_version}"
 }
 
 processResources {

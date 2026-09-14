@@ -1,0 +1,7 @@
+{
+  "attribute": "minecraft:generic.knockback_resistance",
+  "color": "#3F79E8",
+  "gem": "jewelry:sapphire",
+  "operation": "add_value",
+  "value": 0.1
+}

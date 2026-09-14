@@ -1,0 +1,7 @@
+{
+  "attribute": "ranged_weapon:haste",
+  "color": "#4EC272",
+  "gem": "jewelry:jade",
+  "operation": "add_multiplied_base",
+  "value": 0.05
+}

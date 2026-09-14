@@ -3,6 +3,7 @@ package net.jewelry.village;
 import com.google.common.collect.ImmutableSet;
 import net.jewelry.JewelryMod;
 import net.jewelry.blocks.JewelryBlocks;
+import net.jewelry.items.Gems;
 import net.jewelry.items.JewelryItems;
 import net.jewelry.util.SoundHelper;
 import net.minecraft.block.BlockState;
@@ -59,39 +60,42 @@ public class JewelryVillagers {
         JEWELER_PROFESSION = Registry.register(Registries.VILLAGER_PROFESSION, Identifier.of(JewelryMod.ID, JEWELER), createProfession(JEWELER, workStation));
     }
 
+    /// Emeralds per raw gem (64 = vanilla's stack cap; demand can't raise it further) and uses per restock.
+    public static final int GEM_PRICE = 64;
+    public static final int GEM_USES = 3;
+
     public static LinkedHashMap<Integer, List<TradeOffers.Factory>> createTrades() {
         LinkedHashMap<Integer, List<TradeOffers.Factory>> trades = new LinkedHashMap<>();
 
         trades.put(1, List.of(
-                new TradeOffers.BuyItemFactory(Items.COPPER_INGOT, 8, 8, 3, 2),
-                new TradeOffers.BuyItemFactory(Items.STRING, 7, 6, 3, 2),
+                new TradeOffers.BuyItemFactory(Items.COPPER_INGOT, 8, 8, 4, 2),
+                new TradeOffers.BuyItemFactory(Items.STRING, 7, 6, 4, 2),
                 new TradeOffers.SellItemFactory(JewelryItems.copper_ring.item(), 4, 1, 12, 4)
         ));
         trades.put(2, List.of(
-                new TradeOffers.BuyItemFactory(Items.GOLD_INGOT, 7, 8, 2, 8),
-                new TradeOffers.SellItemFactory(JewelryItems.iron_ring.item(), 4, 1, 6, 5),
-                new TradeOffers.SellItemFactory(JewelryItems.gold_ring.item(), 18, 1, 6, 5)
+                new TradeOffers.BuyItemFactory(Items.GOLD_INGOT, 7, 8, 8, 12),
+                new TradeOffers.SellItemFactory(JewelryItems.iron_ring.item(), 4, 1, 6, 10),
+                new TradeOffers.SellItemFactory(JewelryItems.gold_ring.item(), 18, 1, 6, 10)
         ));
         trades.put(3, List.of(
-                new TradeOffers.BuyItemFactory(Items.DIAMOND, 1, 12, 10, 10),
-                new TradeOffers.SellItemFactory(JewelryItems.emerald_necklace.item(), 20, 1, 12, 10),
-                new TradeOffers.SellItemFactory(JewelryItems.diamond_necklace.item(), 25, 1, 12, 10)
+                new TradeOffers.BuyItemFactory(Items.DIAMOND, 1, 8, 30, 8),
+                new TradeOffers.SellItemFactory(JewelryItems.emerald_necklace.item(), 20, 1, 12, 30),
+                new TradeOffers.SellItemFactory(JewelryItems.diamond_necklace.item(), 25, 1, 12, 30),
+                new TradeOffers.SellItemFactory(JewelryItems.diamond_ring.item(), 20, 1, 12, 30)
         ));
+        // Raw gems are the jeweler's endgame goods: a consistent but expensive source (the emerald cap is a
+        // stack) that players cut at the Jeweler's Kit or craft into jewelry themselves — finished gem
+        // jewelry is no longer sold, since it would undercut its own ingredient. Vanilla rolls two offers per
+        // level from each pool, so a jeweler stocks two of the three gems at each of these levels.
         trades.put(4, List.of(
-                new TradeOffers.SellItemFactory(JewelryItems.ruby_ring.item(), 35, 1, 5, 15),
-                new TradeOffers.SellItemFactory(JewelryItems.topaz_ring.item(), 35, 1, 5, 15),
-                new TradeOffers.SellItemFactory(JewelryItems.citrine_ring.item(), 35, 1, 5, 15),
-                new TradeOffers.SellItemFactory(JewelryItems.jade_ring.item(), 35, 1, 5, 15),
-                new TradeOffers.SellItemFactory(JewelryItems.sapphire_ring.item(), 35, 1, 5, 13),
-                new TradeOffers.SellItemFactory(JewelryItems.tanzanite_ring.item(), 35, 1, 5, 13)
+                new TradeOffers.SellItemFactory(Gems.ruby.item(), GEM_PRICE, 1, GEM_USES, 40),
+                new TradeOffers.SellItemFactory(Gems.sapphire.item(), GEM_PRICE, 1, GEM_USES, 40),
+                new TradeOffers.SellItemFactory(Gems.jade.item(), GEM_PRICE, 1, GEM_USES, 40)
         ));
         trades.put(5, List.of(
-                new TradeOffers.SellItemFactory(JewelryItems.ruby_necklace.item(), 45, 1, 3, 15),
-                new TradeOffers.SellItemFactory(JewelryItems.topaz_necklace.item(), 45, 1, 3, 15),
-                new TradeOffers.SellItemFactory(JewelryItems.citrine_necklace.item(), 45, 1, 3, 15),
-                new TradeOffers.SellItemFactory(JewelryItems.jade_necklace.item(), 45, 1, 3, 15),
-                new TradeOffers.SellItemFactory(JewelryItems.sapphire_necklace.item(), 45, 1, 3, 15),
-                new TradeOffers.SellItemFactory(JewelryItems.tanzanite_necklace.item(), 45, 1, 3, 15)
+                new TradeOffers.SellItemFactory(Gems.topaz.item(), GEM_PRICE, 1, GEM_USES, 60),
+                new TradeOffers.SellItemFactory(Gems.citrine.item(), GEM_PRICE, 1, GEM_USES, 60),
+                new TradeOffers.SellItemFactory(Gems.tanzanite.item(), GEM_PRICE, 1, GEM_USES, 60)
         ));
 
         return trades;

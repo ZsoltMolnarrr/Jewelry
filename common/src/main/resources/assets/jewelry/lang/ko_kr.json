@@ -4,6 +4,7 @@
   "block.jewelry.deepslate_gem_vein": "심층암 보석 광맥",
   "block.jewelry.jewelers_kit": "보석공의 도구",
   "block.jewelry.jewelers_kit.hint": "보석공 주민을 위한 작업대입니다.",
+  "emi.category.jewelry.gem_cutting": "보석공의 도구",
   "entity.minecraft.villager.jeweler": "보석공",
   "entity.minecraft.villager.jewelry.jeweler": "보석공",
   "item.jewelry.ruby": "루비",

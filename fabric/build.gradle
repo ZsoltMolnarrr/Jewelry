@@ -88,6 +88,11 @@ dependencies {
     // Compat only
     modImplementation("maven.modrinth:spell-engine:${project.spell_engine_version}-${platform}")
 //    modImplementation("net.spell_engine:spell_engine-${platform}:${project.spell_engine_version}")
+
+    // EMI (optional integration) — dev runtime only, so `runClient` can verify the plugin.
+    // NOT bundled and NOT a declared dependency: the plugin lives in `common` and is
+    // compile-only there.
+    modLocalRuntime "dev.emi:emi-fabric:${project.emi_version}"
 }
 
 processResources {

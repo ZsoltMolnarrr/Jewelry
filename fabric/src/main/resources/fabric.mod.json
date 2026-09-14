@@ -25,6 +25,9 @@
     ],
     "fabric-datagen": [
       "net.jewelry.fabric.datagen.JewelryDataGenerator"
+    ],
+    "emi": [
+      "net.jewelry.compat.emi.JewelryEmiPlugin"
     ]
   },
   "mixins": [

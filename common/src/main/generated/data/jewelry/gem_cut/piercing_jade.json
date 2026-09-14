@@ -1,0 +1,7 @@
+{
+  "attribute": "ranged_weapon:velocity",
+  "color": "#4EC272",
+  "gem": "jewelry:jade",
+  "operation": "add_value",
+  "value": 0.25
+}
