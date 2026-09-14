@@ -1,0 +1,22 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "critical_strike"
+      ]
+    }
+  ],
+  "attribute": "critical_strike:damage",
+  "color": "#E5404F",
+  "gem": "jewelry:ruby",
+  "model": "jewelry:item/gem_cut/fierce_ruby",
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "critical_strike"
+    }
+  ],
+  "operation": "add_multiplied_base",
+  "value": 0.08
+}

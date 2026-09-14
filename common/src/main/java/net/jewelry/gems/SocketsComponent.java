@@ -32,6 +32,7 @@ public record SocketsComponent(int count, List<RegistryEntry<GemCut>> gems) {
         gems = List.copyOf(gems);
     }
 
+    /// `count` empty sockets — also the value to hand `Item.Settings#component` for an item's default.
     public static SocketsComponent empty(int count) {
         return new SocketsComponent(count, List.of());
     }
@@ -49,14 +50,19 @@ public record SocketsComponent(int count, List<RegistryEntry<GemCut>> gems) {
         return index >= 0 && index < filled() ? Optional.of(gems.get(index)) : Optional.empty();
     }
 
-    /// Socket a gem: fills the first empty socket, or — when every socket is full — replaces the gem in
-    /// the first socket. The replaced gem is gone (World of Warcraft rules), the caller owes no refund.
+    /// Socket a gem: fills the first empty socket. When every socket is already full, the item is reset —
+    /// all previous gems are destroyed and the new gem alone sits in socket one — since the anvil offers
+    /// no way to pick a socket. The anvil's result preview shows this before the player commits.
     public SocketsComponent withGem(RegistryEntry<GemCut> gem) {
+        if (count <= 0) {
+            return this;
+        }
         var updated = new ArrayList<>(gems.subList(0, filled()));
         if (updated.size() < count) {
             updated.add(gem);
-        } else if (!updated.isEmpty()) {
-            updated.set(0, gem);
+        } else {
+            updated.clear();
+            updated.add(gem);
         }
         return new SocketsComponent(count, updated);
     }

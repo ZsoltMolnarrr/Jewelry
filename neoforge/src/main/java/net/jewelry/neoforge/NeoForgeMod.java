@@ -15,6 +15,8 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.village.VillagerTradesEvent;
+import net.neoforged.neoforge.event.server.ServerStartedEvent;
+import net.jewelry.gems.GemCutRegistry;
 import net.neoforged.neoforge.registries.DataPackRegistryEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
 
@@ -30,6 +32,7 @@ public final class NeoForgeMod {
         modBus.addListener(BuildCreativeModeTabContentsEvent.class, NeoForgeMod::buildTabContents);
         // Villager trades — game-bus event (fired per profession); replaces Fabric API's TradeOfferHelper.
         NeoForge.EVENT_BUS.addListener(VillagerTradesEvent.class, NeoForgeMod::onVillagerTrades);
+        NeoForge.EVENT_BUS.addListener(ServerStartedEvent.class, event -> GemCutRegistry.logLoaded(event.getServer()));
         // Ore world-gen injection is data-driven on NeoForge — see
         // data/jewelry/neoforge/biome_modifier/gem_vein.json (replaces Fabric's BiomeModifications).
     }

@@ -25,7 +25,8 @@ public class GemComponents {
 
     public static final Identifier SOCKETS_ID = Identifier.of(JewelryMod.ID, "sockets");
 
-    /// Present on an item that has (or had) sockets written to it; see [GemSockets#of] for the data default.
+    /// An item's sockets. Items declare their default count via `Item.Settings#component` with
+    /// [SocketsComponent#empty]; socketing writes the filled component onto the stack.
     public static final ComponentType<SocketsComponent> SOCKETS = ComponentType.<SocketsComponent>builder()
             .codec(SocketsComponent.CODEC)
             .packetCodec(SocketsComponent.PACKET_CODEC)

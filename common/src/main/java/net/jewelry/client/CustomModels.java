@@ -28,11 +28,6 @@ public class CustomModels {
     public static final String MODEL_FOLDER = "models";
     public static final String GEM_CUT_MODEL_PATH = "item/gem_cut/";
 
-    /// Conventional model id of a shipped cut: `<ns>:item/gem_cut/<cut>`.
-    public static Identifier gemCutModelId(Identifier cutId) {
-        return Identifier.of(cutId.getNamespace(), GEM_CUT_MODEL_PATH + cutId.getPath());
-    }
-
     @Nullable
     public static Identifier modelIdOf(ItemStack stack) {
         var explicit = stack.get(GemComponents.ITEM_MODEL);

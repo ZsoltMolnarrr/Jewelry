@@ -1,6 +1,8 @@
 package net.jewelry.fabric;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.jewelry.gems.GemCutRegistry;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.object.builder.v1.world.poi.PointOfInterestHelper;
@@ -32,6 +34,8 @@ public final class FabricMod implements ModInitializer {
         JewelryVillagers.createTrades().forEach((tier, factories) ->
                 TradeOfferHelper.registerVillagerOffers(JewelryVillagers.JEWELER_PROFESSION, tier,
                         list -> list.addAll(factories)));
+
+        ServerLifecycleEvents.SERVER_STARTED.register(GemCutRegistry::logLoaded);
 
         // Ore world-gen injection — Fabric API BiomeModifications (NeoForge uses a biome_modifier JSON).
         OreGeneration.register();

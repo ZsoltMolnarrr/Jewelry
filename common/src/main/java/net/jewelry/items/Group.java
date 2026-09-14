@@ -7,6 +7,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
@@ -39,13 +40,17 @@ public class Group {
                     entries.add(gem.item());
                 }
                 GemCutRegistry.from(context.lookup()).ifPresent(registry -> {
-                    // Grouped by gem, in gem declaration order; cuts of a gem in id order
-                    for (var gem : Gems.all) {
-                        registry.streamEntries()
-                                .filter(entry -> entry.value().gem().value() == gem.item())
-                                .sorted(Comparator.comparing(entry -> entry.registryKey().getValue()))
-                                .forEach(entry -> entries.add(GemCut.stack(entry)));
-                    }
+                    // Every cut in the registry, other mods' included: grouped by gem — Jewelry's gems in
+                    // declaration order, then any other gem by item id — and cuts of a gem in id order.
+                    var jewelryGems = Gems.all.stream().map(Gems.Entry::item).toList();
+                    Comparator<RegistryEntry.Reference<GemCut>> byGem = Comparator.comparing(entry -> {
+                        var gem = entry.value().gem().value();
+                        int index = jewelryGems.indexOf(gem);
+                        return index >= 0 ? String.format("0%03d", index) : "1" + Registries.ITEM.getId(gem);
+                    });
+                    registry.streamEntries()
+                            .sorted(byGem.thenComparing(entry -> entry.registryKey().getValue()))
+                            .forEach(entry -> entries.add(GemCut.stack(entry)));
                 });
             })
             .build();

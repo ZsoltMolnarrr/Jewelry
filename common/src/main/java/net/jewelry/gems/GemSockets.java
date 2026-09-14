@@ -1,6 +1,5 @@
 package net.jewelry.gems;
 
-import net.jewelry.JewelryMod;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.entity.EquipmentSlot;
@@ -8,10 +7,7 @@ import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.item.Equipment;
 import net.minecraft.item.ItemStack;
-import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.util.Identifier;
 
 import java.util.Optional;
 import java.util.function.BiConsumer;
@@ -20,33 +16,13 @@ import java.util.function.BiConsumer;
 /// carry sockets, and socketed gems apply whenever the item is equipped in a slot its own attribute
 /// modifiers target.
 ///
-/// Default socket counts come from data, so other mods (or packs) grant sockets without a code dependency:
-/// an item in `#jewelry:sockets/N` has N empty sockets until a `jewelry:sockets` component says otherwise.
+/// An item declares its sockets as a default component in its item settings
+/// (`settings.component(GemComponents.SOCKETS, SocketsComponent.empty(1))`, see [SocketsComponent#empty]);
+/// the stack's component then overrides it once gems are socketed.
 public class GemSockets {
-    public static final TagKey<net.minecraft.item.Item> ONE_SOCKET = tag("sockets/1");
-    public static final TagKey<net.minecraft.item.Item> TWO_SOCKETS = tag("sockets/2");
-    public static final TagKey<net.minecraft.item.Item> THREE_SOCKETS = tag("sockets/3");
-
-    private static TagKey<net.minecraft.item.Item> tag(String path) {
-        return TagKey.of(RegistryKeys.ITEM, Identifier.of(JewelryMod.ID, path));
-    }
-
-    /// Sockets an item has by default, before any component is written to the stack.
-    public static int defaultCount(ItemStack stack) {
-        if (stack.isIn(THREE_SOCKETS)) return 3;
-        if (stack.isIn(TWO_SOCKETS)) return 2;
-        if (stack.isIn(ONE_SOCKET)) return 1;
-        return 0;
-    }
-
-    /// The effective sockets of a stack: its component if present, else the data default, else none.
+    /// The sockets of a stack: its `jewelry:sockets` component (the item's default counts), or none.
     public static Optional<SocketsComponent> of(ItemStack stack) {
-        var component = stack.get(GemComponents.SOCKETS);
-        if (component != null) {
-            return Optional.of(component);
-        }
-        var count = defaultCount(stack);
-        return count > 0 ? Optional.of(SocketsComponent.empty(count)) : Optional.empty();
+        return Optional.ofNullable(stack.get(GemComponents.SOCKETS));
     }
 
     public static boolean hasSockets(ItemStack stack) {

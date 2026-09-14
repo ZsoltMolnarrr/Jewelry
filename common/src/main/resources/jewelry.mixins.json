@@ -4,6 +4,7 @@
   "package": "net.jewelry.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "AnvilScreenHandlerMixin",
     "ItemStackMixin"
   ],
   "client": [

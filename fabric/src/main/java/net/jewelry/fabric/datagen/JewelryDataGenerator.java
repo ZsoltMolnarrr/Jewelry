@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.jewelry.JewelryMod;
+import net.jewelry.api.datagen.GemCutGenerator;
 import net.jewelry.gems.GemCuts;
 import net.jewelry.items.Gems;
 import net.jewelry.items.JewelryItem;
@@ -13,7 +14,6 @@ import net.jewelry.items.JewelryItems;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.ItemModelGenerator;
 import net.minecraft.data.client.Models;
-import net.minecraft.data.client.TextureMap;
 import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
@@ -40,7 +40,7 @@ public class JewelryDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(ItemTagGenerator::new);
         pack.addProvider(ModelProvider::new);
         pack.addProvider(UnsmeltGenerator::new);
-        pack.addProvider(GemCutGenerator::new);
+        pack.addProvider(JewelryGemCuts::new);
     }
 
     // ========================================
@@ -125,12 +125,25 @@ public class JewelryDataGenerator implements DataGeneratorEntrypoint {
             JewelryItems.all.forEach(entry -> {
                 itemModelGenerator.register(entry.item(), Models.GENERATED);
             });
-            // One standalone flat model per cut: `models/item/gem_cut/<cut>.json` → `textures/item/gem_cut/<cut>.png`.
-            // Discovered and baked at runtime by CustomModels; the cut's `model` field points here.
-            GemCuts.all.forEach(cut -> {
-                var texture = Identifier.of(cut.id().getNamespace(), "item/gem_cut/" + cut.id().getPath());
-                Models.GENERATED.upload(cut.model(), TextureMap.layer0(texture), itemModelGenerator.writer);
-            });
+            // One standalone flat model per cut (`models/item/gem_cut/<cut>.json`), discovered and baked at runtime.
+            GemCuts.all.forEach(cut -> GemCutGenerator.generateItemModel(itemModelGenerator, cut));
+        }
+    }
+
+    /// Jewelry's own cuts, through the public generator other mods use too.
+    public static class JewelryGemCuts extends GemCutGenerator {
+        public JewelryGemCuts(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+            super(output, registriesFuture);
+        }
+
+        @Override
+        protected void generate(Entries entries) {
+            GemCuts.all.forEach(entries::add);
+        }
+
+        @Override
+        public String getName() {
+            return "Jewelry Gem Cuts";
         }
     }
 

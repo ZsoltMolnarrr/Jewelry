@@ -42,6 +42,11 @@ public record GemCut(
             Identifier.CODEC.optionalFieldOf("model").forGetter(GemCut::model)
     ).apply(instance, GemCut::new));
 
+    /// Conventional model id of a cut: `<ns>:item/gem_cut/<path>`, a file under `models/item/gem_cut/`.
+    public static Identifier conventionalModelId(Identifier cutId) {
+        return Identifier.of(cutId.getNamespace(), "item/gem_cut/" + cutId.getPath());
+    }
+
     // MARK: Naming
 
     public static String translationKey(Identifier id) {
