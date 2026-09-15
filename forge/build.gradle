@@ -63,9 +63,9 @@ dependencies {
     common(project(path: ':common', configuration: 'namedElements')) { transitive = false }
     shadowBundle project(path: ':common', configuration: 'transformProductionForge')
 
-    // Ecosystem libraries: the Modrinth maven for the released ones, mavenLocal for the 1.20.1-modern ports.
+    // Ecosystem libraries: all resolved from the Modrinth maven.
     include(modImplementation("maven.modrinth:tiny-config:${rootProject.tiny_config_version}-${platform}"))
-    modImplementation("net.spell_power:spell_power-${platform}:${rootProject.spell_power_version}")
+    modImplementation("maven.modrinth:spell-power:${rootProject.spell_power_version}-${platform}")
 
     // Curios 5.x (1.20.1) - https://docs.illusivesoulworks.com/category/curios
     modImplementation("top.theillusivec4.curios:curios-forge:${rootProject.curios_version}")

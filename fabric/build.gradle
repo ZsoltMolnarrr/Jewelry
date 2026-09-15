@@ -67,9 +67,9 @@ dependencies {
     modImplementation("dev.kosmx.player-anim:player-animation-lib-${platform}:${rootProject.player_anim_version}")
     modImplementation("me.shedaniel.cloth:cloth-config-${platform}:${rootProject.cloth_config_version}")
 
-    // Ecosystem libraries: the Modrinth maven for the released ones, mavenLocal for the 1.20.1-modern ports.
+    // Ecosystem libraries: all resolved from the Modrinth maven.
     include(modImplementation("maven.modrinth:tiny-config:${rootProject.tiny_config_version}-${platform}"))
-    modImplementation("net.spell_power:spell_power-${platform}:${rootProject.spell_power_version}")
+    modImplementation("maven.modrinth:spell-power:${rootProject.spell_power_version}-${platform}")
 
     // Trinkets: Modrinth Maven serves minimal POMs (no transitive deps), which breaks
     // local runClient. Resolve from dev.emi (TerraformersMC) for local dev to get the
@@ -89,7 +89,7 @@ dependencies {
 
     // SpellEngine: datagen only (the providers extend `RPGSeriesDataGen`). Jewelry never touches
     // SpellEngine at runtime; it is not declared in fabric.mod.json.
-    modImplementation("net.spell_engine:spell_engine-${platform}:${rootProject.spell_engine_version}")
+    modImplementation("maven.modrinth:spell-engine:${rootProject.spell_engine_version}-${platform}")
 }
 
 processResources {
