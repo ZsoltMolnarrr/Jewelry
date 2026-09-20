@@ -16,18 +16,20 @@ import java.util.Optional;
 /// ```java
 /// SocketTypeBuilder.create(Identifier.of("witcher", "sign"))
 ///         .accepts(SocketTypeBuilder.cutTag(Identifier.of("witcher", "sign_gems")))
-///         .icon("󰄐")
 ///         .title(Text.translatable("socket.witcher.sign"))
-///         .color(0x7FD4C1)
+///         .empty("󰄐", 0x4E8F84)
+///         .fill("󰄑", 0x7FD4C1)
 ///         .build();
 /// ```
 public class SocketTypeBuilder {
     public record Entry(Identifier id, SocketType definition) { }
 
     private final Identifier id;
-    private Optional<String> icon = Optional.empty();
     private Optional<Text> title = Optional.empty();
-    private Optional<TextColor> color = Optional.empty();
+    private Optional<String> emptyIcon = Optional.empty();
+    private Optional<TextColor> emptyColor = Optional.empty();
+    private Optional<String> fillIcon = Optional.empty();
+    private Optional<TextColor> fillColor = Optional.empty();
     private Optional<TagKey<GemCut>> accepts = Optional.empty();
 
     private SocketTypeBuilder(Identifier id) {
@@ -50,28 +52,56 @@ public class SocketTypeBuilder {
         return this;
     }
 
-    /// The socket frame glyph: a character your resource pack maps to a 9×9 bitmap in `font/default.json`.
-    public SocketTypeBuilder icon(String glyph) {
-        this.icon = Optional.of(glyph);
-        return this;
-    }
-
     /// The empty-socket text, e.g. `Text.translatable("socket.witcher.sign")` → "Empty Sign Socket".
     public SocketTypeBuilder title(Text title) {
         this.title = Optional.of(title);
         return this;
     }
 
-    public SocketTypeBuilder color(TextColor color) {
-        this.color = Optional.of(color);
+    // MARK: Appearance — `empty` and `fill` take the same two properties
+
+    /// Frame glyph while empty: a character your resource pack maps to a 9×9 bitmap in `font/default.json`.
+    public SocketTypeBuilder emptyIcon(String glyph) {
+        this.emptyIcon = Optional.of(glyph);
         return this;
     }
 
-    public SocketTypeBuilder color(int rgb) {
-        return color(TextColor.fromRgb(rgb));
+    /// Colour of the whole empty-socket line.
+    public SocketTypeBuilder emptyColor(int rgb) {
+        this.emptyColor = Optional.of(TextColor.fromRgb(rgb));
+        return this;
+    }
+
+    public SocketTypeBuilder empty(String glyph, int rgb) {
+        return emptyIcon(glyph).emptyColor(rgb);
+    }
+
+    /// Frame glyph while holding a gem (the gem is drawn over it).
+    public SocketTypeBuilder fillIcon(String glyph) {
+        this.fillIcon = Optional.of(glyph);
+        return this;
+    }
+
+    /// Colour of the frame while holding a gem.
+    public SocketTypeBuilder fillColor(int rgb) {
+        this.fillColor = Optional.of(TextColor.fromRgb(rgb));
+        return this;
+    }
+
+    public SocketTypeBuilder fill(String glyph, int rgb) {
+        return fillIcon(glyph).fillColor(rgb);
+    }
+
+    /// The same frame glyph in both states.
+    public SocketTypeBuilder icon(String glyph) {
+        return emptyIcon(glyph).fillIcon(glyph);
     }
 
     public Entry build() {
-        return new Entry(id, new SocketType(icon, title, color, accepts));
+        return new Entry(id, new SocketType(title, appearance(emptyIcon, emptyColor), appearance(fillIcon, fillColor), accepts));
+    }
+
+    private static Optional<SocketType.Appearance> appearance(Optional<String> icon, Optional<TextColor> color) {
+        return icon.isEmpty() && color.isEmpty() ? Optional.empty() : Optional.of(new SocketType.Appearance(icon, color));
     }
 }

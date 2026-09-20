@@ -194,7 +194,7 @@ jewelry:sockets=[ {}, {"type": "jewelry:mounted"}, {"type": "witcher:sign"} ]
 
 - `{}` — a plain standard socket.
 - `{"type": "jewelry:mounted"}` — written by the Socket Mount so its one-per-item cap can be counted. Its definition
-  only restyles it (gold "Empty Mounted Socket"); with no `accepts` it is still a standard socket. A type with no
+  only restyles it (dim gold "Empty Mounted Socket", brighter gold frame once filled); with no `accepts` it is still a standard socket. A type with no
   definition at all works the same, with the generic look.
 - `{"type": "witcher:sign"}` — a type that has a **definition**, below.
 
@@ -205,18 +205,21 @@ jewelry:sockets=[ {}, {"type": "jewelry:mounted"}, {"type": "witcher:sign"} ]
 ```json
 {
   "accepts": "#witcher:sign_gems",
-  "icon": "\uDB80\uDD10",
   "title": { "translate": "socket.witcher.sign" },
-  "color": "#7FD4C1"
+  "empty": { "icon": "\uDB80\uDD10", "color": "#4E8F84" },
+  "fill":  { "icon": "\uDB80\uDD11", "color": "#7FD4C1" }
 }
 ```
 
 | Field | Meaning |
 |---|---|
 | `accepts` | A tag of gem cuts (`data/<ns>/tags/gem_cut/<path>.json`). The socket takes those cuts and nothing else. Absent → a standard socket. |
-| `icon` | The socket frame glyph: a character your resource pack maps to a bitmap in `assets/minecraft/font/default.json`. Keep it 9×9 like Jewelry's so the gem drawn over a filled socket lines up. Absent → Jewelry's frame. |
 | `title` | Text of the empty socket, e.g. "Empty Sign Socket". Absent → "Empty Socket". |
-| `color` | Colour of the empty-socket line and of the frame on a filled one. Absent → gray. |
+| `empty` | Appearance while empty: `icon` and `color`, both optional. The colour applies to the whole line. Absent → Jewelry's frame, dark gray. |
+| `fill` | Appearance while holding a gem: the same two fields. The colour applies to the frame only; the gem is tinted by its cut and the bonus text stays vanilla blue. Absent → Jewelry's frame, gray. |
+
+An `icon` is a character your resource pack maps to a bitmap in `assets/minecraft/font/default.json`. Keep it
+9×9 like Jewelry's so the gem drawn over a filled socket lines up.
 
 ### Keeping your gems out of standard sockets
 
@@ -246,7 +249,8 @@ The other direction needs nothing: standard cuts are not in your tag, so your so
 // common
 public static final TagKey<GemCut> SIGN_GEMS = SocketTypeBuilder.cutTag(Identifier.of("witcher", "sign_gems"));
 public static final SocketTypeBuilder.Entry SIGN = SocketTypeBuilder.create(Identifier.of("witcher", "sign"))
-        .accepts(SIGN_GEMS).icon("\uDB80\uDD10").title(Text.translatable("socket.witcher.sign")).color(0x7FD4C1)
+        .accepts(SIGN_GEMS).title(Text.translatable("socket.witcher.sign"))
+        .empty("\uDB80\uDD10", 0x4E8F84).fill("\uDB80\uDD11", 0x7FD4C1)
         .build();
 
 // fabric datagen

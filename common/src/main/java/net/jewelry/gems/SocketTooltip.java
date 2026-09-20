@@ -32,20 +32,23 @@ public class SocketTooltip {
         }
         GemSockets.of(stack).ifPresent(sockets -> {
             for (var socket : sockets.sockets()) {
-                // A socket type may bring its own frame glyph, empty title and colour; anything it leaves
-                // out — and every type without a definition — uses the generic look.
-                var look = socket.type().flatMap(type -> SocketTypeRegistry.find(lookup, type)).orElse(SocketType.GENERIC);
-                var frame = look.icon().orElse(FRAME_GLYPH);
+                // A socket type may bring its own title and an appearance (frame glyph + colour) per state;
+                // anything it leaves out — and every type without a definition — uses the generic look.
+                var type = socket.type().flatMap(id -> SocketTypeRegistry.find(lookup, id)).orElse(SocketType.GENERIC);
                 if (socket.gem().isPresent()) {
                     var cut = socket.gem().get().value();
+                    var look = type.fill().orElse(SocketType.Appearance.GENERIC);
+                    var frame = look.icon().orElse(FRAME_GLYPH);
                     var frameColor = look.color().orElse(TextColor.fromFormatting(Formatting.GRAY));
                     lines.add(Text.literal(frame).styled(style -> style.withColor(frameColor))
                             .append(Text.literal(BACKSPACE + GEM_GLYPH).styled(style -> style.withColor(cut.color())))
                             .append(Text.literal(" "))
                             .append(GemItem.bonusText(cut)));
                 } else {
+                    var look = type.empty().orElse(SocketType.Appearance.GENERIC);
+                    var frame = look.icon().orElse(FRAME_GLYPH);
                     var lineColor = look.color().orElse(TextColor.fromFormatting(Formatting.DARK_GRAY));
-                    var title = look.title().map(Text::copy).orElseGet(() -> Text.translatable("item.jewelry.socket.empty"));
+                    var title = type.title().map(Text::copy).orElseGet(() -> Text.translatable("item.jewelry.socket.empty"));
                     lines.add(Text.literal(frame + " ").append(title).styled(style -> style.withColor(lineColor)));
                 }
             }

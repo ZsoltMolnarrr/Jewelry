@@ -18,8 +18,10 @@ public class SocketTypes {
     }
 
     /// Sockets added by a Socket Mount: look only — no `accepts`, so they take every standard cut.
-    /// A muted gold line (the mount is goldwork) reading "Empty Mounted Socket".
+    /// Goldwork, like the mount: a dim gold "Empty Mounted Socket" line, a brighter gold frame once filled —
+    /// the same dim/bright relation the generic dark gray / gray has.
     public static final SocketTypeBuilder.Entry MOUNTED = add(SocketTypeBuilder.create(SocketMountComponent.DEFAULT_TYPE)
             .title(Text.translatable("socket.jewelry.mounted"))
-            .color(0xC9A84C));
+            .emptyColor(0x8F7A3A)
+            .fillColor(0xC9A84C));
 }
