@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "jewelry:iron_nugget_from_blasting_iron_ring"
+        "recipes": "jewelry:iron_nugget_from_blasting_iron_ring"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

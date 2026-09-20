@@ -5,13 +5,15 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.jewelry.blocks.JewelryBlocks;
 import net.jewelry.items.Gems;
 import net.jewelry.items.JewelryItems;
+import net.minecraft.advancements.Advancement;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Recipe;
 import java.util.concurrent.CompletableFuture;
 
 public class JewelryCraftingRecipes extends FabricRecipeProvider {
@@ -27,14 +29,19 @@ public class JewelryCraftingRecipes extends FabricRecipeProvider {
     /// Since 1.21.2 the recipe provider only *builds* a {@link RecipeGenerator}; the recipe-building
     /// helpers (`createShaped`, `hasItem`, `conditionsFromItem`) are instance members of the generator,
     /// which also holds the exporter.
+    ///
+    /// 26.3: recipes and their advancements are written through two `BootstrapContext`s instead of a
+    /// `RecipeOutput`; the generator builds its own `output` from them (vanilla `RecipeProvider`).
     @Override
-    protected RecipeProvider createRecipeProvider(HolderLookup.Provider registries, RecipeOutput exporter) {
-        return new Generator(registries, exporter);
+    protected RecipeProvider createRecipeProvider(HolderLookup.Provider registries,
+                                                  BootstrapContext<Recipe<?>> recipeOutput,
+                                                  BootstrapContext<Advancement> advancementOutput) {
+        return new Generator(recipeOutput, advancementOutput);
     }
 
     private static class Generator extends RecipeProvider {
-        Generator(HolderLookup.Provider registries, RecipeOutput exporter) {
-            super(registries, exporter);
+        Generator(BootstrapContext<Recipe<?>> recipeOutput, BootstrapContext<Advancement> advancementOutput) {
+            super(recipeOutput, advancementOutput);
         }
 
         @Override

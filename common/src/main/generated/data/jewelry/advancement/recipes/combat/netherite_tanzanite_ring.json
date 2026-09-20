@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "jewelry:netherite_tanzanite_ring"
+        "recipes": "jewelry:netherite_tanzanite_ring"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

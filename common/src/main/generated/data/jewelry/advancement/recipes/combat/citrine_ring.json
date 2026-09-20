@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "jewelry:citrine_ring"
+        "recipes": "jewelry:citrine_ring"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

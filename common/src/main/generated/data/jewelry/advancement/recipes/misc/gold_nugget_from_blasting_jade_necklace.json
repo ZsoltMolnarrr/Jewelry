@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "jewelry:gold_nugget_from_blasting_jade_necklace"
+        "recipes": "jewelry:gold_nugget_from_blasting_jade_necklace"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

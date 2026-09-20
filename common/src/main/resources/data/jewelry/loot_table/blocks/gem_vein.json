@@ -9,23 +9,21 @@
           "children": [
             {
               "type": "minecraft:item",
-              "conditions": [
-                {
-                  "condition": "minecraft:match_tool",
-                  "predicate": {
-                    "predicates": {
-                      "minecraft:enchantments": [
-                        {
-                          "enchantments": "minecraft:silk_touch",
-                          "levels": {
-                            "min": 1
-                          }
+              "condition": {
+                "type": "minecraft:match_tool",
+                "predicate": {
+                  "predicates": {
+                    "minecraft:enchantments": [
+                      {
+                        "enchantments": "minecraft:silk_touch",
+                        "levels": {
+                          "min": 1
                         }
-                      ]
-                    }
+                      }
+                    ]
                   }
                 }
-              ],
+              },
               "name": "jewelry:gem_vein"
             },
             {
@@ -33,102 +31,102 @@
               "children": [
                 {
                   "type": "minecraft:item",
-                  "functions": [
+                  "modifier": [
                     {
+                      "type": "minecraft:apply_bonus",
                       "enchantment": "minecraft:fortune",
                       "formula": "minecraft:uniform_bonus_count",
-                      "function": "minecraft:apply_bonus",
                       "parameters": {
                         "bonusMultiplier": 1
                       }
                     },
                     {
-                      "function": "minecraft:explosion_decay"
+                      "type": "minecraft:explosion_decay"
                     }
                   ],
                   "name": "jewelry:ruby"
                 },
                 {
                   "type": "minecraft:item",
-                  "functions": [
+                  "modifier": [
                     {
+                      "type": "minecraft:apply_bonus",
                       "enchantment": "minecraft:fortune",
                       "formula": "minecraft:uniform_bonus_count",
-                      "function": "minecraft:apply_bonus",
                       "parameters": {
                         "bonusMultiplier": 1
                       }
                     },
                     {
-                      "function": "minecraft:explosion_decay"
+                      "type": "minecraft:explosion_decay"
                     }
                   ],
                   "name": "jewelry:topaz"
                 },
                 {
                   "type": "minecraft:item",
-                  "functions": [
+                  "modifier": [
                     {
+                      "type": "minecraft:apply_bonus",
                       "enchantment": "minecraft:fortune",
                       "formula": "minecraft:uniform_bonus_count",
-                      "function": "minecraft:apply_bonus",
                       "parameters": {
                         "bonusMultiplier": 1
                       }
                     },
                     {
-                      "function": "minecraft:explosion_decay"
+                      "type": "minecraft:explosion_decay"
                     }
                   ],
                   "name": "jewelry:citrine"
                 },
                 {
                   "type": "minecraft:item",
-                  "functions": [
+                  "modifier": [
                     {
+                      "type": "minecraft:apply_bonus",
                       "enchantment": "minecraft:fortune",
                       "formula": "minecraft:uniform_bonus_count",
-                      "function": "minecraft:apply_bonus",
                       "parameters": {
                         "bonusMultiplier": 1
                       }
                     },
                     {
-                      "function": "minecraft:explosion_decay"
+                      "type": "minecraft:explosion_decay"
                     }
                   ],
                   "name": "jewelry:jade"
                 },
                 {
                   "type": "minecraft:item",
-                  "functions": [
+                  "modifier": [
                     {
+                      "type": "minecraft:apply_bonus",
                       "enchantment": "minecraft:fortune",
                       "formula": "minecraft:uniform_bonus_count",
-                      "function": "minecraft:apply_bonus",
                       "parameters": {
                         "bonusMultiplier": 1
                       }
                     },
                     {
-                      "function": "minecraft:explosion_decay"
+                      "type": "minecraft:explosion_decay"
                     }
                   ],
                   "name": "jewelry:sapphire"
                 },
                 {
                   "type": "minecraft:item",
-                  "functions": [
+                  "modifier": [
                     {
+                      "type": "minecraft:apply_bonus",
                       "enchantment": "minecraft:fortune",
                       "formula": "minecraft:uniform_bonus_count",
-                      "function": "minecraft:apply_bonus",
                       "parameters": {
                         "bonusMultiplier": 1
                       }
                     },
                     {
-                      "function": "minecraft:explosion_decay"
+                      "type": "minecraft:explosion_decay"
                     }
                   ],
                   "name": "jewelry:tanzanite"

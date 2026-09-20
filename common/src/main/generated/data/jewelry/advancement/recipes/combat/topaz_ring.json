@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "jewelry:topaz_ring"
+        "recipes": "jewelry:topaz_ring"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

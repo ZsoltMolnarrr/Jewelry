@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "jewelry:gold_nugget_from_smelting_topaz_necklace"
+        "recipes": "jewelry:gold_nugget_from_smelting_topaz_necklace"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

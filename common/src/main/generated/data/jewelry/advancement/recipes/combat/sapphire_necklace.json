@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "jewelry:sapphire_necklace"
+        "recipes": "jewelry:sapphire_necklace"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

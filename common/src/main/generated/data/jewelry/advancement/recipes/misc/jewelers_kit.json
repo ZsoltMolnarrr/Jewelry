@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "jewelry:jewelers_kit"
+        "recipes": "jewelry:jewelers_kit"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -11,11 +11,12 @@ import net.jewelry.items.JewelryItems;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.advancements.Advancement;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
@@ -23,6 +24,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CookingBookCategory;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.ItemLike;
 import net.spell_engine.rpg_series.item.Equipment;
 import net.spell_engine.rpg_series.datagen.RPGSeriesDataGen;
@@ -146,14 +148,18 @@ public class JewelryDataGenerator implements DataGeneratorEntrypoint {
             return "Jewelry Unsmelt Recipes";
         }
 
+        /// 26.3: recipes and their advancements are written through two `BootstrapContext`s instead of a
+        /// `RecipeOutput`; the generator builds its own `output` from them (vanilla `RecipeProvider`).
         @Override
-        protected RecipeProvider createRecipeProvider(HolderLookup.Provider registries, RecipeOutput exporter) {
-            return new Generator(registries, exporter);
+        protected RecipeProvider createRecipeProvider(HolderLookup.Provider registries,
+                                                      BootstrapContext<Recipe<?>> recipeOutput,
+                                                      BootstrapContext<Advancement> advancementOutput) {
+            return new Generator(recipeOutput, advancementOutput);
         }
 
         private static class Generator extends RecipeProvider {
-            Generator(HolderLookup.Provider registries, RecipeOutput exporter) {
-                super(registries, exporter);
+            Generator(BootstrapContext<Recipe<?>> recipeOutput, BootstrapContext<Advancement> advancementOutput) {
+                super(recipeOutput, advancementOutput);
             }
 
             @Override

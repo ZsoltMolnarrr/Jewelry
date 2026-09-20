@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "jewelry:copper_ring"
+        "recipes": "jewelry:copper_ring"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

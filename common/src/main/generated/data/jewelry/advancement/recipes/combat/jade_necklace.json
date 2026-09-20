@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "jewelry:jade_necklace"
+        "recipes": "jewelry:jade_necklace"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

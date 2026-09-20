@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "jewelry:netherite_ruby_ring"
+        "recipes": "jewelry:netherite_ruby_ring"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

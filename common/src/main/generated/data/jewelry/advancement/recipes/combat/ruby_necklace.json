@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "jewelry:ruby_necklace"
+        "recipes": "jewelry:ruby_necklace"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

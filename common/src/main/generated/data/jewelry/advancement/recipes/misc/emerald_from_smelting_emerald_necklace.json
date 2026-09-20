@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "jewelry:emerald_from_smelting_emerald_necklace"
+        "recipes": "jewelry:emerald_from_smelting_emerald_necklace"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

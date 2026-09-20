@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "jewelry:netherite_scrap_from_smelting_netherite_tanzanite_necklace"
+        "recipes": "jewelry:netherite_scrap_from_smelting_netherite_tanzanite_necklace"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

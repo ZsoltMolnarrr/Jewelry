@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "jewelry:netherite_citrine_necklace"
+        "recipes": "jewelry:netherite_citrine_necklace"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

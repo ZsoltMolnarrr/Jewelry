@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "jewelry:gold_nugget_from_blasting_topaz_ring"
+        "recipes": "jewelry:gold_nugget_from_blasting_topaz_ring"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
