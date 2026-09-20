@@ -1,6 +1,7 @@
 package net.jewelry.gems;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.RegistryWrapper;
 import org.jetbrains.annotations.Nullable;
 
 /// Putting a cut gem into an item's socket — the anvil's job (left: socketed item, right: cut gem).
@@ -11,8 +12,9 @@ public class GemSocketing {
     /// The anvil's result for (left, right): a gem socketed, or a socket mount applied, or null.
     /// `ignoreMountCap`: creative players may mount past the cap.
     @Nullable
-    public static ItemStack anvilResult(ItemStack left, ItemStack right, boolean ignoreMountCap) {
-        var socketed = socket(left, right);
+    public static ItemStack anvilResult(ItemStack left, ItemStack right, boolean ignoreMountCap,
+                                        @Nullable RegistryWrapper.WrapperLookup registries) {
+        var socketed = socket(left, right, registries);
         return socketed != null ? socketed : mount(left, right, ignoreMountCap);
     }
 
@@ -52,17 +54,22 @@ public class GemSocketing {
         return !target.isEmpty() && GemCut.of(gem).isPresent() && GemSockets.hasSockets(target);
     }
 
-    /// The target with the gem socketed (first empty socket; a fully gemmed item is reset to this gem
-    /// alone, the old gems destroyed), or null when the pair does not apply. The inputs are left untouched.
+    /// The target with the gem socketed: into the first empty socket that accepts it ([GemSockets#accepts]);
+    /// when none is empty, the accepting sockets alone are reset to this gem. Null when the pair does not
+    /// apply, including when no socket of the item accepts this gem. The inputs are left untouched.
     @Nullable
-    public static ItemStack socket(ItemStack target, ItemStack gem) {
+    public static ItemStack socket(ItemStack target, ItemStack gem, @Nullable RegistryWrapper.WrapperLookup registries) {
         if (!canSocket(target, gem)) {
             return null;
         }
         var cut = GemCut.of(gem).get();
         var sockets = GemSockets.of(target).get();
+        var updated = sockets.withGem(cut, socket -> GemSockets.accepts(registries, socket, cut));
+        if (updated == null) {
+            return null;
+        }
         var result = target.copyWithCount(1);
-        result.set(GemComponents.SOCKETS, sockets.withGem(cut));
+        result.set(GemComponents.SOCKETS, updated);
         return result;
     }
 }

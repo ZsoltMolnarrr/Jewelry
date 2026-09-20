@@ -11,6 +11,8 @@ import net.jewelry.gems.GemCut;
 import net.jewelry.gems.GemCutRegistry;
 import net.jewelry.gems.GemCuttingScreenHandler;
 import net.jewelry.gems.SocketMounts;
+import net.jewelry.gems.SocketType;
+import net.jewelry.gems.SocketTypeRegistry;
 import net.jewelry.items.Gems;
 import net.jewelry.items.Group;
 import net.jewelry.items.JewelryItems;
@@ -60,6 +62,7 @@ public class JewelryMod {
     /// events fire (NeoForge buffers it until `DataPackRegistryEvent.NewRegistry`).
     public static void registerDataRegistries() {
         Platform.util().registerSyncedDataRegistry(GemCutRegistry.KEY, GemCut.CODEC, GemCut.CODEC);
+        Platform.util().registerSyncedDataRegistry(SocketTypeRegistry.KEY, SocketType.CODEC, SocketType.CODEC);
     }
 
     public static void registerScreenHandlers() {

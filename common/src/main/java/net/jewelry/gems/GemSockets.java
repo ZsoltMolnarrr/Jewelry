@@ -8,7 +8,11 @@ import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.item.Equipment;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.tag.TagKey;
+import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 import java.util.function.BiConsumer;
@@ -33,6 +37,22 @@ public class GemSockets {
             return Optional.empty();
         }
         return Optional.ofNullable(stack.get(GemComponents.SOCKETS));
+    }
+
+    // MARK: Which gem fits which socket
+
+    /// Blacklist for standard sockets: a cut in `#jewelry:restricted` fits only sockets whose type definition
+    /// `accepts` it. Every other cut — Jewelry's, any pack's — fits standard sockets with no extra step.
+    public static final TagKey<GemCut> RESTRICTED = TagKey.of(GemCutRegistry.KEY, Identifier.of(JewelryMod.ID, "restricted"));
+
+    /// A socket whose type has a definition with `accepts` takes exactly the cuts in that tag. Any other
+    /// socket (untyped, or a type without a definition or without `accepts`) is a standard socket and takes
+    /// every cut that is not [#RESTRICTED].
+    public static boolean accepts(@Nullable RegistryWrapper.WrapperLookup lookup, SocketsComponent.Socket socket, RegistryEntry<GemCut> cut) {
+        var filter = socket.type()
+                .flatMap(type -> SocketTypeRegistry.find(lookup, type))
+                .flatMap(SocketType::accepts);
+        return filter.map(cut::isIn).orElseGet(() -> !cut.isIn(RESTRICTED));
     }
 
     public static boolean hasSockets(ItemStack stack) {

@@ -36,7 +36,8 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
     private void updateResult_HEAD_Jewelry(CallbackInfo ci) {
         var target = this.input.getStack(0);
         var gem = this.input.getStack(1);
-        var result = GemSocketing.anvilResult(target, gem, this.player.isInCreativeMode());
+        var result = GemSocketing.anvilResult(target, gem, this.player.isInCreativeMode(),
+                this.player.getWorld().getRegistryManager());
         if (result == null) {
             return;
         }

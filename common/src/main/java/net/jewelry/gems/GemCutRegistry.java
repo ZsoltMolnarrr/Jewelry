@@ -60,5 +60,11 @@ public class GemCutRegistry {
         var registry = server.getRegistryManager().get(KEY);
         var ids = registry.getIds().stream().map(Identifier::toString).sorted().collect(Collectors.joining(", "));
         LOGGER.info("Loaded {} gem cuts: {}", registry.size(), ids);
+        server.getRegistryManager().getOptional(SocketTypeRegistry.KEY).ifPresent(types -> {
+            if (types.size() > 0) {
+                LOGGER.info("Loaded {} socket types: {}", types.size(),
+                        types.getIds().stream().map(Identifier::toString).sorted().collect(Collectors.joining(", ")));
+            }
+        });
     }
 }

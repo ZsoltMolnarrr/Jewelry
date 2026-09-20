@@ -10,7 +10,7 @@ No wiki is maintained at this moment, as all the information is available in-gam
 
 Raw gems are cut at the Jeweler's Kit into cut gems that socket into equipment at an anvil.
 
-Cuts are data (`data/<ns>/gem_cut/*.json`): data packs add their own, see [Adding gem cuts with a data pack](#adding-gem-cuts-with-a-data-pack); mods can author them in datagen, see [Adding gem cuts from another mod](#adding-gem-cuts-from-another-mod).
+Cuts are data (`data/<ns>/gem_cut/*.json`): data packs add their own, see [Adding gem cuts with a data pack](#adding-gem-cuts-with-a-data-pack); mods can author them in datagen, see [Adding gem cuts from another mod](#adding-gem-cuts-from-another-mod). Sockets that only take certain gems: [Advanced use-cases](#advanced-use-cases).
 
 For under the hood technical details, check out the projects providing the custom attributes:
 - [Spell Power Attributes](https://github.com/ZsoltMolnarrr/SpellPower)
@@ -177,3 +177,88 @@ its component types during vanilla's component bootstrap (`DataComponentTypes`),
 - `GemComponents.SOCKETS` + `SocketsComponent.empty(n)` — give your equipment sockets as a default
   component: `new Item.Settings().component(GemComponents.SOCKETS, SocketsComponent.empty(1))`.
 - `GemComponents.ITEM_MODEL` — explicit per-stack model, the SpellEngine `item_model` replica.
+
+# Advanced use-cases
+
+## Socket types: sockets that only take certain gems
+
+By default every socket is a standard socket and every cut fits it, so nothing in the guides above needs any
+of this. A mod that brings its own family of gems — and wants them kept apart from the standard ones, both
+ways — gives its sockets a **type**.
+
+A socket's `type` is an id on the socket entry:
+
+```
+jewelry:sockets=[ {}, {"type": "jewelry:mounted"}, {"type": "witcher:sign"} ]
+```
+
+- `{}` — a plain standard socket.
+- `{"type": "jewelry:mounted"}` — a label with no definition; still a standard socket. (The Socket Mount writes
+  it so its one-per-item cap can be counted.)
+- `{"type": "witcher:sign"}` — a type that has a **definition**, below.
+
+### Defining a type
+
+`data/<ns>/socket_type/<path>.json`, in the synced `socket_type` registry. Every field is optional:
+
+```json
+{
+  "accepts": "#witcher:sign_gems",
+  "icon": "\uDB80\uDD10",
+  "title": { "translate": "socket.witcher.sign" },
+  "color": "#7FD4C1"
+}
+```
+
+| Field | Meaning |
+|---|---|
+| `accepts` | A tag of gem cuts (`data/<ns>/tags/gem_cut/<path>.json`). The socket takes those cuts and nothing else. Absent → a standard socket. |
+| `icon` | The socket frame glyph: a character your resource pack maps to a bitmap in `assets/minecraft/font/default.json`. Keep it 9×9 like Jewelry's so the gem drawn over a filled socket lines up. Absent → Jewelry's frame. |
+| `title` | Text of the empty socket, e.g. "Empty Sign Socket". Absent → "Empty Socket". |
+| `color` | Colour of the empty-socket line and of the frame on a filled one. Absent → gray. |
+
+### Keeping your gems out of standard sockets
+
+`#jewelry:restricted` is the blacklist of standard sockets: a cut in it fits only sockets whose type `accepts`
+it. Tags can include tags, so it is one line:
+
+```json
+// data/jewelry/tags/gem_cut/restricted.json
+{ "values": [ "#witcher:sign_gems" ] }
+```
+
+The other direction needs nothing: standard cuts are not in your tag, so your sockets refuse them.
+
+### What follows
+
+- A gem goes into the first empty socket that accepts it. When none is empty, only the accepting sockets are
+  reset to the new gem — a gem of one family never wipes another family's gems. An item with no accepting
+  socket gives no anvil result.
+- A Socket Mount adds sockets of the `type` its `jewelry:socket_mount` component names, capped per type by
+  `max_mounted`. Name your defined type there to ship a mount for your own sockets.
+- Item defaults: `SocketsComponent.empty(1, Identifier.of("witcher", "sign"))`, or without depending on
+  Jewelry, the JSON `[{"type": "witcher:sign"}]` through the lookup shown in *Giving your items sockets*.
+
+### From Java (datagen)
+
+```java
+// common
+public static final TagKey<GemCut> SIGN_GEMS = SocketTypeBuilder.cutTag(Identifier.of("witcher", "sign_gems"));
+public static final SocketTypeBuilder.Entry SIGN = SocketTypeBuilder.create(Identifier.of("witcher", "sign"))
+        .accepts(SIGN_GEMS).icon("\uDB80\uDD10").title(Text.translatable("socket.witcher.sign")).color(0x7FD4C1)
+        .build();
+
+// fabric datagen
+public static class MySocketTypes extends SocketTypeGenerator {      // → data/witcher/socket_type/sign.json
+    ...constructor...
+    @Override protected void generate(Entries entries) { entries.add(SIGN); }
+}
+public static class MyCutTags extends GemCutTagGenerator {           // → the tag + the blacklist entry
+    ...constructor...
+    @Override protected void configure(RegistryWrapper.WrapperLookup lookup) {
+        var tag = getOrCreateTagBuilder(SIGN_GEMS);
+        MyCuts.all.forEach(cut -> tag.addOptional(cut.id()));
+        restrict(SIGN_GEMS);
+    }
+}
+```
