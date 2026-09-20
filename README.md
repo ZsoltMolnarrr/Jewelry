@@ -193,8 +193,9 @@ jewelry:sockets=[ {}, {"type": "jewelry:mounted"}, {"type": "witcher:sign"} ]
 ```
 
 - `{}` — a plain standard socket.
-- `{"type": "jewelry:mounted"}` — a label with no definition; still a standard socket. (The Socket Mount writes
-  it so its one-per-item cap can be counted.)
+- `{"type": "jewelry:mounted"}` — written by the Socket Mount so its one-per-item cap can be counted. Its definition
+  only restyles it (gold "Empty Mounted Socket"); with no `accepts` it is still a standard socket. A type with no
+  definition at all works the same, with the generic look.
 - `{"type": "witcher:sign"}` — a type that has a **definition**, below.
 
 ### Defining a type

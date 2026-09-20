@@ -7,6 +7,8 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.jewelry.JewelryMod;
 import net.jewelry.api.datagen.GemCutGenerator;
+import net.jewelry.api.datagen.SocketTypeGenerator;
+import net.jewelry.gems.SocketTypes;
 import net.jewelry.gems.GemCuts;
 import net.jewelry.gems.SocketMounts;
 import net.minecraft.registry.tag.ItemTags;
@@ -43,6 +45,7 @@ public class JewelryDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(ModelProvider::new);
         pack.addProvider(UnsmeltGenerator::new);
         pack.addProvider(JewelryGemCuts::new);
+        pack.addProvider(JewelrySocketTypes::new);
     }
 
     // ========================================
@@ -159,6 +162,23 @@ public class JewelryDataGenerator implements DataGeneratorEntrypoint {
         @Override
         public String getName() {
             return "Jewelry Gem Cuts";
+        }
+    }
+
+    /// Jewelry's own socket types (the mounted socket's look), through the public generator.
+    public static class JewelrySocketTypes extends SocketTypeGenerator {
+        public JewelrySocketTypes(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+            super(output, registriesFuture);
+        }
+
+        @Override
+        protected void generate(Entries entries) {
+            SocketTypes.all.forEach(entries::add);
+        }
+
+        @Override
+        public String getName() {
+            return "Jewelry Socket Types";
         }
     }
 
