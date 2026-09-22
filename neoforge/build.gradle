@@ -19,7 +19,7 @@ sourceSets {
 
 sourceSets.main.java {
     // The Curios integration stays in-tree, but out of the compile while Curios is gated off
-    // (see gradle.properties, TODO 26.3 (Curios)). `compat/CompatFeatures` resolves it reflectively.
+    // (see `enable_curios` in gradle.properties). `compat/CompatFeatures` resolves it reflectively.
     if (!rootProject.enable_curios.toBoolean()) {
         exclude 'net/jewelry/neoforge/compat/curios/**'
     }
@@ -70,7 +70,7 @@ dependencies {
     include(implementation("maven.modrinth:tiny-config:${project.tiny_config_version}-${platform}"))
 
     // Curios - https://docs.illusivesoulworks.com/category/curios
-    // TODO 26.3 (Curios): gated off — see `enable_curios` in gradle.properties.
+    // Gated by `enable_curios` in gradle.properties.
     if (rootProject.enable_curios.toBoolean()) {
         implementation("top.theillusivec4.curios:curios-neoforge:${project.curios_version}")
     }
