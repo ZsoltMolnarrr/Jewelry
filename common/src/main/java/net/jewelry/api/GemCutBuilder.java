@@ -1,5 +1,7 @@
 package net.jewelry.api;
 
+import net.jewelry.api.bonus.AttributeBonus;
+import net.jewelry.api.bonus.GemBonus;
 import net.jewelry.gems.GemCut;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
@@ -41,9 +43,7 @@ public class GemCutBuilder {
 
     private final Identifier id;
     private final RegistryEntry<Item> gem;
-    private Identifier attribute;
-    private float value;
-    private EntityAttributeModifier.Operation operation = EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE;
+    private GemBonus bonus;
     private TextColor color = TextColor.fromRgb(0xFFFFFF);
     private Optional<Identifier> model;
     private String requiredMod;
@@ -62,13 +62,16 @@ public class GemCutBuilder {
         return new GemCutBuilder(id, gem);
     }
 
-    // MARK: Attribute (exactly one per cut)
+    // MARK: Bonus (exactly one per cut)
+
+    /// Any bonus, including kinds registered by other mods (see [net.jewelry.api.bonus.GemBonusTypes]).
+    public GemCutBuilder bonus(GemBonus bonus) {
+        this.bonus = bonus;
+        return this;
+    }
 
     public GemCutBuilder attribute(Identifier attribute, float value, EntityAttributeModifier.Operation operation) {
-        this.attribute = attribute;
-        this.value = value;
-        this.operation = operation;
-        return this;
+        return bonus(new AttributeBonus(attribute, value, operation));
     }
 
     public GemCutBuilder attribute(RegistryEntry<EntityAttribute> attribute, float value, EntityAttributeModifier.Operation operation) {
@@ -127,9 +130,9 @@ public class GemCutBuilder {
     }
 
     public Entry build() {
-        if (attribute == null) {
-            throw new IllegalStateException("Gem cut " + id + " has no attribute");
+        if (bonus == null) {
+            throw new IllegalStateException("Gem cut " + id + " has no bonus");
         }
-        return new Entry(id, new GemCut(gem, attribute, value, operation, color, model), requiredMod);
+        return new Entry(id, new GemCut(gem, bonus, color, model), requiredMod);
     }
 }

@@ -1,7 +1,9 @@
 {
-  "attribute": "minecraft:generic.armor",
+  "bonus": {
+    "attribute": "minecraft:generic.armor",
+    "operation": "add_value",
+    "value": 1.0
+  },
   "color": "#3F79E8",
-  "gem": "jewelry:sapphire",
-  "operation": "add_value",
-  "value": 1.0
+  "gem": "jewelry:sapphire"
 }

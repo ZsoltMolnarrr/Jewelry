@@ -1,7 +1,9 @@
 {
-  "attribute": "minecraft:generic.armor_toughness",
+  "bonus": {
+    "attribute": "minecraft:generic.armor_toughness",
+    "operation": "add_value",
+    "value": 0.5
+  },
   "color": "#3F79E8",
-  "gem": "jewelry:sapphire",
-  "operation": "add_value",
-  "value": 0.5
+  "gem": "jewelry:sapphire"
 }

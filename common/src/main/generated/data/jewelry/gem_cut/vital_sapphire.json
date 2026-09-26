@@ -7,7 +7,11 @@
       ]
     }
   ],
-  "attribute": "spell_engine:healing_taken",
+  "bonus": {
+    "attribute": "spell_engine:healing_taken",
+    "operation": "add_multiplied_base",
+    "value": 0.02
+  },
   "color": "#3F79E8",
   "gem": "jewelry:sapphire",
   "neoforge:conditions": [
@@ -15,7 +19,5 @@
       "type": "neoforge:mod_loaded",
       "modid": "spell_engine"
     }
-  ],
-  "operation": "add_multiplied_base",
-  "value": 0.02
+  ]
 }

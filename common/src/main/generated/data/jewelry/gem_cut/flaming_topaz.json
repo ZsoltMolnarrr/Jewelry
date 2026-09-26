@@ -1,7 +1,9 @@
 {
-  "attribute": "spell_power:fire",
+  "bonus": {
+    "attribute": "spell_power:fire",
+    "operation": "add_multiplied_base",
+    "value": 0.04
+  },
   "color": "#F2A33A",
-  "gem": "jewelry:topaz",
-  "operation": "add_multiplied_base",
-  "value": 0.04
+  "gem": "jewelry:topaz"
 }

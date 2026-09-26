@@ -1,7 +1,9 @@
 {
-  "attribute": "ranged_weapon:velocity",
+  "bonus": {
+    "attribute": "ranged_weapon:velocity",
+    "operation": "add_value",
+    "value": 0.25
+  },
   "color": "#4EC272",
-  "gem": "jewelry:jade",
-  "operation": "add_value",
-  "value": 0.25
+  "gem": "jewelry:jade"
 }

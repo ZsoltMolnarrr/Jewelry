@@ -1,7 +1,9 @@
 {
-  "attribute": "minecraft:generic.movement_speed",
+  "bonus": {
+    "attribute": "minecraft:generic.movement_speed",
+    "operation": "add_multiplied_base",
+    "value": 0.05
+  },
   "color": "#F4D44B",
-  "gem": "jewelry:citrine",
-  "operation": "add_multiplied_base",
-  "value": 0.05
+  "gem": "jewelry:citrine"
 }

@@ -1,6 +1,8 @@
 package net.jewelry.gems;
 
 import net.jewelry.JewelryMod;
+import net.jewelry.api.bonus.AttributeBonus;
+import net.jewelry.api.bonus.GemBonus;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.entity.EquipmentSlot;
@@ -14,6 +16,8 @@ import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.BiConsumer;
 
@@ -59,6 +63,45 @@ public class GemSockets {
         return of(stack).map(sockets -> sockets.count() > 0).orElse(false);
     }
 
+    // MARK: Collecting bonuses
+
+    /// A gem sitting in a socket: which socket, which cut, and the cut's bonus.
+    public record SocketedBonus<T extends GemBonus>(int socketIndex, RegistryEntry<GemCut> cut, T bonus) {
+        /// An id unique to this placement on this equipment slot: `<cut ns>:gem_cut/<cut>/<slot>/<index>`.
+        /// Use it for anything that must not collapse when the same cut sits in two sockets or two slots
+        /// (attribute modifiers, effect sources, …).
+        public Identifier placementId(EquipmentSlot slot) {
+            var cutId = GemCut.idOf(cut).orElse(Identifier.of(JewelryMod.ID, "unknown"));
+            return cutId.withPrefixedPath("gem_cut/").withSuffixedPath("/" + slot.getName() + "/" + socketIndex);
+        }
+    }
+
+    /// Every socketed gem of the stack with its bonus, in socket order. Empty while sockets are disabled.
+    /// This is the discovery helper for custom bonus kinds: call it from whatever hook your mechanic needs.
+    public static List<SocketedBonus<GemBonus>> bonuses(ItemStack stack) {
+        return bonuses(stack, GemBonus.class);
+    }
+
+    /// The socketed gems of the stack whose bonus is of the given kind.
+    public static <T extends GemBonus> List<SocketedBonus<T>> bonuses(ItemStack stack, Class<T> kind) {
+        var sockets = of(stack).orElse(null);
+        if (sockets == null || sockets.filled() == 0) {
+            return List.of();
+        }
+        var found = new ArrayList<SocketedBonus<T>>();
+        for (int i = 0; i < sockets.count(); i++) {
+            var gem = sockets.gemAt(i);
+            if (gem.isEmpty()) {
+                continue;
+            }
+            var bonus = gem.get().value().bonus();
+            if (kind.isInstance(bonus)) {
+                found.add(new SocketedBonus<>(i, gem.get(), kind.cast(bonus)));
+            }
+        }
+        return found;
+    }
+
     // MARK: Attribute contribution
 
     /// Whether socketed gems count while the item sits in `slot`: the slots the item's own modifiers
@@ -79,24 +122,12 @@ public class GemSockets {
     /// Ids are unique per (cut, slot, socket index), so the same cut stacks across sockets and across slots.
     public static void applyModifiers(ItemStack stack, EquipmentSlot slot,
                                       BiConsumer<RegistryEntry<EntityAttribute>, EntityAttributeModifier> consumer) {
-        var sockets = of(stack).orElse(null);
-        if (sockets == null || sockets.filled() == 0 || !appliesTo(stack, slot)) {
+        if (!appliesTo(stack, slot)) {
             return;
         }
-        for (int i = 0; i < sockets.count(); i++) {
-            var socket = sockets.gemAt(i);
-            if (socket.isEmpty()) {
-                continue;
-            }
-            var gem = socket.get();
-            var cutId = GemCut.idOf(gem);
-            if (cutId.isEmpty()) {
-                continue;
-            }
-            var modifierId = cutId.get().withPrefixedPath("gem_cut/").withSuffixedPath("/" + slot.getName() + "/" + i);
-            var cut = gem.value();
-            cut.resolveAttribute().ifPresent(attribute ->
-                    consumer.accept(attribute, cut.modifier(modifierId)));
+        for (var socketed : bonuses(stack, AttributeBonus.class)) {
+            socketed.bonus().resolveAttribute().ifPresent(attribute ->
+                    consumer.accept(attribute, socketed.bonus().modifier(socketed.placementId(slot))));
         }
     }
 }

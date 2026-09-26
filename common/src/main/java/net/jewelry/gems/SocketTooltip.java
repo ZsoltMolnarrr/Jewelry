@@ -43,7 +43,7 @@ public class SocketTooltip {
                     lines.add(Text.literal(frame).styled(style -> style.withColor(frameColor))
                             .append(Text.literal(BACKSPACE + GEM_GLYPH).styled(style -> style.withColor(cut.color())))
                             .append(Text.literal(" "))
-                            .append(GemItem.bonusText(cut)));
+                            .append(cut.bonus().description()));
                 } else {
                     var look = type.empty().orElse(SocketType.Appearance.GENERIC);
                     var frame = look.icon().orElse(FRAME_GLYPH);

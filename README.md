@@ -34,9 +34,11 @@ Every gem cut is one JSON file in a data pack, no code needed. Jewelry's own cut
 ```json
 {
   "gem": "jewelry:ruby",
-  "attribute": "minecraft:generic.attack_damage",
-  "operation": "add_multiplied_base",
-  "value": 0.04,
+  "bonus": {
+    "attribute": "minecraft:generic.attack_damage",
+    "operation": "add_multiplied_base",
+    "value": 0.04
+  },
   "color": "#E5404F"
 }
 ```
@@ -44,9 +46,10 @@ Every gem cut is one JSON file in a data pack, no code needed. Jewelry's own cut
 | Field | Meaning |
 |---|---|
 | `gem` | The raw gem item this cut applies to. Jewelry's: `jewelry:ruby`, `sapphire`, `jade`, `topaz`, `citrine`, `tanzanite`. |
-| `attribute` | One attribute id, e.g. `minecraft:generic.max_health`, `spell_power:fire`, `ranged_weapon:damage`. Unknown ids load fine and grant nothing. |
-| `operation` | `add_value` (flat), `add_multiplied_base` (percent of base, `0.04` = +4 %) or `add_multiplied_total`. |
-| `value` | The bonus amount. |
+| `bonus` | What the cut grants. Its `type` picks the kind of bonus and defaults to `attribute`, the only kind Jewelry ships; mods can register further kinds (see "Custom bonus kinds" below). |
+| `bonus.attribute` | One attribute id, e.g. `minecraft:generic.max_health`, `spell_power:fire`, `ranged_weapon:damage`. Unknown ids load fine and grant nothing. |
+| `bonus.operation` | `add_value` (flat), `add_multiplied_base` (percent of base, `0.04` = +4 %) or `add_multiplied_total`. |
+| `bonus.value` | The bonus amount. |
 | `color` | Tint of the socket glyph on equipment tooltips, `#RRGGBB`. |
 | `model` | Optional. A custom item model for this cut, e.g. `mypack:item/gem_cut/bold_ruby`. Without it the cut uses its gem's default cut sprite. |
 
@@ -101,9 +104,10 @@ public class MyGemCuts {
 
 `GemCutBuilder`:
 - `create(id, gem)` — the RAW gem item this cut applies to (Jewelry's `Gems.ruby.item()` or your own).
-- exactly one attribute: `multiplyBase(attribute, value)`, `addValue(attribute, value)` or
-  `attribute(attribute, value, operation)`; the attribute is an id, so a missing mod's attribute means "no
-  bonus", never a load failure.
+- exactly one bonus: `multiplyBase(attribute, value)`, `addValue(attribute, value)` or
+  `attribute(attribute, value, operation)` for an attribute modifier — the attribute is an id, so a missing
+  mod's attribute means "no bonus", never a load failure; or `bonus(GemBonus)` for a kind of your own (see
+  "Custom bonus kinds" below).
 - `color(rgb)` — tint of the socket glyph on equipment tooltips. The cut's name is never tinted.
 - `customIcon()` — opt in to a sprite of the cut's own (`textures/item/gem_cut/<path>.png`). Without it
   every cut of a gem shares that gem's default cut sprite (`textures/item/gem_cut/<gem path>.png`).
@@ -177,6 +181,8 @@ its component types during vanilla's component bootstrap (`DataComponentTypes`),
 - `GemComponents.SOCKETS` + `SocketsComponent.empty(n)` — give your equipment sockets as a default
   component: `new Item.Settings().component(GemComponents.SOCKETS, SocketsComponent.empty(1))`.
 - `GemComponents.ITEM_MODEL` — explicit per-stack model, the SpellEngine `item_model` replica.
+- `GemSockets.bonuses(stack)` / `bonuses(stack, MyBonus.class)` — the socketed gems of a stack with their
+  bonuses; the discovery helper for custom bonus kinds.
 
 # Advanced use-cases
 
@@ -267,3 +273,80 @@ public static class MyCutTags extends GemCutTagGenerator {           // → the 
     }
 }
 ```
+
+## Custom bonus kinds: cuts that grant something other than an attribute
+
+A cut's `bonus` is one object whose `type` names a *bonus kind*. Jewelry ships one kind, `attribute` (the default when `type` is absent), serving as default.
+
+Any mod can register further kinds — a small spell modifier, a status effect while worn, whatever.
+
+⚠️Important note: Jewelry only serves the structural backbone, does not provide any dynamics. So gems with custom bonus types need to be checked by developer to execute their related effect.
+
+### Registering a kind
+
+The kind registry is plain code, not a vanilla registry — `net.jewelry.api.bonus.GemBonusTypes`. Register from your mod initializer, on both sides (cuts are synced and decoded on the client with the same codec):
+
+```java
+public record StatusEffectBonus(RegistryEntry<StatusEffect> effect, int amplifier) implements GemBonus {
+    public static final MapCodec<StatusEffectBonus> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
+            Registries.STATUS_EFFECT.getEntryCodec().fieldOf("effect").forGetter(StatusEffectBonus::effect),
+            Codec.INT.optionalFieldOf("amplifier", 0).forGetter(StatusEffectBonus::amplifier)
+    ).apply(i, StatusEffectBonus::new));
+
+    public static final GemBonusType<StatusEffectBonus> TYPE =
+            GemBonusTypes.register("mymod:status_effect", CODEC);   // a plain string; prefix it with your mod id
+
+    @Override public GemBonusType<?> type() { return TYPE; }
+
+    /// The line on the cut gem's tooltip and on the socket line of the item holding it.
+    @Override public Text description() {
+        return Text.translatable("gem_bonus.mymod.status_effect", effect.value().getName()).formatted(Formatting.BLUE);
+    }
+}
+```
+
+The cut JSON then reads:
+
+```json
+{
+  "gem": "jewelry:ruby",
+  "bonus": { "type": "mymod:status_effect", "effect": "minecraft:speed" },
+  "color": "#E5404F"
+}
+```
+
+From Java, build it with `GemCutBuilder.create(id, gem).bonus(new StatusEffectBonus(...))` and generate it
+like any other cut.
+
+### Making it do something
+
+`GemSockets.bonuses(stack, StatusEffectBonus.class)` returns the socketed gems of that kind on a stack, in
+socket order, each as a `SocketedBonus(socketIndex, cut, bonus)`. Where you call it is up to the mechanic —
+an entity tick, an equipment-change hook, a spell-cast event. `SocketedBonus.placementId(slot)` gives an id
+unique to that gem's placement (`<ns>:gem_cut/<cut>/<slot>/<index>`) for anything that must not collapse
+when the same cut sits in two sockets. Jewelry's own attribute path is written on the same helper.
+
+```java
+// e.g. once per second on the server
+for (var slot : EquipmentSlot.values()) {
+    var stack = entity.getEquippedStack(slot);
+    if (!GemSockets.appliesTo(stack, slot)) continue;            // the slot rule Jewelry uses for attributes
+    for (var socketed : GemSockets.bonuses(stack, StatusEffectBonus.class)) {
+        entity.addStatusEffect(new StatusEffectInstance(socketed.bonus().effect(), 40, socketed.bonus().amplifier()));
+    }
+}
+```
+
+The helper returns nothing while sockets are disabled in `config/jewelry/features.json`, so the feature
+flag covers your kind as well.
+
+### Rules
+
+- **Register at init.** Kinds must exist before a world loads its data packs; a kind registered later is
+  unknown to cuts that already loaded.
+- **An unknown `type` fails the cut** — and, as with every data-pack registry, a failed entry stops the
+  world from loading, naming the cut and the unknown type in the log. A cut whose kind belongs to an
+  optional mod therefore carries that mod's load conditions (`requiresMod` in Java, or the two condition
+  fields in JSON), exactly like a cut for an optional mod's attribute.
+- **Clients need the mod** that defines the kind, since cuts are synced and decoded with the kind's codec.
+- **One bonus per cut.** A cut grants exactly one bonus; two stats means two cuts.

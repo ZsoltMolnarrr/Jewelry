@@ -1,7 +1,9 @@
 {
-  "attribute": "minecraft:generic.attack_damage",
+  "bonus": {
+    "attribute": "minecraft:generic.attack_damage",
+    "operation": "add_multiplied_base",
+    "value": 0.04
+  },
   "color": "#E5404F",
-  "gem": "jewelry:ruby",
-  "operation": "add_multiplied_base",
-  "value": 0.04
+  "gem": "jewelry:ruby"
 }

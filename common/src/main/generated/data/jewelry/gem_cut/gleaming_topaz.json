@@ -1,7 +1,9 @@
 {
-  "attribute": "spell_power:critical_chance",
+  "bonus": {
+    "attribute": "spell_power:critical_chance",
+    "operation": "add_multiplied_base",
+    "value": 0.03
+  },
   "color": "#F2A33A",
-  "gem": "jewelry:topaz",
-  "operation": "add_multiplied_base",
-  "value": 0.03
+  "gem": "jewelry:topaz"
 }

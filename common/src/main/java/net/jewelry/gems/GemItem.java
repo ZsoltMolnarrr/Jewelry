@@ -1,12 +1,9 @@
 package net.jewelry.gems;
 
-import net.minecraft.component.type.AttributeModifiersComponent;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 
 import java.util.List;
 
@@ -27,26 +24,7 @@ public class GemItem extends Item {
     @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
         super.appendTooltip(stack, context, tooltip, type);
-        GemCut.of(stack).ifPresent(entry -> tooltip.add(bonusText(entry.value())));
+        GemCut.of(stack).ifPresent(entry -> tooltip.add(entry.value().bonus().description()));
     }
 
-    /// "+5% Attack Damage" in the same wording vanilla uses for positive item attribute modifiers.
-    public static Text bonusText(GemCut cut) {
-        var attribute = cut.resolveAttribute();
-        if (attribute.isEmpty()) {
-            return Text.literal(cut.attribute().toString()).formatted(Formatting.DARK_GRAY);
-        }
-        var operation = cut.operation();
-        double value = cut.value();
-        double shown = (operation == EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
-                || operation == EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)
-                ? value * 100.0
-                : value;
-        var prefix = value < 0 ? "attribute.modifier.take." : "attribute.modifier.plus.";
-        return Text.translatable(
-                        prefix + operation.getId(),
-                        AttributeModifiersComponent.DECIMAL_FORMAT.format(Math.abs(shown)),
-                        Text.translatable(attribute.get().value().getTranslationKey()))
-                .formatted(value < 0 ? Formatting.RED : Formatting.BLUE);
-    }
 }

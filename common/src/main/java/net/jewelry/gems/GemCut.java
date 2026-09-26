@@ -2,8 +2,7 @@ package net.jewelry.gems;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.entity.attribute.EntityAttribute;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.jewelry.api.bonus.GemBonus;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
@@ -15,19 +14,17 @@ import net.minecraft.util.Identifier;
 
 import java.util.Optional;
 
-/// A gem cut: the recipe that turns a raw gem into a cut gem carrying one attribute bonus.
+/// A gem cut: the recipe that turns a raw gem into a cut gem carrying one bonus.
 ///
 /// Loaded from data packs into the synced `gem_cut` registry ([GemCutRegistry]), one file per cut at
 /// `data/<mod>/gem_cut/<id>.json`. A cut gem is the raw gem item with the [GemComponents#CUT] component
 /// referencing one of these entries — the same shape as an enchanted book referencing an enchantment.
 ///
-/// `attribute` is kept as an identifier rather than a registry entry on purpose: a cut whose attribute
-/// comes from an absent mod still loads, still names and colours itself, and merely contributes nothing.
+/// `bonus` is whatever the cut grants — Jewelry's cuts carry an [net.jewelry.api.bonus.AttributeBonus];
+/// mods may register further kinds (see [net.jewelry.api.bonus.GemBonusTypes]).
 public record GemCut(
         RegistryEntry<Item> gem,
-        Identifier attribute,
-        float value,
-        EntityAttributeModifier.Operation operation,
+        GemBonus bonus,
         TextColor color,
         /// Custom item model of the cut gem (opt-in, e.g. `jewelry:item/gem_cut/bold_ruby`, a file under
         /// `models/item/gem_cut/`). Absent → the gem's default cut model ([#defaultModelId]), which every gem
@@ -36,9 +33,7 @@ public record GemCut(
 ) {
     public static final Codec<GemCut> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Registries.ITEM.getEntryCodec().fieldOf("gem").forGetter(GemCut::gem),
-            Identifier.CODEC.fieldOf("attribute").forGetter(GemCut::attribute),
-            Codec.FLOAT.fieldOf("value").forGetter(GemCut::value),
-            EntityAttributeModifier.Operation.CODEC.fieldOf("operation").forGetter(GemCut::operation),
+            GemBonus.CODEC.fieldOf("bonus").forGetter(GemCut::bonus),
             TextColor.CODEC.fieldOf("color").forGetter(GemCut::color),
             Identifier.CODEC.optionalFieldOf("model").forGetter(GemCut::model)
     ).apply(instance, GemCut::new));
@@ -74,18 +69,6 @@ public record GemCut(
     public static MutableText name(RegistryEntry<GemCut> entry) {
         var key = idOf(entry).map(GemCut::translationKey).orElse("gem_cut.unknown");
         return Text.translatable(key);
-    }
-
-    // MARK: Attribute
-
-    public Optional<RegistryEntry<EntityAttribute>> resolveAttribute() {
-        return Registries.ATTRIBUTE.getEntry(attribute).map(reference -> (RegistryEntry<EntityAttribute>) reference);
-    }
-
-    /// The modifier this cut contributes under the given id. Callers choose an id unique per placement
-    /// (cut, slot, socket index) so equal cuts stack instead of overwriting each other on an entity.
-    public EntityAttributeModifier modifier(Identifier modifierId) {
-        return new EntityAttributeModifier(modifierId, value, operation);
     }
 
     // MARK: Stacks
