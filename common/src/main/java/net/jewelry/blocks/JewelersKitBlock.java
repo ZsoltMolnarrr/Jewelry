@@ -35,7 +35,7 @@ public class JewelersKitBlock extends Block {
     @Override
     public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType options) {
         super.appendTooltip(stack, context, tooltip, options);
-        tooltip.add(Text.translatable("block.jewelry.jewelers_kit.hint").formatted(Formatting.GRAY, Formatting.ITALIC));
+        tooltip.add(Text.translatable("block.jewelry.jewelers_kit.hint").formatted(Formatting.GRAY));
     }
 
     // MARK: Gem cutting screen
