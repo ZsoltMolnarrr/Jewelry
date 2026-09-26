@@ -10,7 +10,7 @@
   "bonus": {
     "attribute": "critical_strike:damage",
     "operation": "add_multiplied_base",
-    "value": 0.08
+    "value": 0.05
   },
   "color": "#E5404F",
   "gem": "jewelry:ruby",

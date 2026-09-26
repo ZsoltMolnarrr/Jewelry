@@ -60,10 +60,10 @@ public class GemCuts {
     public static final GemCutBuilder.Entry QUICK_RUBY = add(cut("quick_ruby", Gems.ruby, RUBY)
             .multiplyBase(vanilla("generic.attack_speed"), PRIMARY_BONUS));
     public static final GemCutBuilder.Entry FIERCE_RUBY = add(cut("fierce_ruby", Gems.ruby, RUBY)
-            .multiplyBase(Identifier.of(CRITICAL_STRIKE, "damage"), 0.08F)
+            .multiplyBase(Identifier.of(CRITICAL_STRIKE, "damage"), 0.05F)
             .requiresMod(CRITICAL_STRIKE));
     public static final GemCutBuilder.Entry KEEN_RUBY = add(cut("keen_ruby", Gems.ruby, RUBY)
-            .multiplyBase(Identifier.of(CRITICAL_STRIKE, "chance"), 0.04F)
+            .multiplyBase(Identifier.of(CRITICAL_STRIKE, "chance"), 0.03F)
             .requiresMod(CRITICAL_STRIKE));
 
     // MARK: Sapphire — fortitude
@@ -108,7 +108,7 @@ public class GemCuts {
     public static final GemCutBuilder.Entry RECKLESS_CITRINE = add(cut("reckless_citrine", Gems.citrine, CITRINE)
             .multiplyBase(SpellPowerMechanics.HASTE.id, SECONDARY_BONUS));
     public static final GemCutBuilder.Entry FLEET_CITRINE = add(cut("fleet_citrine", Gems.citrine, CITRINE)
-            .multiplyBase(vanilla("generic.movement_speed"), HALF_UNIQUE_BONUS));
+            .multiplyBase(vanilla("generic.movement_speed"), 0.02F));
 
     // MARK: Tanzanite — frost & soul, lethality & elusiveness
     public static final GemCutBuilder.Entry GLACIAL_TANZANITE = add(cut("glacial_tanzanite", Gems.tanzanite, TANZANITE)
@@ -118,6 +118,6 @@ public class GemCuts {
     public static final GemCutBuilder.Entry WICKED_TANZANITE = add(cut("wicked_tanzanite", Gems.tanzanite, TANZANITE)
             .multiplyBase(SpellPowerMechanics.CRITICAL_DAMAGE.id, HALF_UNIQUE_BONUS));
     public static final GemCutBuilder.Entry ELUSIVE_TANZANITE = add(cut("elusive_tanzanite", Gems.tanzanite, TANZANITE)
-            .multiplyBase(Identifier.of(SPELL_ENGINE, "evasion_chance"), PRIMARY_BONUS)
+            .multiplyBase(Identifier.of(SPELL_ENGINE, "evasion_chance"), 0.02F)
             .requiresMod(SPELL_ENGINE));
 }
