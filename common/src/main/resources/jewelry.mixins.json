@@ -6,6 +6,7 @@
   "mixins": [
     "AnvilScreenHandlerMixin",
     "DataComponentTypesMixin",
+    "GrindstoneScreenHandlerMixin",
     "ItemStackMixin",
     "RegistryLoaderMixin"
   ],

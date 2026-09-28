@@ -59,6 +59,9 @@ public class GemSockets {
         return filter.map(cut::isIn).orElseGet(() -> !cut.isIn(RESTRICTED));
     }
 
+    /// Socket types the grindstone takes off an item (with the gems in them). Jewelry tags `jewelry:mounted`.
+    public static final TagKey<SocketType> GRINDSTONE_REMOVABLE = TagKey.of(SocketTypeRegistry.KEY, Identifier.of(JewelryMod.ID, "grindstone_removable"));
+
     public static boolean hasSockets(ItemStack stack) {
         return of(stack).map(sockets -> sockets.count() > 0).orElse(false);
     }

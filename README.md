@@ -8,7 +8,9 @@ No wiki is maintained at this moment, as all the information is available in-gam
 
 ### 💎 Gem cuts & sockets
 
-Raw gems are cut at the Jeweler's Kit into cut gems that socket into equipment at an anvil.
+Raw gems are cut at the Jeweler's Kit into cut gems that are inserted into equipment sockets at an anvil.
+A Socket Mount adds a socket to a piece of armor at an anvil; a grindstone takes mounted sockets off again
+(gems in them are lost, the item's own sockets and its enchantments stay).
 
 Cuts are data (`data/<ns>/gem_cut/*.json`): data packs add their own, see [Adding gem cuts with a data pack](#adding-gem-cuts-with-a-data-pack); mods can author them in datagen, see [Adding gem cuts from another mod](#adding-gem-cuts-from-another-mod). Sockets that only take certain gems: [Advanced use-cases](#advanced-use-cases).
 
@@ -273,6 +275,15 @@ public static class MyCutTags extends GemCutTagGenerator {           // → the 
     }
 }
 ```
+
+### Sockets the grindstone can take off
+
+Sockets whose type is in the socket type tag `#jewelry:grindstone_removable`
+(`data/<ns>/tags/socket_type/grindstone_removable.json`) come off when the item is ground alone: those
+sockets and the gems in them are gone, every other socket and the enchantments stay (the next grind
+disenchants, as vanilla does). Jewelry tags `jewelry:mounted`, the type its Socket Mount adds. A mod adding
+its own mount type tags it the same way; only types with a definition can be tagged. From datagen:
+`SocketTypeTagGenerator` with `grindstoneRemovable(type)`.
 
 ## Custom bonus kinds: cuts that grant something other than an attribute
 

@@ -4,7 +4,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.registry.RegistryWrapper;
 import org.jetbrains.annotations.Nullable;
 
-/// Putting a cut gem into an item's socket — the anvil's job (left: socketed item, right: cut gem).
+/// Putting a cut gem into an item's socket, or a Socket Mount onto an item — the anvil's job (left: item,
+/// right: gem or mount) — and taking attached sockets off again, the grindstone's job ([#unmount]).
 public class GemSocketing {
     /// Cost in levels charged by the anvil; the item's repair-cost counter is never raised.
     public static final int LEVEL_COST = 1;
@@ -45,6 +46,29 @@ public class GemSocketing {
         var sockets = GemSockets.of(target).orElse(SocketsComponent.empty(0));
         var result = target.copyWithCount(1);
         result.set(GemComponents.SOCKETS, sockets.withAddedSockets(mount.sockets(), mount.type()));
+        return result;
+    }
+
+    /// Whether the socket is of a type in `#jewelry:grindstone_removable`.
+    public static boolean isRemovable(@Nullable RegistryWrapper.WrapperLookup registries, SocketsComponent.Socket socket) {
+        return socket.type().map(type -> SocketTypeRegistry.isIn(registries, type, GemSockets.GRINDSTONE_REMOVABLE)).orElse(false);
+    }
+
+    /// The grindstone's job: the item with every socket of a `#jewelry:grindstone_removable` type taken off,
+    /// gems inside them destroyed; every other socket (and its gem) stays. Enchantments are left alone —
+    /// grinding again removes those, as vanilla does. Null when the item has no removable socket.
+    @Nullable
+    public static ItemStack unmount(ItemStack target, @Nullable RegistryWrapper.WrapperLookup registries) {
+        var sockets = GemSockets.of(target).orElse(null);
+        if (sockets == null) {
+            return null;
+        }
+        var kept = sockets.sockets().stream().filter(socket -> !isRemovable(registries, socket)).toList();
+        if (kept.size() == sockets.count()) {
+            return null;
+        }
+        var result = target.copy();
+        result.set(GemComponents.SOCKETS, new SocketsComponent(kept));
         return result;
     }
 

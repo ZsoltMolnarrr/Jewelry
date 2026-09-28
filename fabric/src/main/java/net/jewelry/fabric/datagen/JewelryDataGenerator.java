@@ -8,6 +8,8 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.jewelry.JewelryMod;
 import net.jewelry.api.datagen.GemCutGenerator;
 import net.jewelry.api.datagen.SocketTypeGenerator;
+import net.jewelry.api.datagen.SocketTypeTagGenerator;
+import net.jewelry.gems.SocketMountComponent;
 import net.jewelry.gems.SocketTypes;
 import net.jewelry.gems.GemCuts;
 import net.jewelry.gems.SocketMounts;
@@ -46,6 +48,7 @@ public class JewelryDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(UnsmeltGenerator::new);
         pack.addProvider(JewelryGemCuts::new);
         pack.addProvider(JewelrySocketTypes::new);
+        pack.addProvider(JewelrySocketTypeTags::new);
     }
 
     // ========================================
@@ -179,6 +182,18 @@ public class JewelryDataGenerator implements DataGeneratorEntrypoint {
         @Override
         public String getName() {
             return "Jewelry Socket Types";
+        }
+    }
+
+    /// `#jewelry:grindstone_removable`: the grindstone takes mounted sockets off again.
+    public static class JewelrySocketTypeTags extends SocketTypeTagGenerator {
+        public JewelrySocketTypeTags(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registries) {
+            super(output, registries);
+        }
+
+        @Override
+        protected void configure(RegistryWrapper.WrapperLookup lookup) {
+            grindstoneRemovable(SocketMountComponent.DEFAULT_TYPE);
         }
     }
 
