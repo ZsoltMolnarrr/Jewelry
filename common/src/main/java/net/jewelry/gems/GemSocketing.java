@@ -1,6 +1,8 @@
 package net.jewelry.gems;
 
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.tag.EnchantmentTags;
 import net.minecraft.registry.RegistryWrapper;
 import org.jetbrains.annotations.Nullable;
 
@@ -54,13 +56,21 @@ public class GemSocketing {
         return socket.type().map(type -> SocketTypeRegistry.isIn(registries, type, GemSockets.GRINDSTONE_REMOVABLE)).orElse(false);
     }
 
-    /// The grindstone's job: the item with every socket of a `#jewelry:grindstone_removable` type taken off,
-    /// gems inside them destroyed; every other socket (and its gem) stays. Enchantments are left alone —
-    /// grinding again removes those, as vanilla does. Null when the item has no removable socket.
+    /// Whether the grindstone still has vanilla work on the item: any enchantment it would remove (curses
+    /// stay on a ground item, so they don't count).
+    public static boolean hasGrindableEnchantments(ItemStack stack) {
+        return EnchantmentHelper.getEnchantments(stack).getEnchantments().stream()
+                .anyMatch(enchantment -> !enchantment.isIn(EnchantmentTags.CURSE));
+    }
+
+    /// The grindstone's job, once the item has no enchantments left to grind: the item with every socket of a
+    /// `#jewelry:grindstone_removable` type taken off, gems inside them destroyed; every other socket (and its
+    /// gem) stays. An enchanted item is disenchanted first, as vanilla does — the sockets come off on the next
+    /// grind. Null when vanilla still has work, or the item has no removable socket.
     @Nullable
     public static ItemStack unmount(ItemStack target, @Nullable RegistryWrapper.WrapperLookup registries) {
         var sockets = GemSockets.of(target).orElse(null);
-        if (sockets == null) {
+        if (sockets == null || hasGrindableEnchantments(target)) {
             return null;
         }
         var kept = sockets.sockets().stream().filter(socket -> !isRemovable(registries, socket)).toList();

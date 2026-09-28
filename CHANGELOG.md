@@ -1,6 +1,6 @@
 # 2.5.1
 
-- Grindstone removes mounted sockets (gems in them are lost)
+- Grindstone removes mounted sockets from unenchanted items (gems in them are lost)
 - Socket lines on item tooltips are separated from enchantments by an empty line
 
 # 2.5.0

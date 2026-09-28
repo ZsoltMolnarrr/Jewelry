@@ -13,12 +13,12 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-/// Grinding an item (alone in the grindstone) that carries sockets of a `#jewelry:grindstone_removable`
-/// type takes them off — gems in them included — and nothing else; enchantments survive that grind and go
-/// on the next one, as vanilla does.
+/// Grinding an item (alone in the grindstone) that has no enchantments left to grind but carries sockets
+/// of a `#jewelry:grindstone_removable` type takes them off — gems in them included. An enchanted item is
+/// disenchanted first (vanilla, untouched); the sockets come off on the next grind.
 ///
 /// Same shape as Archers' Auto-Fire Hook removal (and SpellEngine's `#spell_engine:grindable`): a
-/// cancellable HEAD inject guarded on "this input carries MY attachment". The three compose in any mixin
+/// cancellable HEAD inject guarded on "this input carries MY attachment". They compose in any mixin
 /// order: each grind strips whichever attachment's handler runs first, the next grind the next.
 @Mixin(GrindstoneScreenHandler.class)
 public class GrindstoneScreenHandlerMixin {
