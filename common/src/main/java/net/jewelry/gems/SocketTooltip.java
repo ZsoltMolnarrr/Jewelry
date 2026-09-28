@@ -2,6 +2,7 @@ package net.jewelry.gems;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.screen.ScreenTexts;
 import org.jetbrains.annotations.Nullable;
 import net.minecraft.text.Text;
 import net.minecraft.text.TextColor;
@@ -9,7 +10,7 @@ import net.minecraft.util.Formatting;
 
 import java.util.List;
 
-/// Socket lines of an item tooltip, one per socket, placed right after the enchantment lines:
+/// Socket lines of an item tooltip, one per socket, as their own paragraph right after the enchantment lines:
 ///
 ///     ◆ +4% Attack Damage      (gray socket frame with the gem inside tinted in the cut's colour)
 ///     ◇ Empty Socket           (the frame alone)
@@ -31,6 +32,11 @@ public class SocketTooltip {
             return;
         }
         GemSockets.of(stack).ifPresent(sockets -> {
+            if (sockets.count() == 0) {
+                return;
+            }
+            // Own paragraph, like vanilla's attribute sections: a blank line separates it from the enchantments
+            lines.add(ScreenTexts.EMPTY);
             for (var socket : sockets.sockets()) {
                 // A socket type may bring its own title and an appearance (frame glyph + colour) per state;
                 // anything it leaves out — and every type without a definition — uses the generic look.
