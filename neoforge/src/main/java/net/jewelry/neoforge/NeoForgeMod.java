@@ -2,6 +2,7 @@ package net.jewelry.neoforge;
 
 import net.jewelry.JewelryMod;
 import net.jewelry.items.Group;
+import net.jewelry.items.JewelryItems;
 import net.jewelry.neoforge.compat.CompatFeatures;
 import net.jewelry.village.JewelryVillagers;
 import net.minecraft.registry.Registries;
@@ -13,23 +14,32 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.village.VillagerTradesEvent;
+import net.neoforged.neoforge.event.server.ServerStartedEvent;
+import net.jewelry.gems.GemCutRegistry;
+import net.neoforged.neoforge.registries.DataPackRegistryEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
 
 @Mod(JewelryMod.ID)
 public final class NeoForgeMod {
     public NeoForgeMod(IEventBus modBus) {
         CompatFeatures.init();
+        JewelryMod.registerDataRegistries(); // buffered, flushed by the listener below
         JewelryMod.init();
+        modBus.addListener(DataPackRegistryEvent.NewRegistry.class, SyncedDataRegistrar::onNewRegistry);
         modBus.addListener(RegisterEvent.class, NeoForgeMod::register);
         // Jewelry items into the Jewelry creative tab — NeoForge mod-bus event (replaces ItemGroupEvents).
         modBus.addListener(BuildCreativeModeTabContentsEvent.class, NeoForgeMod::buildTabContents);
         // Villager trades — game-bus event (fired per profession); replaces Fabric API's TradeOfferHelper.
         NeoForge.EVENT_BUS.addListener(VillagerTradesEvent.class, NeoForgeMod::onVillagerTrades);
+        NeoForge.EVENT_BUS.addListener(ServerStartedEvent.class, event -> GemCutRegistry.logLoaded(event.getServer()));
         // Ore world-gen injection is data-driven on NeoForge — see
         // data/jewelry/neoforge/biome_modifier/gem_vein.json (replaces Fabric's BiomeModifications).
     }
 
     public static void register(RegisterEvent event) {
+        event.register(RegistryKeys.SCREEN_HANDLER, reg -> {
+            JewelryMod.registerScreenHandlers();
+        });
         event.register(RegistryKeys.SOUND_EVENT, reg -> {
             JewelryMod.registerSounds();
         });
@@ -58,9 +68,9 @@ public final class NeoForgeMod {
         if (!event.getTabKey().equals(Group.KEY)) {
             return;
         }
-        // Order comes from `Group.orderedEntries()` so it matches Fabric exactly.
-        for (var item : Group.orderedEntries()) {
-            event.add(item);
+        // (Blocks, gems and cut gems are on Group.GEMS, populated by its own vanilla entries collector.)
+        for (var entry : JewelryItems.all) {
+            event.add(entry.item());
         }
     }
 

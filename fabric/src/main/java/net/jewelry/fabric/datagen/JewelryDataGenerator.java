@@ -6,6 +6,14 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.jewelry.JewelryMod;
+import net.jewelry.api.datagen.GemCutGenerator;
+import net.jewelry.api.datagen.SocketTypeGenerator;
+import net.jewelry.api.datagen.SocketTypeTagGenerator;
+import net.jewelry.gems.SocketMountComponent;
+import net.jewelry.gems.SocketTypes;
+import net.jewelry.gems.GemCuts;
+import net.jewelry.gems.SocketMounts;
+import net.minecraft.registry.tag.ItemTags;
 import net.jewelry.items.Gems;
 import net.jewelry.items.JewelryItems;
 import net.minecraft.client.data.BlockStateModelGenerator;
@@ -38,6 +46,9 @@ public class JewelryDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(ItemTagGenerator::new);
         pack.addProvider(ModelProvider::new);
         pack.addProvider(UnsmeltGenerator::new);
+        pack.addProvider(JewelryGemCuts::new);
+        pack.addProvider(JewelrySocketTypes::new);
+        pack.addProvider(JewelrySocketTypeTags::new);
     }
 
     // ========================================
@@ -56,6 +67,14 @@ public class JewelryDataGenerator implements DataGeneratorEntrypoint {
 
             // Generate loot tier tags using RPGSeries helper
             generateLootTierTags();
+
+            // What the armor socket mount fits: vanilla's armor tags plus the conventional c:armors
+            builder(SocketMounts.ARMOR_TARGETS)
+                    .addOptionalTag(ItemTags.HEAD_ARMOR)
+                    .addOptionalTag(ItemTags.CHEST_ARMOR)
+                    .addOptionalTag(ItemTags.LEG_ARMOR)
+                    .addOptionalTag(ItemTags.FOOT_ARMOR)
+                    .addOptionalTag(TagKey.of(RegistryKeys.ITEM, Identifier.of("c", "armors")));
         }
 
         /**
@@ -126,9 +145,62 @@ public class JewelryDataGenerator implements DataGeneratorEntrypoint {
             Gems.all.forEach(gem -> {
                 itemModelGenerator.register(gem.item(), Models.GENERATED);
             });
+            SocketMounts.all.forEach(mount -> {
+                itemModelGenerator.register(mount.item(), Models.GENERATED);
+            });
             JewelryItems.all.forEach(entry -> {
                 itemModelGenerator.register(entry.item(), Models.GENERATED);
             });
+            // Default cut sprite per gem (`models/item/gem_cut/<gem>.json`) plus one per cut with a custom icon;
+            // all discovered under models/item/gem_cut/ and baked at runtime.
+            Gems.all.forEach(gem -> GemCutGenerator.generateDefaultGemModel(itemModelGenerator, gem.item()));
+            GemCuts.all.forEach(cut -> GemCutGenerator.generateItemModel(itemModelGenerator, cut));
+        }
+    }
+
+    /// Jewelry's own cuts, through the public generator other mods use too.
+    public static class JewelryGemCuts extends GemCutGenerator {
+        public JewelryGemCuts(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+            super(output, registriesFuture);
+        }
+
+        @Override
+        protected void generate(Entries entries) {
+            GemCuts.all.forEach(entries::add);
+        }
+
+        @Override
+        public String getName() {
+            return "Jewelry Gem Cuts";
+        }
+    }
+
+    /// Jewelry's own socket types (the mounted socket's look), through the public generator.
+    public static class JewelrySocketTypes extends SocketTypeGenerator {
+        public JewelrySocketTypes(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+            super(output, registriesFuture);
+        }
+
+        @Override
+        protected void generate(Entries entries) {
+            SocketTypes.all.forEach(entries::add);
+        }
+
+        @Override
+        public String getName() {
+            return "Jewelry Socket Types";
+        }
+    }
+
+    /// `#jewelry:grindstone_removable`: the grindstone takes mounted sockets off again.
+    public static class JewelrySocketTypeTags extends SocketTypeTagGenerator {
+        public JewelrySocketTypeTags(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registries) {
+            super(output, registries);
+        }
+
+        @Override
+        protected void configure(RegistryWrapper.WrapperLookup lookup) {
+            grindstoneRemovable(SocketMountComponent.DEFAULT_TYPE);
         }
     }
 

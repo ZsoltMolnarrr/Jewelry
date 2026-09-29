@@ -1,0 +1,9 @@
+{
+  "bonus": {
+    "attribute": "minecraft:attack_damage",
+    "operation": "add_multiplied_base",
+    "value": 0.04
+  },
+  "color": "#E5404F",
+  "gem": "jewelry:ruby"
+}

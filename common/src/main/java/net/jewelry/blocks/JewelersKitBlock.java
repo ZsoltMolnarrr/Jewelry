@@ -3,6 +3,17 @@ package net.jewelry.blocks;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.jewelry.gems.GemCutRegistry;
+import net.jewelry.gems.GemCuttingScreenHandler;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.screen.ScreenHandlerContext;
+import net.minecraft.screen.SimpleNamedScreenHandlerFactory;
+import net.minecraft.text.Text;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
@@ -13,6 +24,28 @@ import org.jetbrains.annotations.Nullable;
 public class JewelersKitBlock extends Block {
     public JewelersKitBlock(AbstractBlock.Settings settings) {
         super(settings);
+    }
+
+    // MARK: Gem cutting screen
+
+    @Override
+    protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+        if (!GemCutRegistry.isEnabled(world)) {
+            return ActionResult.PASS; // gem cuts disabled on this server: plain workstation block
+        }
+        if (world.isClient()) {
+            return ActionResult.SUCCESS;
+        }
+        player.openHandledScreen(state.createScreenHandlerFactory(world, pos));
+        return ActionResult.CONSUME;
+    }
+
+    @Nullable
+    @Override
+    protected NamedScreenHandlerFactory createScreenHandlerFactory(BlockState state, World world, BlockPos pos) {
+        return new SimpleNamedScreenHandlerFactory(
+                (syncId, playerInventory, player) -> new GemCuttingScreenHandler(syncId, playerInventory, ScreenHandlerContext.create(world, pos)),
+                Text.translatable(this.getTranslationKey()));
     }
 
     // MARK: Facing

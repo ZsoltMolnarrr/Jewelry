@@ -1,0 +1,9 @@
+{
+  "bonus": {
+    "attribute": "spell_power:haste",
+    "operation": "add_multiplied_base",
+    "value": 0.03
+  },
+  "color": "#F4D44B",
+  "gem": "jewelry:citrine"
+}

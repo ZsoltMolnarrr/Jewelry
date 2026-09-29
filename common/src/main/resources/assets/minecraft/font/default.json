@@ -1,0 +1,22 @@
+{
+  "providers": [
+    {
+      "type": "bitmap",
+      "file": "jewelry:font/socket_frame.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [ "\uDB80\uDD00" ]
+    },
+    {
+      "type": "bitmap",
+      "file": "jewelry:font/socket_gem.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [ "\uDB80\uDD01" ]
+    },
+    {
+      "type": "space",
+      "advances": { "\uDB80\uDD02": -10 }
+    }
+  ]
+}

@@ -4,8 +4,15 @@
   "package": "net.jewelry.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "AnvilScreenHandlerMixin",
+    "DataComponentTypesMixin",
+    "GrindstoneScreenHandlerMixin",
+    "ItemStackMixin",
+    "RegistryLoaderMixin"
   ],
   "client": [
+    "client.ItemModelManagerMixin",
+    "client.ItemStackTooltipMixin"
   ],
   "injectors": {
     "defaultRequire": 1
