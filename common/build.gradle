@@ -34,6 +34,17 @@ dependencies {
     // Compat only
     // compileOnly("maven.modrinth:spell-engine:${project.spell_engine_version}-${platform}")
 
+    // EMI (optional integration) — PARKED, no build past 1.21.1 (see gradle.properties).
+    // The `xplat-intermediary` `api` artifact is the loader-neutral subset EMI publishes for
+    // Architectury common modules. Compile-only: `net.jewelry.compat.emi` is only ever class-loaded
+    // by EMI itself, so the mod runs fine without EMI present.
+    //modCompileOnly "dev.emi:emi-xplat-intermediary:${project.emi_version}:api"
+
     // Compatibility
     // Fabric specific
+}
+
+sourceSets.main.java {
+    // EMI is parked (see gradle.properties): the plugin sources stay in-tree but never compile.
+    exclude 'net/jewelry/compat/emi/**'
 }

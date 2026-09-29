@@ -9,7 +9,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.block.Block;
 
-/// `BlockItem` carrying an optional grey/italic hint line.
+/// `BlockItem` carrying an optional grey hint line.
 ///
 /// 1.21.11 removed `Block#appendTooltip`, so block hints have to be appended by the block's *item*.
 /// The tooltip hook itself also changed shape: it takes a `TooltipDisplayComponent` and a
@@ -27,7 +27,7 @@ public class JewelryBlockItem extends BlockItem {
                               Consumer<Component> textConsumer, TooltipFlag type) {
         super.appendHoverText(stack, context, displayComponent, textConsumer, type);
         if (hint != null && !hint.isEmpty()) {
-            textConsumer.accept(Component.translatable(hint).withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC));
+            textConsumer.accept(Component.translatable(hint).withStyle(ChatFormatting.GRAY));
         }
     }
 }

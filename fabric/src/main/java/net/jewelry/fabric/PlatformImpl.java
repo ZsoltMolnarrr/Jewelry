@@ -1,13 +1,27 @@
 package net.jewelry.fabric;
 
+import com.mojang.serialization.Codec;
+import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
 import net.fabricmc.loader.api.FabricLoader;
 import net.jewelry.Platform;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceKey;
 
 public class PlatformImpl {
     public static class FabricUtil implements Platform.Util {
         @Override
         public boolean isModLoaded(String modid) {
             return FabricLoader.getInstance().isModLoaded(modid);
+        }
+
+        @Override
+        public boolean isFabric() {
+            return true;
+        }
+
+        @Override
+        public <T> void registerSyncedDataRegistry(ResourceKey<Registry<T>> key, Codec<T> localCodec, Codec<T> networkCodec) {
+            DynamicRegistries.registerSynced(key, localCodec, networkCodec);
         }
     }
     private static final Platform.Util UTIL = new FabricUtil();

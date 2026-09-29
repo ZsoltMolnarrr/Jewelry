@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.jewelry.blocks.JewelryBlocks;
 import net.jewelry.items.Gems;
+import net.jewelry.gems.SocketMounts;
 import net.jewelry.items.JewelryItems;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.core.HolderLookup;
@@ -199,7 +200,7 @@ public class JewelryCraftingRecipes extends FabricRecipeProvider {
             netheriteNecklace(JewelryItems.netherite_ruby_necklace.item(), Gems.ruby.item());
             netheriteNecklace(JewelryItems.netherite_topaz_necklace.item(), Gems.topaz.item());
             netheriteNecklace(JewelryItems.netherite_citrine_necklace.item(), Gems.citrine.item());
-            netheriteNecklace(JewelryItems.nsetherite_jade_necklace.item(), Gems.jade.item());
+            netheriteNecklace(JewelryItems.netherite_jade_necklace.item(), Gems.jade.item());
             netheriteNecklace(JewelryItems.netherite_sapphire_necklace.item(), Gems.sapphire.item());
             netheriteNecklace(JewelryItems.netherite_tanzanite_necklace.item(), Gems.tanzanite.item());
         }
@@ -227,6 +228,23 @@ public class JewelryCraftingRecipes extends FabricRecipeProvider {
 
         private void generateSpecialItems() {
             jewelryKit();
+            socketMount();
+        }
+
+        /**
+         * Socket Mount: metalwork around a diamond — gold corners, iron sides.
+         * Pattern: "GIG" / "IDI" / "GIG"
+         */
+        private void socketMount() {
+            shaped(RecipeCategory.MISC, SocketMounts.SOCKET_MOUNT.item())
+                    .pattern("GIG")
+                    .pattern("IDI")
+                    .pattern("GIG")
+                    .define('G', Items.GOLD_INGOT)
+                    .define('I', Items.IRON_INGOT)
+                    .define('D', Items.DIAMOND)
+                    .unlockedBy(getHasName(Items.DIAMOND), has(Items.DIAMOND))
+                    .save(output);
         }
 
         /**

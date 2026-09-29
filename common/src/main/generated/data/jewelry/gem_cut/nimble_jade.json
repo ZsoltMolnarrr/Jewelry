@@ -1,0 +1,23 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "combat_roll"
+      ]
+    }
+  ],
+  "bonus": {
+    "attribute": "combat_roll:recharge",
+    "operation": "add_multiplied_base",
+    "value": 0.04
+  },
+  "color": "#4EC272",
+  "gem": "jewelry:jade",
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "combat_roll"
+    }
+  ]
+}

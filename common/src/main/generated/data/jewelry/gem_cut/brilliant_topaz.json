@@ -1,0 +1,9 @@
+{
+  "bonus": {
+    "attribute": "spell_power:generic",
+    "operation": "add_multiplied_base",
+    "value": 0.03
+  },
+  "color": "#F2A33A",
+  "gem": "jewelry:topaz"
+}
