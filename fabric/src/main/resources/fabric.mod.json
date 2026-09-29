@@ -25,6 +25,12 @@
     ],
     "fabric-datagen": [
       "net.jewelry.fabric.datagen.JewelryDataGenerator"
+    ],
+    "rei_common": [
+      "net.jewelry.compat.rei.JewelryReiCommonPlugin"
+    ],
+    "rei_client": [
+      "net.jewelry.compat.rei.JewelryReiClientPlugin"
     ]
   },
   "mixins": [

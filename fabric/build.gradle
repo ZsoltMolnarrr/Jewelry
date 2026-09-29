@@ -82,6 +82,10 @@ dependencies {
     // but it must be resolvable in the dev runtime, so its own hard deps (PAL) come along transitively.
 //    modImplementation("maven.modrinth:spell-engine:${project.spell_engine_version}-${platform}")
     modImplementation("net.spell_engine:spell_engine-${platform}:${project.spell_engine_version}")
+
+    // REI (recipe viewer) — dev runtime only, so `runClient` can verify the plugin. NOT bundled and
+    // NOT a declared dependency: the plugin lives in `common` and is compile-only there.
+    modLocalRuntime "me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}"
 }
 
 processResources {
