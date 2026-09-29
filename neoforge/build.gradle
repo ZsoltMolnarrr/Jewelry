@@ -50,6 +50,7 @@ repositories {
     // For Curios
     maven { url = 'https://maven.theillusivec4.top/' }
     maven { url = 'https://maven.fabricmc.net' }
+    maven { url = 'https://maven.shedaniel.me/' } // REI
 
     mavenLocal()
 }
@@ -73,6 +74,15 @@ dependencies {
 
     // Compat only
     // compileOnly("maven.modrinth:spell-engine:${project.spell_engine_version}-${platform}")
+
+    // REI (recipe viewer) — the plugin classes live in `common`; this module only adds the two
+    // annotated stubs REI's NeoForge annotation scan looks for, so it needs the NeoForge API jar.
+    compileOnly "me.shedaniel:RoughlyEnoughItems-api-neoforge:${project.rei_version}"
+    // Dev runtime: OFF on 26.2. REI needs Architectury API, and every Architectury 21.0.x build (21.0.2 that
+    // REI pulls, up to 21.0.5) fails to load on this NeoForge version
+    // (`NoClassDefFoundError: ContainerScreenEvent$Render$Foreground`), which takes the whole dev client down.
+    // Jewelry's plugin itself registers fine. Re-enable once Architectury loads on the pinned NeoForge.
+    //localRuntime "me.shedaniel:RoughlyEnoughItems-neoforge:${project.rei_version}"
 
     // EMI (optional integration) — PARKED, no build past 1.21.1 (see gradle.properties).
     //localRuntime "dev.emi:emi-neoforge:${project.emi_version}"

@@ -15,7 +15,7 @@
 - Inserting into a full item replaces all of its gems
 - New item: Socket Mount, adds a socket to armor at an anvil
 - New creative tab: Gems
-- EMI support for gem cutting
+- REI support for gem cutting
 - Jeweler villagers now sell raw gems instead of finished gem jewelry
 - Feature flags in `config/jewelry/features.json`: `gem_cuts`, `sockets`
 
