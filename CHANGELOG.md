@@ -1,5 +1,7 @@
 # 2.5.1
 
+- Updated for Minecraft 26.3
+
 **Gems and sockets**
 
 - Jeweler's Kit now cuts raw gems into cut gems
