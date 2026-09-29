@@ -25,7 +25,7 @@ For under the hood technical details, check out the projects providing the custo
 
 | Flag | Default | Read by | Effect when `false` |
 |---|---|---|---|
-| `gem_cuts` | `true` | the server (the integrated one in singleplayer), on every datapack load, so `/reload` applies it | No gem cut data is loaded, from Jewelry or any pack. The synced registry reaches clients empty, so nothing of the system shows: no cuts in the Gems tab, an inert Jeweler's Kit, no socket lines. Cut gems already in the world are lost. |
+| `gem_cuts` | `true` | the server (the integrated one in singleplayer), on every datapack load, so `/reload` applies it | No gem cut data is loaded, from Jewelry or any pack. The synced registry reaches clients empty, so nothing of the system shows: no cuts in the Gems tab, an inert Jeweler's Kit, no socket lines, no REI category. Cut gems already in the world are lost. |
 | `sockets` | `true` | each side from its own file, at runtime; set it on server and clients alike | No item resolves sockets: no socket tooltip lines, socketed gems grant nothing, the anvil won't socket. Item data is untouched, so turning it back on restores everything. |
 
 # Adding gem cuts with a data pack
@@ -70,7 +70,7 @@ and reference the MODEL from the cut's `model` field (`<your_namespace>:item/gem
 "neoforge:conditions": [ { "type": "neoforge:mod_loaded", "modid": "critical_strike" } ]
 ```
 
-The cut then appears in the Gems creative tab and in the Jeweler's Kit for its gem. The server log
+The cut then appears in the Gems creative tab, in the Jeweler's Kit for its gem, and in REI. The server log
 lists the loaded cuts at startup, handy for checking a pack.
 
 # Adding gem cuts from another mod

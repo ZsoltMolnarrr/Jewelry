@@ -77,6 +77,10 @@ dependencies {
     // TODO 26.3: back to maven.modrinth once released
 //    implementation("maven.modrinth:spell-engine:${project.spell_engine_version}-${platform}")
     implementation("net.spell_engine:spell_engine-${platform}:${project.spell_engine_version}")
+
+    // REI (recipe viewer) — dev runtime only, so `runClient` can verify the plugin. NOT bundled and
+    // NOT a declared dependency: the plugin lives in `common` and is compile-only there.
+    localRuntime "me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}"
 }
 
 processResources {

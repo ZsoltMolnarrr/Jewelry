@@ -58,6 +58,7 @@ repositories {
     // For Curios
     maven { url = 'https://maven.theillusivec4.top/' }
     maven { url = 'https://maven.fabricmc.net' }
+    maven { url = 'https://maven.shedaniel.me/' } // REI
 
     mavenLocal()
 }
@@ -81,6 +82,12 @@ dependencies {
 
     // Compat only
     // compileOnly("maven.modrinth:spell-engine:${project.spell_engine_version}-${platform}")
+
+    // REI (recipe viewer) — the plugin classes live in `common`; this module only adds the two
+    // annotated stubs REI's NeoForge annotation scan looks for, so it needs the NeoForge API jar.
+    compileOnly "me.shedaniel:RoughlyEnoughItems-api-neoforge:${project.rei_version}"
+    // The runtime artifact is dev-only, so `runClient` can verify the plugin: NOT bundled, NOT a dependency.
+    localRuntime "me.shedaniel:RoughlyEnoughItems-neoforge:${project.rei_version}"
 
     // EMI (optional integration) — PARKED, no build past 1.21.1 (see gradle.properties).
     //localRuntime "dev.emi:emi-neoforge:${project.emi_version}"

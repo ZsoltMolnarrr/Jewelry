@@ -14,6 +14,7 @@ repositories {
         }
     }
     maven { url = 'https://maven.fabricmc.net' }
+    maven { url = 'https://maven.shedaniel.me/' } // REI
 
     mavenLocal()
 }
@@ -33,6 +34,11 @@ dependencies {
 
     // Compat only
     // compileOnly("maven.modrinth:spell-engine:${project.spell_engine_version}-${platform}")
+
+    // REI (recipe viewer) — `RoughlyEnoughItems-api` is the loader-neutral API, Mojmap-named on 26.x, so a
+    // plain `compileOnly` does. `net.jewelry.compat.rei` is only ever class-loaded by REI, so the mod runs
+    // fine without it.
+    compileOnly "me.shedaniel:RoughlyEnoughItems-api:${project.rei_version}"
 
     // EMI (optional integration) — PARKED, no build past 1.21.1 (see gradle.properties).
     // The `xplat-intermediary` `api` artifact is the loader-neutral subset EMI publishes for
