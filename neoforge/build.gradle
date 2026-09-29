@@ -73,6 +73,9 @@ dependencies {
 
     // Compat only
     // compileOnly("maven.modrinth:spell-engine:${project.spell_engine_version}-${platform}")
+
+    // EMI (optional integration) — PARKED, no build past 1.21.1 (see gradle.properties).
+    //localRuntime "dev.emi:emi-neoforge:${project.emi_version}"
 }
 
 processResources {

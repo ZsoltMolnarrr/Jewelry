@@ -1,3 +1,31 @@
+# 2.5.1
+
+- Grindstone removes mounted sockets from unenchanted items (gems in them are lost)
+- Socket lines on item tooltips are separated from enchantments by an empty line
+
+# 2.5.0
+
+**Gems and sockets**
+
+- Jeweler's Kit now cuts raw gems into cut gems
+- 25 gem cuts, each granting an attribute bonus (4-5 per gem)
+- Equipment can have sockets, shown on its tooltip
+- Cut gems are inserted into sockets at an anvil
+- Socketed gems grant their bonus while the item is equipped
+- Inserting into a full item replaces all of its gems
+- New item: Socket Mount, adds a socket to armor at an anvil
+- New creative tab: Gems
+- EMI support for gem cutting
+- Jeweler villagers now sell raw gems instead of finished gem jewelry
+- Feature flags in `config/jewelry/features.json`: `gem_cuts`, `sockets`
+
+**For developers and data packs**
+
+- Gem cuts are data: `data/<namespace>/gem_cut/<name>.json`
+- Socket types are data: `data/<namespace>/socket_type/<name>.json`
+- Custom gem bonus kinds can be registered from code
+- Java API and datagen helpers, see README
+
 # 2.4.1
 
 - Updated for Minecraft 26.1.2 (Java 25)

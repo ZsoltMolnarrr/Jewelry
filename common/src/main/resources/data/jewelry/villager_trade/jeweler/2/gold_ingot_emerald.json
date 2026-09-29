@@ -1,6 +1,6 @@
 {
   "gives": {
-    "count": 8,
+    "count": 12,
     "id": "minecraft:emerald"
   },
   "max_uses": 8,
@@ -9,5 +9,5 @@
     "count": 7,
     "id": "minecraft:gold_ingot"
   },
-  "xp": 2
+  "xp": 8
 }

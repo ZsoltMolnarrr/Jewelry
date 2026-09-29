@@ -1,6 +1,7 @@
 package net.jewelry.items;
 
 import net.jewelry.JewelryMod;
+import net.jewelry.gems.GemItem;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -15,7 +16,7 @@ public class Gems {
     public static ArrayList<Entry> all = new ArrayList<>();
     public static Entry gem(Identifier id) {
         // 1.21.2+: settings must carry the item's own registry key or the constructor throws `Item id not set`.
-        var entry = new Entry(id, new Item(new Item.Properties()
+        var entry = new Entry(id, new GemItem(new Item.Properties()
                 .setId(ResourceKey.create(Registries.ITEM, id))
                 .rarity(Rarity.UNCOMMON)));
         all.add(entry);
@@ -33,6 +34,6 @@ public class Gems {
         for (var entry : all) {
             Registry.register(BuiltInRegistries.ITEM, entry.id(), entry.item());
         }
-        // Creative-tab placement: see `Group.orderedEntries` (single ordered list for both loaders).
+        // Creative-tab placement: gems live on the Gems tab, see Group.GEMS (built in common, vanilla API).
     }
 }
