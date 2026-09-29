@@ -21,7 +21,7 @@ public class Platform {
         boolean isFabric();
 
         /// Register a synced datapack registry (mirrors SpellEngine's seam). Fabric: `DynamicRegistries.registerSynced`;
-        /// NeoForge: buffered and flushed into `DataPackRegistryEvent.NewRegistry`, the only point NeoForge accepts one.
+        /// NeoForge: buffered and flushed into `NewDatapackRegistryEvent`, the only point NeoForge accepts one.
         <T> void registerSyncedDataRegistry(ResourceKey<Registry<T>> key, Codec<T> localCodec, Codec<T> networkCodec);
     }
 

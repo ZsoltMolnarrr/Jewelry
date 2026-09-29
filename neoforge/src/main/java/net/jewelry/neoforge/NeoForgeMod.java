@@ -15,7 +15,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
-import net.neoforged.neoforge.registries.DataPackRegistryEvent;
+import net.neoforged.neoforge.registries.NewDatapackRegistryEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
 
 @Mod(JewelryMod.ID)
@@ -24,7 +24,7 @@ public final class NeoForgeMod {
         CompatFeatures.init();
         JewelryMod.registerDataRegistries(); // buffered, flushed by the listener below
         JewelryMod.init();
-        modBus.addListener(DataPackRegistryEvent.NewRegistry.class, SyncedDataRegistrar::onNewRegistry);
+        modBus.addListener(NewDatapackRegistryEvent.class, SyncedDataRegistrar::onNewRegistry);
         modBus.addListener(RegisterEvent.class, NeoForgeMod::register);
         // Jewelry items into the Jewelry creative tab — NeoForge mod-bus event (replaces ItemGroupEvents).
         modBus.addListener(BuildCreativeModeTabContentsEvent.class, NeoForgeMod::buildTabContents);

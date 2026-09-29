@@ -59,7 +59,7 @@ public class JewelryMod {
     }
 
     /// Synced datapack registries. Called exactly once per loader, before the loader's registry
-    /// events fire (NeoForge buffers it until `DataPackRegistryEvent.NewRegistry`).
+    /// events fire (NeoForge buffers it until `NewDatapackRegistryEvent`).
     public static void registerDataRegistries() {
         Platform.util().registerSyncedDataRegistry(GemCutRegistry.KEY, GemCut.CODEC, GemCut.CODEC);
         Platform.util().registerSyncedDataRegistry(SocketTypeRegistry.KEY, SocketType.CODEC, SocketType.CODEC);
