@@ -1,0 +1,9 @@
+{
+  "bonus": {
+    "attribute": "spell_power:healing",
+    "operation": "add_multiplied_base",
+    "value": 0.04
+  },
+  "color": "#F4D44B",
+  "gem": "jewelry:citrine"
+}

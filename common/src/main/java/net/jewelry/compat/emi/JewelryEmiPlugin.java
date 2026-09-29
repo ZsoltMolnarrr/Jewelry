@@ -1,0 +1,68 @@
+package net.jewelry.compat.emi;
+
+import dev.emi.emi.api.EmiEntrypoint;
+import dev.emi.emi.api.EmiPlugin;
+import dev.emi.emi.api.EmiRegistry;
+import dev.emi.emi.api.recipe.EmiRecipeCategory;
+import dev.emi.emi.api.recipe.EmiRecipeSorting;
+import dev.emi.emi.api.stack.EmiStack;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.jewelry.JewelryMod;
+import net.jewelry.blocks.JewelryBlocks;
+import net.jewelry.gems.GemCut;
+import net.jewelry.gems.GemCutRegistry;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.Holder;
+import net.minecraft.resources.Identifier;
+
+/**
+ * Surfaces gem cuts — entries of the synced {@code gem_cut} datapack registry, which are not
+ * recipes at all as far as vanilla (and therefore EMI) is concerned — under their own category,
+ * worked at the Jeweler's Kit.
+ * <p>
+ * Loaded reflectively by EMI only: Fabric via the {@code emi} entrypoint in {@code fabric.mod.json},
+ * NeoForge via the {@link EmiEntrypoint} annotation scan. Nothing in Jewelry references this class,
+ * so it is never class-loaded when EMI is absent.
+ */
+@EmiEntrypoint
+@Environment(EnvType.CLIENT)
+public class JewelryEmiPlugin implements EmiPlugin {
+    /** Category id {@code jewelry:gem_cutting} → name key {@code emi.category.jewelry.gem_cutting}. */
+    public static final Identifier CATEGORY_ID = Identifier.fromNamespaceAndPath(JewelryMod.ID, "gem_cutting");
+    public static final EmiStack JEWELERS_KIT = EmiStack.of(JewelryBlocks.JEWELERS_KIT.item());
+    public static final EmiRecipeCategory CATEGORY = new EmiRecipeCategory(
+            CATEGORY_ID, JEWELERS_KIT, JEWELERS_KIT, EmiRecipeSorting.compareInputThenOutput());
+
+    @Override
+    public void register(EmiRegistry registry) {
+        // The gem cut registry is datapack-driven and synced, so it is reachable only through the
+        // client world's registry manager. EMI refuses to run plugins while `client.world` is null,
+        // so this is populated by the time we get here — the guard is belt and braces.
+        // An empty registry means the server has gem cuts disabled: register nothing, not even the category.
+        var world = Minecraft.getInstance().level;
+        if (world == null || !GemCutRegistry.isEnabled(world)) {
+            return;
+        }
+        registry.addCategory(CATEGORY);
+        registry.addWorkstation(CATEGORY, JEWELERS_KIT);
+
+        // Iterating the registry (rather than Jewelry's own gem list) picks up cuts contributed by
+        // other mods and data packs, including cuts for gems Jewelry does not own.
+        GemCutRegistry.from(world).listElements().forEach(entry -> {
+            Holder<GemCut> cut = entry;
+            GemCut.idOf(cut).ifPresent(cutId -> registry.addRecipe(new GemCuttingEmiRecipe(recipeId(cutId), cut)));
+        });
+    }
+
+    /**
+     * {@code jewelry:bold_ruby} → {@code jewelry:/gem_cutting/bold_ruby}. EMI recipe ids share one
+     * namespace with every real recipe id, so the category path segment keeps these synthetic
+     * entries from colliding with a same-named recipe.
+     */
+    public static Identifier recipeId(Identifier cutId) {
+        // Leading "/" marks the id as synthetic to EMI (not backed by the recipe manager), silencing its
+        // "not present in recipe manager" error and keeping it out of recipe-manager lookups.
+        return Identifier.fromNamespaceAndPath(cutId.getNamespace(), "/gem_cutting/" + cutId.getPath());
+    }
+}

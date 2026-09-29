@@ -1,0 +1,9 @@
+{
+  "bonus": {
+    "attribute": "minecraft:armor_toughness",
+    "operation": "add_value",
+    "value": 0.5
+  },
+  "color": "#3F79E8",
+  "gem": "jewelry:sapphire"
+}

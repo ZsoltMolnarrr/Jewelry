@@ -1,0 +1,9 @@
+{
+  "bonus": {
+    "attribute": "minecraft:max_health",
+    "operation": "add_value",
+    "value": 2.0
+  },
+  "color": "#3F79E8",
+  "gem": "jewelry:sapphire"
+}

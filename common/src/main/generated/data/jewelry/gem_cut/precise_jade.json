@@ -1,0 +1,9 @@
+{
+  "bonus": {
+    "attribute": "ranged_weapon:damage",
+    "operation": "add_multiplied_base",
+    "value": 0.04
+  },
+  "color": "#4EC272",
+  "gem": "jewelry:jade"
+}

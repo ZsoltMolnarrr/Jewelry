@@ -75,6 +75,6 @@ public class JewelryBlocks {
             Registry.register(BuiltInRegistries.BLOCK, Identifier.fromNamespaceAndPath(JewelryMod.ID, entry.name), entry.block);
             Registry.register(BuiltInRegistries.ITEM, Identifier.fromNamespaceAndPath(JewelryMod.ID, entry.name), entry.item());
         }
-        // Creative-tab placement: see `Group.orderedEntries` (blocks come first in the tab).
+        // Creative-tab placement: these lead the Gems tab, see Group.GEMS (built in common, vanilla API).
     }
 }
