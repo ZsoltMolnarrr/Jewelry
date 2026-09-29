@@ -1,10 +1,5 @@
 # 2.5.1
 
-- Grindstone removes mounted sockets from unenchanted items (gems in them are lost)
-- Socket lines on item tooltips are separated from enchantments by an empty line
-
-# 2.5.0
-
 **Gems and sockets**
 
 - Jeweler's Kit now cuts raw gems into cut gems
@@ -14,6 +9,7 @@
 - Socketed gems grant their bonus while the item is equipped
 - Inserting into a full item replaces all of its gems
 - New item: Socket Mount, adds a socket to armor at an anvil
+- Grindstone removes mounted sockets from unenchanted items (gems in them are lost)
 - New creative tab: Gems
 - REI support for gem cutting
 - Jeweler villagers now sell raw gems instead of finished gem jewelry
